@@ -40,7 +40,8 @@
             Resize your image online easily by setting custom width and height.
         </p>
 
-        <form action="{{ url_for('image_resize') }}"
+        <form id="resizeForm"
+              action="{{ url_for('image_resize') }}"
               method="POST"
               enctype="multipart/form-data">
 
@@ -58,32 +59,23 @@
                 <input type="number" name="height" required style="width:100%; border:none;">
             </div>
 
-            <button type="submit"
-                    onclick="showProcessing()"
+            <button id="resizeBtn"
+                    type="submit"
                     style="background:white; color:#4e54c8; border:none; padding:14px; width:100%; border-radius:10px; font-weight:600; cursor:pointer;">
                 Resize Image
             </button>
 
-            <div id="processing-message" style="display:none; margin-top:15px; text-align:center; color:white;">
-             Processing your file... <br>
-             This may take a few seconds.<br>
-             Please do not close this page.
-           </div>
-            
+            <div id="processing-message"
+                 style="display:none; margin-top:15px; text-align:center; color:white; font-weight:500;">
+                Processing your file... <br>
+                This may take a few seconds.<br>
+                Please do not close this page.
+            </div>
+
         </form>
 
     </div>
 </section>
-
-{# 
-<ul>
-    <li><a href="{{ url_for('image_compressor') }}">Compress Image Online</a></li>
-    <li><a href="{{ url_for('png_to_pdf') }}">PNG to PDF Converter</a></li>
-    <li><a href="{{ url_for('jpg_to_pdf') }}">JPG to PDF Tool</a></li>
-    <li><a href="{{ url_for('merge_pdf') }}">Merge PDF Files</a></li>
-    <li><a href="{{ url_for('split_pdf') }}">Split PDF Online</a></li>
-</ul>
-#}
 
 <section style="max-width:900px; margin:120px auto; color:white; line-height:1.7; font-size:16px;">
 
@@ -139,20 +131,28 @@ Most common formats such as JPG, JPEG, PNG, and WEBP images can be resized using
 
 <style>
 @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+0% { background-position: 0% 50%; }
+50% { background-position: 100% 50%; }
+100% { background-position: 0% 50%; }
 }
 </style>
 
 <script>
-function showProcessing(){
+document.getElementById("resizeForm").addEventListener("submit", function(){
+
     const msg = document.getElementById("processing-message");
+    const btn = document.getElementById("resizeBtn");
+
     if(msg){
         msg.style.display = "block";
     }
-}
+
+    if(btn){
+        btn.disabled = true;
+        btn.innerText = "Processing...";
+    }
+
+});
 </script>
 
 {% endblock %}
-
