@@ -5,76 +5,135 @@
 
 <section style="display:flex; justify-content:flex-start; margin:200px 0 0 80px;">
 
-```
-<div style="
-    padding:45px;
-    border-radius:18px;
-    width:480px;
-    color:white;
-    box-shadow:0 15px 35px rgba(0,0,0,0.18);
-    background: linear-gradient(270deg, #4e54c8, #8f94fb, #4e54c8);
-    background-size: 600% 600%;
-    animation: gradientMove 8s ease infinite;
-">
+    <div style="
+        padding:45px;
+        border-radius:18px;
+        width:480px;
+        color:white;
+        box-shadow:0 15px 35px rgba(0,0,0,0.18);
+        background: linear-gradient(270deg, #4e54c8, #8f94fb, #4e54c8);
+        background-size: 600% 600%;
+        animation: gradientMove 8s ease infinite;
+    ">
 
-    <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
-        <div style="
-            background:white;
-            color:#4e54c8;
-            font-weight:bold;
-            font-size:22px;
-            width:70px;
-            height:70px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:16px;">
-            IMG
+        <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+            <div style="
+                background:white;
+                color:#4e54c8;
+                font-weight:bold;
+                font-size:22px;
+                width:70px;
+                height:70px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                border-radius:16px;">
+                IMG
+            </div>
+
+            <h1 style="font-size:24px; font-weight:600;">
+                Image Resizer
+            </h1>
         </div>
 
-        <h1 style="font-size:24px; font-weight:600;">
-            Image Resizer
-        </h1>
+        <p style="margin-bottom:30px; color:#ffffff;">
+            Resize your image online easily by setting custom width and height.
+        </p>
+
+        <form action="{{ url_for('image_resize') }}"
+              method="POST"
+              enctype="multipart/form-data"
+              onsubmit="showProcessing()">
+
+            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
+                <input type="file" name="file" accept="image/*" required style="border:none; width:100%;">
+            </div>
+
+            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
+                <label style="color:#333;">Width (px)</label>
+                <input type="number" name="width" required style="width:100%; border:none;">
+            </div>
+
+            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:20px;">
+                <label style="color:#333;">Height (px)</label>
+                <input type="number" name="height" required style="width:100%; border:none;">
+            </div>
+
+            <button type="submit"
+                    style="background:white; color:#4e54c8; border:none; padding:14px; width:100%; border-radius:10px; font-weight:600; cursor:pointer;">
+                Resize Image
+            </button>
+
+            <div id="processing-message" style="display:none; margin-top:15px; text-align:center; color:white;">
+             Processing your file... <br>
+             This may take a few seconds.<br>
+             Please do not close this page.
+           </div>
+            
+        </form>
+
     </div>
+</section>
 
-    <p style="margin-bottom:30px; color:#ffffff;">
-        Resize your image online easily by setting custom width and height.
-    </p>
+{# 
+<ul>
+    <li><a href="{{ url_for('image_compressor') }}">Compress Image Online</a></li>
+    <li><a href="{{ url_for('png_to_pdf') }}">PNG to PDF Converter</a></li>
+    <li><a href="{{ url_for('jpg_to_pdf') }}">JPG to PDF Tool</a></li>
+    <li><a href="{{ url_for('merge_pdf') }}">Merge PDF Files</a></li>
+    <li><a href="{{ url_for('split_pdf') }}">Split PDF Online</a></li>
+</ul>
+#}
 
-    <form action="{{ url_for('image_resize') }}"
-          method="POST"
-          enctype="multipart/form-data"
-          onsubmit="document.getElementById('processing-message').style.display='block';">
+<section style="max-width:900px; margin:120px auto; color:#333; line-height:1.7; font-size:16px;">
 
-        <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
-            <input type="file" name="file" accept="image/*" required style="border:none; width:100%;">
-        </div>
+<h2 style="font-size:28px; margin-bottom:20px;">Resize Images Online Free</h2>
 
-        <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
-            <label style="color:#333;">Width (px)</label>
-            <input type="number" name="width" required style="width:100%; border:none;">
-        </div>
+<p>
+Our free image resizer tool allows you to quickly resize images online without losing quality. 
+You can easily change the width and height of your image in pixels and download the resized image instantly. 
+This tool works directly in your browser and does not add any watermark to your images.
+</p>
 
-        <div style="background:white; padding:12px; border-radius:10px; margin-bottom:20px;">
-            <label style="color:#333;">Height (px)</label>
-            <input type="number" name="height" required style="width:100%; border:none;">
-        </div>
+<p>
+Whether you need to resize images for websites, social media posts, presentations, or documents, 
+this online image resizer makes the process simple and fast. Just upload your image, enter the 
+desired dimensions, and download the resized image within seconds.
+</p>
 
-        <button type="submit"
-                style="background:white; color:#4e54c8; border:none; padding:14px; width:100%; border-radius:10px; font-weight:600; cursor:pointer;">
-            Resize Image
-        </button>
+<h2 style="margin-top:40px;">Why Use Our Image Resizer?</h2>
 
-        <div id="processing-message" style="display:none; margin-top:15px; text-align:center; color:white;">
-            Processing your file... <br>
-            This may take a few seconds.<br>
-            Please do not close this page.
-        </div>
+<ul>
+<li>Resize images instantly online</li>
+<li>No watermark added to your images</li>
+<li>Secure image processing</li>
+<li>Works on all devices including mobile</li>
+<li>Fast and simple interface</li>
+</ul>
 
-    </form>
+<h2 style="margin-top:40px;">Frequently Asked Questions</h2>
 
-</div>
-```
+<h3>How do I resize an image online?</h3>
+<p>
+Upload your image, enter the desired width and height in pixels, and click the resize button. 
+Your resized image will be generated automatically.
+</p>
+
+<h3>Will the image quality be reduced?</h3>
+<p>
+Our tool resizes images while maintaining good quality. However, extremely small dimensions 
+may reduce visual clarity.
+</p>
+
+<h3>Is this image resizer free?</h3>
+<p>
+Yes, this image resizing tool is completely free to use and does not add any watermark to your images.
+</p>
+
+<h3>Which image formats are supported?</h3>
+<p>
+Most common formats such as JPG, JPEG, PNG, and WEBP images can be resized using this tool.
+</p>
 
 </section>
 
@@ -85,5 +144,11 @@
     100% { background-position: 0% 50%; }
 }
 </style>
+
+<script>
+function showProcessing(){
+    document.getElementById("processing-message").style.display = "block";
+}
+</script>
 
 {% endblock %}
