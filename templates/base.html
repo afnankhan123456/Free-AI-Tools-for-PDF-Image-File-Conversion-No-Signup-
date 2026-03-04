@@ -97,21 +97,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 <!-- ================================= -->
-<!-- PROCESSING LOADER (SEPARATE BLOCK) -->
+<!-- PROCESSING LOADER -->
 <!-- ================================= -->
 
-<!-- LOADER HTML -->
 <div id="processing-message">
     <div class="loader"></div>
-    <p>
-    Processing your file... <br>
-    This may take a few seconds.<br>
-    Please do not close this page.
+    <p id="processing-text">
+        Processing your file... <br>
+        This may take a few seconds.<br>
+        Please do not close this page.
     </p>
 </div>
 
 
-<!-- LOADER CSS -->
+<!-- ================================= -->
+<!-- DRAG & DROP UPLOAD -->
+<!-- ================================= -->
+
+<div id="upload-area">
+    Drag & Drop your file here <br>
+    or <br>
+    Click to Upload
+    <input type="file" id="fileInput" name="file">
+</div>
+
+
+<!-- ================================= -->
+<!-- CSS -->
+<!-- ================================= -->
+
 <style>
 
 #processing-message{
@@ -148,28 +162,108 @@ margin-bottom:20px;
 100%{transform:rotate(360deg);}
 }
 
+
+/* Upload Box */
+
+#upload-area{
+border:2px dashed #4e54c8;
+padding:40px;
+text-align:center;
+cursor:pointer;
+margin-bottom:20px;
+border-radius:10px;
+position:relative;
+}
+
+#upload-area input{
+position:absolute;
+width:100%;
+height:100%;
+left:0;
+top:0;
+opacity:0;
+cursor:pointer;
+}
+
+#upload-area.dragover{
+background:#f0f2ff;
+border-color:#000;
+}
+
 </style>
 
 
-<!-- LOADER SCRIPT -->
+<!-- ================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================= -->
+
 <script>
+
 document.addEventListener("DOMContentLoaded", function(){
 
     const forms = document.querySelectorAll("form");
+    const loader = document.getElementById("processing-message");
+    const text = document.getElementById("processing-text");
 
     forms.forEach(function(form){
 
         form.addEventListener("submit", function(){
 
-            const loader = document.getElementById("processing-message");
-
             if(loader){
                 loader.style.display = "flex";
             }
+
+            // 3 sec baad message change
+            setTimeout(function(){
+
+                if(text){
+                    text.innerHTML = "Preparing your download...<br>Please wait.";
+                }
+
+            },3000);
+
+
+            // 8 sec baad page auto refresh
+            setTimeout(function(){
+
+                location.reload();
+
+            },8000);
 
         });
 
     });
 
 });
+
+
+/* ============================= */
+/* DRAG & DROP */
+/* ============================= */
+
+const uploadArea = document.getElementById("upload-area");
+const fileInput = document.getElementById("fileInput");
+
+if(uploadArea){
+
+uploadArea.addEventListener("dragover", function(e){
+e.preventDefault();
+uploadArea.classList.add("dragover");
+});
+
+uploadArea.addEventListener("dragleave", function(){
+uploadArea.classList.remove("dragover");
+});
+
+uploadArea.addEventListener("drop", function(e){
+
+e.preventDefault();
+uploadArea.classList.remove("dragover");
+
+fileInput.files = e.dataTransfer.files;
+
+});
+
+}
+
 </script>
