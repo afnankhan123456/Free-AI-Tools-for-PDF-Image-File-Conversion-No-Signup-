@@ -37,7 +37,8 @@
         </div>
 
         <p style="margin-bottom:30px; color:#ffffff;">
-            Resize your image online easily by setting custom width and height.
+            Drag & Drop your image here or Click to Upload. 
+            Then set custom width and height to resize your image instantly.
         </p>
 
         <form id="resizeForm"
@@ -45,8 +46,14 @@
               method="POST"
               enctype="multipart/form-data">
 
-            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
-                <input type="file" name="file" accept="image/*" required style="border:none; width:100%;">
+            <div id="uploadBox" style="background:white; padding:12px; border-radius:10px; margin-bottom:15px; text-align:center; border:2px dashed #4e54c8; cursor:pointer;">
+                
+                <span style="color:#4e54c8; font-weight:600;">
+                    Drag & Drop Image Here or Click to Upload
+                </span>
+
+                <input type="file" id="fileInput" name="file" accept="image/*" required style="border:none; width:100%; margin-top:8px;">
+
             </div>
 
             <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
@@ -72,7 +79,7 @@
 
 
 <!-- FULL SCREEN PROCESSING OVERLAY -->
-<div id="processing-message" style="
+<div id="processing-message" aria-hidden="true" style="
 display:none;
 position:fixed;
 top:0;
@@ -90,9 +97,13 @@ font-size:22px;
 font-weight:600;
 ">
 
+<p data-nosnippet>
+
 Processing your file... <br>
 This may take a few seconds.<br>
 Please do not close this page.
+
+</p>
 
 </div>
 
@@ -160,6 +171,7 @@ Most common formats such as JPG, JPEG, PNG, and WEBP images can be resized using
 
 
 <script>
+
 document.getElementById("resizeForm").addEventListener("submit", function(){
 
     const msg = document.getElementById("processing-message");
@@ -175,6 +187,32 @@ document.getElementById("resizeForm").addEventListener("submit", function(){
     }
 
 });
+
+
+/* DRAG AND DROP SUPPORT */
+
+const uploadBox = document.getElementById("uploadBox");
+const fileInput = document.getElementById("fileInput");
+
+uploadBox.addEventListener("dragover", function(e){
+e.preventDefault();
+uploadBox.style.background="#f1f3ff";
+});
+
+uploadBox.addEventListener("dragleave", function(){
+uploadBox.style.background="white";
+});
+
+uploadBox.addEventListener("drop", function(e){
+
+e.preventDefault();
+
+uploadBox.style.background="white";
+
+fileInput.files = e.dataTransfer.files;
+
+});
+
 </script>
 
 {% endblock %}
