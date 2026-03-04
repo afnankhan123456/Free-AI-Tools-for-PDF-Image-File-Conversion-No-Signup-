@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Download Resized Image{% endblock %}
+
+{% block content %}
+
+<section style="display:flex; justify-content:center; margin-top:120px;">
+
+<div style="
+background:white;
+padding:40px;
+border-radius:16px;
+width:450px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+">
+
+<h2 style="margin-bottom:20px;">
+Your Image is Ready
+</h2>
+
+<p style="margin-bottom:25px;">
+Your image has been resized successfully.
+Click the button below to download it.
+</p>
+
+<a href="{{ file_url }}"
+style="
+display:inline-block;
+background:#4e54c8;
+color:white;
+padding:14px 25px;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+">
+
+Download Image
+
+</a>
+
+<div style="margin-top:20px;">
+
+<a href="/image-resize" style="color:#4e54c8;">
+Resize Another Image
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
