@@ -107,6 +107,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if(msg){
                 msg.style.display = "flex";
+
+                // 4 second baad message hide ho jayega
+                setTimeout(function(){
+                    msg.style.display = "none";
+                }, 4000);
             }
 
         });
