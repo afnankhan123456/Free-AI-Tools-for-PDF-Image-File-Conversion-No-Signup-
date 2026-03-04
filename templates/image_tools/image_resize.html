@@ -1,301 +1,145 @@
 {% extends "base.html" %}
 {% block title %}Resize Images Online Free | Change Image Size Instantly | AI Tools Hub{% endblock %}
-{% block description %}Resize images online free. Change image width and height easily without losing quality. Fast, secure and no watermark image resizer tool.{% endblock %}
+{% block description %}Resize images online for free. Easily change image width and height without losing quality. Fast, secure and watermark-free image resizer tool for JPG, PNG, WEBP and more.{% endblock %}
 {% block content %}
 
 <section style="display:flex; justify-content:flex-start; margin:200px 0 0 80px;">
 
-<div style="
-padding:45px;
-border-radius:18px;
-width:480px;
-color:white;
-box-shadow:0 15px 35px rgba(0,0,0,0.18);
-background: linear-gradient(270deg, #4e54c8, #8f94fb, #4e54c8);
-background-size: 600% 600%;
-animation: gradientMove 8s ease infinite;
-">
+    <div style="
+        padding:45px;
+        border-radius:18px;
+        width:480px;
+        color:white;
+        box-shadow:0 15px 35px rgba(0,0,0,0.18);
+        background: linear-gradient(270deg, #4e54c8, #8f94fb, #4e54c8);
+        background-size: 600% 600%;
+        animation: gradientMove 8s ease infinite;
+    ">
 
-<div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+        <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+            <div style="
+                background:white;
+                color:#4e54c8;
+                font-weight:bold;
+                font-size:22px;
+                width:70px;
+                height:70px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                border-radius:16px;">
+                IMG
+            </div>
 
-<div style="
-background:white;
-color:#4e54c8;
-font-weight:bold;
-font-size:22px;
-width:70px;
-height:70px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:16px;">
-IMG
-</div>
+            <h1 style="font-size:24px; font-weight:600;">
+                Image Resizer
+            </h1>
+        </div>
 
-<h1 style="font-size:24px; font-weight:600;">
-Image Resizer
-</h1>
+        <p style="margin-bottom:30px; color:#ffffff;">
+            Upload your image and resize it instantly by setting custom width and height.
+            This free online image resizer supports JPG, PNG, WEBP, GIF, BMP and TIFF images.
+        </p>
 
-</div>
+        <form action="{{ url_for('image_resize') }}"
+              method="POST"
+              enctype="multipart/form-data">
 
-<p style="margin-bottom:30px; color:#ffffff;">
-Drag & Drop your image here or Click to Upload. 
-Then set custom width and height to resize your image instantly.
-</p>
+            <!-- DRAG DROP AREA -->
+            <div id="drop-area" style="
+                background:white;
+                padding:25px;
+                border-radius:10px;
+                margin-bottom:15px;
+                border:2px dashed #ccc;
+                text-align:center;
+                cursor:pointer;
+                color:#333;
+                font-weight:500;
+                position:relative;
+            ">
+                Drag & Drop Image Here or Click to Upload
 
-<form id="resizeForm"
-action="{{ url_for('image_resize') }}"
-method="POST"
-enctype="multipart/form-data">
+                <input type="file"
+                       id="fileInput"
+                       name="file"
+                       accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.tiff,.tif,image/*"
+                       required
+                       style="
+                       opacity:0;
+                       position:absolute;
+                       left:0;
+                       top:0;
+                       width:100%;
+                       height:100%;
+                       cursor:pointer;">
+            </div>
 
-<div id="uploadBox" style="background:white; padding:12px; border-radius:10px; margin-bottom:15px; text-align:center; border:2px dashed #4e54c8; cursor:pointer;">
+            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
+                <label style="color:#333;">Width (px)</label>
+                <input type="number" name="width" required style="width:100%; border:none;">
+            </div>
 
-<span style="color:#4e54c8; font-weight:600;">
-Drag & Drop Image Here or Click to Upload
-</span>
+            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:20px;">
+                <label style="color:#333;">Height (px)</label>
+                <input type="number" name="height" required style="width:100%; border:none;">
+            </div>
 
-<input type="file" id="fileInput" name="file" accept="image/*" required style="border:none; width:100%; margin-top:8px;">
+            <button type="submit"
+                    style="background:white; color:#4e54c8; border:none; padding:14px; width:100%; border-radius:10px; font-weight:600; cursor:pointer;">
+                Resize Image
+            </button>
 
-<div id="fileName" style="margin-top:10px; color:#4e54c8; font-weight:600;"></div>
+        </form>
 
-</div>
-
-<div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
-<label style="color:#333;">Width (px)</label>
-<input type="number" name="width" required style="width:100%; border:none;">
-</div>
-
-<div style="background:white; padding:12px; border-radius:10px; margin-bottom:20px;">
-<label style="color:#333;">Height (px)</label>
-<input type="number" name="height" required style="width:100%; border:none;">
-</div>
-
-<button id="resizeBtn"
-type="submit"
-style="background:white; color:#4e54c8; border:none; padding:14px; width:100%; border-radius:10px; font-weight:600; cursor:pointer;">
-Resize Image
-</button>
-
-</form>
-
-</div>
+    </div>
 </section>
 
-
-<!-- PROCESSING SCREEN -->
-<div id="processing-message" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.90);
-z-index:9999;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-text-align:center;
-color:white;
-font-size:20px;
-font-weight:600;
-">
-
-<div class="spinner"></div>
-
-<p style="margin-top:20px;">
-Processing your image...
-</p>
-
-<div class="progressContainer">
-
-<div id="progressBar"></div>
-
-</div>
-
-<div id="percentText">0%</div>
-
-<div id="tips" style="margin-top:20px; font-size:15px; color:#ccc;"></div>
-
-</div>
-
-
-<section style="max-width:900px; margin:120px auto; color:white; line-height:1.7; font-size:16px;">
-
-<h2 style="font-size:28px; margin-bottom:20px;">Resize Images Online Free</h2>
-
-<p>
-Our free image resizer tool allows you to quickly resize images online without losing quality. 
-You can easily change the width and height of your image in pixels and download the resized image instantly.
-</p>
-
-</section>
-
+{# 
+<ul>
+    <li><a href="{{ url_for('image_compressor') }}">Compress Image Online</a></li>
+    <li><a href="{{ url_for('png_to_pdf') }}">PNG to PDF Converter</a></li>
+    <li><a href="{{ url_for('jpg_to_pdf') }}">JPG to PDF Tool</a></li>
+    <li><a href="{{ url_for('merge_pdf') }}">Merge PDF Files</a></li>
+    <li><a href="{{ url_for('split_pdf') }}">Split PDF Online</a></li>
+</ul>
+#}
 
 <style>
-
-@keyframes gradientMove{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-
-/* spinner */
-
-.spinner{
-border:5px solid rgba(255,255,255,0.2);
-border-top:5px solid white;
-border-radius:50%;
-width:50px;
-height:50px;
-animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-/* progress bar */
-
-.progressContainer{
-width:300px;
-height:10px;
-background:#444;
-border-radius:20px;
-overflow:hidden;
-margin-top:20px;
-}
-
-#progressBar{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,#4e54c8,#8f94fb);
-transition:width 0.2s ease;
-}
-
 </style>
-
 
 <script>
 
-const tipsList=[
-"Tip: High resolution images resize better.",
-"Tip: PNG keeps transparency.",
-"Tip: JPG is best for photos.",
-"Tip: Large images may take few seconds.",
-"Tip: Resize images before uploading to websites."
-];
+const dropArea = document.getElementById("drop-area");
+const fileInput = document.getElementById("fileInput");
 
-let tipIndex=0;
-
-function rotateTips(){
-
-document.getElementById("tips").innerText=tipsList[tipIndex];
-
-tipIndex=(tipIndex+1)%tipsList.length;
-
-}
-
-setInterval(rotateTips,3000);
-
-
-/* file name show */
-
-document.getElementById("fileInput").addEventListener("change",function(){
-
-if(this.files.length>0){
-
-document.getElementById("fileName").innerText="Selected: "+this.files[0].name;
-
-}
-
-});
-
-
-/* real upload progress */
-
-document.getElementById("resizeForm").addEventListener("submit",function(e){
-
+dropArea.addEventListener("dragover", function(e){
 e.preventDefault();
-
-const form=this;
-
-const formData=new FormData(form);
-
-document.getElementById("processing-message").style.display="flex";
-
-const xhr=new XMLHttpRequest();
-
-xhr.open("POST",form.action,true);
-
-xhr.upload.onprogress=function(e){
-
-if(e.lengthComputable){
-
-let percent=Math.round((e.loaded/e.total)*100);
-
-document.getElementById("progressBar").style.width=percent+"%";
-
-document.getElementById("percentText").innerText=percent+"%";
-
-}
-
-};
-
-xhr.onload=function(){
-
-if(xhr.status===200){
-
-document.open();
-
-document.write(xhr.responseText);
-
-document.close();
-
-}
-
-};
-
-xhr.send(formData);
-
+dropArea.style.borderColor = "#4e54c8";
 });
 
+dropArea.addEventListener("dragleave", function(){
+dropArea.style.borderColor = "#ccc";
+});
 
-/* drag drop */
-
-const uploadBox=document.getElementById("uploadBox");
-
-const fileInput=document.getElementById("fileInput");
-
-uploadBox.addEventListener("dragover",function(e){
-
+dropArea.addEventListener("drop", function(e){
 e.preventDefault();
+fileInput.files = e.dataTransfer.files;
 
-uploadBox.style.background="#f1f3ff";
-
-});
-
-uploadBox.addEventListener("dragleave",function(){
-
-uploadBox.style.background="white";
-
-});
-
-uploadBox.addEventListener("drop",function(e){
-
-e.preventDefault();
-
-uploadBox.style.background="white";
-
-fileInput.files=e.dataTransfer.files;
-
-if(fileInput.files.length>0){
-
-document.getElementById("fileName").innerText="Selected: "+fileInput.files[0].name;
-
+if(e.dataTransfer.files.length > 0){
+dropArea.innerHTML = e.dataTransfer.files[0].name;
 }
+});
 
+fileInput.addEventListener("change", function(){
+if(this.files.length > 0){
+dropArea.innerHTML = this.files[0].name;
+}
 });
 
 </script>
