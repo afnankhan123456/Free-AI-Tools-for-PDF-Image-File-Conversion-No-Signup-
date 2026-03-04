@@ -66,7 +66,10 @@
     {% block content %}{% endblock %}
 </main>
 
-<!--  UNIVERSAL 5MB FILE SIZE VALIDATION -->
+<!-- ================================= -->
+<!-- UNIVERSAL 5MB FILE SIZE VALIDATION -->
+<!-- ================================= -->
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -93,15 +96,20 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-<!-- ============================= -->
-<!-- PROCESSING LOADER (SEPARATE) -->
-<!-- ============================= -->
+<!-- ================================= -->
+<!-- PROCESSING LOADER (SEPARATE BLOCK) -->
+<!-- ================================= -->
 
 <!-- LOADER HTML -->
 <div id="processing-message">
     <div class="loader"></div>
-    <p>Processing your file...<br>Please wait</p>
+    <p>
+    Processing your file... <br>
+    This may take a few seconds.<br>
+    Please do not close this page.
+    </p>
 </div>
+
 
 <!-- LOADER CSS -->
 <style>
@@ -115,9 +123,11 @@ width:100%;
 height:100%;
 background:rgba(0,0,0,0.85);
 z-index:9999;
+
 align-items:center;
 justify-content:center;
 flex-direction:column;
+
 color:white;
 font-size:20px;
 text-align:center;
@@ -140,6 +150,7 @@ margin-bottom:20px;
 
 </style>
 
+
 <!-- LOADER SCRIPT -->
 <script>
 document.addEventListener("DOMContentLoaded", function(){
@@ -154,10 +165,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
             if(loader){
                 loader.style.display = "flex";
-
-                setTimeout(function(){
-                    loader.style.display = "none";
-                }, 3000);
             }
 
         });
