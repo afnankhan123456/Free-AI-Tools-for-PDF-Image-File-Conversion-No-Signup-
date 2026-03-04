@@ -289,6 +289,7 @@ def image_compress_logic(app):
 
 
 # ---------------- IMAGE RESIZE ----------------
+
 def image_resize_logic(app):
 
 ```
@@ -308,7 +309,7 @@ try:
 
     image = Image.open(file)
 
-    # Handle transparency and unsupported modes
+    # Fix transparency / unsupported modes
     if image.mode in ("RGBA", "P", "LA"):
         image = image.convert("RGB")
     elif image.mode != "RGB":
@@ -328,6 +329,7 @@ try:
 except Exception as e:
     return f"Error: {str(e)}"
 ```
+
 
 
 
@@ -376,6 +378,7 @@ def word_counter_logic():
         "words": len(text.split()),
         "characters": len(text)
     }
+
 
 
 
