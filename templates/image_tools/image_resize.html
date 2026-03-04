@@ -5,84 +5,78 @@
 
 <section style="display:flex; justify-content:flex-start; margin:200px 0 0 80px;">
 
-    <div style="
-        padding:45px;
-        border-radius:18px;
-        width:480px;
-        color:white;
-        box-shadow:0 15px 35px rgba(0,0,0,0.18);
-        background: linear-gradient(270deg, #4e54c8, #8f94fb, #4e54c8);
-        background-size: 600% 600%;
-        animation: gradientMove 8s ease infinite;
-    ">
+```
+<div style="
+    padding:45px;
+    border-radius:18px;
+    width:480px;
+    color:white;
+    box-shadow:0 15px 35px rgba(0,0,0,0.18);
+    background: linear-gradient(270deg, #4e54c8, #8f94fb, #4e54c8);
+    background-size: 600% 600%;
+    animation: gradientMove 8s ease infinite;
+">
 
-        <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
-            <div style="
-                background:white;
-                color:#4e54c8;
-                font-weight:bold;
-                font-size:22px;
-                width:70px;
-                height:70px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                border-radius:16px;">
-                IMG
-            </div>
-
-            <h1 style="font-size:24px; font-weight:600;">
-                Image Resizer
-            </h1>
+    <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+        <div style="
+            background:white;
+            color:#4e54c8;
+            font-weight:bold;
+            font-size:22px;
+            width:70px;
+            height:70px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:16px;">
+            IMG
         </div>
 
-        <p style="margin-bottom:30px; color:#ffffff;">
-            Resize your image online easily by setting custom width and height.
-        </p>
-
-        <form action="{{ url_for('image_resize') }}"
-              method="POST"
-              enctype="multipart/form-data">
-
-            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
-                <input type="file" name="file" accept="image/*" required style="border:none; width:100%;">
-            </div>
-
-            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
-                <label style="color:#333;">Width (px)</label>
-                <input type="number" name="width" required style="width:100%; border:none;">
-            </div>
-
-            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:20px;">
-                <label style="color:#333;">Height (px)</label>
-                <input type="number" name="height" required style="width:100%; border:none;">
-            </div>
-
-            <button type="submit"
-                    style="background:white; color:#4e54c8; border:none; padding:14px; width:100%; border-radius:10px; font-weight:600; cursor:pointer;">
-                Resize Image
-            </button>
-
-            <div id="processing-message" style="display:none; margin-top:15px; text-align:center; color:white;">
-             Processing your file... <br>
-             This may take a few seconds.<br>
-             Please do not close this page.
-           </div>
-            
-        </form>
-
+        <h1 style="font-size:24px; font-weight:600;">
+            Image Resizer
+        </h1>
     </div>
-</section>
 
-{# 
-<ul>
-    <li><a href="{{ url_for('image_compressor') }}">Compress Image Online</a></li>
-    <li><a href="{{ url_for('png_to_pdf') }}">PNG to PDF Converter</a></li>
-    <li><a href="{{ url_for('jpg_to_pdf') }}">JPG to PDF Tool</a></li>
-    <li><a href="{{ url_for('merge_pdf') }}">Merge PDF Files</a></li>
-    <li><a href="{{ url_for('split_pdf') }}">Split PDF Online</a></li>
-</ul>
-#}
+    <p style="margin-bottom:30px; color:#ffffff;">
+        Resize your image online easily by setting custom width and height.
+    </p>
+
+    <form action="{{ url_for('image_resize') }}"
+          method="POST"
+          enctype="multipart/form-data"
+          onsubmit="document.getElementById('processing-message').style.display='block';">
+
+        <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
+            <input type="file" name="file" accept="image/*" required style="border:none; width:100%;">
+        </div>
+
+        <div style="background:white; padding:12px; border-radius:10px; margin-bottom:15px;">
+            <label style="color:#333;">Width (px)</label>
+            <input type="number" name="width" required style="width:100%; border:none;">
+        </div>
+
+        <div style="background:white; padding:12px; border-radius:10px; margin-bottom:20px;">
+            <label style="color:#333;">Height (px)</label>
+            <input type="number" name="height" required style="width:100%; border:none;">
+        </div>
+
+        <button type="submit"
+                style="background:white; color:#4e54c8; border:none; padding:14px; width:100%; border-radius:10px; font-weight:600; cursor:pointer;">
+            Resize Image
+        </button>
+
+        <div id="processing-message" style="display:none; margin-top:15px; text-align:center; color:white;">
+            Processing your file... <br>
+            This may take a few seconds.<br>
+            Please do not close this page.
+        </div>
+
+    </form>
+
+</div>
+```
+
+</section>
 
 <style>
 @keyframes gradientMove {
@@ -93,5 +87,3 @@
 </style>
 
 {% endblock %}
-
-
