@@ -45,6 +45,13 @@ body {
     gap: 25px;
 }
 
+/*  color */
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
 .nav-logo {
     width: 40px;
     height: 40px;
@@ -210,4 +217,5 @@ body {
         font-size: 14px;
     }
 }
+
 
