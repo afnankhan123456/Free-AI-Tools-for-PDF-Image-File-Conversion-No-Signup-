@@ -222,41 +222,55 @@ body {
 /* 🎮 GAME HUB CARD STYLE */
 /* ============================= */
 
-.game-card{
+.tool-card.game-card{
     border-radius:16px;
-    padding:20px;
+    padding:22px;
     text-align:center;
     position:relative;
     overflow:hidden;
     color:white;
-    background: linear-gradient(270deg,#ff0080,#7928ca,#00c6ff,#ff0080);
-    background-size:600% 600%;
-    animation:gradientMove 8s ease infinite;
+    display:block;
+
+    background: linear-gradient(135deg,#ff0080,#7928ca,#00c6ff);
+    background-size:300% 300%;
+    animation: gradientMove 6s ease infinite;
+
     transition:0.3s;
 }
 
-.game-card:hover{
-    transform:scale(1.06);
-    box-shadow:0 12px 35px rgba(0,0,0,0.6);
+/* hover effect */
+
+.tool-card.game-card:hover{
+    transform:scale(1.05);
+    box-shadow:0 12px 35px rgba(0,0,0,0.5);
 }
 
-.game-icon{
-    font-size:38px;
+/* game icon */
+
+.tool-card.game-card .game-icon{
+    font-size:40px;
     margin-bottom:10px;
+    font-family:"Segoe UI Emoji","Apple Color Emoji",sans-serif;
 }
 
-.tool-name{
+/* title */
+
+.tool-card.game-card .tool-name{
     font-size:20px;
     font-weight:700;
     margin-bottom:6px;
 }
 
-.tool-desc{
+/* description */
+
+.tool-card.game-card .tool-desc{
     font-size:14px;
     opacity:0.9;
 }
 
-.play-btn{
+/* play button */
+
+.tool-card.game-card .play-btn{
     margin-top:12px;
     background:#22c55e;
     padding:8px 18px;
@@ -266,7 +280,7 @@ body {
     font-weight:600;
 }
 
-/* moving gradient animation */
+/* animated gradient */
 
 @keyframes gradientMove{
 
