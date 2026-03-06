@@ -178,16 +178,16 @@ body {
 
     .navbar {
         padding: 15px 20px;
-        flex-direction: row;          /* 🔥 Horizontal on mobile */
+        flex-direction: row;
         align-items: center;
         justify-content: space-between;
     }
 
     .nav-links {
-        flex-direction: row;          /* 🔥 Keep horizontal */
+        flex-direction: row;
         gap: 15px;
         width: auto;
-        flex-wrap: wrap;              /* 🔥 Wrap if space less */
+        flex-wrap: wrap;
     }
 
     .tools-section {
@@ -200,7 +200,7 @@ body {
     }
 
     .tools-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
 
@@ -217,5 +217,3 @@ body {
         font-size: 14px;
     }
 }
-
-
