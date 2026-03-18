@@ -75,38 +75,31 @@ def google_verify():
 #=============
 @app.route("/sitemap.xml")
 def sitemap():
-    pages = []
-
-    # Static pages
-    pages.append("https://ai-tools-website-twj7.onrender.com/")
-    pages.append("https://ai-tools-website-twj7.onrender.com/pdf-tools")
-    pages.append("https://ai-tools-website-twj7.onrender.com/image-tools")
-    pages.append("https://ai-tools-website-twj7.onrender.com/utility-tools")
-
-    # PDF tools
-    pages.append("https://ai-tools-website-twj7.onrender.com/png-to-pdf")
-    pages.append("https://ai-tools-website-twj7.onrender.com/jpg-to-pdf")
-    pages.append("https://ai-tools-website-twj7.onrender.com/pdf-to-word")
-    pages.append("https://ai-tools-website-twj7.onrender.com/word-to-pdf")
-    pages.append("https://ai-tools-website-twj7.onrender.com/pdf-to-jpg")
-    pages.append("https://ai-tools-website-twj7.onrender.com/merge-pdf")
-    pages.append("https://ai-tools-website-twj7.onrender.com/split-pdf")
-    pages.append("https://ai-tools-website-twj7.onrender.com/compress-pdf")
-    pages.append("https://ai-tools-website-twj7.onrender.com/rotate-pdf")
-    pages.append("https://ai-tools-website-twj7.onrender.com/unlock-pdf")
-    pages.append("https://ai-tools-website-twj7.onrender.com/protect-pdf")
-    pages.append("https://ai-tools-website-twj7.onrender.com/resize-pdf")
-
-    # Utility tools
-    pages.append("https://ai-tools-website-twj7.onrender.com/base64-encoder")
-    pages.append("https://ai-tools-website-twj7.onrender.com/json-formatter")
-    pages.append("https://ai-tools-website-twj7.onrender.com/qr-generator")
-    pages.append("https://ai-tools-website-twj7.onrender.com/word-counter")
-
-    # Image tools
-    pages.append("https://ai-tools-website-twj7.onrender.com/bg-remover")
-    pages.append("https://ai-tools-website-twj7.onrender.com/image-resize")
-    pages.append("https://ai-tools-website-twj7.onrender.com/image-compressor")
+    pages = [
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/image-compressor",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/image-resize",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/bg-remover",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/word-to-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-jpg",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/split-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/compress-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/rotate-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/unlock-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/protect-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/resize-pdf",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/word-counter",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/qr-generator",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/base64-encoder",
+        "https://free-ai-tools-for-pdf-image-file.onrender.com/json-formatter"
+    ]
 
     sitemap_xml = render_template("sitemap_template.xml", pages=pages)
 
