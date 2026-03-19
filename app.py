@@ -380,6 +380,10 @@ from flask import send_from_directory
 def robots():
     return send_from_directory('static', 'robots.txt')
 
+# =============== YANDEX ROUTE (yaha add karo)
+@app.route('/yandex_3c01d903358ab76d.html')
+def yandex_verify():
+    return send_from_directory('.', 'yandex_3c01d903358ab76d.html')
 
 
 # ===============================
