@@ -1,125 +1,264 @@
 {% extends "base.html" %}
-{% block title %}JPG to PDF Converter Online Free | Convert Images to PDF Instantly{% endblock %}
-{% block description %}Convert JPG to PDF online free. Fast and secure image to PDF converter without watermark.{% endblock %}
+{% block title %}JPG to PDF Converter | Modern Image to PDF Tool{% endblock %}
+{% block description %}Convert JPG to PDF online free. Fast, secure, premium converter with real-time progress.{% endblock %}
 
 {% block content %}
 
-<section style="display:flex; justify-content:flex-start; margin:200px 0 0 80px;">
-    <div style="padding:45px; border-radius:18px; width:480px; color:white; box-shadow:0 15px 35px rgba(0,0,0,0.18); position:relative; overflow:hidden; background: linear-gradient(270deg, #ff8c00, #ff5e00, #ff8c00); background-size: 600% 600%; animation: gradientMove 8s ease infinite;">
-        <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
-            <div style="background:white; color:#ff5e00; font-weight:bold; font-size:22px; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">JPG</div>
-            <h1 style="font-size:24px;">JPG to PDF</h1>
-        </div>
-        <p style="margin-bottom:30px;">Convert your JPG image into a high-quality PDF instantly. Fast, secure and completely free.</p>
+<style>
+    body {
+        background: linear-gradient(135deg, #0a0e2a 0%, #1a1a3e 50%, #2d1b4e 100%);
+        min-height: 100vh;
+    }
 
-        <form id="convertForm" action="{{ url_for('jpg_to_pdf_action') }}" method="POST" enctype="multipart/form-data">
-            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:20px;">
-                <input type="file" name="file" accept=".jpg,.jpeg" required style="border:none; width:100%;">
+    @keyframes glowMove {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 300% 50%; }
+    }
+
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    .glow-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        border-radius: 32px;
+    }
+
+    .glow-card::before {
+        content: '';
+        position: absolute;
+        top: -2px; left: -2px; right: -2px; bottom: -2px;
+        background: linear-gradient(90deg, #ff6b9d, #c44f9e, #7b2d8e, #ff6b9d);
+        background-size: 300% 100%;
+        border-radius: 34px;
+        z-index: -1;
+        animation: glowMove 4s linear infinite;
+        opacity: 0.7;
+    }
+
+    .glow-card:hover::before { opacity: 1; }
+
+    .gradient-btn {
+        background: linear-gradient(135deg, #ff6b9d, #7b2d8e);
+        border: none;
+        padding: 14px 28px;
+        border-radius: 16px;
+        font-weight: 600;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    .gradient-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 107, 157, 0.5);
+    }
+
+    .download-btn {
+        background: linear-gradient(135deg, #00d4ff, #7b2d8e);
+        border: none;
+        padding: 12px 24px;
+        border-radius: 40px;
+        font-weight: 600;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .download-btn:hover { transform: scale(1.05); }
+
+    .progress-bar {
+        background: rgba(255,255,255,0.15);
+        border-radius: 30px;
+        height: 8px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        background: linear-gradient(90deg, #ff6b9d, #ffd6e8);
+        border-radius: 30px;
+        height: 100%;
+        transition: width 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .progress-fill::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+        animation: shimmer 1.5s infinite;
+    }
+
+    .spinner {
+        width: 24px;
+        height: 24px;
+        border: 3px solid rgba(255,255,255,0.3);
+        border-top-color: #ff6b9d;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    .file-label {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 16px;
+        padding: 14px 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .file-label:hover { background: rgba(255,255,255,0.2); border-color: #ff6b9d; }
+    .convert-another { color: rgba(255,255,255,0.7); cursor: pointer; transition: 0.3s; }
+    .convert-another:hover { color: #ff6b9d; }
+</style>
+
+<section style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px;">
+    <div class="glow-card" style="max-width: 1100px; width: 100%; padding: 48px;">
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+            
+            <!-- LEFT -->
+            <div style="animation: slideIn 0.5s ease;">
+                <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                    <div style="background: linear-gradient(135deg, #ff6b9d, #7b2d8e); width: 60px; height: 60px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; color: white;">JPG</div>
+                    <h1 style="font-size: 32px; font-weight: 700; color: white;">JPG to PDF</h1>
+                </div>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 32px;">Convert your JPG image into a high-quality PDF instantly. Fast, secure and completely free.</p>
+
+                <form id="convertForm" action="{{ url_for('jpg_to_pdf_action') }}" method="POST" enctype="multipart/form-data">
+                    <div class="file-label" id="fileLabel">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+                        <span id="fileName">Choose file</span>
+                    </div>
+                    <input type="file" name="file" id="fileInput" accept=".jpg,.jpeg" required style="display: none;">
+                    <button type="submit" class="gradient-btn" style="margin-top: 20px;">Convert to PDF</button>
+                </form>
             </div>
-            <button type="submit" style="background:white; color:#ff5e00; border:none; padding:14px; width:100%; border-radius:10px; font-weight:600; cursor:pointer;">Convert to PDF</button>
-        </form>
 
-        <div id="conversionStatus" style="margin-top:25px; background:rgba(0,0,0,0.2); border-radius:12px; padding:15px; text-align:center; backdrop-filter:blur(4px); display:none;"></div>
+            <!-- RIGHT -->
+            <div id="rightPanel" style="animation: slideIn 0.5s ease 0.1s both;">
+                <div id="initialMsg" style="background: rgba(255,255,255,0.05); border-radius: 24px; padding: 40px; text-align: center; color: rgba(255,255,255,0.6);">Select a JPG file and click convert to start</div>
+                
+                <div id="progressBox" style="display: none; background: rgba(255,255,255,0.05); border-radius: 24px; padding: 24px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                        <div class="spinner"></div>
+                        <span style="color: white;">Your file is being converted...</span>
+                    </div>
+                    <div id="estTime" style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 16px;">Estimated time: 0 seconds</div>
+                    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%;"></div></div>
+                    <div id="progressPct" style="color: white; font-size: 36px; font-weight: bold; text-align: center; margin-top: 16px;">0%</div>
+                </div>
+                
+                <div id="completeBox" style="display: none; background: rgba(255,255,255,0.05); border-radius: 24px; padding: 24px; text-align: center;">
+                    <div style="font-size: 48px;">✅</div>
+                    <div style="color: white; font-size: 20px; font-weight: 600;">Conversion complete!</div>
+                    <div style="color: rgba(255,255,255,0.7); margin: 8px 0 20px;">Your PDF is ready to download.</div>
+                    <button id="downloadBtn" class="download-btn">📥 Download PDF</button>
+                    <div style="margin-top: 20px;"><span id="convertAnother" class="convert-another">Convert another file →</span></div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 32px; text-align: center; color: rgba(255,255,255,0.5); font-size: 12px;">Your files are processed securely and never stored.</div>
     </div>
 </section>
 
-<section style="max-width:900px; margin:100px auto; padding:0 20px; line-height:1.8;">
-    <h2>JPG to PDF Converter Online Free – Convert Images to PDF Easily</h2>
-    <p>Our free JPG to PDF converter allows you to convert JPG images into PDF format. You can convert your images into a secure PDF without installing any software.</p>
-    <h3>How to Convert JPG to PDF?</h3>
-    <ul><li>Step 1: Upload your JPG image</li><li>Step 2: Click Convert to PDF button</li><li>Step 3: Wait for conversion – then click download button</li></ul>
-</section>
-
-<style>
-@keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-</style>
-
 <script>
-    (function() {
-        const form = document.getElementById('convertForm');
-        const statusDiv = document.getElementById('conversionStatus');
-        let progressInterval;
-        let startTime;
-        let estimatedSeconds = 8; // default estimate
-
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const fileInput = form.querySelector('input[name="file"]');
-            if (!fileInput.files.length) {
-                alert('Please select a JPG or JPEG image.');
-                return;
-            }
-
-            const file = fileInput.files[0];
-            // Estimate time based on file size (larger file = more time)
-            const fileSizeMB = file.size / (1024 * 1024);
-            estimatedSeconds = Math.max(3, Math.min(20, Math.floor(fileSizeMB * 4)));
-
-            // Show progress box
-            statusDiv.style.display = 'block';
-            statusDiv.innerHTML = `
-                <div style="color:white; font-weight:500;">Your file is being converted...</div>
-                <div style="font-size:0.9rem; margin:8px 0;">Estimated time: ${estimatedSeconds} seconds</div>
-                <div style="background:rgba(255,255,255,0.3); border-radius:20px; height:10px; margin:12px 0; overflow:hidden;">
-                    <div id="progressFill" style="width:0%; background:white; height:100%; border-radius:20px; transition:width 0.3s;"></div>
-                </div>
-                <div id="progressPercent" style="font-size:1.2rem; font-weight:bold;">0%</div>
-            `;
-
-            // Animate progress from 0% to 90% (remaining 10% when actual conversion completes)
-            let progress = 0;
-            startTime = performance.now();
-            const progressDuration = estimatedSeconds * 1000;
+    const form = document.getElementById('convertForm');
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+    const fileLabel = document.getElementById('fileLabel');
+    
+    fileLabel.onclick = () => fileInput.click();
+    fileInput.onchange = () => fileName.textContent = fileInput.files[0]?.name || 'Choose file';
+    
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        if (!fileInput.files.length) return alert('Select a JPG file');
+        
+        const file = fileInput.files[0];
+        const estSec = Math.max(3, Math.min(20, Math.floor((file.size / 1048576) * 4)));
+        
+        document.getElementById('initialMsg').style.display = 'none';
+        const progressBox = document.getElementById('progressBox');
+        const completeBox = document.getElementById('completeBox');
+        progressBox.style.display = 'block';
+        completeBox.style.display = 'none';
+        
+        document.getElementById('estTime').innerText = `Estimated time: ${estSec} seconds`;
+        
+        let start = performance.now();
+        const progressFill = document.getElementById('progressFill');
+        const progressPct = document.getElementById('progressPct');
+        
+        const interval = setInterval(() => {
+            let elapsed = (performance.now() - start) / 1000;
+            let pct = Math.min(90, (elapsed / estSec) * 90);
+            progressFill.style.width = pct + '%';
+            progressPct.innerText = Math.floor(pct) + '%';
+        }, 50);
+        
+        const fd = new FormData();
+        fd.append('file', file);
+        
+        try {
+            const res = await fetch(form.action, { method: 'POST', body: fd });
+            if (!res.ok) throw new Error();
+            const blob = await res.blob();
+            clearInterval(interval);
+            progressFill.style.width = '100%';
+            progressPct.innerText = '100%';
             
-            progressInterval = setInterval(() => {
-                const elapsed = performance.now() - startTime;
-                progress = Math.min(90, (elapsed / progressDuration) * 90);
-                document.getElementById('progressFill').style.width = progress + '%';
-                document.getElementById('progressPercent').innerText = Math.floor(progress) + '%';
-            }, 100);
-
-            // Send actual conversion request
-            const formData = new FormData();
-            formData.append('file', file);
-
-            try {
-                const response = await fetch(form.action, { method: 'POST', body: formData });
-                if (!response.ok) throw new Error();
-                const blob = await response.blob();
-                const actualTime = ((performance.now() - startTime) / 1000).toFixed(1);
-                const blobUrl = URL.createObjectURL(blob);
-                const fileSizeKB = (blob.size / 1024).toFixed(1);
-
-                clearInterval(progressInterval);
-                // Jump to 100%
-                document.getElementById('progressFill').style.width = '100%';
-                document.getElementById('progressPercent').innerText = '100%';
-
-                // Show completion + download button
-                statusDiv.innerHTML = `
-                    <div style="color:white; margin-bottom:10px;">✅ Conversion complete! (${actualTime} sec)</div>
-                    <div style="font-size:0.85rem; margin-bottom:12px;">${fileSizeKB} KB - Ready to download</div>
-                    <button id="downloadNowBtn" style="background:white; color:#ff5e00; border:none; padding:10px 20px; border-radius:30px; font-weight:600; cursor:pointer;">📥 Download PDF</button>
-                    <div style="font-size:0.7rem; margin-top:10px;">Your files are processed securely and never stored.</div>
-                `;
-
-                document.getElementById('downloadNowBtn').onclick = () => {
-                    const a = document.createElement('a');
-                    a.href = blobUrl;
-                    a.download = 'converted.pdf';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
-                };
-            } catch (error) {
-                clearInterval(progressInterval);
-                statusDiv.innerHTML = `<div style="color:#ffd0b5;">❌ Conversion failed. Try again.</div>`;
-                setTimeout(() => statusDiv.style.display = 'none', 4000);
-            }
-        });
-    })();
+            setTimeout(() => {
+                progressBox.style.display = 'none';
+                completeBox.style.display = 'block';
+            }, 300);
+            
+            const url = URL.createObjectURL(blob);
+            const downloadBtn = document.getElementById('downloadBtn');
+            const newBtn = downloadBtn.cloneNode(true);
+            downloadBtn.parentNode.replaceChild(newBtn, downloadBtn);
+            newBtn.onclick = () => {
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'converted.pdf';
+                a.click();
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+            };
+        } catch(err) {
+            clearInterval(interval);
+            progressBox.innerHTML = '<div style="color:#ffd0b5;padding:20px;">❌ Conversion failed</div>';
+        }
+    };
+    
+    document.getElementById('convertAnother')?.addEventListener('click', () => {
+        document.getElementById('completeBox').style.display = 'none';
+        document.getElementById('initialMsg').style.display = 'block';
+        fileInput.value = '';
+        fileName.textContent = 'Choose file';
+    });
 </script>
 
 {% endblock %}
