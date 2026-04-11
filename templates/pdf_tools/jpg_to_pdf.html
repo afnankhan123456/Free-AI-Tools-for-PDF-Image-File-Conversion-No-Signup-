@@ -1,699 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>JPG to PDF | Glassmorphism Converter</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle at 20% 30%, rgba(25, 45, 85, 0.4) 0%, #0b1120 70%),
-                  linear-gradient(135deg, #0b1120 0%, #0f172a 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-      padding: 1.5rem;
-      position: relative;
-    }
-
-    /* subtle background glow behind card */
-    body::before {
-      content: '';
-      position: absolute;
-      width: 80%;
-      height: 70%;
-      top: 15%;
-      left: 10%;
-      background: radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(34,211,238,0.05) 60%, transparent 90%);
-      filter: blur(70px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* MAIN CARD — GLASS SURFACE + ANIMATED BORDER GLOW (ONLY BLUE/CYAN TONES) */
-    .glass-card {
-      position: relative;
-      max-width: 1180px;
-      width: 100%;
-      background: rgba(12, 20, 35, 0.65);
-      backdrop-filter: blur(16px);
-      border-radius: 2rem;
-      padding: 2rem 2rem 2rem 2rem;
-      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59,130,246,0.15) inset;
-      z-index: 2;
-      transition: all 0.3s ease;
-    }
-
-    /* MOVING GRADIENT BORDER — ONLY BLUE / CYAN / INDIGO (no pink) */
-    .glass-card::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(115deg, 
-        #3b82f6, #22d3ee, #4f46e5, #1e8bff, #06b6d4, #3b82f6);
-      background-size: 300% 300%;
-      border-radius: 2.1rem;
-      z-index: -1;
-      opacity: 0.8;
-      animation: borderFlow 4s ease infinite;
-      filter: blur(3px);
-    }
-
-    /* second layer for extra soft neon glow (blue aura) */
-    .glass-card::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      background: linear-gradient(125deg, #3b82f6, #22d3ee, #2563eb, #06b6d4);
-      background-size: 300% 300%;
-      border-radius: 2.1rem;
-      z-index: -2;
-      opacity: 0.45;
-      filter: blur(10px);
-      animation: borderFlow 5s ease infinite reverse;
-    }
-
-    @keyframes borderFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* 3-COLUMN LAYOUT (left, middle, right) */
-    .converter-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.8rem;
-      justify-content: space-between;
-    }
-
-    .col {
-      flex: 1;
-      min-width: 230px;
-      background: rgba(15, 25, 45, 0.35);
-      border-radius: 1.5rem;
-      padding: 1.4rem 1.3rem;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(59, 130, 246, 0.25);
-      transition: transform 0.2s;
-    }
-
-    /* left section specific */
-    .jpg-icon {
-      background: linear-gradient(135deg, #1e88e5, #06b6d4);
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.7rem;
-      font-weight: 800;
-      color: white;
-      box-shadow: 0 10px 18px -5px rgba(0, 160, 255, 0.3);
-      margin-bottom: 1.3rem;
-    }
-
-    h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: white;
-      letter-spacing: -0.3px;
-      margin-bottom: 0.5rem;
-    }
-
-    .sub {
-      color: rgba(210, 230, 255, 0.75);
-      font-size: 0.85rem;
-      line-height: 1.4;
-      margin-bottom: 1.5rem;
-    }
-
-    .file-zone {
-      background: rgba(59, 130, 246, 0.08);
-      border: 1px dashed rgba(34, 211, 238, 0.6);
-      border-radius: 1rem;
-      padding: 0.9rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 1.3rem;
-    }
-
-    .file-zone:hover {
-      background: rgba(59, 130, 246, 0.2);
-      border-color: #22d3ee;
-    }
-
-    .file-name {
-      color: #b9e2ff;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    .btn-gradient {
-      background: linear-gradient(95deg, #2563eb, #06b6d4);
-      border: none;
-      width: 100%;
-      padding: 0.8rem;
-      border-radius: 2rem;
-      font-weight: 600;
-      color: white;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 5px 12px rgba(0, 150, 255, 0.2);
-    }
-
-    .btn-gradient:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
-      background: linear-gradient(95deg, #3b82f6, #22d3ee);
-    }
-
-    .security-text {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 0.7rem;
-      color: #8aaee0;
-      margin-top: 1.2rem;
-    }
-
-    /* MIDDLE SECTION (progress panel) */
-    .progress-title {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: white;
-      margin-bottom: 1.2rem;
-      text-align: center;
-    }
-
-    .circular-wrap {
-      display: flex;
-      justify-content: center;
-      margin: 1rem 0;
-    }
-
-    .circular-progress {
-      width: 110px;
-      height: 110px;
-    }
-
-    .circular-bg {
-      stroke: rgba(59, 130, 246, 0.2);
-      stroke-width: 6;
-    }
-
-    .circular-fill {
-      stroke: url(#blueGradient);
-      stroke-width: 6;
-      stroke-linecap: round;
-      transition: stroke-dasharray 0.3s ease;
-    }
-
-    .progress-percent {
-      font-size: 1.8rem;
-      font-weight: 700;
-      fill: white;
-      dominant-baseline: middle;
-      text-anchor: middle;
-    }
-
-    .progress-steps {
-      margin-top: 1.5rem;
-    }
-
-    .step-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.75rem;
-      color: #b9d0ff;
-      margin-bottom: 10px;
-    }
-
-    .step-icon {
-      width: 20px;
-      text-align: center;
-    }
-
-    .step-icon.completed {
-      color: #22d3ee;
-      font-weight: bold;
-    }
-
-    .step-icon.active {
-      color: #3b82f6;
-      filter: drop-shadow(0 0 3px #3b82f6);
-    }
-
-    .active-step-text {
-      color: #22d3ee;
-      font-weight: 500;
-    }
-
-    .bar-bg {
-      background: rgba(59, 130, 246, 0.2);
-      border-radius: 40px;
-      height: 5px;
-      width: 100%;
-      margin: 1rem 0;
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #22d3ee);
-      border-radius: 40px;
-      transition: width 0.2s linear;
-    }
-
-    .status-message {
-      font-size: 0.7rem;
-      text-align: center;
-      color: #9bc0ff;
-      margin-top: 0.5rem;
-    }
-
-    /* RIGHT SECTION (completion) */
-    .check-large {
-      display: flex;
-      justify-content: center;
-      margin: 0.5rem 0 0.8rem;
-    }
-
-    .check-circle {
-      background: linear-gradient(145deg, #1e88e5, #06b6d4);
-      width: 60px;
-      height: 60px;
-      border-radius: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      color: white;
-      box-shadow: 0 5px 15px rgba(6, 182, 212, 0.5);
-    }
-
-    .complete-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: white;
-      text-align: center;
-      margin: 0.5rem 0 0.2rem;
-    }
-
-    .complete-sub {
-      font-size: 0.75rem;
-      color: #b8d0ff;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .download-btn {
-      background: linear-gradient(95deg, #2563eb, #06b6d4);
-      width: 100%;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 2rem;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .another-link {
-      text-align: center;
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      color: #5f9eff;
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    @media (max-width: 780px) {
-      .glass-card { padding: 1.5rem; }
-      .col { padding: 1rem; }
-      h2 { font-size: 1.5rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPG to PDF | Glass Converter</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            background: radial-gradient(circle at 20% 30%, rgba(25,45,85,0.4) 0%, #0b1120 70%), linear-gradient(135deg, #0b1120, #0f172a);
+            min-height:100vh; display:flex; align-items:center; justify-content:center; font-family:'Segoe UI',sans-serif; padding:20px;
+        }
+        body::before{
+            content:''; position:absolute; width:80%; height:70%; top:15%; left:10%;
+            background:radial-gradient(circle,rgba(59,130,246,0.2) 0%,rgba(34,211,238,0.05) 60%,transparent 90%);
+            filter:blur(70px); pointer-events:none; z-index:0;
+        }
+        .card{
+            position:relative; max-width:1180px; width:100%; background:rgba(12,20,35,0.65);
+            backdrop-filter:blur(16px); border-radius:2rem; padding:2rem; z-index:2;
+        }
+        .card::before{
+            content:''; position:absolute; inset:-2px;
+            background:linear-gradient(115deg,#3b82f6,#22d3ee,#4f46e5,#1e8bff,#06b6d4,#3b82f6);
+            background-size:300% 300%; border-radius:2.1rem; z-index:-1; opacity:0.8;
+            animation:borderFlow 4s ease infinite; filter:blur(3px);
+        }
+        .card::after{
+            content:''; position:absolute; inset:-3px;
+            background:linear-gradient(125deg,#3b82f6,#22d3ee,#2563eb,#06b6d4);
+            background-size:300% 300%; border-radius:2.1rem; z-index:-2; opacity:0.45;
+            filter:blur(10px); animation:borderFlow 5s ease infinite reverse;
+        }
+        @keyframes borderFlow{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+        .row{display:flex;flex-wrap:wrap;gap:1.8rem;}
+        .col{flex:1;min-width:230px;background:rgba(15,25,45,0.35);border-radius:1.5rem;padding:1.4rem;backdrop-filter:blur(4px);border:1px solid rgba(59,130,246,0.25);}
+        .icon{background:linear-gradient(135deg,#1e88e5,#06b6d4);width:58px;height:58px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:800;color:white;margin-bottom:1.3rem;}
+        h2{font-size:1.8rem;font-weight:700;color:white;margin-bottom:0.5rem;}
+        .sub{color:rgba(210,230,255,0.75);font-size:0.85rem;margin-bottom:1.5rem;}
+        .file-area{background:rgba(59,130,246,0.08);border:1px dashed rgba(34,211,238,0.6);border-radius:1rem;padding:0.9rem;text-align:center;cursor:pointer;margin-bottom:1.3rem;}
+        .file-area:hover{background:rgba(59,130,246,0.2);border-color:#22d3ee;}
+        .btn{background:linear-gradient(95deg,#2563eb,#06b6d4);width:100%;border:none;padding:0.8rem;border-radius:2rem;font-weight:600;color:white;cursor:pointer;}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(59,130,246,0.4);}
+        .security{display:flex;align-items:center;justify-content:center;gap:6px;font-size:0.7rem;color:#8aaee0;margin-top:1.2rem;}
+        .progress-title{font-size:0.9rem;font-weight:500;color:white;text-align:center;margin-bottom:1rem;}
+        .circular{display:flex;justify-content:center;margin:1rem 0;}
+        svg{width:110px;height:110px;}
+        .bar-bg{background:rgba(59,130,246,0.2);border-radius:40px;height:5px;margin:1rem 0;overflow:hidden;}
+        .bar-fill{width:0%;height:100%;background:linear-gradient(90deg,#3b82f6,#22d3ee);border-radius:40px;transition:width 0.2s;}
+        .steps{margin-top:1rem;}
+        .step{display:flex;align-items:center;gap:8px;font-size:0.75rem;color:#b9d0ff;margin-bottom:10px;}
+        .check{background:linear-gradient(145deg,#1e88e5,#06b6d4);width:60px;height:60px;border-radius:60px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:white;margin:0 auto 0.8rem;}
+        .complete-title{font-size:1.3rem;font-weight:700;color:white;text-align:center;}
+        .complete-sub{font-size:0.75rem;color:#b8d0ff;text-align:center;margin:0.5rem 0 1.5rem;}
+        .another{text-align:center;margin-top:1rem;font-size:0.75rem;color:#5f9eff;cursor:pointer;text-decoration:underline;}
+        .hidden{display:none;}
+        @media(max-width:780px){.card{padding:1.5rem;}h2{font-size:1.5rem;}}
+    </style>
 </head>
 <body>
-<div class="glass-card">
-  <div class="converter-grid">
-    
-    <!-- LEFT SECTION: upload area -->
-    <div class="col">
-      <div class="jpg-icon">JPG</div>
-      <h2>JPG to PDF</h2>
-      <div class="sub">Convert your images into a professional PDF document in seconds.</div>
-      <div class="file-zone" id="uploadZone">
-        <span id="fileNameDisplay" class="file-name">📁 Select JPG file</span>
-      </div>
-      <input type="file" id="fileInput" accept=".jpg,.jpeg" style="display: none;">
-      <button class="btn-gradient" id="convertBtn">Convert to PDF</button>
-      <div class="security-text">🔒 Secure & encrypted · Max 10MB</div>
-    </div>
+<div class="card">
+    <div class="row">
+        <!-- LEFT -->
+        <div class="col">
+            <div class="icon">JPG</div>
+            <h2>JPG to PDF</h2>
+            <div class="sub">Convert your images into a professional PDF document in seconds.</div>
+            <div class="file-area" id="uploadZone"><span id="fileName">📁 Select JPG file</span></div>
+            <input type="file" id="fileInput" accept=".jpg,.jpeg" style="display:none">
+            <button class="btn" id="convertBtn">Convert to PDF</button>
+            <div class="security">🔒 Secure & encrypted · Max 10MB</div>
+        </div>
 
-    <!-- MIDDLE SECTION: dynamic progress panel -->
-    <div class="col" id="middlePanel">
-      <div id="progressPanel">
-        <div class="progress-title">⚡ Conversion progress</div>
-        <div class="circular-wrap">
-          <svg class="circular-progress" viewBox="0 0 120 120">
-            <defs>
-              <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#3b82f6" />
-                <stop offset="100%" stop-color="#22d3ee" />
-              </linearGradient>
-            </defs>
-            <circle class="circular-bg" cx="60" cy="60" r="52" fill="none" stroke-width="6"></circle>
-            <circle class="circular-fill" cx="60" cy="60" r="52" fill="none" stroke-width="6" stroke-dasharray="326.5" stroke-dashoffset="326.5" transform="rotate(-90 60 60)"></circle>
-            <text class="progress-percent" x="60" y="66" font-size="26">0%</text>
-          </svg>
+        <!-- MIDDLE -->
+        <div class="col" id="middleCol">
+            <div id="progressPanel">
+                <div class="progress-title">⚡ Conversion progress</div>
+                <div class="circular">
+                    <svg viewBox="0 0 120 120">
+                        <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient></defs>
+                        <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(59,130,246,0.2)" stroke-width="6"/>
+                        <circle id="progressCircle" cx="60" cy="60" r="52" fill="none" stroke="url(#grad)" stroke-width="6" stroke-dasharray="326.5" stroke-dashoffset="326.5" transform="rotate(-90 60 60)"/>
+                        <text id="percentText" x="60" y="66" text-anchor="middle" fill="white" font-size="26" font-weight="700">0%</text>
+                    </svg>
+                </div>
+                <div class="bar-bg"><div class="bar-fill" id="barFill"></div></div>
+                <div class="steps">
+                    <div class="step"><span id="step1Icon">○</span><span id="step1Text">Uploading file</span></div>
+                    <div class="step"><span id="step2Icon">○</span><span id="step2Text">Processing & converting</span></div>
+                    <div class="step"><span id="step3Icon">○</span><span id="step3Text">Finalizing PDF</span></div>
+                </div>
+                <div class="complete-sub" id="statusMsg">Ready to convert</div>
+            </div>
         </div>
-        <div class="bar-bg"><div class="bar-fill" id="linearFill"></div></div>
-        <div class="progress-steps" id="stepsContainer">
-          <div class="step-item" id="stepUpload">
-            <span class="step-icon" id="uploadIcon">○</span>
-            <span id="uploadText">Uploading file</span>
-          </div>
-          <div class="step-item" id="stepProcess">
-            <span class="step-icon" id="processIcon">○</span>
-            <span id="processText">Processing & converting</span>
-          </div>
-          <div class="step-item" id="stepFinal">
-            <span class="step-icon" id="finalIcon">○</span>
-            <span id="finalText">Finalizing PDF</span>
-          </div>
-        </div>
-        <div class="status-message" id="statusMsg">Ready to convert</div>
-      </div>
-    </div>
 
-    <!-- RIGHT SECTION: completion panel -->
-    <div class="col" id="rightPanel">
-      <div id="completePanel" class="hidden">
-        <div class="check-large">
-          <div class="check-circle">✓</div>
+        <!-- RIGHT -->
+        <div class="col">
+            <div id="completePanel" class="hidden">
+                <div class="check">✓</div>
+                <div class="complete-title">Conversion complete!</div>
+                <div class="complete-sub">Your PDF is ready to download.</div>
+                <button class="btn" id="downloadBtn">📥 Download PDF</button>
+                <div class="another" id="resetBtn">Convert another file →</div>
+            </div>
+            <div id="initialMsg" class="complete-sub" style="margin-top:2rem;"><span style="opacity:0.6;">✨ Select a JPG<br>to get started</span></div>
         </div>
-        <div class="complete-title">Conversion complete!</div>
-        <div class="complete-sub">Your PDF is ready to download.</div>
-        <button class="download-btn" id="downloadPdfBtn">📥 Download PDF</button>
-        <div class="another-link" id="resetBtn">Convert another file →</div>
-      </div>
-      <div id="initialRightMsg" class="complete-sub" style="text-align:center; margin-top: 2rem;">
-        <span style="opacity:0.6;">✨ Select a JPG<br>to get started</span>
-      </div>
     </div>
-  </div>
 </div>
 
 <script>
-  (function() {
-    // DOM elements
-    const fileInput = document.getElementById('fileInput');
-    const uploadZone = document.getElementById('uploadZone');
-    const fileNameSpan = document.getElementById('fileNameDisplay');
-    const convertBtn = document.getElementById('convertBtn');
-    const middlePanel = document.getElementById('middlePanel');
-    const progressPanel = document.getElementById('progressPanel');
-    const completePanel = document.getElementById('completePanel');
-    const initialRightMsg = document.getElementById('initialRightMsg');
-    const downloadBtn = document.getElementById('downloadPdfBtn');
-    const resetLink = document.getElementById('resetBtn');
-    
-    // progress visuals
-    const circularFill = document.querySelector('.circular-fill');
-    const percentText = document.querySelector('.progress-percent');
-    const linearFill = document.getElementById('linearFill');
-    const statusMsgSpan = document.getElementById('statusMsg');
-    const uploadIconSpan = document.getElementById('uploadIcon');
-    const processIconSpan = document.getElementById('processIcon');
-    const finalIconSpan = document.getElementById('finalIcon');
-    const uploadTextSpan = document.getElementById('uploadText');
-    const processTextSpan = document.getElementById('processText');
-    const finalTextSpan = document.getElementById('finalText');
-    
-    let currentFile = null;
-    let pdfBlobUrl = null;
-    let animationInterval = null;
-    let currentStep = 'idle'; // idle, upload, process, final
-    
-    const circumference = 2 * Math.PI * 52; // ~326.725
-    function setProgressPercent(percent) {
-      let p = Math.min(100, Math.max(0, percent));
-      const offset = circumference - (p / 100) * circumference;
-      if (circularFill) circularFill.setAttribute('stroke-dashoffset', offset);
-      if (percentText) percentText.textContent = Math.floor(p) + '%';
-      if (linearFill) linearFill.style.width = p + '%';
-    }
-    
-    function resetStepsStyle() {
-      uploadIconSpan.innerHTML = '○';
-      processIconSpan.innerHTML = '○';
-      finalIconSpan.innerHTML = '○';
-      uploadTextSpan.classList.remove('active-step-text');
-      processTextSpan.classList.remove('active-step-text');
-      finalTextSpan.classList.remove('active-step-text');
-      uploadIconSpan.classList.remove('completed');
-      processIconSpan.classList.remove('completed');
-      finalIconSpan.classList.remove('completed');
-    }
-    
-    function markStepComplete(stepId) {
-      if (stepId === 'upload') {
-        uploadIconSpan.innerHTML = '✓';
-        uploadIconSpan.classList.add('completed');
-      } else if (stepId === 'process') {
-        processIconSpan.innerHTML = '✓';
-        processIconSpan.classList.add('completed');
-      } else if (stepId === 'final') {
-        finalIconSpan.innerHTML = '✓';
-        finalIconSpan.classList.add('completed');
-      }
-    }
-    
-    function setActiveStepHighlight(stepId) {
-      resetStepsStyle();
-      if (stepId === 'upload') {
-        uploadIconSpan.innerHTML = '⟳';
-        uploadTextSpan.classList.add('active-step-text');
-      } else if (stepId === 'process') {
-        processIconSpan.innerHTML = '⟳';
-        processTextSpan.classList.add('active-step-text');
-      } else if (stepId === 'final') {
-        finalIconSpan.innerHTML = '⟳';
-        finalTextSpan.classList.add('active-step-text');
-      }
-    }
-    
-    // simulate smooth progress with dynamic steps
-    async function runProgressSimulation() {
-      return new Promise((resolve) => {
-        const duration = 5000; // 5 sec total (2s + 2s + 1s approx)
-        const startTime = performance.now();
-        let lastPercent = 0;
+    (function(){
+        const fileInput=document.getElementById('fileInput'),uploadZone=document.getElementById('uploadZone'),fileNameSpan=document.getElementById('fileName');
+        const convertBtn=document.getElementById('convertBtn'),progressPanel=document.getElementById('progressPanel'),completePanel=document.getElementById('completePanel');
+        const initialMsg=document.getElementById('initialMsg'),downloadBtn=document.getElementById('downloadBtn'),resetBtn=document.getElementById('resetBtn');
+        const progressCircle=document.getElementById('progressCircle'),percentText=document.getElementById('percentText'),barFill=document.getElementById('barFill');
+        const step1Icon=document.getElementById('step1Icon'),step2Icon=document.getElementById('step2Icon'),step3Icon=document.getElementById('step3Icon');
+        const step1Text=document.getElementById('step1Text'),step2Text=document.getElementById('step2Text'),step3Text=document.getElementById('step3Text');
+        const statusMsg=document.getElementById('statusMsg');
         
-        function updateFrame(now) {
-          let elapsed = now - startTime;
-          let percent = Math.min(100, (elapsed / duration) * 100);
-          if (percent >= 100) {
-            setProgressPercent(100);
-            markStepComplete('final');
-            setActiveStepHighlight('final');
-            statusMsgSpan.innerText = 'PDF ready!';
-            resolve();
-            return;
-          }
-          setProgressPercent(percent);
-          
-          // step logic
-          if (percent < 30) {
-            if (currentStep !== 'upload') { setActiveStepHighlight('upload'); currentStep = 'upload'; statusMsgSpan.innerText = 'Uploading file...'; }
-          } else if (percent < 70) {
-            if (currentStep !== 'process') { 
-              markStepComplete('upload'); 
-              setActiveStepHighlight('process'); 
-              currentStep = 'process'; 
-              statusMsgSpan.innerText = 'Processing & converting (AI engine)...'; 
-            }
-          } else {
-            if (currentStep !== 'final') { 
-              markStepComplete('process'); 
-              setActiveStepHighlight('final'); 
-              currentStep = 'final'; 
-              statusMsgSpan.innerText = 'Finalizing PDF layout...'; 
-            }
-          }
-          requestAnimationFrame(updateFrame);
-        }
-        requestAnimationFrame(updateFrame);
-      });
-    }
-    
-    // Real PDF generation using jspdf (lightweight)
-    function generatePdfFromJpg(file) {
-      return new Promise((resolve, reject) => {
-        if (window.jspdf) {
-          createPdf(file, resolve, reject);
-        } else {
-          const script = document.createElement('script');
-          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-          script.onload = () => createPdf(file, resolve, reject);
-          script.onerror = () => reject(new Error('PDF library failed to load'));
-          document.head.appendChild(script);
-        }
-      });
-    }
-    
-    function createPdf(file, resolve, reject) {
-      const { jsPDF } = window.jspdf;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const imgData = e.target.result;
-        const img = new Image();
-        img.onload = () => {
-          const pdf = new jsPDF({
-            orientation: img.width > img.height ? 'landscape' : 'portrait',
-            unit: 'mm'
-          });
-          const imgWidth = pdf.internal.pageSize.getWidth();
-          const imgHeight = (img.height * imgWidth) / img.width;
-          pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
-          const blob = pdf.output('blob');
-          resolve(blob);
-        };
-        img.onerror = () => reject(new Error('Image decoding error'));
-        img.src = imgData;
-      };
-      reader.onerror = () => reject(new Error('File read failed'));
-      reader.readAsDataURL(file);
-    }
-    
-    // reset UI to initial state
-    function fullReset() {
-      if (pdfBlobUrl) { URL.revokeObjectURL(pdfBlobUrl); pdfBlobUrl = null; }
-      currentFile = null;
-      fileInput.value = '';
-      fileNameSpan.innerHTML = '📁 Select JPG file';
-      fileNameSpan.style.opacity = '1';
-      // show progress panel and hide complete panel
-      progressPanel.classList.remove('hidden');
-      completePanel.classList.add('hidden');
-      initialRightMsg.classList.remove('hidden');
-      setProgressPercent(0);
-      resetStepsStyle();
-      uploadIconSpan.innerHTML = '○';
-      processIconSpan.innerHTML = '○';
-      finalIconSpan.innerHTML = '○';
-      uploadTextSpan.classList.remove('active-step-text');
-      processTextSpan.classList.remove('active-step-text');
-      finalTextSpan.classList.remove('active-step-text');
-      statusMsgSpan.innerText = 'Ready to convert';
-      currentStep = 'idle';
-      // reinit file name style
-    }
-    
-    async function startConversion(file) {
-      if (!file) {
-        alert('Please select a JPG/JPEG file first.');
-        return;
-      }
-      // Show middle progress panel, hide complete panel, hide initial right message
-      progressPanel.classList.remove('hidden');
-      completePanel.classList.add('hidden');
-      initialRightMsg.classList.add('hidden');
-      setProgressPercent(0);
-      resetStepsStyle();
-      setActiveStepHighlight('upload');
-      statusMsgSpan.innerText = 'Uploading file...';
-      currentStep = 'upload';
-      
-      try {
-        // Simulate steps & real PDF generation in parallel
-        const simPromise = runProgressSimulation();
-        const pdfPromise = generatePdfFromJpg(file);
-        const pdfBlob = await pdfPromise;
-        await simPromise; // wait for visual completion
-        setProgressPercent(100);
-        markStepComplete('final');
-        statusMsgSpan.innerText = 'Finalizing...';
-        setTimeout(() => {
-          // show completion panel
-          progressPanel.classList.add('hidden');
-          completePanel.classList.remove('hidden');
-          initialRightMsg.classList.add('hidden');
-          if (pdfBlobUrl) URL.revokeObjectURL(pdfBlobUrl);
-          pdfBlobUrl = URL.createObjectURL(pdfBlob);
-          // attach fresh download event
-          const newDownloadBtn = downloadBtn.cloneNode(true);
-          downloadBtn.parentNode.replaceChild(newDownloadBtn, downloadBtn);
-          newDownloadBtn.onclick = (e) => {
-            if (pdfBlobUrl) {
-              const a = document.createElement('a');
-              a.href = pdfBlobUrl;
-              a.download = 'converted.pdf';
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-            }
-          };
-        }, 120);
-      } catch (err) {
-        console.error(err);
-        alert('Conversion error: ' + err.message);
-        fullReset();
-      }
-    }
-    
-    // Event listeners
-    uploadZone.onclick = () => fileInput.click();
-    fileInput.onchange = () => {
-      if (fileInput.files.length) {
-        currentFile = fileInput.files[0];
-        let name = currentFile.name.length > 28 ? currentFile.name.substring(0, 24) + '...' : currentFile.name;
-        fileNameSpan.innerHTML = `🖼️ ${name}`;
-      } else {
-        currentFile = null;
-        fileNameSpan.innerHTML = '📁 Select JPG file';
-      }
-    };
-    
-    convertBtn.onclick = () => {
-      if (currentFile) {
-        startConversion(currentFile);
-      } else {
-        alert('Please choose a JPG image first.');
-      }
-    };
-    
-    resetLink.onclick = () => {
-      fullReset();
-    };
-    
-    // initial reset state
-    fullReset();
-    
-    window.addEventListener('beforeunload', () => {
-      if (pdfBlobUrl) URL.revokeObjectURL(pdfBlobUrl);
-    });
-  })();
+        let currentFile=null,pdfBlobUrl=null,currentStep='';
+        const circumference=326.5;
+        
+        function setProgress(p){let per=Math.min(100,Math.max(0,p));progressCircle.setAttribute('stroke-dashoffset',circumference-(per/100)*circumference);percentText.textContent=Math.floor(per)+'%';barFill.style.width=per+'%';}
+        function resetSteps(){step1Icon.innerHTML='○';step2Icon.innerHTML='○';step3Icon.innerHTML='○';step1Text.classList.remove('active-step-text');step2Text.classList.remove('active-step-text');step3Text.classList.remove('active-step-text');}
+        function markStep(step,active){if(step===1){step1Icon.innerHTML=active?'⟳':'✓';if(!active)step1Icon.innerHTML='✓';step1Text.classList.add('active-step-text');}
+        else if(step===2){step2Icon.innerHTML=active?'⟳':'✓';if(!active)step2Icon.innerHTML='✓';step2Text.classList.add('active-step-text');}
+        else if(step===3){step3Icon.innerHTML=active?'⟳':'✓';if(!active)step3Icon.innerHTML='✓';step3Text.classList.add('active-step-text');}}
+        
+        function simulateProgress(){return new Promise((resolve)=>{const start=performance.now(),duration=5000;let stepDone1=false,stepDone2=false;function update(t){let elapsed=t-start,percent=Math.min(100,(elapsed/duration)*100);setProgress(percent);if(percent>=100){setProgress(100);markStep(3,false);statusMsg.innerText='PDF ready!';resolve();return;}
+        if(percent<30){if(currentStep!=='upload'){resetSteps();markStep(1,true);currentStep='upload';statusMsg.innerText='Uploading file...';}}
+        else if(percent<70){if(currentStep!=='process'){if(!stepDone1){step1Icon.innerHTML='✓';stepDone1=true;}resetSteps();markStep(2,true);currentStep='process';statusMsg.innerText='Processing & converting...';}}
+        else{if(currentStep!=='final'){if(!stepDone2){step2Icon.innerHTML='✓';stepDone2=true;}resetSteps();markStep(3,true);currentStep='final';statusMsg.innerText='Finalizing PDF layout...';}}
+        requestAnimationFrame(update);}requestAnimationFrame(update);});}
+        
+        function generatePDF(file){return new Promise((resolve,reject)=>{if(window.jspdf){createPdf(file,resolve,reject);}else{let script=document.createElement('script');script.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';script.onload=()=>createPdf(file,resolve,reject);script.onerror=()=>reject('Library error');document.head.appendChild(script);}});}
+        
+        function createPdf(file,resolve,reject){const{jsPDF}=window.jspdf;const reader=new FileReader();reader.onload=(e)=>{const img=new Image();img.onload=()=>{const pdf=new jsPDF({orientation:img.width>img.height?'landscape':'portrait',unit:'mm'});const imgWidth=pdf.internal.pageSize.getWidth();const imgHeight=(img.height*imgWidth)/img.width;pdf.addImage(img,'JPEG',0,0,imgWidth,imgHeight);resolve(pdf.output('blob'));};img.onerror=()=>reject('Image error');img.src=e.target.result;};reader.onerror=()=>reject('Read error');reader.readAsDataURL(file);}
+        
+        function resetUI(){if(pdfBlobUrl){URL.revokeObjectURL(pdfBlobUrl);pdfBlobUrl=null;}currentFile=null;fileInput.value='';fileNameSpan.innerHTML='📁 Select JPG file';progressPanel.classList.remove('hidden');completePanel.classList.add('hidden');initialMsg.classList.remove('hidden');setProgress(0);resetSteps();step1Icon.innerHTML='○';step2Icon.innerHTML='○';step3Icon.innerHTML='○';statusMsg.innerText='Ready to convert';currentStep='';}
+        
+        async function startConversion(file){if(!file){alert('Please select a JPG/JPEG file first.');return;}
+        progressPanel.classList.remove('hidden');completePanel.classList.add('hidden');initialMsg.classList.add('hidden');setProgress(0);resetSteps();markStep(1,true);statusMsg.innerText='Uploading file...';currentStep='upload';
+        try{const simPromise=simulateProgress();const pdfPromise=generatePDF(file);const pdfBlob=await pdfPromise;await simPromise;setProgress(100);statusMsg.innerText='Finalizing...';setTimeout(()=>{progressPanel.classList.add('hidden');completePanel.classList.remove('hidden');initialMsg.classList.add('hidden');if(pdfBlobUrl)URL.revokeObjectURL(pdfBlobUrl);pdfBlobUrl=URL.createObjectURL(pdfBlob);const newBtn=downloadBtn.cloneNode(true);downloadBtn.parentNode.replaceChild(newBtn,downloadBtn);newBtn.onclick=()=>{if(pdfBlobUrl){let a=document.createElement('a');a.href=pdfBlobUrl;a.download='converted.pdf';a.click();}};},150);}catch(err){alert('Conversion failed: '+err);resetUI();}}
+        
+        uploadZone.onclick=()=>fileInput.click();
+        fileInput.onchange=()=>{if(fileInput.files.length){currentFile=fileInput.files[0];let name=currentFile.name.length>28?currentFile.name.substring(0,24)+'...':currentFile.name;fileNameSpan.innerHTML=`🖼️ ${name}`;}else{currentFile=null;fileNameSpan.innerHTML='📁 Select JPG file';}};
+        convertBtn.onclick=()=>{if(currentFile)startConversion(currentFile);else alert('Please choose a JPG image first.');};
+        resetBtn.onclick=()=>resetUI();
+        resetUI();
+        window.addEventListener('beforeunload',()=>{if(pdfBlobUrl)URL.revokeObjectURL(pdfBlobUrl);});
+    })();
 </script>
 </body>
 </html>
