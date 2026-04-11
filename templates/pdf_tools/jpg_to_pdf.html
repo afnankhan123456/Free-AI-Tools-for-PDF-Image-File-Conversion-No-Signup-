@@ -5,23 +5,21 @@
 {% block content %}
 
 <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body {
         background: linear-gradient(135deg, #0a0e2a 0%, #1a1a3e 50%, #2d1b4e 100%);
         min-height: 100vh;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
-    /* Only border glow moving - not full card */
     @keyframes borderGlow {
         0% { background-position: 0% 50%; }
         100% { background-position: 200% 50%; }
-    }
-
-    @keyframes slideIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes spin {
@@ -29,15 +27,19 @@
         100% { transform: rotate(360deg); }
     }
 
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
     .main-card {
         position: relative;
-        background: rgba(20, 25, 55, 0.7);
-        backdrop-filter: blur(15px);
-        border-radius: 28px;
+        background: rgba(15, 20, 45, 0.8);
+        backdrop-filter: blur(20px);
+        border-radius: 32px;
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Moving border glow - only on edges */
     .main-card::before {
         content: '';
         position: absolute;
@@ -45,9 +47,9 @@
         left: -2px;
         right: -2px;
         bottom: -2px;
-        background: linear-gradient(90deg, #ff3366, #ff66cc, #ff3366, #ff66cc, #ff3366);
+        background: linear-gradient(90deg, #ff3366, #ff66cc, #ff3366, #ff66cc);
         background-size: 200% 100%;
-        border-radius: 30px;
+        border-radius: 34px;
         z-index: -1;
         animation: borderGlow 3s linear infinite;
         opacity: 0.6;
@@ -61,7 +63,7 @@
         background: linear-gradient(135deg, #ff6b9d, #e64b7c);
         border: none;
         padding: 14px;
-        border-radius: 12px;
+        border-radius: 14px;
         font-weight: 600;
         color: white;
         cursor: pointer;
@@ -78,7 +80,7 @@
     .download-btn {
         background: linear-gradient(135deg, #ff6b9d, #e64b7c);
         border: none;
-        padding: 12px 28px;
+        padding: 12px 30px;
         border-radius: 40px;
         font-weight: 600;
         color: white;
@@ -95,7 +97,7 @@
     .progress-bar-bg {
         background: rgba(255, 255, 255, 0.15);
         border-radius: 30px;
-        height: 8px;
+        height: 10px;
         overflow: hidden;
     }
 
@@ -104,6 +106,19 @@
         border-radius: 30px;
         height: 100%;
         transition: width 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .progress-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+        animation: shimmer 1.5s infinite;
     }
 
     .file-input-area {
@@ -121,69 +136,100 @@
         border-color: #ff6b9d;
     }
 
-    .step-text {
+    .step-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .step-name {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 13px;
+    }
+
+    .step-time {
+        color: rgba(255, 255, 255, 0.4);
         font-size: 12px;
-        color: rgba(255, 255, 255, 0.5);
-        margin-top: 8px;
     }
 </style>
 
-<section style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 30px;">
-    <div class="main-card" style="max-width: 1000px; width: 100%; padding: 40px;">
+<section style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 40px;">
+    <div class="main-card" style="max-width: 1000px; width: 100%; padding: 45px;">
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 45px;">
             
-            <!-- LEFT SIDE -->
-            <div style="animation: slideIn 0.4s ease;">
-                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
-                    <div style="background: linear-gradient(135deg, #ff6b9d, #e64b7c); width: 55px; height: 55px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: white;">JPG</div>
-                    <h1 style="font-size: 28px; font-weight: 700; color: white;">JPG to PDF</h1>
+            <!-- LEFT SIDE - Exactly as image -->
+            <div>
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <div style="background: linear-gradient(135deg, #ff6b9d, #e64b7c); width: 58px; height: 58px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; color: white; box-shadow: 0 8px 20px rgba(255,107,157,0.3);">JPG</div>
+                    <h1 style="font-size: 32px; font-weight: 700; color: white;">JPG to PDF</h1>
                 </div>
-                <p style="color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.5; margin-bottom: 28px;">
+                <p style="color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.5; margin-bottom: 30px;">
                     Convert your JPG image into a high-quality PDF instantly. Fast, secure and completely free JPG to PDF converter.
                 </p>
 
                 <form id="convertForm" action="{{ url_for('jpg_to_pdf_action') }}" method="POST" enctype="multipart/form-data">
-                    <div class="file-input-area" id="fileLabel">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                    <div class="file-input-area" id="fileLabel" style="margin-bottom: 16px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
                             <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
                             <polyline points="13 2 13 9 20 9"/>
                         </svg>
                         <span id="fileName" style="color: rgba(255,255,255,0.8);">Choose file</span>
                     </div>
                     <input type="file" name="file" id="fileInput" accept=".jpg,.jpeg" required style="display: none;">
-                    <button type="submit" class="convert-btn" style="margin-top: 18px;">Convert to PDF</button>
+                    <button type="submit" class="convert-btn">Convert to PDF</button>
                 </form>
-                <div class="step-text">Supported: JPG, JPEG | Max file: 10MB</div>
             </div>
 
-            <!-- RIGHT SIDE -->
-            <div id="rightPanel" style="animation: slideIn 0.4s ease 0.1s both;">
+            <!-- RIGHT SIDE - Exactly as image with steps -->
+            <div id="rightPanel">
                 
-                <!-- Initial Message -->
-                <div id="initialMsg" style="background: rgba(255,255,255,0.04); border-radius: 20px; padding: 50px 20px; text-align: center;">
-                    <div style="color: rgba(255,255,255,0.4); font-size: 14px;">✨ Ready to convert</div>
-                    <div style="color: rgba(255,255,255,0.3); font-size: 12px; margin-top: 8px;">Select a file to begin</div>
+                <!-- Initial State -->
+                <div id="initialMsg" style="background: rgba(255,255,255,0.04); border-radius: 24px; padding: 50px 20px; text-align: center;">
+                    <div style="color: rgba(255,255,255,0.4); font-size: 14px;">Ready to convert</div>
+                    <div style="color: rgba(255,255,255,0.25); font-size: 12px; margin-top: 8px;">Select a JPG file</div>
                 </div>
                 
-                <!-- Progress Section -->
+                <!-- Progress Section with Steps (like image) -->
                 <div id="progressBox" style="display: none;">
-                    <div style="background: rgba(255,255,255,0.04); border-radius: 20px; padding: 28px 24px;">
-                        <div style="font-size: 18px; font-weight: 500; color: white; margin-bottom: 8px;">Your file is being converted...</div>
+                    <div style="background: rgba(255,255,255,0.04); border-radius: 24px; padding: 28px 24px;">
+                        <div style="font-size: 20px; font-weight: 500; color: white; margin-bottom: 5px;">Your file is being converted...</div>
                         <div id="estTime" style="color: rgba(255,255,255,0.5); font-size: 13px; margin-bottom: 20px;">Estimated time: -- seconds</div>
-                        <div class="progress-bar-bg"><div class="progress-fill" id="progressFill" style="width: 0%;"></div></div>
-                        <div id="progressPct" style="color: white; font-size: 42px; font-weight: bold; text-align: center; margin-top: 20px;">0%</div>
+                        
+                        <div class="progress-bar-bg" style="margin-bottom: 15px;">
+                            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                        </div>
+                        
+                        <div id="progressPct" style="color: white; font-size: 48px; font-weight: bold; text-align: center; margin: 20px 0;">0%</div>
+                        
+                        <!-- Steps timing like image -->
+                        <div style="margin-top: 20px; background: rgba(0,0,0,0.3); border-radius: 16px; padding: 12px 16px;">
+                            <div class="step-item">
+                                <span class="step-name">📤 Uploading file</span>
+                                <span class="step-time" id="uploadTime">0s</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-name">⚙️ Processing & converting</span>
+                                <span class="step-time" id="convertTime">0s</span>
+                            </div>
+                            <div class="step-item">
+                                <span class="step-name">✅ Finalizing PDF</span>
+                                <span class="step-time" id="finalizeTime">0s</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Completion Section -->
                 <div id="completeBox" style="display: none;">
-                    <div style="background: rgba(255,255,255,0.04); border-radius: 20px; padding: 28px 24px; text-align: center;">
-                        <div style="font-size: 52px; margin-bottom: 8px;">✅</div>
-                        <div style="color: white; font-size: 20px; font-weight: 600;">Conversion complete!</div>
-                        <div style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 8px 0 20px;">Your PDF is ready to download.</div>
+                    <div style="background: rgba(255,255,255,0.04); border-radius: 24px; padding: 32px 24px; text-align: center;">
+                        <div style="font-size: 56px; margin-bottom: 10px;">✅</div>
+                        <div style="color: white; font-size: 22px; font-weight: 600;">Conversion complete!</div>
+                        <div style="color: rgba(255,255,255,0.6); font-size: 14px; margin: 10px 0 25px;">Your PDF is ready to download.</div>
                         <button id="downloadBtn" class="download-btn">📥 Download PDF</button>
-                        <div style="margin-top: 18px;">
+                        <div style="margin-top: 20px;">
                             <span id="convertAnother" style="color: rgba(255,255,255,0.5); font-size: 13px; cursor: pointer; transition: 0.3s;">Convert another file →</span>
                         </div>
                     </div>
@@ -192,7 +238,7 @@
         </div>
         
         <!-- Footer -->
-        <div style="margin-top: 32px; text-align: center; color: rgba(255,255,255,0.35); font-size: 11px;">
+        <div style="margin-top: 35px; text-align: center; color: rgba(255,255,255,0.3); font-size: 11px;">
             Your files are processed securely and never stored.
         </div>
     </div>
@@ -224,7 +270,7 @@
         
         const file = fileInput.files[0];
         const fileSizeMB = file.size / (1024 * 1024);
-        const estSec = Math.max(3, Math.min(20, Math.floor(fileSizeMB * 4)));
+        const estSec = Math.max(4, Math.min(20, Math.floor(fileSizeMB * 4)));
         
         document.getElementById('initialMsg').style.display = 'none';
         const progressBox = document.getElementById('progressBox');
@@ -237,12 +283,32 @@
         let start = performance.now();
         const progressFill = document.getElementById('progressFill');
         const progressPct = document.getElementById('progressPct');
+        const uploadTimeSpan = document.getElementById('uploadTime');
+        const convertTimeSpan = document.getElementById('convertTime');
+        const finalizeTimeSpan = document.getElementById('finalizeTime');
+        
+        // Simulate step timings
+        let uploadDone = false;
+        let convertDone = false;
         
         const interval = setInterval(() => {
             let elapsed = (performance.now() - start) / 1000;
             let pct = Math.min(90, (elapsed / estSec) * 90);
             progressFill.style.width = pct + '%';
             progressPct.innerText = Math.floor(pct) + '%';
+            
+            // Update step times based on progress
+            if (!uploadDone && pct >= 15) {
+                uploadTimeSpan.innerText = Math.floor(elapsed * 0.3) + 's';
+                uploadDone = true;
+            }
+            if (!convertDone && pct >= 40) {
+                convertTimeSpan.innerText = Math.floor(elapsed * 0.5) + 's';
+                convertDone = true;
+            }
+            if (pct >= 70) {
+                finalizeTimeSpan.innerText = Math.floor(elapsed * 0.2) + 's';
+            }
         }, 50);
         
         const fd = new FormData();
@@ -252,14 +318,21 @@
             const res = await fetch(form.action, { method: 'POST', body: fd });
             if (!res.ok) throw new Error();
             const blob = await res.blob();
+            const actualTime = ((performance.now() - start) / 1000).toFixed(0);
+            
             clearInterval(interval);
             progressFill.style.width = '100%';
             progressPct.innerText = '100%';
             
+            // Update final step times
+            uploadTimeSpan.innerText = Math.floor(actualTime * 0.25) + 's';
+            convertTimeSpan.innerText = Math.floor(actualTime * 0.6) + 's';
+            finalizeTimeSpan.innerText = Math.floor(actualTime * 0.15) + 's';
+            
             setTimeout(() => {
                 progressBox.style.display = 'none';
                 completeBox.style.display = 'block';
-            }, 400);
+            }, 500);
             
             const url = URL.createObjectURL(blob);
             const downloadBtn = document.getElementById('downloadBtn');
@@ -276,7 +349,7 @@
             };
         } catch(err) {
             clearInterval(interval);
-            progressBox.innerHTML = '<div style="background:rgba(255,255,255,0.04);border-radius:20px;padding:40px;text-align:center;color:#ffb8d4;">❌ Conversion failed. Please try again.</div>';
+            progressBox.innerHTML = '<div style="background:rgba(255,255,255,0.04);border-radius:24px;padding:40px;text-align:center;color:#ffb8d4;">❌ Conversion failed. Please try again.</div>';
         }
     };
     
