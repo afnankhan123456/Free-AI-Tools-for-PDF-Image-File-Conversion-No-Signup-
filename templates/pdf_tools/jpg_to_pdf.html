@@ -5,231 +5,92 @@
 {% block content %}
 
 <section style="display:flex; justify-content:flex-start; margin:200px 0 0 80px;">
-
-    <div style="
-        padding:45px;
-        border-radius:18px;
-        width:480px;
-        color:white;
-        box-shadow:0 15px 35px rgba(0,0,0,0.18);
-        position:relative;
-        overflow:hidden;
-        background: linear-gradient(270deg, #ff8c00, #ff5e00, #ff8c00);
-        background-size: 600% 600%;
-        animation: gradientMove 8s ease infinite;
-    ">
-
+    <div style="padding:45px; border-radius:18px; width:480px; color:white; box-shadow:0 15px 35px rgba(0,0,0,0.18); position:relative; overflow:hidden; background: linear-gradient(270deg, #ff8c00, #ff5e00, #ff8c00); background-size: 600% 600%; animation: gradientMove 8s ease infinite;">
         <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
-
-            <div style="
-                background:white;
-                color:#ff5e00;
-                font-weight:bold;
-                font-size:22px;
-                width:70px;
-                height:70px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                border-radius:16px;
-                box-shadow:0 6px 18px rgba(0,0,0,0.2);
-            ">
-                JPG
-            </div>
-
-            <h1 style="font-size:24px; font-weight:600;">
-                JPG to PDF
-            </h1>
-
+            <div style="background:white; color:#ff5e00; font-weight:bold; font-size:22px; width:70px; height:70px; display:flex; align-items:center; justify-content:center; border-radius:16px;">JPG</div>
+            <h1 style="font-size:24px;">JPG to PDF</h1>
         </div>
+        <p style="margin-bottom:30px;">Convert your JPG image into a high-quality PDF instantly. Fast, secure and completely free.</p>
 
-        <p style="margin-bottom:30px; color:#ffffff;">
-            Convert your JPG image into a high-quality PDF instantly.
-            Fast, secure and completely free JPG to PDF converter.
-        </p>
-
-        <!-- ✅ FORM WITH AJAX HANDLING (no auto-download) -->
-        <form id="convertForm" 
-              action="{{ url_for('jpg_to_pdf_action') }}"
-              method="POST"
-              enctype="multipart/form-data">
-
-            <div style="
-                background:white;
-                padding:12px;
-                border-radius:10px;
-                margin-bottom:20px;
-            ">
-                <input type="file"
-                       name="file"
-                       accept=".jpg,.jpeg"
-                       required
-                       style="border:none; width:100%;">
+        <form id="convertForm" action="{{ url_for('jpg_to_pdf_action') }}" method="POST" enctype="multipart/form-data">
+            <div style="background:white; padding:12px; border-radius:10px; margin-bottom:20px;">
+                <input type="file" name="file" accept=".jpg,.jpeg" required style="border:none; width:100%;">
             </div>
-
-            <button type="submit"
-                    style="
-                        background:white;
-                        color:#ff5e00;
-                        border:none;
-                        padding:14px;
-                        width:100%;
-                        border-radius:10px;
-                        font-weight:600;
-                        cursor:pointer;
-                        transition:0.3s;
-                    "
-                    onmouseover="this.style.background='#f3f4f6'"
-                    onmouseout="this.style.background='white'">
-
-                Convert to PDF
-
-            </button>
-
+            <button type="submit" style="background:white; color:#ff5e00; border:none; padding:14px; width:100%; border-radius:10px; font-weight:600; cursor:pointer;">Convert to PDF</button>
         </form>
 
-        <!-- STATUS BOX (for conversion messages & download button) -->
-        <div id="conversionStatus" style="margin-top:25px; background:rgba(0,0,0,0.2); border-radius:12px; padding:15px; text-align:center; backdrop-filter:blur(4px); display:none;">
-            <!-- dynamic content will appear here -->
-        </div>
-
+        <div id="conversionStatus" style="margin-top:25px; background:rgba(0,0,0,0.2); border-radius:12px; padding:15px; text-align:center; backdrop-filter:blur(4px); display:none;"></div>
     </div>
-
 </section>
 
 <section style="max-width:900px; margin:100px auto; padding:0 20px; line-height:1.8;">
-
     <h2>JPG to PDF Converter Online Free – Convert Images to PDF Easily</h2>
-
-    <p>
-        Our free JPG to PDF converter allows you to convert JPG images into PDF format.
-        You can convert your images into a secure PDF without installing any software.
-    </p>
-
+    <p>Our free JPG to PDF converter allows you to convert JPG images into PDF format. You can convert your images into a secure PDF without installing any software.</p>
     <h3>How to Convert JPG to PDF?</h3>
-    <ul>
-        <li>Step 1: Upload your JPG image</li>
-        <li>Step 2: Click the Convert to PDF button</li>
-        <li>Step 3: Wait for conversion – then click the download button</li>
-    </ul>
-
+    <ul><li>Step 1: Upload your JPG image</li><li>Step 2: Click Convert to PDF button</li><li>Step 3: Wait for conversion – then click download button</li></ul>
 </section>
 
 <style>
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+@keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 </style>
 
 <script>
     (function() {
         const form = document.getElementById('convertForm');
         const statusDiv = document.getElementById('conversionStatus');
+        let conversionStartTime = 0;
 
         form.addEventListener('submit', async function(event) {
-            event.preventDefault();  // prevent auto-download / page reload
-
-            // Get the file input
+            event.preventDefault();
             const fileInput = form.querySelector('input[name="file"]');
             if (!fileInput.files.length) {
                 alert('Please select a JPG or JPEG image.');
                 return;
             }
 
-            // Show status box with "processing" message
+            // Show loading spinner
             statusDiv.style.display = 'block';
-            statusDiv.innerHTML = `
-                <div style="color:white; font-weight:500;">
-                    ⏳ Conversion in progress...<br>
-                    <span style="font-size:0.9rem; opacity:0.9;">It may take a few seconds. Please wait.</span>
-                </div>
-                <div style="margin-top:10px;">
-                    <div style="width:40px; height:40px; margin:0 auto; border:3px solid rgba(255,255,255,0.3); border-top:3px solid white; border-radius:50%; animation: spin 0.8s linear infinite;"></div>
-                </div>
-            `;
-
-            // Prepare FormData
+            statusDiv.innerHTML = `<div style="color:white;">⏳ Converting...<br><div style="width:30px; height:30px; margin:10px auto; border:3px solid white; border-top-color:#ff5e00; border-radius:50%; animation:spin 0.6s linear infinite;"></div></div>`;
+            
+            conversionStartTime = performance.now();
             const formData = new FormData();
             formData.append('file', fileInput.files[0]);
 
             try {
-                // Send the request to the same endpoint (returns PDF blob)
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Server error: ${response.status}`);
-                }
-
-                // Get the PDF as blob
+                const response = await fetch(form.action, { method: 'POST', body: formData });
+                if (!response.ok) throw new Error();
                 const blob = await response.blob();
+                const conversionTime = ((performance.now() - conversionStartTime) / 1000).toFixed(2);
                 const blobUrl = URL.createObjectURL(blob);
+                const fileSizeKB = (blob.size / 1024).toFixed(1);
 
-                // Show success message + manual download button
+                // Show conversion time + download button (only after conversion)
                 statusDiv.innerHTML = `
-                    <div style="color:white; font-weight:500; margin-bottom:12px;">
-                        ✅ Conversion complete!
-                    </div>
-                    <a href="${blobUrl}" download="converted.pdf" 
-                       style="
-                           display:inline-block;
-                           background:white;
-                           color:#ff5e00;
-                           text-decoration:none;
-                           padding:10px 20px;
-                           border-radius:30px;
-                           font-weight:600;
-                           transition:0.2s;
-                           box-shadow:0 2px 8px rgba(0,0,0,0.2);
-                       "
-                       onmouseover="this.style.background='#f9f9f9'"
-                       onmouseout="this.style.background='white'">
-                       📥 Download PDF
-                    </a>
-                    <div style="font-size:0.8rem; margin-top:10px; opacity:0.8;">
-                        Click the button above to save your PDF file.
-                    </div>
+                    <div style="color:white; margin-bottom:10px;">✅ Converted in <strong>${conversionTime} sec</strong> (${fileSizeKB} KB)</div>
+                    <button id="downloadNowBtn" style="background:white; color:#ff5e00; border:none; padding:10px 20px; border-radius:30px; font-weight:600; cursor:pointer;">📥 Download PDF</button>
+                    <div style="font-size:0.75rem; margin-top:8px;">Click button to save file</div>
                 `;
 
-                // Clean up the blob URL after download (optional: after user clicks)
-                const downloadLink = statusDiv.querySelector('a');
-                downloadLink.addEventListener('click', function() {
-                    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-                });
-
+                document.getElementById('downloadNowBtn').onclick = () => {
+                    const downloadStart = performance.now();
+                    const a = document.createElement('a');
+                    a.href = blobUrl;
+                    a.download = 'converted.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    const downloadEnd = performance.now();
+                    const downloadTime = ((downloadEnd - downloadStart) / 1000).toFixed(3);
+                    statusDiv.innerHTML += `<div style="margin-top:8px;">💾 Download completed in ${downloadTime} sec</div>`;
+                    setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+                };
             } catch (error) {
-                console.error('Conversion error:', error);
-                statusDiv.innerHTML = `
-                    <div style="color:#ffd0b5; font-weight:500;">
-                        ❌ Conversion failed.<br>
-                        <span style="font-size:0.85rem;">Please try again later.</span>
-                    </div>
-                `;
-                // Auto-hide error after 4 seconds
-                setTimeout(() => {
-                    if (statusDiv.innerHTML.includes('failed')) {
-                        statusDiv.style.display = 'none';
-                    }
-                }, 4000);
+                statusDiv.innerHTML = `<div style="color:#ffd0b5;">❌ Conversion failed. Try again.</div>`;
+                setTimeout(() => statusDiv.style.display = 'none', 4000);
             }
         });
     })();
-
-    // Add keyframes for spinner (if not already present)
-    if (!document.querySelector('#spinnerKeyframe')) {
-        const styleSheet = document.createElement("style");
-        styleSheet.textContent = `
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(styleSheet);
-    }
 </script>
 
 {% endblock %}
