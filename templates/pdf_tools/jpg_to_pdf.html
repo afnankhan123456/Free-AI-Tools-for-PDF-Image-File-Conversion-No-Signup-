@@ -39,7 +39,9 @@
     (function() {
         const form = document.getElementById('convertForm');
         const statusDiv = document.getElementById('conversionStatus');
-        let conversionStartTime = 0;
+        let progressInterval;
+        let startTime;
+        let estimatedSeconds = 8; // default estimate
 
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
@@ -49,43 +51,70 @@
                 return;
             }
 
-            // Show loading spinner
+            const file = fileInput.files[0];
+            // Estimate time based on file size (larger file = more time)
+            const fileSizeMB = file.size / (1024 * 1024);
+            estimatedSeconds = Math.max(3, Math.min(20, Math.floor(fileSizeMB * 4)));
+
+            // Show progress box
             statusDiv.style.display = 'block';
-            statusDiv.innerHTML = `<div style="color:white;">⏳ Converting...<br><div style="width:30px; height:30px; margin:10px auto; border:3px solid white; border-top-color:#ff5e00; border-radius:50%; animation:spin 0.6s linear infinite;"></div></div>`;
+            statusDiv.innerHTML = `
+                <div style="color:white; font-weight:500;">Your file is being converted...</div>
+                <div style="font-size:0.9rem; margin:8px 0;">Estimated time: ${estimatedSeconds} seconds</div>
+                <div style="background:rgba(255,255,255,0.3); border-radius:20px; height:10px; margin:12px 0; overflow:hidden;">
+                    <div id="progressFill" style="width:0%; background:white; height:100%; border-radius:20px; transition:width 0.3s;"></div>
+                </div>
+                <div id="progressPercent" style="font-size:1.2rem; font-weight:bold;">0%</div>
+            `;
+
+            // Animate progress from 0% to 90% (remaining 10% when actual conversion completes)
+            let progress = 0;
+            startTime = performance.now();
+            const progressDuration = estimatedSeconds * 1000;
             
-            conversionStartTime = performance.now();
+            progressInterval = setInterval(() => {
+                const elapsed = performance.now() - startTime;
+                progress = Math.min(90, (elapsed / progressDuration) * 90);
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('progressPercent').innerText = Math.floor(progress) + '%';
+            }, 100);
+
+            // Send actual conversion request
             const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
+            formData.append('file', file);
 
             try {
                 const response = await fetch(form.action, { method: 'POST', body: formData });
                 if (!response.ok) throw new Error();
                 const blob = await response.blob();
-                const conversionTime = ((performance.now() - conversionStartTime) / 1000).toFixed(2);
+                const actualTime = ((performance.now() - startTime) / 1000).toFixed(1);
                 const blobUrl = URL.createObjectURL(blob);
                 const fileSizeKB = (blob.size / 1024).toFixed(1);
 
-                // Show conversion time + download button (only after conversion)
+                clearInterval(progressInterval);
+                // Jump to 100%
+                document.getElementById('progressFill').style.width = '100%';
+                document.getElementById('progressPercent').innerText = '100%';
+
+                // Show completion + download button
                 statusDiv.innerHTML = `
-                    <div style="color:white; margin-bottom:10px;">✅ Converted in <strong>${conversionTime} sec</strong> (${fileSizeKB} KB)</div>
+                    <div style="color:white; margin-bottom:10px;">✅ Conversion complete! (${actualTime} sec)</div>
+                    <div style="font-size:0.85rem; margin-bottom:12px;">${fileSizeKB} KB - Ready to download</div>
                     <button id="downloadNowBtn" style="background:white; color:#ff5e00; border:none; padding:10px 20px; border-radius:30px; font-weight:600; cursor:pointer;">📥 Download PDF</button>
-                    <div style="font-size:0.75rem; margin-top:8px;">Click button to save file</div>
+                    <div style="font-size:0.7rem; margin-top:10px;">Your files are processed securely and never stored.</div>
                 `;
 
                 document.getElementById('downloadNowBtn').onclick = () => {
-                    const downloadStart = performance.now();
                     const a = document.createElement('a');
                     a.href = blobUrl;
                     a.download = 'converted.pdf';
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
-                    const downloadEnd = performance.now();
-                    const downloadTime = ((downloadEnd - downloadStart) / 1000).toFixed(3);
-                    statusDiv.innerHTML += `<div style="margin-top:8px;">💾 Download completed in ${downloadTime} sec</div>`;
                     setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
                 };
             } catch (error) {
+                clearInterval(progressInterval);
                 statusDiv.innerHTML = `<div style="color:#ffd0b5;">❌ Conversion failed. Try again.</div>`;
                 setTimeout(() => statusDiv.style.display = 'none', 4000);
             }
