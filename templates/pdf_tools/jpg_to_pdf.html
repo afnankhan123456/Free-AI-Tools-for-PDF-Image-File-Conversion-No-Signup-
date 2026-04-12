@@ -346,9 +346,8 @@ h1 {
 
 <script>
 // ============================================================
-// URL FIXED - Now matches app.py route: /jpg-to-pdf
+// UPDATED: ONLY JPG FILES ALLOWED - NO EMPTY FILES - NO OTHER FORMATS
 // UI remains exactly the same
-// File validation before conversion - no errors
 // ============================================================
 
 let selectedFile = null;
@@ -375,36 +374,53 @@ const elements = {
   fileErrorMsg: document.getElementById('fileErrorMsg')
 };
 
-// ✅ FIXED: API URL now matches your app.py route exactly
+// API URL - matches app.py route
 const API_CONVERT_URL = '/jpg-to-pdf';
 
-// ========== FILE VALIDATION FUNCTION ==========
+// ========== FILE VALIDATION - ONLY JPG/JEPG, NO EMPTY FILES ==========
 function validateFile(file) {
+  // Check 1: No file selected
   if (!file) {
-    return { valid: false, message: '❌ No file selected. Please choose a file first.' };
+    return { valid: false, message: '❌ No file selected. Please choose a JPG file first.' };
   }
   
+  // Check 2: Empty file
   if (file.size === 0) {
     return { valid: false, message: '❌ File is empty. Please select a valid JPG image.' };
   }
   
+  // Check 3: File size too large (max 50MB)
   if (file.size > 50 * 1024 * 1024) {
-    return { valid: false, message: '❌ File is too large (max 50MB). Please select a smaller image.' };
+    return { valid: false, message: '❌ File is too large (max 50MB). Please select a smaller JPG image.' };
   }
   
-  const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+  // Check 4: ONLY JPG/JPEG - NO PNG, NO GIF, NO PDF, NO OTHER FORMATS
+  const validMimeTypes = ['image/jpeg', 'image/jpg'];
+  const validExtensions = ['jpg', 'jpeg'];
+  
   const fileExtension = file.name.split('.').pop().toLowerCase();
-  const isValidType = validTypes.includes(file.type) || ['jpg', 'jpeg', 'png'].includes(fileExtension);
+  const isValidMime = validMimeTypes.includes(file.type);
+  const isValidExt = validExtensions.includes(fileExtension);
   
-  if (!isValidType) {
-    return { valid: false, message: '❌ This is not a JPG/PNG file. Please select a valid JPG or PNG image.' };
+  // Check mime type
+  if (!isValidMime) {
+    if (file.type === 'image/png') {
+      return { valid: false, message: '❌ PNG files are not allowed. Please select a JPG file only.' };
+    }
+    return { valid: false, message: '❌ Invalid file type. Please select a JPG/JPEG image only.' };
   }
   
-  if (!file.name.match(/\.(jpe?g|png)$/i)) {
-    return { valid: false, message: '❌ File extension is not .jpg or .png. Please select a valid image.' };
+  // Check extension
+  if (!isValidExt) {
+    return { valid: false, message: '❌ Invalid file extension. Please select a .jpg or .jpeg file only.' };
   }
   
-  return { valid: true, message: '' };
+  // Check filename pattern
+  if (!file.name.match(/\.(jpe?g)$/i)) {
+    return { valid: false, message: '❌ Only .jpg and .jpeg files are allowed. No other formats.' };
+  }
+  
+  return { valid: true, message: '✓ Valid JPG file ready for conversion' };
 }
 
 function showFileMessage(message, isError = false) {
@@ -456,7 +472,7 @@ function updateConvertButtonState() {
     if (validation.valid) {
       elements.convertBtn.classList.remove('disabled');
       elements.etaText.innerText = 'Ready to start conversion';
-      showFileMessage('✓ File is valid! Click Convert to PDF', false);
+      showFileMessage(validation.message, false);
     } else {
       elements.convertBtn.classList.add('disabled');
       elements.etaText.innerText = validation.message;
@@ -518,7 +534,7 @@ async function startRealConversion() {
   elements.completeTitle.innerText = 'Converting...';
   elements.completeMsg.innerText = 'Contacting server';
   elements.statusTitle.innerText = 'Converting...';
-  showFileMessage('✓ Converting your image to PDF...', false);
+  showFileMessage('✓ Converting your JPG to PDF...', false);
   updateConvertButtonState();
   
   const formData = new FormData();
@@ -622,7 +638,7 @@ function downloadPdf() {
   }
   const downloadUrl = URL.createObjectURL(pdfBlobFromServer);
   const a = document.createElement('a');
-  let baseName = selectedFile ? selectedFile.name.replace(/\.(jpe?g|png)$/i, '') : 'converted_image';
+  let baseName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '') : 'converted_image';
   baseName = baseName.replace(/[\\/:*?"<>|]/g, '');
   const fileName = `${baseName || 'image'}.pdf`;
   a.href = downloadUrl;
@@ -636,7 +652,8 @@ function downloadPdf() {
 
 const hiddenFileInput = document.createElement('input');
 hiddenFileInput.type = 'file';
-hiddenFileInput.accept = 'image/jpeg,image/jpg,image/png';
+// ONLY JPG FILES - NO PNG, NO OTHER FORMATS
+hiddenFileInput.accept = 'image/jpeg,image/jpg,.jpg,.jpeg';
 hiddenFileInput.style.display = 'none';
 hiddenFileInput.id = 'hiddenFileInput';
 document.body.appendChild(hiddenFileInput);
@@ -683,14 +700,14 @@ hiddenFileInput.addEventListener('change', (e) => {
     }
     conversionDone = false;
     pdfBlobFromServer = null;
-    showFileMessage('✓ File loaded! Ready to convert.', false);
+    showFileMessage('✓ JPG file loaded! Ready to convert.', false);
     updateConvertButtonState();
   }
 });
 
 elements.convertBtn.addEventListener('click', () => {
   if (!selectedFile) {
-    showFileMessage('Please select a JPG/JPEG image first.', true);
+    showFileMessage('Please select a JPG image first.', true);
     return;
   }
   if (isConverting) {
@@ -736,7 +753,7 @@ elements.resetLink.addEventListener('click', () => {
 
 resetFullUI(true);
 
-console.log('JPG to PDF Converter Ready - API URL: /jpg-to-pdf');
+console.log('JPG to PDF Converter Ready - ONLY JPG FILES ALLOWED');
 </script>
 </body>
 </html>
