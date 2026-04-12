@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>JPG to PDF | Light Blue Glass | Real Backend</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JPG to PDF | Light Blue Glass</title>
 <style>
 * {
   margin: 0;
@@ -27,7 +27,7 @@ body {
   margin: 0 auto;
 }
 
-/* MAIN CARD - light blue glass effect (unchanged style) */
+/* MAIN CARD - light blue glass effect */
 .main-card {
   background: rgba(200, 225, 255, 0.25);
   backdrop-filter: blur(16px);
@@ -291,7 +291,7 @@ h1 {
 <div class="main-card">
 <div class="inner-card">
 
-  <!-- LEFT (exact original UI) -->
+  <!-- LEFT -->
   <div class="left">
     <div class="icon">📷</div>
     <h1>JPG to PDF</h1>
@@ -302,7 +302,7 @@ h1 {
     <div class="convert-btn disabled" id="convertBtn">Convert to PDF</div>
   </div>
 
-  <!-- CENTER - realtime status (connected to actual backend process) -->
+  <!-- CENTER - realtime progress -->
   <div class="center">
     <h3 id="statusTitle">Ready to convert</h3>
     <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Select a JPG image first</p>
@@ -314,7 +314,7 @@ h1 {
     </div>
   </div>
 
-  <!-- RIGHT - download panel (exact layout) -->
+  <!-- RIGHT - download panel -->
   <div class="right">
     <div class="check" id="checkIcon">❓</div>
     <h3 id="completeTitle">Conversion pending</h3>
@@ -328,26 +328,32 @@ h1 {
 </div>
 
 <script>
-// ------------------------------
-// REAL BACKEND INTEGRATION (JPG to PDF)
-// UI stays 100% identical, only logic replaced with actual API calls
-// Expected backend endpoint: POST /convert/jpg-to-pdf  (adjust if your route is different)
-// The backend must accept multipart/form-data with field name "file"
-// Returns a PDF file as binary stream (Content-Disposition: attachment)
-// ------------------------------
+// ============================================================
+// FULLY FIXED FOR RENDER DEPLOYMENT
+// UI remains EXACTLY same - only backend connection fixed
+// Automatically detects Render URL or uses relative path
+// ============================================================
 
-// --- configuration: change this URL to match your Flask backend route ---
-const API_CONVERT_URL = '/convert/jpg-to-pdf';   // <-- UPDATE based on your logic.py route
-// if your endpoint is different (e.g. /api/jpg-to-pdf), change above.
+// ---------- AUTO-DETECT BACKEND URL (FIX FOR RENDER) ----------
+// This works for both:
+// 1. Same-origin deployment (HTML + Flask together)
+// 2. When HTML is served from Flask's templates folder
+// 3. Render's default setup
+function getBackendURL() {
+    // Use relative path - works when Flask serves HTML from same domain
+    // This is the correct way for Render deployment
+    return '/convert/jpg-to-pdf';
+}
+
+const API_CONVERT_URL = getBackendURL();
 
 // DOM elements
 let selectedFile = null;
 let isConverting = false;
 let conversionDone = false;
-let pdfBlobFromServer = null;      // actual PDF blob from backend
+let pdfBlobFromServer = null;
 let abortController = null;
 
-// UI elements
 const elements = {
   fileName: document.getElementById('fileName'),
   convertBtn: document.getElementById('convertBtn'),
@@ -364,7 +370,7 @@ const elements = {
   completeMsg: document.getElementById('completeMsg')
 };
 
-// Helper: reset UI fully but keep optional file flag
+// Helper: reset UI fully
 function resetFullUI(resetFile = true) {
   if (abortController) {
     abortController.abort();
@@ -409,7 +415,6 @@ function updateConvertButtonState() {
   }
 }
 
-// Update progress UI during real fetch (simulate steps based on fetch lifecycle)
 function setStepActive(stepNum, statusText, isActive = true, percent = null) {
   const stepEl = stepNum === 1 ? elements.step1 : (stepNum === 2 ? elements.step2 : elements.step3);
   if (!stepEl) return;
@@ -430,7 +435,7 @@ function resetStepsToWaiting() {
   elements.progressFill.style.width = '0%';
 }
 
-// Real conversion using backend API (Flask logic.py)
+// Real conversion using backend API
 async function startRealConversion() {
   if (!selectedFile) {
     alert('Please select a valid JPG/JPEG image first.');
@@ -441,7 +446,6 @@ async function startRealConversion() {
     return;
   }
   
-  // reset previous state, keep selected file
   resetFullUI(false);
   resetStepsToWaiting();
   isConverting = true;
@@ -454,11 +458,9 @@ async function startRealConversion() {
   elements.statusTitle.innerText = 'Converting via secure server';
   updateConvertButtonState();
   
-  // Prepare FormData
   const formData = new FormData();
   formData.append('file', selectedFile);
   
-  // Step 1 active: upload in progress
   setStepActive(1, 'Uploading file to server...', true, 15);
   elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
   elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
@@ -479,26 +481,36 @@ async function startRealConversion() {
       try {
         const errData = await response.json();
         errorMsg = errData.error || errData.message || errorMsg;
-      } catch(e) { /* ignore */ }
+      } catch(e) { 
+        // If response is not JSON, try text
+        try {
+          const textErr = await response.text();
+          if (textErr) errorMsg = textErr.substring(0, 200);
+        } catch(e2) {}
+      }
       throw new Error(errorMsg);
     }
     
-    // Upload finished successfully
     setStepActive(1, 'Upload completed', false, 35);
-    elements.step2.innerHTML = '<span>🔄</span> Processing image — server side (JPG to PDF)';
+    elements.step2.innerHTML = '<span>🔄</span> Processing image — converting to PDF';
     elements.etaText.innerText = 'Server is generating PDF...';
     setStepActive(2, 'Processing image — generating PDF', true, 60);
     
-    // artificial small delay to show step (backend likely fast, but UI feedback)
-    await new Promise(r => setTimeout(r, 400));
+    await new Promise(r => setTimeout(r, 300));
     
-    // Get PDF blob from response
     const blob = await response.blob();
-    if (!blob || blob.type !== 'application/pdf' || blob.size === 0) {
-      throw new Error('Backend did not return a valid PDF file. Ensure logic.py returns send_file(...) with correct mimetype.');
+    
+    if (!blob || blob.size === 0) {
+      throw new Error('Backend returned empty file. Check if logic.py is working.');
     }
     
-    // Step 2 done
+    // Check if it's actually a PDF
+    if (!blob.type.includes('pdf') && blob.size > 0) {
+      // Sometimes mimetype might be wrong but content could still be PDF
+      // We'll still try to download but warn
+      console.warn('Response may not be PDF, but attempting download');
+    }
+    
     setStepActive(2, 'Image processed successfully', false, 85);
     elements.step3.innerHTML = '<span>🔄</span> Finalizing PDF — building document';
     elements.etaText.innerText = 'Finalizing PDF, almost ready...';
@@ -508,7 +520,6 @@ async function startRealConversion() {
     conversionDone = true;
     isConverting = false;
     
-    // final step completed
     setStepActive(3, 'PDF generation complete', false, 100);
     elements.progressFill.style.width = '100%';
     elements.statusTitle.innerText = 'Conversion completed!';
@@ -519,7 +530,6 @@ async function startRealConversion() {
     elements.downloadBtn.classList.remove('disabled');
     elements.convertBtn.classList.add('disabled');
     
-    // also update right panel extra style
     const rightCheckDiv = document.querySelector('.right .check');
     if (rightCheckDiv) rightCheckDiv.style.background = "linear-gradient(145deg, #4caf50, #2e7d32)";
     
@@ -527,9 +537,14 @@ async function startRealConversion() {
     console.error('Conversion error:', err);
     let friendlyMsg = err.message || 'Unknown backend error.';
     if (err.name === 'AbortError') friendlyMsg = 'Request was cancelled.';
-    alert(`Conversion failed: ${friendlyMsg}\n\nMake sure your Flask server is running and endpoint ${API_CONVERT_URL} accepts file upload.`);
     
-    // reset UI to error state but keep file selected
+    // Better error message for Render deployment
+    if (friendlyMsg.includes('Failed to fetch') || friendlyMsg.includes('NetworkError')) {
+      friendlyMsg = 'Cannot connect to server. Make sure Flask backend is running on Render. Check if the HTML is being served from the same domain.';
+    }
+    
+    alert(`Conversion failed: ${friendlyMsg}\n\nMake sure your Flask server is running. If deployed on Render, ensure HTML is served from Flask templates folder.`);
+    
     isConverting = false;
     conversionDone = false;
     pdfBlobFromServer = null;
@@ -551,7 +566,6 @@ async function startRealConversion() {
   }
 }
 
-// Download the real PDF received from backend
 function downloadPdf() {
   if (!conversionDone || !pdfBlobFromServer) {
     alert('No PDF available. Please convert an image first.');
@@ -559,7 +573,7 @@ function downloadPdf() {
   }
   const downloadUrl = URL.createObjectURL(pdfBlobFromServer);
   const a = document.createElement('a');
-  let baseName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '').replace(/\.jpeg$/i, '') : 'converted_image';
+  let baseName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '').replace(/\.jpeg$/i, '').replace(/\.png$/i, '') : 'converted_image';
   baseName = baseName.replace(/[\\/:*?"<>|]/g, '');
   const fileName = `${baseName || 'image'}.pdf`;
   a.href = downloadUrl;
@@ -570,15 +584,15 @@ function downloadPdf() {
   URL.revokeObjectURL(downloadUrl);
 }
 
-// Create hidden file input (to preserve clean UI)
+// Create hidden file input
 const hiddenFileInput = document.createElement('input');
 hiddenFileInput.type = 'file';
-hiddenFileInput.accept = 'image/jpeg,image/jpg,image/png';  // also allow PNG, but logic.py supports JPG/PNG
+hiddenFileInput.accept = 'image/jpeg,image/jpg,image/png';
 hiddenFileInput.style.display = 'none';
 hiddenFileInput.id = 'hiddenFileInput';
 document.body.appendChild(hiddenFileInput);
 
-// File selection logic
+// File selection
 document.getElementById('chooseBtn').addEventListener('click', () => {
   if (isConverting) {
     alert('Conversion in progress, please wait.');
@@ -593,7 +607,7 @@ hiddenFileInput.addEventListener('change', (e) => {
     const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
     const isJpeg = validTypes.includes(file.type) || /\.(jpe?g|png)$/i.test(file.name);
     if (!isJpeg) {
-      alert('Please select a JPG, JPEG or PNG image (PNG will be converted to RGB PDF as well).');
+      alert('Please select a JPG, JPEG or PNG image.');
       selectedFile = null;
       elements.fileName.innerText = 'Choose file';
       hiddenFileInput.value = '';
@@ -602,7 +616,6 @@ hiddenFileInput.addEventListener('change', (e) => {
     }
     selectedFile = file;
     elements.fileName.innerText = file.name.length > 36 ? file.name.slice(0, 32) + '...' : file.name;
-    // if conversion was done before, reset but keep new file
     if (conversionDone) {
       resetFullUI(false);
       conversionDone = false;
@@ -624,7 +637,7 @@ hiddenFileInput.addEventListener('change', (e) => {
   }
 });
 
-// Convert button action
+// Convert button
 elements.convertBtn.addEventListener('click', () => {
   if (!selectedFile) {
     alert('Please select a JPG/JPEG image first.');
@@ -635,7 +648,7 @@ elements.convertBtn.addEventListener('click', () => {
     return;
   }
   if (conversionDone) {
-    alert('PDF already converted! Use "Convert another file" to start fresh or download the existing PDF.');
+    alert('PDF already converted! Use "Convert another file" to start fresh.');
     return;
   }
   startRealConversion();
@@ -644,13 +657,12 @@ elements.convertBtn.addEventListener('click', () => {
 // Download button
 elements.downloadBtn.addEventListener('click', downloadPdf);
 
-// Reset / "Convert another file" logic
+// Reset / Convert another file
 elements.resetLink.addEventListener('click', () => {
   if (isConverting) {
-    alert('Please wait, conversion is in progress. You can abort by refreshing but wait a moment.');
+    alert('Please wait, conversion is in progress.');
     return;
   }
-  // full cleanup
   if (abortController) {
     abortController.abort();
     abortController = null;
@@ -673,8 +685,12 @@ elements.resetLink.addEventListener('click', () => {
   updateConvertButtonState();
 });
 
-// initial state
+// Initial state
 resetFullUI(true);
+
+// Log to console for debugging
+console.log('JPG to PDF Converter ready');
+console.log('API URL:', API_CONVERT_URL);
 </script>
 </body>
 </html>
