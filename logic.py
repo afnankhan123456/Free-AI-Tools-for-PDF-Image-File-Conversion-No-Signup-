@@ -29,18 +29,33 @@ def png_to_pdf_logic(app):
 
 
 # ---------------- JPG TO PDF ----------------
+    
 def jpg_to_pdf_logic(app):
     file = request.files["file"]
-
-    output_path = os.path.join(
-        app.config["PROCESSED_FOLDER"],
-        str(uuid.uuid4()) + ".pdf"
-    )
-
-    Image.open(file).convert("RGB").save(output_path)
-
+    
+    output_path = os.path.join(app.config["PROCESSED_FOLDER"], str(uuid.uuid4()) + ".pdf")
+    
+    img = Image.open(file).convert('RGB')
+    img_width, img_height = img.size
+    
+    # A4 at 300 DPI
+    A4_W, A4_H = 2480, 3508
+    
+    # Calculate fit size (maintain aspect ratio)
+    if img_width / img_height > A4_W / A4_H:
+        new_w, new_h = A4_W, int(A4_W / (img_width / img_height))
+    else:
+        new_w, new_h = int(A4_H * (img_width / img_height)), A4_H
+    
+    # Resize and center on white canvas
+    img_resized = img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+    canvas = Image.new('RGB', (A4_W, A4_H), 'white')
+    canvas.paste(img_resized, ((A4_W - new_w) // 2, (A4_H - new_h) // 2))
+    
+    canvas.save(output_path, 'PDF', resolution=300.0, quality=100)
+    
     return send_file(output_path, as_attachment=True)
-
+    
 
 # ---------------- PDF TO JPG ----------------
 def pdf_to_jpg_logic(app):
