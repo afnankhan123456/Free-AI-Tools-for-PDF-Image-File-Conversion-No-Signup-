@@ -346,9 +346,9 @@ h1 {
 
 <script>
 // ============================================================
-// COMPLETE FIXED CODE - UI SAME, NO ERRORS
-// File validation before conversion - shows friendly messages
-// No backend errors - all validation done on frontend first
+// URL FIXED - Now matches app.py route: /jpg-to-pdf
+// UI remains exactly the same
+// File validation before conversion - no errors
 // ============================================================
 
 let selectedFile = null;
@@ -375,27 +375,23 @@ const elements = {
   fileErrorMsg: document.getElementById('fileErrorMsg')
 };
 
-// API URL - relative path works on Render
-const API_CONVERT_URL = '/convert/jpg-to-pdf';
+// ✅ FIXED: API URL now matches your app.py route exactly
+const API_CONVERT_URL = '/jpg-to-pdf';
 
-// ========== FILE VALIDATION FUNCTION (pehle check karega) ==========
+// ========== FILE VALIDATION FUNCTION ==========
 function validateFile(file) {
-  // Check 1: File exists or not
   if (!file) {
     return { valid: false, message: '❌ No file selected. Please choose a file first.' };
   }
   
-  // Check 2: File empty hai?
   if (file.size === 0) {
     return { valid: false, message: '❌ File is empty. Please select a valid JPG image.' };
   }
   
-  // Check 3: File size too large? (optional - 50MB max)
   if (file.size > 50 * 1024 * 1024) {
     return { valid: false, message: '❌ File is too large (max 50MB). Please select a smaller image.' };
   }
   
-  // Check 4: JPG/JPEG/PNG hai? (backend supports JPG/PNG)
   const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
   const fileExtension = file.name.split('.').pop().toLowerCase();
   const isValidType = validTypes.includes(file.type) || ['jpg', 'jpeg', 'png'].includes(fileExtension);
@@ -404,7 +400,6 @@ function validateFile(file) {
     return { valid: false, message: '❌ This is not a JPG/PNG file. Please select a valid JPG or PNG image.' };
   }
   
-  // Check 5: File name has valid extension
   if (!file.name.match(/\.(jpe?g|png)$/i)) {
     return { valid: false, message: '❌ File extension is not .jpg or .png. Please select a valid image.' };
   }
@@ -412,7 +407,6 @@ function validateFile(file) {
   return { valid: true, message: '' };
 }
 
-// Show friendly message (no error, just info)
 function showFileMessage(message, isError = false) {
   if (elements.fileErrorMsg) {
     elements.fileErrorMsg.textContent = message;
@@ -427,7 +421,6 @@ function showFileMessage(message, isError = false) {
   }
 }
 
-// Reset UI fully
 function resetFullUI(resetFile = true) {
   if (abortController) {
     abortController.abort();
@@ -502,9 +495,7 @@ function resetStepsToWaiting() {
   elements.progressFill.style.width = '0%';
 }
 
-// Real conversion with backend
 async function startRealConversion() {
-  // FINAL VALIDATION BEFORE CONVERSION (pehle check karega)
   const validation = validateFile(selectedFile);
   if (!validation.valid) {
     showFileMessage(validation.message, true);
@@ -608,7 +599,7 @@ async function startRealConversion() {
     
     let friendlyMsg = err.message || 'Unknown error. Please try again.';
     if (friendlyMsg.includes('Failed to fetch')) {
-      friendlyMsg = 'Cannot connect to server. Please check if backend is running.';
+      friendlyMsg = 'Cannot connect to server. Make sure Flask backend is running.';
     }
     showFileMessage(friendlyMsg, true);
     setTimeout(() => {
@@ -643,7 +634,6 @@ function downloadPdf() {
   showFileMessage('✓ Download started!', false);
 }
 
-// Create hidden file input
 const hiddenFileInput = document.createElement('input');
 hiddenFileInput.type = 'file';
 hiddenFileInput.accept = 'image/jpeg,image/jpg,image/png';
@@ -651,7 +641,6 @@ hiddenFileInput.style.display = 'none';
 hiddenFileInput.id = 'hiddenFileInput';
 document.body.appendChild(hiddenFileInput);
 
-// File selection with validation
 document.getElementById('chooseBtn').addEventListener('click', () => {
   if (isConverting) {
     showFileMessage('Conversion in progress, please wait.', false);
@@ -699,7 +688,6 @@ hiddenFileInput.addEventListener('change', (e) => {
   }
 });
 
-// Convert button
 elements.convertBtn.addEventListener('click', () => {
   if (!selectedFile) {
     showFileMessage('Please select a JPG/JPEG image first.', true);
@@ -716,10 +704,8 @@ elements.convertBtn.addEventListener('click', () => {
   startRealConversion();
 });
 
-// Download button
 elements.downloadBtn.addEventListener('click', downloadPdf);
 
-// Reset / Convert another file
 elements.resetLink.addEventListener('click', () => {
   if (isConverting) {
     showFileMessage('Please wait, conversion is in progress.', false);
@@ -748,10 +734,9 @@ elements.resetLink.addEventListener('click', () => {
   updateConvertButtonState();
 });
 
-// Initial state
 resetFullUI(true);
 
-console.log('JPG to PDF Converter Ready - File validation active');
+console.log('JPG to PDF Converter Ready - API URL: /jpg-to-pdf');
 </script>
 </body>
 </html>
