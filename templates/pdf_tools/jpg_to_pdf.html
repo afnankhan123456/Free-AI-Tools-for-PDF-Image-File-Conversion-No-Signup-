@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JPG to PDF | High Quality | Full Page Fit</title>
+<title>JPG to PDF | Full HD | Auto Fit</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 * {
@@ -76,6 +76,7 @@ h1 {
   background-clip: text;
   color: transparent;
   letter-spacing: -0.3px;
+  margin: 8px 0 5px 0;
 }
 
 .desc {
@@ -97,16 +98,19 @@ h1 {
   color: #1a3a6e;
   font-weight: 600;
   border: 1px solid rgba(255,255,255,0.4);
+  transition: all 0.2s;
 }
 
 .file-btn {
   padding: 8px 20px;
   border-radius: 40px;
   background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+  backdrop-filter: blur(4px);
   color: white;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.85rem;
+  transition: 0.2s;
   border: none;
   box-shadow: 0 2px 8px rgba(58,140,255,0.3);
 }
@@ -122,11 +126,14 @@ h1 {
   border-radius: 60px;
   text-align: center;
   background: linear-gradient(105deg, #5cb0ff, #3a8cff, #5cb0ff);
+  backdrop-filter: blur(4px);
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.25s;
   font-size: 1rem;
   border: 1px solid rgba(255,255,255,0.4);
   color: white;
+  letter-spacing: 0.5px;
   box-shadow: 0 6px 14px rgba(58,140,255,0.3);
 }
 
@@ -134,6 +141,13 @@ h1 {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
+  filter: grayscale(0.1);
+}
+
+.convert-btn:not(.disabled):hover {
+  transform: translateY(-3px);
+  background: linear-gradient(105deg, #6cbaff, #4a9eff);
+  box-shadow: 0 12px 22px rgba(58,140,255,0.4);
 }
 
 .center {
@@ -167,6 +181,7 @@ h1 {
   background: linear-gradient(90deg, #5cb0ff, #3a8cff, #7bc5ff);
   border-radius: 20px;
   transition: width 0.25s ease;
+  box-shadow: 0 0 6px #5cb0ff;
 }
 
 .step-list p {
@@ -180,6 +195,7 @@ h1 {
   background: rgba(255,255,255,0.2);
   padding: 6px 12px;
   border-radius: 40px;
+  backdrop-filter: blur(2px);
 }
 
 .right {
@@ -190,12 +206,14 @@ h1 {
   padding: 28px 20px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.2s;
 }
 
 .check {
   width: 68px;
   height: 68px;
   background: linear-gradient(145deg, #4caf50, #2e7d32);
+  backdrop-filter: blur(4px);
   border-radius: 50%;
   margin: 0 auto 18px;
   display: flex;
@@ -203,7 +221,16 @@ h1 {
   justify-content: center;
   font-size: 36px;
   font-weight: bold;
+  box-shadow: 0 8px 20px rgba(46,125,50,0.3);
+  border: 1px solid rgba(255,255,255,0.5);
   color: white;
+}
+
+.right h3 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #1a3a6e;
 }
 
 .download {
@@ -211,8 +238,11 @@ h1 {
   padding: 12px 16px;
   border-radius: 60px;
   background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+  backdrop-filter: blur(4px);
   font-weight: bold;
   cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid rgba(255,255,255,0.4);
   color: white;
 }
 
@@ -221,12 +251,25 @@ h1 {
   pointer-events: none;
 }
 
+.download:not(.disabled):hover {
+  transform: translateY(-2px);
+  background: linear-gradient(95deg, #6cbaff, #4a9eff);
+  box-shadow: 0 8px 18px rgba(58,140,255,0.4);
+}
+
 .link {
   margin-top: 22px;
   font-size: 13px;
   color: #1a3a6e;
   text-decoration: underline;
   cursor: pointer;
+  transition: 0.2s;
+  font-weight: 500;
+}
+
+.link:hover {
+  color: #0a2a4e;
+  text-shadow: 0 0 4px rgba(90,170,255,0.5);
 }
 
 .error-msg {
@@ -237,40 +280,18 @@ h1 {
   font-weight: bold;
 }
 
-.fit-options {
-  margin-top: 20px;
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.fit-btn {
-  padding: 8px 16px;
-  border-radius: 40px;
-  background: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.4);
-  color: #1a3a6e;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 600;
-  transition: all 0.2s;
-}
-
-.fit-btn.active {
-  background: linear-gradient(95deg, #5cb0ff, #3a8cff);
-  color: white;
-  border-color: transparent;
-}
-
-.fit-btn:hover:not(.active) {
-  background: rgba(255,255,255,0.4);
-}
-
 @media (max-width: 880px) {
   .inner-card {
     padding: 24px 22px;
     gap: 20px;
+  }
+  .icon {
+    width: 54px;
+    height: 54px;
+    font-size: 1.3rem;
+  }
+  h1 {
+    font-size: 1.6rem;
   }
 }
 </style>
@@ -283,17 +304,11 @@ h1 {
   <div class="left">
     <div class="icon">📷</div>
     <h1>JPG to PDF</h1>
-    <div class="desc">High quality PDF conversion • Full page fit • No cropping</div>
+    <div class="desc">Convert JPG to PDF • Full HD Quality • Auto Fit • No Cropping</div>
     
     <div class="file-box">
       <span id="fileName">Choose file</span>
       <div class="file-btn" id="chooseBtn">Browse</div>
-    </div>
-    
-    <div class="fit-options">
-      <div class="fit-btn active" data-fit="fit">📐 Fit to Page</div>
-      <div class="fit-btn" data-fit="original">🔍 Original Size</div>
-      <div class="fit-btn" data-fit="fill">📏 Fill Page (No Margin)</div>
     </div>
     
     <div class="convert-btn disabled" id="convertBtn">Convert to PDF</div>
@@ -306,8 +321,8 @@ h1 {
     <div class="progress"><div class="fill" id="progressFill"></div></div>
     <div class="step-list">
       <p id="step1"><span>⭕</span> Loading image — waiting</p>
-      <p id="step2"><span>⭕</span> Processing & scaling — waiting</p>
-      <p id="step3"><span>⭕</span> Generating PDF — waiting</p>
+      <p id="step2"><span>⭕</span> Processing & auto-scaling — waiting</p>
+      <p id="step3"><span>⭕</span> Generating HD PDF — waiting</p>
     </div>
   </div>
 
@@ -325,21 +340,20 @@ h1 {
 
 <script>
 // ============================================================
-// HIGH QUALITY JPG TO PDF CONVERTER
-// - Full page fit without cropping
-// - Maintain aspect ratio
-// - Auto orientation (portrait/landscape)
-// - 3 fit modes: Fit to Page, Original Size, Fill Page
+// HIGH QUALITY JPG TO PDF CONVERTER - AUTO FIT
+// - Automatically fits image to full page without cropping
+// - Maintains original aspect ratio
+// - Auto detects portrait/landscape orientation
+// - White margins added automatically for perfect fit
 // - High resolution output (300 DPI equivalent)
+// - No options shown - fully automatic
 // ============================================================
 
 let selectedFile = null;
 let isConverting = false;
 let conversionDone = false;
 let pdfBlobFromServer = null;
-let currentFitMode = 'fit'; // fit, original, fill
 
-// DOM elements
 const elements = {
   fileName: document.getElementById('fileName'),
   convertBtn: document.getElementById('convertBtn'),
@@ -356,18 +370,6 @@ const elements = {
   completeMsg: document.getElementById('completeMsg'),
   fileErrorMsg: document.getElementById('fileErrorMsg')
 };
-
-// Fit mode selection
-document.querySelectorAll('.fit-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.fit-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFitMode = btn.dataset.fit;
-    if (selectedFile) {
-      showFileMessage(`✓ Mode changed: ${btn.textContent}`, false);
-    }
-  });
-});
 
 function validateFile(file) {
   if (!file) return { valid: false, message: '❌ No file selected' };
@@ -388,9 +390,11 @@ function showFileMessage(message, isError = false) {
   if (elements.fileErrorMsg) {
     elements.fileErrorMsg.textContent = message;
     elements.fileErrorMsg.style.color = isError ? '#ff6b6b' : '#4caf50';
-    if (!isError) setTimeout(() => {
-      if (elements.fileErrorMsg.textContent === message) elements.fileErrorMsg.textContent = '';
-    }, 3000);
+    if (!isError) {
+      setTimeout(() => {
+        if (elements.fileErrorMsg.textContent === message) elements.fileErrorMsg.textContent = '';
+      }, 3000);
+    }
   }
 }
 
@@ -410,8 +414,8 @@ function resetUI(resetFile = true) {
   pdfBlobFromServer = null;
   elements.progressFill.style.width = '0%';
   setStep(1, 'Loading image — waiting', false, 0);
-  setStep(2, 'Processing & scaling — waiting', false);
-  setStep(3, 'Generating PDF — waiting', false);
+  setStep(2, 'Processing & auto-scaling — waiting', false);
+  setStep(3, 'Generating HD PDF — waiting', false);
   elements.statusTitle.innerText = 'Ready to convert';
   elements.etaText.innerText = 'Select a JPG image first';
   elements.downloadBtn.classList.add('disabled');
@@ -441,10 +445,10 @@ function updateConvertBtn() {
   }
 }
 
-// ========== HIGH QUALITY PDF CONVERSION ==========
-// A4 dimensions in points: 595 x 842 (at 72 DPI)
-// For high quality, we use higher resolution canvas
-async function convertJpgToHighQualityPdf(file, fitMode) {
+// ========== HIGH QUALITY AUTO-FIT PDF CONVERSION ==========
+// Automatically fits image to A4 page without cropping
+// Maintains aspect ratio, adds white margins, centers image
+async function convertJpgToHDPdf(file) {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const objectUrl = URL.createObjectURL(file);
@@ -457,100 +461,81 @@ async function convertJpgToHighQualityPdf(file, fitMode) {
       const imgAspect = imgWidth / imgHeight;
       
       // A4 dimensions in points (1 point = 1/72 inch)
-      const pdfWidthPt = 595.28;  // 210mm at 72 DPI
-      const pdfHeightPt = 841.89; // 297mm at 72 DPI
+      const pdfWidthPt = 595.28;  // 210mm
+      const pdfHeightPt = 841.89; // 297mm
       const pdfAspect = pdfWidthPt / pdfHeightPt;
       
       let finalWidthPt, finalHeightPt;
       let xOffsetPt = 0, yOffsetPt = 0;
+      let pageOrientation = 'portrait';
       
-      // Calculate scaling based on fit mode
-      if (fitMode === 'original') {
-        // Original size: 1 pixel = 1 point (72 DPI equivalent)
-        // But we want high quality, so we'll scale image to actual size
-        finalWidthPt = imgWidth;
-        finalHeightPt = imgHeight;
-        
-        // If image is larger than page, scale down to fit
-        if (finalWidthPt > pdfWidthPt) {
-          const scale = pdfWidthPt / finalWidthPt;
-          finalWidthPt = pdfWidthPt;
-          finalHeightPt = finalHeightPt * scale;
-        }
-        if (finalHeightPt > pdfHeightPt) {
-          const scale = pdfHeightPt / finalHeightPt;
-          finalHeightPt = pdfHeightPt;
-          finalWidthPt = finalWidthPt * scale;
-        }
-        
-        // Center on page
-        xOffsetPt = (pdfWidthPt - finalWidthPt) / 2;
+      // AUTO FIT LOGIC - Fit image to page without cropping
+      // Image will be scaled to fit within page, maintaining aspect ratio
+      // White margins added automatically, image centered
+      
+      if (imgAspect > pdfAspect) {
+        // Image is wider than page aspect ratio
+        // Fit to page width
+        finalWidthPt = pdfWidthPt;
+        finalHeightPt = pdfWidthPt / imgAspect;
         yOffsetPt = (pdfHeightPt - finalHeightPt) / 2;
+        xOffsetPt = 0;
         
-      } else if (fitMode === 'fill') {
-        // Fill entire page (may crop slightly)
-        const scaleW = pdfWidthPt / imgWidth;
-        const scaleH = pdfHeightPt / imgHeight;
-        const scale = Math.max(scaleW, scaleH);
-        finalWidthPt = imgWidth * scale;
-        finalHeightPt = imgHeight * scale;
+        // Check if image is landscape or portrait
+        if (imgWidth > imgHeight) {
+          pageOrientation = 'landscape';
+        }
+      } else {
+        // Image is taller or equal to page aspect ratio
+        // Fit to page height
+        finalHeightPt = pdfHeightPt;
+        finalWidthPt = pdfHeightPt * imgAspect;
         xOffsetPt = (pdfWidthPt - finalWidthPt) / 2;
-        yOffsetPt = (pdfHeightPt - finalHeightPt) / 2;
+        yOffsetPt = 0;
         
-      } else { // 'fit' - default: fit to page with margins
-        if (imgAspect > pdfAspect) {
-          // Image is wider - fit to width
-          finalWidthPt = pdfWidthPt;
-          finalHeightPt = pdfWidthPt / imgAspect;
-          yOffsetPt = (pdfHeightPt - finalHeightPt) / 2;
-          xOffsetPt = 0;
-        } else {
-          // Image is taller - fit to height
-          finalHeightPt = pdfHeightPt;
-          finalWidthPt = pdfHeightPt * imgAspect;
-          xOffsetPt = (pdfWidthPt - finalWidthPt) / 2;
-          yOffsetPt = 0;
+        // Check orientation
+        if (imgHeight > imgWidth) {
+          pageOrientation = 'portrait';
+        } else if (imgWidth > imgHeight) {
+          pageOrientation = 'landscape';
         }
       }
       
-      // Create canvas at high resolution (3x for quality)
-      const scale = 3; // Render at 3x for anti-aliasing
+      // For landscape images, use landscape page orientation
+      const finalOrientation = (imgWidth > imgHeight) ? 'landscape' : 'portrait';
+      
+      // Create high resolution canvas for quality (4x scaling for anti-aliasing)
+      const scale = 4;
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       
-      // Set canvas size to match final PDF dimensions at high DPI
       canvas.width = finalWidthPt * scale;
       canvas.height = finalHeightPt * scale;
       
-      // Enable high quality image smoothing
+      // High quality image rendering
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
       
-      // Draw image scaled to fit
+      // Draw image with high quality
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       
-      // Create PDF
       const { jsPDF } = window.jspdf;
       
-      // Determine page orientation based on final dimensions
-      const orientation = finalWidthPt > finalHeightPt ? 'landscape' : 'portrait';
-      
-      // Create PDF at high quality
+      // Create PDF with appropriate orientation
       const pdf = new jsPDF({
-        orientation: orientation,
+        orientation: finalOrientation,
         unit: 'pt',
         format: 'a4',
-        compress: false, // No compression for maximum quality
+        compress: false,
         hotfixes: ['px_scaling']
       });
       
-      // Get canvas data as JPEG at high quality (100%)
+      // Get high quality JPEG data (100% quality)
       const imgData = canvas.toDataURL('image/jpeg', 1.0);
       
-      // Add image to PDF at exact position
+      // Add image to PDF at calculated position
       pdf.addImage(imgData, 'JPEG', xOffsetPt, yOffsetPt, finalWidthPt, finalHeightPt, undefined, 'FAST');
       
-      // Generate PDF blob
       const pdfBlob = pdf.output('blob');
       resolve(pdfBlob);
     };
@@ -581,26 +566,26 @@ async function startConversion() {
   elements.checkIcon.innerHTML = '⏳';
   elements.completeTitle.innerText = 'Converting...';
   elements.completeMsg.innerText = 'Processing image';
-  elements.statusTitle.innerText = 'Converting to PDF';
+  elements.statusTitle.innerText = 'Converting to HD PDF';
   updateConvertBtn();
   
   setStep(1, 'Loading image...', true, 20);
-  setStep(2, 'Processing & scaling...', false);
-  setStep(3, 'Generating PDF...', false);
+  setStep(2, 'Processing & auto-scaling...', false);
+  setStep(3, 'Generating HD PDF...', false);
   elements.etaText.innerText = 'Loading image...';
   
   try {
     setStep(1, 'Image loaded, analyzing dimensions...', false, 40);
-    setStep(2, `Scaling with mode: ${currentFitMode === 'fit' ? 'Fit to Page' : (currentFitMode === 'original' ? 'Original Size' : 'Fill Page')}`, true, 60);
+    setStep(2, 'Auto-scaling to fit A4 page without cropping...', true, 60);
     elements.etaText.innerText = 'Processing image...';
     
     await new Promise(r => setTimeout(r, 100));
     
-    const pdfBlob = await convertJpgToHighQualityPdf(selectedFile, currentFitMode);
+    const pdfBlob = await convertJpgToHDPdf(selectedFile);
     
     setStep(2, 'Image processed successfully', false, 85);
     setStep(3, 'Generating high quality PDF...', true, 90);
-    elements.etaText.innerText = 'Creating PDF...';
+    elements.etaText.innerText = 'Creating HD PDF...';
     
     await new Promise(r => setTimeout(r, 100));
     
@@ -611,13 +596,13 @@ async function startConversion() {
     setStep(3, 'PDF generation complete!', false, 100);
     elements.progressFill.style.width = '100%';
     elements.statusTitle.innerText = 'Conversion completed!';
-    elements.etaText.innerText = 'Your high quality PDF is ready';
+    elements.etaText.innerText = 'Your HD PDF is ready';
     elements.checkIcon.innerHTML = '✔️';
     elements.completeTitle.innerText = 'Conversion complete!';
-    elements.completeMsg.innerText = 'PDF ready - No cropping, HD quality';
+    elements.completeMsg.innerText = 'PDF ready • Full HD • Auto-fitted • No cropping';
     elements.downloadBtn.classList.remove('disabled');
     elements.convertBtn.classList.add('disabled');
-    showFileMessage('✓ High quality PDF created successfully!', false);
+    showFileMessage('✓ HD PDF created successfully!', false);
     
   } catch (err) {
     console.error(err);
@@ -652,7 +637,6 @@ function downloadPdf() {
   showFileMessage('✓ Download started!', false);
 }
 
-// File input setup
 const hiddenFileInput = document.createElement('input');
 hiddenFileInput.type = 'file';
 hiddenFileInput.accept = 'image/jpeg,image/jpg,.jpg,.jpeg';
@@ -715,7 +699,7 @@ elements.resetLink.onclick = () => {
 };
 
 resetUI(true);
-console.log('High Quality JPG to PDF Converter Ready');
+console.log('High Quality JPG to PDF Converter Ready - Auto Fit Mode');
 </script>
 </body>
 </html>
