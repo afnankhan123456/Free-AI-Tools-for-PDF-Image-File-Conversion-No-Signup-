@@ -2,199 +2,699 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Final UI</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>JPG to PDF Converter | Real-time Process</title>
 <style>
-body {
-  margin: 0;
-  background: #000;
-  font-family: Arial, sans-serif;
-  color: white;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-.wrapper {
-  padding: 100px 60px;
-}
+  body {
+    margin: 0;
+    background: #000;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-/* MAIN CARD */
-.main-card {
-  position: relative;
-  width: 100%;
-  max-width: 1600px;
-  margin: auto;
-  border-radius: 30px;
-  padding: 2px; /* IMPORTANT for border */
+  .wrapper {
+    padding: 40px 24px;
+    width: 100%;
+  }
 
-  background: linear-gradient(90deg, #00f0ff, #6a00ff, #00f0ff);
-  background-size: 300% 300%;
-  animation: borderMove 4s linear infinite;
-}
+  /* MAIN CARD with animated border */
+  .main-card {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+    border-radius: 32px;
+    padding: 2px;
+    background: linear-gradient(90deg, #00f0ff, #6a00ff, #00f0ff);
+    background-size: 300% 300%;
+    animation: borderMove 4s linear infinite;
+    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+  }
 
-/* INNER CONTENT CARD */
-.inner-card {
-  background: linear-gradient(135deg, #0b2cff, #6a00ff, #d100ff);
-  border-radius: 28px;
-  padding: 25px;
-  display: flex;
-  gap: 25px;
-}
+  .inner-card {
+    background: linear-gradient(135deg, #0b2cff, #6a00ff, #d100ff);
+    border-radius: 30px;
+    padding: 28px 32px;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(2px);
+  }
 
-/* ANIMATION */
-@keyframes borderMove {
-  0% { background-position: 0% }
-  100% { background-position: 300% }
-}
+  @keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
 
-/* LEFT */
-.left { flex: 1.5; }
+  /* LEFT PANEL */
+  .left {
+    flex: 1.5;
+    min-width: 220px;
+  }
 
-.icon {
-  width: 55px;
-  height: 55px;
-  border-radius: 12px;
-  background: linear-gradient(135deg,#3bb2ff,#6f5bff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
+  .icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #3bb2ff, #6f5bff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 14px rgba(0,0,0,0.3);
+  }
 
-h1 { margin: 5px 0; }
+  h1 {
+    margin: 8px 0 5px 0;
+    font-size: 1.8rem;
+    letter-spacing: -0.3px;
+  }
 
-.file-box {
-  margin-top: 15px;
-  background: white;
-  border-radius: 10px;
-  padding: 8px;
-  display: flex;
-  justify-content: space-between;
-  color: black;
-}
+  .file-box {
+    margin-top: 25px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 60px;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #111;
+    font-weight: 500;
+    backdrop-filter: blur(2px);
+  }
 
-.file-btn {
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: linear-gradient(90deg,#3bb2ff,#8a2be2);
-  color: white;
-}
+  .file-btn {
+    padding: 8px 18px;
+    border-radius: 40px;
+    background: linear-gradient(90deg, #3bb2ff, #8a2be2);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: 0.2s;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
 
-.convert-btn {
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 10px;
-  text-align: center;
-  background: linear-gradient(90deg,#ff4ecd,#4ecbff);
-  font-weight: bold;
-}
+  .file-btn:hover {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
 
-/* CENTER */
-.center {
-  flex: 1.1;
-  background: rgba(0,0,0,0.25);
-  padding: 15px;
-  border-radius: 12px;
-}
+  .convert-btn {
+    margin-top: 20px;
+    padding: 14px 12px;
+    border-radius: 60px;
+    text-align: center;
+    background: linear-gradient(90deg, #ff4ecd, #4ecbff);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+  }
 
-.progress {
-  height: 6px;
-  background: #111;
-  border-radius: 10px;
-  margin: 10px 0;
-  overflow: hidden;
-}
+  .convert-btn.disabled-btn, .convert-btn:not(.active-convert) {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(0.1);
+    pointer-events: none;
+  }
 
-.fill {
-  width: 58%;
-  height: 100%;
-  background: linear-gradient(90deg,#4ecbff,#a64dff);
-}
+  .convert-btn.active-convert {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: auto;
+  }
 
-/* RIGHT */
-.right {
-  flex: 0.9;
-  background: rgba(0,0,0,0.25);
-  padding: 15px;
-  border-radius: 12px;
-  text-align: center;
-}
+  .convert-btn.active-convert:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+  }
 
-.check {
-  width: 50px;
-  height: 50px;
-  background: #00c853;
-  border-radius: 50%;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  /* CENTER panel (progress realtime) */
+  .center {
+    flex: 1.1;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 20px 20px;
+    border-radius: 24px;
+    backdrop-filter: blur(4px);
+    min-width: 240px;
+  }
 
-.download {
-  margin-top: 12px;
-  padding: 10px;
-  border-radius: 8px;
-  background: linear-gradient(90deg,#4ecbff,#a64dff);
-}
+  .center h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
 
-.link {
-  margin-top: 8px;
-  font-size: 12px;
-  color: #ccc;
-}
+  .progress {
+    height: 8px;
+    background: #1e1e2f;
+    border-radius: 20px;
+    margin: 18px 0 20px 0;
+    overflow: hidden;
+  }
+
+  .fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #4ecbff, #a64dff);
+    transition: width 0.25s ease-out;
+    border-radius: 20px;
+  }
+
+  .step-list p {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .step-icon {
+    width: 24px;
+    font-weight: bold;
+  }
+
+  .pending {
+    opacity: 0.6;
+  }
+
+  .active-step {
+    color: #ffec80;
+    font-weight: 600;
+    text-shadow: 0 0 3px #ffb347;
+  }
+
+  .completed-step {
+    color: #b0ffb0;
+  }
+
+  /* RIGHT PANEL (hidden initially except minimal placeholder) */
+  .right {
+    flex: 0.9;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 20px 18px;
+    border-radius: 24px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .right-inner {
+    width: 100%;
+  }
+
+  .check {
+    width: 58px;
+    height: 58px;
+    background: #00c853;
+    border-radius: 50%;
+    margin: 0 auto 16px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    box-shadow: 0 8px 18px rgba(0,200,80,0.3);
+  }
+
+  .download {
+    margin-top: 20px;
+    padding: 12px 18px;
+    border-radius: 60px;
+    background: linear-gradient(90deg, #4ecbff, #a64dff);
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 100%;
+    text-align: center;
+  }
+
+  .download.disabled-download {
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale(0.2);
+    cursor: default;
+  }
+
+  .download.active-download {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .download.active-download:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+  }
+
+  .link {
+    margin-top: 16px;
+    font-size: 13px;
+    color: #ddd;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .link:hover {
+    color: white;
+  }
+
+  .file-name-hint {
+    font-size: 11px;
+    margin-top: 8px;
+    color: #bbb;
+    word-break: break-all;
+  }
+
+  /* responsive */
+  @media (max-width: 850px) {
+    .inner-card {
+      flex-direction: column;
+    }
+    .wrapper {
+      padding: 20px;
+    }
+  }
 </style>
 </head>
-
 <body>
 
 <div class="wrapper">
+  <div class="main-card">
+    <div class="inner-card">
 
-<div class="main-card">
-
-  <div class="inner-card">
-
-    <!-- LEFT -->
-    <div class="left">
-      <div class="icon">JPG</div>
-      <h1>JPG to PDF</h1>
-
-      <div class="file-box">
-        <span>Choose file</span>
-        <div class="file-btn">Choose file</div>
+      <!-- LEFT SECTION -->
+      <div class="left">
+        <div class="icon">JPG</div>
+        <h1>JPG to PDF</h1>
+        <div class="file-box" id="fileBox">
+          <span id="fileNameDisplay">Choose file</span>
+          <div class="file-btn" id="chooseFileBtn">Browse</div>
+        </div>
+        <div class="convert-btn" id="convertBtn">Convert to PDF</div>
       </div>
 
-      <div class="convert-btn">Convert to PDF</div>
-    </div>
-
-    <!-- CENTER -->
-    <div class="center">
-      <h3>Your file is being converted...</h3>
-      <p>Estimated time: 15 seconds</p>
-
-      <div class="progress">
-        <div class="fill"></div>
+      <!-- CENTER SECTION (Real-time process) -->
+      <div class="center" id="centerPanel">
+        <h3 id="statusTitle">Ready to convert</h3>
+        <p id="etaText">Select a JPG image first</p>
+        <div class="progress">
+          <div class="fill" id="progressFill"></div>
+        </div>
+        <div class="step-list" id="stepList">
+          <p id="stepUpload"><span class="step-icon">⭘</span> Uploading file — 0s</p>
+          <p id="stepProcess"><span class="step-icon">⭘</span> Processing image — 0s</p>
+          <p id="stepFinal"><span class="step-icon">⭘</span> Finalizing PDF — 0s</p>
+        </div>
       </div>
 
-      <p>✔ Uploading file — 2s</p>
-      <p>✔ Processing — 8s</p>
-      <p>○ Finalizing — 5s</p>
+      <!-- RIGHT SECTION (Initially hidden state content: only minimal or placeholder but we keep structure, but success details hidden via opacity? Better: initially hide completed text? but we show disabled download) -->
+      <div class="right" id="rightPanel">
+        <div class="right-inner" id="rightInner">
+          <div class="check" id="checkIcon">✔</div>
+          <h3 id="completeTitle">Conversion complete!</h3>
+          <p id="completeDesc">Your PDF is ready</p>
+          <div class="download disabled-download" id="downloadBtn">Download PDF</div>
+          <div class="link" id="resetLink">Convert another file →</div>
+        </div>
+      </div>
+
     </div>
-
-    <!-- RIGHT -->
-    <div class="right">
-      <div class="check">✔</div>
-
-      <h3>Conversion complete!</h3>
-      <p>Your PDF is ready</p>
-
-      <div class="download">Download PDF</div>
-      <div class="link">Convert another file →</div>
-    </div>
-
   </div>
-
 </div>
 
-</div>
-
+<script>
+  // ---------- DOM elements ----------
+  const chooseFileBtn = document.getElementById('chooseFileBtn');
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/jpeg, image/jpg';
+  fileInput.style.display = 'none';
+  document.body.appendChild(fileInput);
+  
+  const fileNameDisplay = document.getElementById('fileNameDisplay');
+  const convertBtn = document.getElementById('convertBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const resetLink = document.getElementById('resetLink');
+  
+  // progress & status elements
+  const progressFill = document.getElementById('progressFill');
+  const stepUploadEl = document.getElementById('stepUpload');
+  const stepProcessEl = document.getElementById('stepProcess');
+  const stepFinalEl = document.getElementById('stepFinal');
+  const statusTitle = document.getElementById('statusTitle');
+  const etaText = document.getElementById('etaText');
+  
+  // State variables
+  let selectedFile = null;
+  let isConverting = false;
+  let conversionCompleted = false;
+  let generatedPDFBlob = null;      // simulated PDF blob
+  let conversionTimer = null;
+  let stepTimer = null;
+  
+  // Helper: reset UI to initial (clean state) but keep file if any? reset after convert another
+  function resetToInitialState(resetFile = true) {
+    // kill any ongoing conversion simulation
+    if (conversionTimer) {
+      clearInterval(conversionTimer);
+      conversionTimer = null;
+    }
+    isConverting = false;
+    conversionCompleted = false;
+    generatedPDFBlob = null;
+    
+    // reset progress bar
+    progressFill.style.width = '0%';
+    // reset step icons and text to default
+    stepUploadEl.innerHTML = '<span class="step-icon">⭘</span> Uploading file — 0s';
+    stepProcessEl.innerHTML = '<span class="step-icon">⭘</span> Processing image — 0s';
+    stepFinalEl.innerHTML = '<span class="step-icon">⭘</span> Finalizing PDF — 0s';
+    stepUploadEl.classList.remove('completed-step', 'active-step');
+    stepProcessEl.classList.remove('completed-step', 'active-step');
+    stepFinalEl.classList.remove('completed-step', 'active-step');
+    
+    statusTitle.innerText = 'Ready to convert';
+    etaText.innerText = 'Select a JPG image first';
+    
+    // disable download button visually & functionally
+    downloadBtn.classList.remove('active-download');
+    downloadBtn.classList.add('disabled-download');
+    
+    // if resetFile flag true, also clear selected file
+    if (resetFile) {
+      selectedFile = null;
+      fileNameDisplay.innerText = 'Choose file';
+      fileInput.value = ''; // clear input
+    }
+    
+    // make convert button disabled if no file, else re-evaluate
+    updateConvertButtonState();
+    
+    // Right panel remains visible but download disabled; but we also ensure that 'Conversion complete' is visible but it's fine, but we want right side text not misleading: only when conversion done we show fresh. but reset makes complete title appear but download disabled - keep as is but fine cause user will convert again. better reset also to default ready text inside right? No need because conversion complete only appears after convert. But resetting from link ensures we set UI to pre-conversion look: Right panel shows checkmark and completion but we can reset text? but after reset we set dummy: keep text, but conversionCompleted false so download disabled and link triggers full reset.
+    // make consistent: when reset we also make right panel show "Conversion complete!" but it's misleading? actually we set conversionCompleted false and download disabled. but we can also overwrite the right panel text temporary but let's reset full UI state including inner text of right side to show waiting.
+    document.getElementById('completeTitle').innerText = 'Conversion complete!';
+    document.getElementById('completeDesc').innerText = 'Your PDF is ready';
+    // but because conversion is not completed, we keep that but download disabled. better to set custom waiting status? we keep default but download inactive.
+  }
+  
+  function updateConvertButtonState() {
+    if (selectedFile && !isConverting && !conversionCompleted) {
+      convertBtn.classList.add('active-convert');
+      convertBtn.classList.remove('disabled-btn');
+      convertBtn.style.pointerEvents = 'auto';
+      etaText.innerText = 'Ready to start conversion';
+    } else if (isConverting) {
+      convertBtn.classList.remove('active-convert');
+      convertBtn.classList.add('disabled-btn');
+      etaText.innerText = 'Conversion in progress...';
+    } else if (conversionCompleted) {
+      convertBtn.classList.remove('active-convert');
+      convertBtn.classList.add('disabled-btn');
+      etaText.innerText = 'Conversion already done. Reset or convert another.';
+    } else {
+      convertBtn.classList.remove('active-convert');
+      convertBtn.classList.add('disabled-btn');
+      if(!selectedFile) etaText.innerText = 'Please select a JPG file first';
+      else etaText.innerText = 'Waiting...';
+    }
+  }
+  
+  // Simulate realtime conversion steps (dynamic timers)
+  function startConversionSimulation() {
+    if (!selectedFile) return;
+    isConverting = true;
+    conversionCompleted = false;
+    generatedPDFBlob = null;
+    updateConvertButtonState();
+    
+    // reset steps to fresh
+    stepUploadEl.innerHTML = '<span class="step-icon">⭘</span> Uploading file — 0s';
+    stepProcessEl.innerHTML = '<span class="step-icon">⭘</span> Processing image — 0s';
+    stepFinalEl.innerHTML = '<span class="step-icon">⭘</span> Finalizing PDF — 0s';
+    stepUploadEl.classList.remove('completed-step', 'active-step');
+    stepProcessEl.classList.remove('completed-step', 'active-step');
+    stepFinalEl.classList.remove('completed-step', 'active-step');
+    progressFill.style.width = '0%';
+    statusTitle.innerText = 'Converting...';
+    
+    let step = 1; // 1:upload, 2:process, 3:final
+    let uploadSec = 0, processSec = 0, finalSec = 0;
+    const maxUpload = 2;    // 2 seconds upload
+    const maxProcess = 6;   // 6 seconds process (total 8s from start)
+    const maxFinal = 5;      // finalizing 5 seconds => total 13s approx
+    
+    let elapsedTotal = 0;
+    let uploadDone = false, processDone = false, finalDone = false;
+    
+    // helper to update step UI
+    function updateStepsUI() {
+      // upload step active/inactive
+      if (!uploadDone) {
+        stepUploadEl.innerHTML = `<span class="step-icon">⏳</span> Uploading file — ${uploadSec}s`;
+        stepUploadEl.classList.add('active-step');
+        stepUploadEl.classList.remove('completed-step');
+      } else {
+        stepUploadEl.innerHTML = `<span class="step-icon">✔</span> Uploading file — ${uploadSec}s`;
+        stepUploadEl.classList.add('completed-step');
+        stepUploadEl.classList.remove('active-step');
+      }
+      
+      if (!processDone && uploadDone) {
+        stepProcessEl.innerHTML = `<span class="step-icon">⏳</span> Processing image — ${processSec}s`;
+        stepProcessEl.classList.add('active-step');
+        stepProcessEl.classList.remove('completed-step');
+      } else if (processDone) {
+        stepProcessEl.innerHTML = `<span class="step-icon">✔</span> Processing image — ${processSec}s`;
+        stepProcessEl.classList.add('completed-step');
+        stepProcessEl.classList.remove('active-step');
+      } else {
+        stepProcessEl.innerHTML = `<span class="step-icon">⭘</span> Processing image — 0s`;
+        stepProcessEl.classList.remove('active-step','completed-step');
+      }
+      
+      if (!finalDone && processDone) {
+        stepFinalEl.innerHTML = `<span class="step-icon">⏳</span> Finalizing PDF — ${finalSec}s`;
+        stepFinalEl.classList.add('active-step');
+        stepFinalEl.classList.remove('completed-step');
+      } else if (finalDone) {
+        stepFinalEl.innerHTML = `<span class="step-icon">✔</span> Finalizing PDF — ${finalSec}s`;
+        stepFinalEl.classList.add('completed-step');
+        stepFinalEl.classList.remove('active-step');
+      } else {
+        stepFinalEl.innerHTML = `<span class="step-icon">⭘</span> Finalizing PDF — 0s`;
+        stepFinalEl.classList.remove('active-step','completed-step');
+      }
+      
+      // overall progress calculation: upload 20%, process 50% -> final 30%? 
+      let progressPercent = 0;
+      if (!uploadDone) progressPercent = (uploadSec / maxUpload) * 20;
+      else if (!processDone) progressPercent = 20 + ((processSec / maxProcess) * 50);
+      else if (!finalDone) progressPercent = 70 + ((finalSec / maxFinal) * 30);
+      else progressPercent = 100;
+      progressFill.style.width = Math.min(100, progressPercent) + '%';
+      
+      // eta text update dynamic
+      if (!uploadDone) etaText.innerText = `Uploading... ~${Math.max(0, maxUpload-uploadSec)}s left`;
+      else if (!processDone) etaText.innerText = `Processing image... ~${Math.max(0, maxProcess-processSec)}s left`;
+      else if (!finalDone) etaText.innerText = `Finalizing PDF... ~${Math.max(0, maxFinal-finalSec)}s left`;
+      else etaText.innerText = `Finalizing... Done!`;
+    }
+    
+    const interval = setInterval(() => {
+      if (!isConverting) {
+        clearInterval(interval);
+        return;
+      }
+      
+      if (!uploadDone) {
+        uploadSec += 0.3;
+        if (uploadSec >= maxUpload) {
+          uploadSec = maxUpload;
+          uploadDone = true;
+        }
+      } 
+      else if (!processDone) {
+        processSec += 0.45;
+        if (processSec >= maxProcess) {
+          processSec = maxProcess;
+          processDone = true;
+        }
+      }
+      else if (!finalDone) {
+        finalSec += 0.38;
+        if (finalSec >= maxFinal) {
+          finalSec = maxFinal;
+          finalDone = true;
+        }
+      }
+      
+      updateStepsUI();
+      
+      // conversion fully finished
+      if (uploadDone && processDone && finalDone) {
+        clearInterval(interval);
+        finishConversionSuccess();
+      }
+    }, 300);
+    
+    conversionTimer = interval;
+  }
+  
+  function finishConversionSuccess() {
+    // generate fake PDF blob from selected image name (simulate)
+    if (selectedFile) {
+      const pdfData = `%PDF-1.4 simulated JPG to PDF for ${selectedFile.name}`;
+      generatedPDFBlob = new Blob([pdfData, ' -- SIMULATED PDF CONTENT -- '], { type: 'application/pdf' });
+    } else {
+      generatedPDFBlob = new Blob(['Fake PDF content'], { type: 'application/pdf' });
+    }
+    isConverting = false;
+    conversionCompleted = true;
+    if (conversionTimer) clearInterval(conversionTimer);
+    conversionTimer = null;
+    
+    statusTitle.innerText = 'Conversion completed!';
+    etaText.innerText = 'PDF ready to download';
+    progressFill.style.width = '100%';
+    
+    // activate download button
+    downloadBtn.classList.remove('disabled-download');
+    downloadBtn.classList.add('active-download');
+    
+    // Update right panel is already visible but ensure text clean
+    document.getElementById('completeTitle').innerText = 'Conversion complete!';
+    document.getElementById('completeDesc').innerText = 'Your PDF is ready';
+    
+    // disable convert button after completion (only reset via link)
+    convertBtn.classList.remove('active-convert');
+    convertBtn.classList.add('disabled-btn');
+  }
+  
+  // Handle file selection
+  chooseFileBtn.addEventListener('click', () => {
+    if (isConverting) return;
+    fileInput.click();
+  });
+  
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      if (file.type === 'image/jpeg' || file.type === 'image/jpg' || file.name.match(/\.jpe?g$/i)) {
+        selectedFile = file;
+        fileNameDisplay.innerText = file.name.length > 28 ? file.name.slice(0,24)+'...' : file.name;
+        // reset any previous conversion state if new file selected
+        if (conversionCompleted) {
+          // reset full state except keep new file
+          resetToInitialState(false);
+          selectedFile = file;
+          fileNameDisplay.innerText = file.name.length > 28 ? file.name.slice(0,24)+'...' : file.name;
+          conversionCompleted = false;
+          generatedPDFBlob = null;
+          updateConvertButtonState();
+        } else {
+          // just update convert state
+          updateConvertButtonState();
+        }
+        // also if converting, can't change file but prevented by isConverting check
+      } else {
+        alert('Please select a valid JPG / JPEG image file.');
+        selectedFile = null;
+        fileNameDisplay.innerText = 'Choose file';
+        fileInput.value = '';
+        updateConvertButtonState();
+      }
+    }
+  });
+  
+  // Convert button logic: works only after file chosen and not converting & not completed
+  convertBtn.addEventListener('click', () => {
+    if (!selectedFile) {
+      alert('Please select a JPG file first.');
+      return;
+    }
+    if (isConverting) {
+      return;
+    }
+    if (conversionCompleted) {
+      // optional: reset using link but we could auto reset? follow spec: after conversion, convert button won't work, user must click 'convert another'
+      alert('Conversion already done. Click "Convert another file" to start new conversion.');
+      return;
+    }
+    // start realtime simulation
+    startConversionSimulation();
+  });
+  
+  // Download logic: only after conversionCompleted and blob exists
+  downloadBtn.addEventListener('click', () => {
+    if (!conversionCompleted || !generatedPDFBlob) {
+      alert('No PDF ready. Please convert an image first.');
+      return;
+    }
+    // simulate PDF download
+    const downloadUrl = URL.createObjectURL(generatedPDFBlob);
+    const a = document.createElement('a');
+    const fileName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '.pdf') : 'converted_image.pdf';
+    a.href = downloadUrl;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(downloadUrl);
+  });
+  
+  // Convert another file: reset everything, keep fresh
+  resetLink.addEventListener('click', () => {
+    if (isConverting) {
+      alert('Please wait, conversion in progress.');
+      return;
+    }
+    // full reset including file
+    resetToInitialState(true);
+    conversionCompleted = false;
+    generatedPDFBlob = null;
+    if (conversionTimer) clearInterval(conversionTimer);
+    isConverting = false;
+    updateConvertButtonState();
+    // reset right panel to default but don't hide, download disabled is fine.
+    progressFill.style.width = '0%';
+    statusTitle.innerText = 'Ready to convert';
+    etaText.innerText = 'Select a JPG image first';
+    // ensure all step texts are reset
+    stepUploadEl.innerHTML = '<span class="step-icon">⭘</span> Uploading file — 0s';
+    stepProcessEl.innerHTML = '<span class="step-icon">⭘</span> Processing image — 0s';
+    stepFinalEl.innerHTML = '<span class="step-icon">⭘</span> Finalizing PDF — 0s';
+    stepUploadEl.classList.remove('completed-step', 'active-step');
+    stepProcessEl.classList.remove('completed-step', 'active-step');
+    stepFinalEl.classList.remove('completed-step', 'active-step');
+    document.getElementById('completeTitle').innerText = 'Conversion complete!';
+    document.getElementById('completeDesc').innerText = 'Your PDF is ready';
+  });
+  
+  // initial state: convert disabled until file selected
+  updateConvertButtonState();
+  downloadBtn.classList.add('disabled-download');
+  // Additional safety for right panel: ensure download button initially disabled
+</script>
 </body>
 </html>
