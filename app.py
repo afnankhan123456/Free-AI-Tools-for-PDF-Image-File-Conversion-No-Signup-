@@ -174,8 +174,11 @@ def png_to_pdf():
     return render_template("pdf_tools/png_to_pdf.html")
 
 
-@app.route("/jpg-to-pdf")
+@app.route("/jpg-to-pdf", methods=["GET", "POST"])
 def jpg_to_pdf():
+    if request.method == "POST":
+        from your_logic_file import jpg_to_pdf_logic
+        return jpg_to_pdf_logic(app)
     return render_template("pdf_tools/jpg_to_pdf.html")
 
 
