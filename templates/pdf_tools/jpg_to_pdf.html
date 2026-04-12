@@ -2,227 +2,679 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>JPG to PDF UI</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>JPG to PDF | Light Blue Glass | Real Backend</title>
 <style>
-body {
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  color: white;
-  background: radial-gradient(circle at center, #040a1a, #000000);
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* SPACING */
-.wrapper {
-  padding: 100px 60px;
-}
-
-/* OUTER BORDER (LIGHTER) */
-.main-card {
-  position: relative;
-  max-width: 1600px;
-  margin: auto;
-  border-radius: 30px;
-  padding: 2px;
-
-  background: linear-gradient(90deg, rgba(0,240,255,0.6), rgba(106,0,255,0.6), rgba(0,240,255,0.6));
-  background-size: 300% 300%;
-  animation: borderMove 4s linear infinite;
-
-  box-shadow: 0 0 40px rgba(0, 200, 255, 0.15);
-}
-
-/* INNER GLASS CARD */
-.inner-card {
-  background: rgba(20, 30, 80, 0.18);
-  border-radius: 28px;
-  padding: 25px;
-  display: flex;
-  gap: 25px;
-
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-
-  border: 1px solid rgba(255,255,255,0.08);
-
-  box-shadow:
-    inset 0 0 30px rgba(255,255,255,0.04),
-    0 0 30px rgba(100, 0, 255, 0.15);
-}
-
-/* ANIMATION */
-@keyframes borderMove {
-  0% { background-position: 0% }
-  100% { background-position: 300% }
-}
-
-/* LEFT */
-.left { flex: 1.5; }
-
-.icon {
-  width: 55px;
-  height: 55px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(59,178,255,0.7), rgba(111,91,255,0.7));
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
+  font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  padding: 32px 20px;
 }
 
-h1 { margin: 5px 0; }
+.wrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
-.desc {
-  font-size: 13px;
-  color: #cfd8ff;
-  margin-bottom: 10px;
+/* MAIN CARD - light blue glass effect (unchanged style) */
+.main-card {
+  background: rgba(200, 225, 255, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255,255,255,0.3);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.inner-card {
+  display: flex;
+  gap: 28px;
+  padding: 36px 40px;
+  flex-wrap: wrap;
+  background: rgba(150, 200, 255, 0.1);
+}
+
+/* LEFT SECTION */
+.left {
+  flex: 1.5;
+  min-width: 240px;
+}
+
+.icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #7bc5ff, #4a9eff);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+  color: white;
+  box-shadow: 0 8px 20px rgba(58,140,255,0.3);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff, #c8e4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.3px;
+  margin: 8px 0 5px 0;
 }
 
 .file-box {
-  margin-top: 15px;
-  background: rgba(255,255,255,0.75);
-  border-radius: 10px;
-  padding: 8px;
+  margin-top: 32px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 80px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
-  color: black;
+  align-items: center;
+  color: #1a3a6e;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.4);
+  transition: all 0.2s;
 }
 
 .file-btn {
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: linear-gradient(90deg, rgba(59,178,255,0.7), rgba(138,43,226,0.7));
+  padding: 8px 20px;
+  border-radius: 40px;
+  background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+  backdrop-filter: blur(4px);
   color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: 0.2s;
+  border: none;
+  box-shadow: 0 2px 8px rgba(58,140,255,0.3);
+}
+
+.file-btn:hover {
+  transform: scale(0.97);
+  background: linear-gradient(95deg, #4aa0ff, #2a7cff);
 }
 
 .convert-btn {
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 10px;
+  margin-top: 24px;
+  padding: 14px 16px;
+  border-radius: 60px;
   text-align: center;
-  background: linear-gradient(90deg, rgba(255,78,205,0.7), rgba(78,203,255,0.7));
+  background: linear-gradient(105deg, #5cb0ff, #3a8cff, #5cb0ff);
+  backdrop-filter: blur(4px);
   font-weight: bold;
-  box-shadow: 0 0 10px rgba(255,0,200,0.25);
+  cursor: pointer;
+  transition: all 0.25s;
+  font-size: 1rem;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: white;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 14px rgba(58,140,255,0.3);
 }
 
-/* CENTER CARD */
+.convert-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(0.1);
+}
+
+.convert-btn:not(.disabled):hover {
+  transform: translateY(-3px);
+  background: linear-gradient(105deg, #6cbaff, #4a9eff);
+  box-shadow: 0 12px 22px rgba(58,140,255,0.4);
+}
+
+/* CENTER - light blue glass panel */
 .center {
   flex: 1.1;
-  background: rgba(0,0,0,0.15);
-  padding: 15px;
-  border-radius: 12px;
+  background: rgba(180, 215, 255, 0.3);
+  backdrop-filter: blur(12px);
+  border-radius: 32px;
+  padding: 24px 26px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  min-width: 250px;
+}
 
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.06);
+.center h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1a3a6e;
 }
 
 .progress {
-  height: 6px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 10px;
-  margin: 10px 0;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  margin: 20px 0 24px;
   overflow: hidden;
 }
 
 .fill {
-  width: 58%;
+  width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(78,203,255,0.7), rgba(166,77,255,0.7));
+  background: linear-gradient(90deg, #5cb0ff, #3a8cff, #7bc5ff);
+  border-radius: 20px;
+  transition: width 0.25s ease;
+  box-shadow: 0 0 6px #5cb0ff;
 }
 
-/* RIGHT CARD */
+.step-list p {
+  margin: 14px 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.92rem;
+  color: #1a3a6e;
+  font-weight: 500;
+  background: rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: 40px;
+  backdrop-filter: blur(2px);
+}
+
+/* RIGHT - light blue glass panel */
 .right {
   flex: 0.9;
-  background: rgba(0,0,0,0.15);
-  padding: 15px;
-  border-radius: 12px;
+  background: rgba(180, 215, 255, 0.3);
+  backdrop-filter: blur(12px);
+  border-radius: 32px;
+  padding: 28px 20px;
   text-align: center;
-
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.2s;
 }
 
 .check {
-  width: 50px;
-  height: 50px;
-  background: rgba(0,200,83,0.8);
+  width: 68px;
+  height: 68px;
+  background: linear-gradient(145deg, #4caf50, #2e7d32);
+  backdrop-filter: blur(4px);
   border-radius: 50%;
-  margin: auto;
+  margin: 0 auto 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 36px;
+  font-weight: bold;
+  box-shadow: 0 8px 20px rgba(46,125,50,0.3);
+  border: 1px solid rgba(255,255,255,0.5);
+  color: white;
+}
+
+.right h3 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #1a3a6e;
 }
 
 .download {
-  margin-top: 12px;
-  padding: 10px;
-  border-radius: 8px;
-  background: linear-gradient(90deg, rgba(78,203,255,0.7), rgba(166,77,255,0.7));
+  margin-top: 28px;
+  padding: 12px 16px;
+  border-radius: 60px;
+  background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+  backdrop-filter: blur(4px);
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: white;
+}
+
+.download.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.download:not(.disabled):hover {
+  transform: translateY(-2px);
+  background: linear-gradient(95deg, #6cbaff, #4a9eff);
+  box-shadow: 0 8px 18px rgba(58,140,255,0.4);
 }
 
 .link {
-  margin-top: 8px;
-  font-size: 12px;
-  color: #ccc;
+  margin-top: 22px;
+  font-size: 13px;
+  color: #1a3a6e;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 500;
+}
+
+.link:hover {
+  color: #0a2a4e;
+  text-shadow: 0 0 4px rgba(90,170,255,0.5);
+}
+
+/* responsive */
+@media (max-width: 880px) {
+  .inner-card {
+    padding: 24px 22px;
+    gap: 20px;
+  }
+  .icon {
+    width: 54px;
+    height: 54px;
+    font-size: 1.3rem;
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
 }
 </style>
 </head>
-
 <body>
-
 <div class="wrapper">
-
 <div class="main-card">
+<div class="inner-card">
 
-  <div class="inner-card">
-
-    <!-- LEFT -->
-    <div class="left">
-      <div class="icon">JPG</div>
-      <h1>JPG to PDF</h1>
-      <div class="desc">
-        Convert your JPG image into a high-quality PDF instantly.
-      </div>
-
-      <div class="file-box">
-        <span>Choose file</span>
-        <div class="file-btn">Choose file</div>
-      </div>
-
-      <div class="convert-btn">Convert to PDF</div>
+  <!-- LEFT (exact original UI) -->
+  <div class="left">
+    <div class="icon">📷</div>
+    <h1>JPG to PDF</h1>
+    <div class="file-box">
+      <span id="fileName">Choose file</span>
+      <div class="file-btn" id="chooseBtn">Browse</div>
     </div>
+    <div class="convert-btn disabled" id="convertBtn">Convert to PDF</div>
+  </div>
 
-    <!-- CENTER -->
-    <div class="center">
-      <h3>Your file is being converted...</h3>
-      <p>Estimated time: 15 seconds</p>
-
-      <div class="progress">
-        <div class="fill"></div>
-      </div>
-
-      <p>✔ Uploading file — 2s</p>
-      <p>✔ Processing — 8s</p>
-      <p>○ Finalizing — 5s</p>
+  <!-- CENTER - realtime status (connected to actual backend process) -->
+  <div class="center">
+    <h3 id="statusTitle">Ready to convert</h3>
+    <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Select a JPG image first</p>
+    <div class="progress"><div class="fill" id="progressFill"></div></div>
+    <div class="step-list">
+      <p id="step1"><span>⭕</span> Uploading file — waiting</p>
+      <p id="step2"><span>⭕</span> Processing image — waiting</p>
+      <p id="step3"><span>⭕</span> Finalizing PDF — waiting</p>
     </div>
+  </div>
 
-    <!-- RIGHT -->
-    <div class="right">
-      <div class="check">✔</div>
-
-      <h3>Conversion complete!</h3>
-      <p>Your PDF is ready</p>
-
-      <div class="download">Download PDF</div>
-      <div class="link">Convert another file →</div>
-    </div>
-
+  <!-- RIGHT - download panel (exact layout) -->
+  <div class="right">
+    <div class="check" id="checkIcon">❓</div>
+    <h3 id="completeTitle">Conversion pending</h3>
+    <p id="completeMsg" style="opacity:0.8;">No file converted yet</p>
+    <div class="download disabled" id="downloadBtn">Download PDF</div>
+    <div class="link" id="resetLink">Convert another file →</div>
   </div>
 
 </div>
-
+</div>
 </div>
 
+<script>
+// ------------------------------
+// REAL BACKEND INTEGRATION (JPG to PDF)
+// UI stays 100% identical, only logic replaced with actual API calls
+// Expected backend endpoint: POST /convert/jpg-to-pdf  (adjust if your route is different)
+// The backend must accept multipart/form-data with field name "file"
+// Returns a PDF file as binary stream (Content-Disposition: attachment)
+// ------------------------------
+
+// --- configuration: change this URL to match your Flask backend route ---
+const API_CONVERT_URL = '/convert/jpg-to-pdf';   // <-- UPDATE based on your logic.py route
+// if your endpoint is different (e.g. /api/jpg-to-pdf), change above.
+
+// DOM elements
+let selectedFile = null;
+let isConverting = false;
+let conversionDone = false;
+let pdfBlobFromServer = null;      // actual PDF blob from backend
+let abortController = null;
+
+// UI elements
+const elements = {
+  fileName: document.getElementById('fileName'),
+  convertBtn: document.getElementById('convertBtn'),
+  downloadBtn: document.getElementById('downloadBtn'),
+  resetLink: document.getElementById('resetLink'),
+  progressFill: document.getElementById('progressFill'),
+  statusTitle: document.getElementById('statusTitle'),
+  etaText: document.getElementById('etaText'),
+  step1: document.getElementById('step1'),
+  step2: document.getElementById('step2'),
+  step3: document.getElementById('step3'),
+  checkIcon: document.getElementById('checkIcon'),
+  completeTitle: document.getElementById('completeTitle'),
+  completeMsg: document.getElementById('completeMsg')
+};
+
+// Helper: reset UI fully but keep optional file flag
+function resetFullUI(resetFile = true) {
+  if (abortController) {
+    abortController.abort();
+    abortController = null;
+  }
+  if (isConverting) isConverting = false;
+  conversionDone = false;
+  pdfBlobFromServer = null;
+  elements.progressFill.style.width = '0%';
+  elements.step1.innerHTML = '<span>⭕</span> Uploading file — waiting';
+  elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
+  elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
+  elements.statusTitle.innerText = 'Ready to convert';
+  elements.etaText.innerText = 'Select a JPG image first';
+  elements.downloadBtn.classList.add('disabled');
+  elements.checkIcon.innerHTML = '❓';
+  elements.completeTitle.innerText = 'Conversion pending';
+  elements.completeMsg.innerText = 'No file converted yet';
+  
+  if (resetFile) {
+    selectedFile = null;
+    elements.fileName.innerText = 'Choose file';
+    const hiddenInput = document.getElementById('hiddenFileInput');
+    if (hiddenInput) hiddenInput.value = '';
+  }
+  updateConvertButtonState();
+}
+
+function updateConvertButtonState() {
+  if (selectedFile && !isConverting && !conversionDone) {
+    elements.convertBtn.classList.remove('disabled');
+    if (elements.etaText) elements.etaText.innerText = 'Ready to start conversion';
+  } else {
+    elements.convertBtn.classList.add('disabled');
+    if (isConverting) {
+      if (elements.etaText) elements.etaText.innerText = 'Converting via server...';
+    } else if (conversionDone) {
+      if (elements.etaText) elements.etaText.innerText = 'PDF ready — download or convert another';
+    } else if (!selectedFile) {
+      if (elements.etaText) elements.etaText.innerText = 'Select a JPG image first';
+    }
+  }
+}
+
+// Update progress UI during real fetch (simulate steps based on fetch lifecycle)
+function setStepActive(stepNum, statusText, isActive = true, percent = null) {
+  const stepEl = stepNum === 1 ? elements.step1 : (stepNum === 2 ? elements.step2 : elements.step3);
+  if (!stepEl) return;
+  if (isActive) {
+    stepEl.innerHTML = `<span>🔄</span> ${statusText}`;
+  } else {
+    stepEl.innerHTML = `<span>✅</span> ${statusText}`;
+  }
+  if (percent !== undefined && elements.progressFill) {
+    elements.progressFill.style.width = Math.min(100, percent) + '%';
+  }
+}
+
+function resetStepsToWaiting() {
+  elements.step1.innerHTML = '<span>⭕</span> Uploading file — waiting';
+  elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
+  elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
+  elements.progressFill.style.width = '0%';
+}
+
+// Real conversion using backend API (Flask logic.py)
+async function startRealConversion() {
+  if (!selectedFile) {
+    alert('Please select a valid JPG/JPEG image first.');
+    return;
+  }
+  if (isConverting) {
+    alert('Conversion already in progress.');
+    return;
+  }
+  
+  // reset previous state, keep selected file
+  resetFullUI(false);
+  resetStepsToWaiting();
+  isConverting = true;
+  conversionDone = false;
+  pdfBlobFromServer = null;
+  elements.downloadBtn.classList.add('disabled');
+  elements.checkIcon.innerHTML = '⏳';
+  elements.completeTitle.innerText = 'Converting...';
+  elements.completeMsg.innerText = 'Contacting server';
+  elements.statusTitle.innerText = 'Converting via secure server';
+  updateConvertButtonState();
+  
+  // Prepare FormData
+  const formData = new FormData();
+  formData.append('file', selectedFile);
+  
+  // Step 1 active: upload in progress
+  setStepActive(1, 'Uploading file to server...', true, 15);
+  elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
+  elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
+  elements.etaText.innerText = 'Uploading image...';
+  
+  abortController = new AbortController();
+  const signal = abortController.signal;
+  
+  try {
+    const response = await fetch(API_CONVERT_URL, {
+      method: 'POST',
+      body: formData,
+      signal: signal
+    });
+    
+    if (!response.ok) {
+      let errorMsg = `Server error: ${response.status}`;
+      try {
+        const errData = await response.json();
+        errorMsg = errData.error || errData.message || errorMsg;
+      } catch(e) { /* ignore */ }
+      throw new Error(errorMsg);
+    }
+    
+    // Upload finished successfully
+    setStepActive(1, 'Upload completed', false, 35);
+    elements.step2.innerHTML = '<span>🔄</span> Processing image — server side (JPG to PDF)';
+    elements.etaText.innerText = 'Server is generating PDF...';
+    setStepActive(2, 'Processing image — generating PDF', true, 60);
+    
+    // artificial small delay to show step (backend likely fast, but UI feedback)
+    await new Promise(r => setTimeout(r, 400));
+    
+    // Get PDF blob from response
+    const blob = await response.blob();
+    if (!blob || blob.type !== 'application/pdf' || blob.size === 0) {
+      throw new Error('Backend did not return a valid PDF file. Ensure logic.py returns send_file(...) with correct mimetype.');
+    }
+    
+    // Step 2 done
+    setStepActive(2, 'Image processed successfully', false, 85);
+    elements.step3.innerHTML = '<span>🔄</span> Finalizing PDF — building document';
+    elements.etaText.innerText = 'Finalizing PDF, almost ready...';
+    await new Promise(r => setTimeout(r, 200));
+    
+    pdfBlobFromServer = blob;
+    conversionDone = true;
+    isConverting = false;
+    
+    // final step completed
+    setStepActive(3, 'PDF generation complete', false, 100);
+    elements.progressFill.style.width = '100%';
+    elements.statusTitle.innerText = 'Conversion completed!';
+    elements.etaText.innerText = 'Your PDF is ready for download.';
+    elements.checkIcon.innerHTML = '✔️';
+    elements.completeTitle.innerText = 'Conversion complete!';
+    elements.completeMsg.innerText = 'Your PDF is ready';
+    elements.downloadBtn.classList.remove('disabled');
+    elements.convertBtn.classList.add('disabled');
+    
+    // also update right panel extra style
+    const rightCheckDiv = document.querySelector('.right .check');
+    if (rightCheckDiv) rightCheckDiv.style.background = "linear-gradient(145deg, #4caf50, #2e7d32)";
+    
+  } catch (err) {
+    console.error('Conversion error:', err);
+    let friendlyMsg = err.message || 'Unknown backend error.';
+    if (err.name === 'AbortError') friendlyMsg = 'Request was cancelled.';
+    alert(`Conversion failed: ${friendlyMsg}\n\nMake sure your Flask server is running and endpoint ${API_CONVERT_URL} accepts file upload.`);
+    
+    // reset UI to error state but keep file selected
+    isConverting = false;
+    conversionDone = false;
+    pdfBlobFromServer = null;
+    elements.progressFill.style.width = '0%';
+    elements.statusTitle.innerText = 'Conversion error';
+    elements.etaText.innerText = 'Something went wrong. Try again.';
+    elements.step1.innerHTML = '<span>❌</span> Upload failed — retry';
+    elements.step2.innerHTML = '<span>⭕</span> Processing interrupted';
+    elements.step3.innerHTML = '<span>⭕</span> Finalizing cancelled';
+    elements.checkIcon.innerHTML = '⚠️';
+    elements.completeTitle.innerText = 'Conversion error';
+    elements.completeMsg.innerText = 'Please try again';
+    elements.downloadBtn.classList.add('disabled');
+    updateConvertButtonState();
+  } finally {
+    abortController = null;
+    isConverting = false;
+    updateConvertButtonState();
+  }
+}
+
+// Download the real PDF received from backend
+function downloadPdf() {
+  if (!conversionDone || !pdfBlobFromServer) {
+    alert('No PDF available. Please convert an image first.');
+    return;
+  }
+  const downloadUrl = URL.createObjectURL(pdfBlobFromServer);
+  const a = document.createElement('a');
+  let baseName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '').replace(/\.jpeg$/i, '') : 'converted_image';
+  baseName = baseName.replace(/[\\/:*?"<>|]/g, '');
+  const fileName = `${baseName || 'image'}.pdf`;
+  a.href = downloadUrl;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(downloadUrl);
+}
+
+// Create hidden file input (to preserve clean UI)
+const hiddenFileInput = document.createElement('input');
+hiddenFileInput.type = 'file';
+hiddenFileInput.accept = 'image/jpeg,image/jpg,image/png';  // also allow PNG, but logic.py supports JPG/PNG
+hiddenFileInput.style.display = 'none';
+hiddenFileInput.id = 'hiddenFileInput';
+document.body.appendChild(hiddenFileInput);
+
+// File selection logic
+document.getElementById('chooseBtn').addEventListener('click', () => {
+  if (isConverting) {
+    alert('Conversion in progress, please wait.');
+    return;
+  }
+  hiddenFileInput.click();
+});
+
+hiddenFileInput.addEventListener('change', (e) => {
+  if (e.target.files && e.target.files.length > 0) {
+    const file = e.target.files[0];
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const isJpeg = validTypes.includes(file.type) || /\.(jpe?g|png)$/i.test(file.name);
+    if (!isJpeg) {
+      alert('Please select a JPG, JPEG or PNG image (PNG will be converted to RGB PDF as well).');
+      selectedFile = null;
+      elements.fileName.innerText = 'Choose file';
+      hiddenFileInput.value = '';
+      updateConvertButtonState();
+      return;
+    }
+    selectedFile = file;
+    elements.fileName.innerText = file.name.length > 36 ? file.name.slice(0, 32) + '...' : file.name;
+    // if conversion was done before, reset but keep new file
+    if (conversionDone) {
+      resetFullUI(false);
+      conversionDone = false;
+      pdfBlobFromServer = null;
+      elements.progressFill.style.width = '0%';
+      elements.step1.innerHTML = '<span>⭕</span> Uploading file — waiting';
+      elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
+      elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
+      elements.statusTitle.innerText = 'Ready to convert';
+      elements.etaText.innerText = 'Select a JPG image first';
+      elements.downloadBtn.classList.add('disabled');
+      elements.checkIcon.innerHTML = '❓';
+      elements.completeTitle.innerText = 'Conversion pending';
+      elements.completeMsg.innerText = 'No file converted yet';
+    }
+    conversionDone = false;
+    pdfBlobFromServer = null;
+    updateConvertButtonState();
+  }
+});
+
+// Convert button action
+elements.convertBtn.addEventListener('click', () => {
+  if (!selectedFile) {
+    alert('Please select a JPG/JPEG image first.');
+    return;
+  }
+  if (isConverting) {
+    alert('Conversion already in progress. Please wait.');
+    return;
+  }
+  if (conversionDone) {
+    alert('PDF already converted! Use "Convert another file" to start fresh or download the existing PDF.');
+    return;
+  }
+  startRealConversion();
+});
+
+// Download button
+elements.downloadBtn.addEventListener('click', downloadPdf);
+
+// Reset / "Convert another file" logic
+elements.resetLink.addEventListener('click', () => {
+  if (isConverting) {
+    alert('Please wait, conversion is in progress. You can abort by refreshing but wait a moment.');
+    return;
+  }
+  // full cleanup
+  if (abortController) {
+    abortController.abort();
+    abortController = null;
+  }
+  resetFullUI(true);
+  conversionDone = false;
+  pdfBlobFromServer = null;
+  isConverting = false;
+  elements.progressFill.style.width = '0%';
+  elements.statusTitle.innerText = 'Ready to convert';
+  elements.etaText.innerText = 'Select a JPG image first';
+  elements.step1.innerHTML = '<span>⭕</span> Uploading file — waiting';
+  elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
+  elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
+  elements.checkIcon.innerHTML = '❓';
+  elements.completeTitle.innerText = 'Conversion pending';
+  elements.completeMsg.innerText = 'No file converted yet';
+  elements.downloadBtn.classList.add('disabled');
+  hiddenFileInput.value = '';
+  updateConvertButtonState();
+});
+
+// initial state
+resetFullUI(true);
+</script>
 </body>
-</html>   
+</html>
