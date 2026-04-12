@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JPG to PDF | Glass Converter</title>
+<title>JPG to PDF | Chroma Glass Converter</title>
 <style>
 * {
   margin: 0;
@@ -13,233 +13,268 @@
 
 body {
   min-height: 100vh;
-  background: radial-gradient(circle at 20% 30%, #0a0f1e, #03050b);
-  font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Arial', sans-serif;
+  background: radial-gradient(circle at 10% 20%, #0a0f2a, #02040c), 
+              repeating-linear-gradient(45deg, rgba(255,80,120,0.03) 0px, rgba(255,80,120,0.03) 2px, transparent 2px, transparent 8px);
+  font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 32px 20px;
 }
 
-/* Glassmorphism wrapper with blur backdrop */
 .wrapper {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* MAIN CARD - transparent frosted glass effect */
+/* MAIN CARD - vibrant glass with rich border glow */
 .main-card {
-  background: rgba(15, 25, 45, 0.35);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 48px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255,255,255,0.1);
+  background: rgba(12, 20, 35, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 56px;
+  border: 1px solid rgba(255, 200, 255, 0.3);
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255,255,255,0.15), 0 0 0 2px rgba(255,100,200,0.1);
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .inner-card {
   display: flex;
-  gap: 28px;
-  padding: 36px 40px;
+  gap: 32px;
+  padding: 40px 44px;
   flex-wrap: wrap;
-  background: rgba(10, 20, 35, 0.2);
+  background: radial-gradient(ellipse at 30% 40%, rgba(255,100,150,0.08), rgba(80,100,255,0.05));
 }
 
-/* LEFT SECTION */
+/* LEFT SECTION - colorful */
 .left {
   flex: 1.5;
   min-width: 240px;
 }
 
 .icon {
-  width: 68px;
-  height: 68px;
-  border-radius: 24px;
-  background: rgba(59, 178, 255, 0.25);
+  width: 72px;
+  height: 72px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #ff8c5a, #ff2d7a, #a44cff);
   backdrop-filter: blur(4px);
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.45);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 1.6rem;
-  margin-bottom: 18px;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  box-shadow: 0 12px 25px rgba(255,45,100,0.3);
   color: white;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transition: 0.2s;
 }
 
 h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #ffffff, #b2f0ff);
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(125deg, #FFF5C4, #FFB347, #FF6B9D, #C084FC);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  letter-spacing: -0.3px;
-  margin: 8px 0 5px 0;
+  letter-spacing: -0.5px;
+  margin: 12px 0 8px 0;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .file-box {
-  margin-top: 32px;
-  background: rgba(255, 255, 255, 0.12);
+  margin-top: 35px;
+  background: rgba(25, 35, 60, 0.65);
   backdrop-filter: blur(8px);
   border-radius: 80px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #f0f0f0;
-  font-weight: 500;
-  border: 1px solid rgba(255,255,255,0.2);
+  color: #f5eaff;
+  font-weight: 600;
+  border: 1px solid rgba(255, 180, 200, 0.5);
   transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .file-btn {
-  padding: 8px 20px;
-  border-radius: 40px;
-  background: rgba(59, 178, 255, 0.7);
+  padding: 9px 24px;
+  border-radius: 60px;
+  background: linear-gradient(95deg, #ff7b4a, #ff3d8c);
   backdrop-filter: blur(4px);
   color: white;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.85rem;
   transition: 0.2s;
   border: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(255,50,100,0.4);
 }
 
 .file-btn:hover {
-  background: rgba(59, 178, 255, 0.9);
-  transform: scale(0.97);
+  transform: scale(0.96);
+  background: linear-gradient(95deg, #ff6a3a, #ff2a7a);
+  box-shadow: 0 6px 16px rgba(255,50,100,0.6);
 }
 
 .convert-btn {
-  margin-top: 24px;
-  padding: 14px 16px;
+  margin-top: 28px;
+  padding: 15px 20px;
   border-radius: 60px;
   text-align: center;
-  background: linear-gradient(105deg, rgba(255, 78, 205, 0.7), rgba(78, 203, 255, 0.7));
+  background: linear-gradient(105deg, #f857a6, #ff5858, #ffb86b);
+  background-size: 200% auto;
   backdrop-filter: blur(4px);
-  font-weight: bold;
+  font-weight: 800;
   cursor: pointer;
-  transition: all 0.25s;
-  font-size: 1rem;
-  border: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.3s;
+  font-size: 1.05rem;
+  border: 1px solid rgba(255,255,200,0.5);
   color: white;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  box-shadow: 0 8px 18px rgba(248,87,166,0.4);
 }
 
 .convert-btn.disabled {
-  opacity: 0.5;
+  opacity: 0.55;
   cursor: not-allowed;
   pointer-events: none;
-  filter: grayscale(0.1);
+  filter: grayscale(0.15);
+  box-shadow: none;
 }
 
 .convert-btn:not(.disabled):hover {
-  transform: translateY(-3px);
-  background: linear-gradient(105deg, rgba(255, 78, 205, 0.85), rgba(78, 203, 255, 0.85));
-  box-shadow: 0 12px 22px rgba(0,0,0,0.3);
+  transform: translateY(-4px);
+  background-position: right center;
+  box-shadow: 0 16px 28px rgba(248,87,166,0.5);
 }
 
-/* CENTER - glass panel */
+/* CENTER - vibrant glass panel */
 .center {
   flex: 1.1;
-  background: rgba(20, 30, 50, 0.45);
-  backdrop-filter: blur(12px);
-  border-radius: 32px;
-  padding: 24px 26px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  min-width: 250px;
+  background: linear-gradient(145deg, rgba(25, 35, 65, 0.65), rgba(45, 30, 70, 0.55));
+  backdrop-filter: blur(14px);
+  border-radius: 36px;
+  padding: 28px 28px;
+  border: 1px solid rgba(255, 150, 200, 0.4);
+  min-width: 260px;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .center h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 700;
   margin-bottom: 12px;
-  color: #eef5ff;
+  background: linear-gradient(120deg, #FFE6B0, #FFA5D0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+#etaText {
+  font-weight: 500;
+  color: #ffddbb;
+  background: rgba(0,0,0,0.3);
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 40px;
+  font-size: 0.85rem;
 }
 
 .progress {
-  height: 8px;
-  background: rgba(0, 0, 0, 0.5);
+  height: 10px;
+  background: rgba(0, 0, 0, 0.55);
   border-radius: 20px;
-  margin: 20px 0 24px;
+  margin: 22px 0 24px;
   overflow: hidden;
+  box-shadow: inset 0 1px 3px #00000044;
 }
 
 .fill {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #4ecbff, #b77eff);
+  background: linear-gradient(90deg, #FFB347, #FF6B9D, #C084FC, #4ECBFF);
+  background-size: 200% auto;
   border-radius: 20px;
   transition: width 0.25s ease;
-  box-shadow: 0 0 6px #4ecbff;
+  box-shadow: 0 0 10px #ff9f6e;
+  animation: shimmer 1.2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 
 .step-list p {
-  margin: 14px 0;
+  margin: 16px 0;
   display: flex;
   align-items: center;
   gap: 14px;
-  font-size: 0.92rem;
-  color: #e0e4f0;
+  font-size: 0.94rem;
   font-weight: 500;
+  color: #f0eaff;
+  background: rgba(0,0,0,0.2);
+  padding: 6px 12px;
+  border-radius: 60px;
   backdrop-filter: blur(2px);
 }
 
-/* RIGHT - glass panel */
+/* RIGHT - vibrant glass */
 .right {
   flex: 0.9;
-  background: rgba(20, 30, 50, 0.45);
-  backdrop-filter: blur(12px);
-  border-radius: 32px;
-  padding: 28px 20px;
+  background: linear-gradient(135deg, rgba(35, 25, 65, 0.65), rgba(55, 35, 85, 0.55));
+  backdrop-filter: blur(14px);
+  border-radius: 36px;
+  padding: 32px 22px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 180, 220, 0.5);
   transition: all 0.2s;
 }
 
 .check {
-  width: 68px;
-  height: 68px;
-  background: rgba(0, 200, 83, 0.75);
+  width: 78px;
+  height: 78px;
+  background: linear-gradient(145deg, #00E676, #00B248);
   backdrop-filter: blur(4px);
   border-radius: 50%;
-  margin: 0 auto 18px;
+  margin: 0 auto 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
+  font-size: 44px;
   font-weight: bold;
-  box-shadow: 0 8px 20px rgba(0,200,80,0.3);
-  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 10px 28px rgba(0,230,118,0.5);
+  border: 2px solid rgba(255,255,200,0.7);
+  color: white;
 }
 
 .right h3 {
-  font-size: 1.5rem;
-  margin-bottom: 6px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #fff, #c0ffd0);
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  font-weight: 800;
+  background: linear-gradient(125deg, #FFF2B5, #B9FBC0, #FFB3BA);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .download {
-  margin-top: 28px;
-  padding: 12px 16px;
+  margin-top: 32px;
+  padding: 14px 20px;
   border-radius: 60px;
-  background: linear-gradient(95deg, rgba(78, 203, 255, 0.7), rgba(166, 77, 255, 0.7));
+  background: linear-gradient(95deg, #4ECBFF, #A14CFF, #FF4D8C);
+  background-size: 150% auto;
   backdrop-filter: blur(4px);
-  font-weight: bold;
+  font-weight: 800;
   cursor: pointer;
-  transition: 0.2s;
-  border: 1px solid rgba(255,255,255,0.3);
+  transition: 0.25s;
+  border: 1px solid rgba(255,255,255,0.4);
   color: white;
+  font-size: 1rem;
 }
 
 .download.disabled {
@@ -249,46 +284,42 @@ h1 {
 }
 
 .download:not(.disabled):hover {
-  transform: translateY(-2px);
-  background: linear-gradient(95deg, rgba(78, 203, 255, 0.9), rgba(166, 77, 255, 0.9));
-  box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+  transform: translateY(-3px);
+  background-position: right center;
+  box-shadow: 0 12px 24px rgba(78,203,255,0.5);
 }
 
 .link {
-  margin-top: 22px;
-  font-size: 13px;
-  color: #ccd9ff;
+  margin-top: 26px;
+  font-size: 14px;
+  color: #FFD966;
   text-decoration: underline;
   cursor: pointer;
   transition: 0.2s;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .link:hover {
-  color: white;
-  text-shadow: 0 0 6px rgba(255,255,255,0.5);
+  color: #FFB347;
+  text-shadow: 0 0 6px #ffb347;
+  transform: scale(1.02);
 }
 
 /* responsive */
 @media (max-width: 880px) {
   .inner-card {
-    padding: 24px 22px;
-    gap: 20px;
+    padding: 28px 24px;
+    gap: 24px;
   }
   .icon {
-    width: 54px;
-    height: 54px;
-    font-size: 1.3rem;
+    width: 60px;
+    height: 60px;
+    font-size: 1.7rem;
   }
   h1 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
-}
-
-/* animated subtle background floating */
-@keyframes subtleGlow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
 }
 </style>
 </head>
@@ -297,36 +328,36 @@ h1 {
 <div class="main-card">
 <div class="inner-card">
 
-  <!-- LEFT -->
+  <!-- LEFT with vibrant colors -->
   <div class="left">
-    <div class="icon">🖼️</div>
+    <div class="icon">🌈</div>
     <h1>JPG to PDF</h1>
     <div class="file-box">
-      <span id="fileName">Choose file</span>
+      <span id="fileName">✨ Choose file</span>
       <div class="file-btn" id="chooseBtn">Browse</div>
     </div>
-    <div class="convert-btn disabled" id="convertBtn">Convert to PDF</div>
+    <div class="convert-btn disabled" id="convertBtn">⟳ Convert to PDF</div>
   </div>
 
-  <!-- CENTER - realtime progress -->
+  <!-- CENTER - realtime progress with rich colors -->
   <div class="center">
-    <h3 id="statusTitle">Ready to convert</h3>
-    <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Select a JPG image first</p>
+    <h3 id="statusTitle">🌟 Ready to convert</h3>
+    <p id="etaText" style="font-size:0.85rem;">📸 Select a JPG image first</p>
     <div class="progress"><div class="fill" id="progressFill"></div></div>
     <div class="step-list">
-      <p id="step1"><span>○</span> Uploading file — 0s</p>
-      <p id="step2"><span>○</span> Processing image — 0s</p>
-      <p id="step3"><span>○</span> Finalizing PDF — 0s</p>
+      <p id="step1"><span>🎴</span> Uploading file — 0s</p>
+      <p id="step2"><span>⚙️</span> Processing image — 0s</p>
+      <p id="step3"><span>📄</span> Finalizing PDF — 0s</p>
     </div>
   </div>
 
-  <!-- RIGHT - download panel, appears only functional after conversion -->
+  <!-- RIGHT - download panel with vivid style -->
   <div class="right">
     <div class="check">✓</div>
     <h3>Conversion complete!</h3>
-    <p style="opacity:0.8;">Your PDF is ready</p>
-    <div class="download disabled" id="downloadBtn">Download PDF</div>
-    <div class="link" id="resetLink">Convert another file →</div>
+    <p style="opacity:0.9; color:#FFE0B5;">Your PDF is ready ✨</p>
+    <div class="download disabled" id="downloadBtn">⬇️ Download PDF</div>
+    <div class="link" id="resetLink">🔄 Convert another file →</div>
   </div>
 
 </div>
@@ -357,23 +388,23 @@ let conversionDone = false;
 let pdfBlob = null;
 let progressInterval = null;
 
-// Reset UI fully (transparent style kept)
+// Reset UI fully (vibrant but functional)
 function resetFullUI(resetFile = true) {
   if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
   isConverting = false;
   conversionDone = false;
   pdfBlob = null;
   elements.progressFill.style.width = '0%';
-  elements.step1.innerHTML = '<span>○</span> Uploading file — 0s';
-  elements.step2.innerHTML = '<span>○</span> Processing image — 0s';
-  elements.step3.innerHTML = '<span>○</span> Finalizing PDF — 0s';
-  elements.statusTitle.innerText = 'Ready to convert';
-  elements.etaText.innerText = 'Select a JPG image first';
+  elements.step1.innerHTML = '<span>🎴</span> Uploading file — 0s';
+  elements.step2.innerHTML = '<span>⚙️</span> Processing image — 0s';
+  elements.step3.innerHTML = '<span>📄</span> Finalizing PDF — 0s';
+  elements.statusTitle.innerText = '🌟 Ready to convert';
+  elements.etaText.innerText = '📸 Select a JPG image first';
   elements.downloadBtn.classList.add('disabled');
   
   if (resetFile) {
     selectedFile = null;
-    elements.fileName.innerText = 'Choose file';
+    elements.fileName.innerText = '✨ Choose file';
     fileInput.value = '';
   }
   updateConvertButtonState();
@@ -382,11 +413,11 @@ function resetFullUI(resetFile = true) {
 function updateConvertButtonState() {
   if (selectedFile && !isConverting && !conversionDone) {
     elements.convertBtn.classList.remove('disabled');
-    elements.etaText.innerText = '✨ Ready to convert';
+    elements.etaText.innerText = '🎯 Ready to convert! Click button';
   } else {
     elements.convertBtn.classList.add('disabled');
     if (isConverting) elements.etaText.innerText = '⏳ Converting in progress...';
-    else if (conversionDone) elements.etaText.innerText = '✅ PDF ready — use "Convert another" for new file';
+    else if (conversionDone) elements.etaText.innerText = '✅ PDF ready — use "Convert another"';
     else if (!selectedFile) elements.etaText.innerText = '📸 Select a JPG image first';
   }
 }
@@ -398,7 +429,7 @@ function startRealTimeConversion() {
   conversionDone = false;
   pdfBlob = null;
   updateConvertButtonState();
-  elements.statusTitle.innerText = '⚡ Converting...';
+  elements.statusTitle.innerText = '⚡ Converting... ✨';
   
   let uploadSec = 0, processSec = 0, finalSec = 0;
   let uploadDone = false, processDone = false, finalDone = false;
@@ -407,19 +438,19 @@ function startRealTimeConversion() {
   const MAX_FINAL = 5;
   
   function updateStepsUI() {
-    // upload step
+    // upload step with color
     if (!uploadDone) elements.step1.innerHTML = `<span>⏳</span> Uploading file — ${Math.floor(uploadSec)}s`;
-    else elements.step1.innerHTML = `<span>✓</span> Uploading file — ${MAX_UPLOAD}s`;
+    else elements.step1.innerHTML = `<span>✅</span> Uploading file — ${MAX_UPLOAD}s`;
     
     // processing step
-    if (!processDone && uploadDone) elements.step2.innerHTML = `<span>⏳</span> Processing image — ${Math.floor(processSec)}s`;
-    else if (processDone) elements.step2.innerHTML = `<span>✓</span> Processing image — ${MAX_PROCESS}s`;
-    else elements.step2.innerHTML = `<span>○</span> Processing image — 0s`;
+    if (!processDone && uploadDone) elements.step2.innerHTML = `<span>🎨</span> Processing image — ${Math.floor(processSec)}s`;
+    else if (processDone) elements.step2.innerHTML = `<span>✅</span> Processing image — ${MAX_PROCESS}s`;
+    else elements.step2.innerHTML = `<span>⚙️</span> Processing image — 0s`;
     
     // finalizing step
-    if (!finalDone && processDone) elements.step3.innerHTML = `<span>⏳</span> Finalizing PDF — ${Math.floor(finalSec)}s`;
-    else if (finalDone) elements.step3.innerHTML = `<span>✓</span> Finalizing PDF — ${MAX_FINAL}s`;
-    else elements.step3.innerHTML = `<span>○</span> Finalizing PDF — 0s`;
+    if (!finalDone && processDone) elements.step3.innerHTML = `<span>✨</span> Finalizing PDF — ${Math.floor(finalSec)}s`;
+    else if (finalDone) elements.step3.innerHTML = `<span>✅</span> Finalizing PDF — ${MAX_FINAL}s`;
+    else elements.step3.innerHTML = `<span>📄</span> Finalizing PDF — 0s`;
     
     let percent = 0;
     if (!uploadDone) percent = (uploadSec / MAX_UPLOAD) * 20;
@@ -428,11 +459,11 @@ function startRealTimeConversion() {
     else percent = 100;
     elements.progressFill.style.width = Math.min(100, percent) + '%';
     
-    // update eta text
+    // update eta text with colors
     if (!uploadDone) elements.etaText.innerText = `📤 Uploading... ${Math.max(0, MAX_UPLOAD - Math.floor(uploadSec))}s left`;
-    else if (!processDone) elements.etaText.innerText = `🖼️ Processing... ${Math.max(0, MAX_PROCESS - Math.floor(processSec))}s left`;
-    else if (!finalDone) elements.etaText.innerText = `📄 Finalizing PDF... ${Math.max(0, MAX_FINAL - Math.floor(finalSec))}s left`;
-    else elements.etaText.innerText = '🎉 Conversion complete!';
+    else if (!processDone) elements.etaText.innerText = `🖼️ Processing image... ${Math.max(0, MAX_PROCESS - Math.floor(processSec))}s left`;
+    else if (!finalDone) elements.etaText.innerText = `📑 Building PDF... ${Math.max(0, MAX_FINAL - Math.floor(finalSec))}s left`;
+    else elements.etaText.innerText = '🎉 Conversion complete! Download now';
   }
   
   progressInterval = setInterval(() => {
@@ -461,11 +492,11 @@ function startRealTimeConversion() {
       clearInterval(progressInterval);
       progressInterval = null;
       // generate mock pdf blob
-      pdfBlob = new Blob([`%PDF-1.4\nSimulated JPG to PDF content for: ${selectedFile.name}`], { type: 'application/pdf' });
+      pdfBlob = new Blob([`%PDF-1.4\n🌈 Simulated PDF from: ${selectedFile.name}\nColorful conversion complete`], { type: 'application/pdf' });
       isConverting = false;
       conversionDone = true;
-      elements.statusTitle.innerText = '✅ Conversion completed!';
-      elements.etaText.innerText = 'Your PDF is ready to download';
+      elements.statusTitle.innerText = '✅ Conversion completed! 🎉';
+      elements.etaText.innerText = 'Your PDF is ready to download ✨';
       elements.progressFill.style.width = '100%';
       elements.downloadBtn.classList.remove('disabled');
       elements.convertBtn.classList.add('disabled');
@@ -483,7 +514,7 @@ fileInput.onchange = (e) => {
     const file = e.target.files[0];
     if (file.type === 'image/jpeg' || file.type === 'image/jpg' || file.name.match(/\.jpe?g$/i)) {
       selectedFile = file;
-      elements.fileName.innerText = file.name.length > 30 ? file.name.slice(0, 26) + '...' : file.name;
+      elements.fileName.innerText = file.name.length > 32 ? file.name.slice(0, 28) + '...' : file.name;
       // if conversion was previously done, reset but keep file
       if (conversionDone) {
         resetFullUI(false);
@@ -494,7 +525,7 @@ fileInput.onchange = (e) => {
     } else {
       alert('⚠️ Please select a valid JPG / JPEG image.');
       selectedFile = null;
-      elements.fileName.innerText = 'Choose file';
+      elements.fileName.innerText = '✨ Choose file';
       fileInput.value = '';
       updateConvertButtonState();
     }
@@ -521,7 +552,7 @@ elements.downloadBtn.onclick = () => {
   }
   const downloadUrl = URL.createObjectURL(pdfBlob);
   const a = document.createElement('a');
-  const fileName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '.pdf') : 'converted_image.pdf';
+  const fileName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '.pdf') : 'colorful_converted.pdf';
   a.href = downloadUrl;
   a.download = fileName;
   document.body.appendChild(a);
@@ -542,11 +573,11 @@ elements.resetLink.onclick = () => {
   pdfBlob = null;
   isConverting = false;
   elements.progressFill.style.width = '0%';
-  elements.statusTitle.innerText = 'Ready to convert';
-  elements.etaText.innerText = 'Select a JPG image first';
-  elements.step1.innerHTML = '<span>○</span> Uploading file — 0s';
-  elements.step2.innerHTML = '<span>○</span> Processing image — 0s';
-  elements.step3.innerHTML = '<span>○</span> Finalizing PDF — 0s';
+  elements.statusTitle.innerText = '🌟 Ready to convert';
+  elements.etaText.innerText = '📸 Select a JPG image first';
+  elements.step1.innerHTML = '<span>🎴</span> Uploading file — 0s';
+  elements.step2.innerHTML = '<span>⚙️</span> Processing image — 0s';
+  elements.step3.innerHTML = '<span>📄</span> Finalizing PDF — 0s';
   updateConvertButtonState();
 };
 
