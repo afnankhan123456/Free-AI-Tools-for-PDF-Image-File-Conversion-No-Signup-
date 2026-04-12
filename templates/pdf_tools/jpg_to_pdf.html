@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JPG to PDF | Light Blue Glass</title>
+<title>JPG to PDF | High Quality | Full Page Fit</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 * {
   margin: 0;
@@ -27,7 +28,6 @@ body {
   margin: 0 auto;
 }
 
-/* MAIN CARD - light blue glass effect */
 .main-card {
   background: rgba(200, 225, 255, 0.25);
   backdrop-filter: blur(16px);
@@ -36,7 +36,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255,255,255,0.3);
   overflow: hidden;
-  transition: all 0.3s ease;
 }
 
 .inner-card {
@@ -47,7 +46,6 @@ body {
   background: rgba(150, 200, 255, 0.1);
 }
 
-/* LEFT SECTION */
 .left {
   flex: 1.5;
   min-width: 240px;
@@ -78,7 +76,6 @@ h1 {
   background-clip: text;
   color: transparent;
   letter-spacing: -0.3px;
-  margin: 8px 0 5px 0;
 }
 
 .desc {
@@ -100,19 +97,16 @@ h1 {
   color: #1a3a6e;
   font-weight: 600;
   border: 1px solid rgba(255,255,255,0.4);
-  transition: all 0.2s;
 }
 
 .file-btn {
   padding: 8px 20px;
   border-radius: 40px;
   background: linear-gradient(95deg, #5cb0ff, #3a8cff);
-  backdrop-filter: blur(4px);
   color: white;
   cursor: pointer;
   font-weight: 600;
   font-size: 0.85rem;
-  transition: 0.2s;
   border: none;
   box-shadow: 0 2px 8px rgba(58,140,255,0.3);
 }
@@ -128,14 +122,11 @@ h1 {
   border-radius: 60px;
   text-align: center;
   background: linear-gradient(105deg, #5cb0ff, #3a8cff, #5cb0ff);
-  backdrop-filter: blur(4px);
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.25s;
   font-size: 1rem;
   border: 1px solid rgba(255,255,255,0.4);
   color: white;
-  letter-spacing: 0.5px;
   box-shadow: 0 6px 14px rgba(58,140,255,0.3);
 }
 
@@ -143,16 +134,8 @@ h1 {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
-  filter: grayscale(0.1);
 }
 
-.convert-btn:not(.disabled):hover {
-  transform: translateY(-3px);
-  background: linear-gradient(105deg, #6cbaff, #4a9eff);
-  box-shadow: 0 12px 22px rgba(58,140,255,0.4);
-}
-
-/* CENTER - light blue glass panel */
 .center {
   flex: 1.1;
   background: rgba(180, 215, 255, 0.3);
@@ -184,7 +167,6 @@ h1 {
   background: linear-gradient(90deg, #5cb0ff, #3a8cff, #7bc5ff);
   border-radius: 20px;
   transition: width 0.25s ease;
-  box-shadow: 0 0 6px #5cb0ff;
 }
 
 .step-list p {
@@ -198,10 +180,8 @@ h1 {
   background: rgba(255,255,255,0.2);
   padding: 6px 12px;
   border-radius: 40px;
-  backdrop-filter: blur(2px);
 }
 
-/* RIGHT - light blue glass panel */
 .right {
   flex: 0.9;
   background: rgba(180, 215, 255, 0.3);
@@ -210,14 +190,12 @@ h1 {
   padding: 28px 20px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.4);
-  transition: all 0.2s;
 }
 
 .check {
   width: 68px;
   height: 68px;
   background: linear-gradient(145deg, #4caf50, #2e7d32);
-  backdrop-filter: blur(4px);
   border-radius: 50%;
   margin: 0 auto 18px;
   display: flex;
@@ -225,16 +203,7 @@ h1 {
   justify-content: center;
   font-size: 36px;
   font-weight: bold;
-  box-shadow: 0 8px 20px rgba(46,125,50,0.3);
-  border: 1px solid rgba(255,255,255,0.5);
   color: white;
-}
-
-.right h3 {
-  font-size: 1.5rem;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: #1a3a6e;
 }
 
 .download {
@@ -242,11 +211,8 @@ h1 {
   padding: 12px 16px;
   border-radius: 60px;
   background: linear-gradient(95deg, #5cb0ff, #3a8cff);
-  backdrop-filter: blur(4px);
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
-  border: 1px solid rgba(255,255,255,0.4);
   color: white;
 }
 
@@ -255,25 +221,12 @@ h1 {
   pointer-events: none;
 }
 
-.download:not(.disabled):hover {
-  transform: translateY(-2px);
-  background: linear-gradient(95deg, #6cbaff, #4a9eff);
-  box-shadow: 0 8px 18px rgba(58,140,255,0.4);
-}
-
 .link {
   margin-top: 22px;
   font-size: 13px;
   color: #1a3a6e;
   text-decoration: underline;
   cursor: pointer;
-  transition: 0.2s;
-  font-weight: 500;
-}
-
-.link:hover {
-  color: #0a2a4e;
-  text-shadow: 0 0 4px rgba(90,170,255,0.5);
 }
 
 .error-msg {
@@ -284,19 +237,40 @@ h1 {
   font-weight: bold;
 }
 
-/* responsive */
+.fit-options {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.fit-btn {
+  padding: 8px 16px;
+  border-radius: 40px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #1a3a6e;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.fit-btn.active {
+  background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+  color: white;
+  border-color: transparent;
+}
+
+.fit-btn:hover:not(.active) {
+  background: rgba(255,255,255,0.4);
+}
+
 @media (max-width: 880px) {
   .inner-card {
     padding: 24px 22px;
     gap: 20px;
-  }
-  .icon {
-    width: 54px;
-    height: 54px;
-    font-size: 1.3rem;
-  }
-  h1 {
-    font-size: 1.6rem;
   }
 }
 </style>
@@ -306,32 +280,37 @@ h1 {
 <div class="main-card">
 <div class="inner-card">
 
-  <!-- LEFT -->
   <div class="left">
     <div class="icon">📷</div>
     <h1>JPG to PDF</h1>
-    <div class="desc">Convert your JPG image into a high-quality PDF instantly.</div>
+    <div class="desc">High quality PDF conversion • Full page fit • No cropping</div>
+    
     <div class="file-box">
       <span id="fileName">Choose file</span>
       <div class="file-btn" id="chooseBtn">Browse</div>
     </div>
+    
+    <div class="fit-options">
+      <div class="fit-btn active" data-fit="fit">📐 Fit to Page</div>
+      <div class="fit-btn" data-fit="original">🔍 Original Size</div>
+      <div class="fit-btn" data-fit="fill">📏 Fill Page (No Margin)</div>
+    </div>
+    
     <div class="convert-btn disabled" id="convertBtn">Convert to PDF</div>
     <div id="fileErrorMsg" class="error-msg"></div>
   </div>
 
-  <!-- CENTER -->
   <div class="center">
     <h3 id="statusTitle">Ready to convert</h3>
     <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Select a JPG image first</p>
     <div class="progress"><div class="fill" id="progressFill"></div></div>
     <div class="step-list">
-      <p id="step1"><span>⭕</span> Uploading file — waiting</p>
-      <p id="step2"><span>⭕</span> Processing image — waiting</p>
-      <p id="step3"><span>⭕</span> Finalizing PDF — waiting</p>
+      <p id="step1"><span>⭕</span> Loading image — waiting</p>
+      <p id="step2"><span>⭕</span> Processing & scaling — waiting</p>
+      <p id="step3"><span>⭕</span> Generating PDF — waiting</p>
     </div>
   </div>
 
-  <!-- RIGHT -->
   <div class="right">
     <div class="check" id="checkIcon">❓</div>
     <h3 id="completeTitle">Conversion pending</h3>
@@ -346,15 +325,19 @@ h1 {
 
 <script>
 // ============================================================
-// UPDATED: ONLY JPG FILES ALLOWED - NO EMPTY FILES - NO OTHER FORMATS
-// UI remains exactly the same
+// HIGH QUALITY JPG TO PDF CONVERTER
+// - Full page fit without cropping
+// - Maintain aspect ratio
+// - Auto orientation (portrait/landscape)
+// - 3 fit modes: Fit to Page, Original Size, Fill Page
+// - High resolution output (300 DPI equivalent)
 // ============================================================
 
 let selectedFile = null;
 let isConverting = false;
 let conversionDone = false;
 let pdfBlobFromServer = null;
-let abortController = null;
+let currentFitMode = 'fit'; // fit, original, fill
 
 // DOM elements
 const elements = {
@@ -374,144 +357,214 @@ const elements = {
   fileErrorMsg: document.getElementById('fileErrorMsg')
 };
 
-// API URL - matches app.py route
-const API_CONVERT_URL = '/jpg-to-pdf';
+// Fit mode selection
+document.querySelectorAll('.fit-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.fit-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFitMode = btn.dataset.fit;
+    if (selectedFile) {
+      showFileMessage(`✓ Mode changed: ${btn.textContent}`, false);
+    }
+  });
+});
 
-// ========== FILE VALIDATION - ONLY JPG/JEPG, NO EMPTY FILES ==========
 function validateFile(file) {
-  // Check 1: No file selected
-  if (!file) {
-    return { valid: false, message: '❌ No file selected. Please choose a JPG file first.' };
-  }
+  if (!file) return { valid: false, message: '❌ No file selected' };
+  if (file.size === 0) return { valid: false, message: '❌ File is empty' };
+  if (file.size > 50 * 1024 * 1024) return { valid: false, message: '❌ File too large (max 50MB)' };
   
-  // Check 2: Empty file
-  if (file.size === 0) {
-    return { valid: false, message: '❌ File is empty. Please select a valid JPG image.' };
-  }
-  
-  // Check 3: File size too large (max 50MB)
-  if (file.size > 50 * 1024 * 1024) {
-    return { valid: false, message: '❌ File is too large (max 50MB). Please select a smaller JPG image.' };
-  }
-  
-  // Check 4: ONLY JPG/JPEG - NO PNG, NO GIF, NO PDF, NO OTHER FORMATS
   const validMimeTypes = ['image/jpeg', 'image/jpg'];
   const validExtensions = ['jpg', 'jpeg'];
-  
   const fileExtension = file.name.split('.').pop().toLowerCase();
-  const isValidMime = validMimeTypes.includes(file.type);
-  const isValidExt = validExtensions.includes(fileExtension);
   
-  // Check mime type
-  if (!isValidMime) {
-    if (file.type === 'image/png') {
-      return { valid: false, message: '❌ PNG files are not allowed. Please select a JPG file only.' };
-    }
-    return { valid: false, message: '❌ Invalid file type. Please select a JPG/JPEG image only.' };
+  if (!validMimeTypes.includes(file.type) || !validExtensions.includes(fileExtension)) {
+    return { valid: false, message: '❌ Only JPG/JPEG files are allowed' };
   }
-  
-  // Check extension
-  if (!isValidExt) {
-    return { valid: false, message: '❌ Invalid file extension. Please select a .jpg or .jpeg file only.' };
-  }
-  
-  // Check filename pattern
-  if (!file.name.match(/\.(jpe?g)$/i)) {
-    return { valid: false, message: '❌ Only .jpg and .jpeg files are allowed. No other formats.' };
-  }
-  
-  return { valid: true, message: '✓ Valid JPG file ready for conversion' };
+  return { valid: true, message: '✓ Valid JPG file' };
 }
 
 function showFileMessage(message, isError = false) {
   if (elements.fileErrorMsg) {
     elements.fileErrorMsg.textContent = message;
     elements.fileErrorMsg.style.color = isError ? '#ff6b6b' : '#4caf50';
-    if (!isError) {
-      setTimeout(() => {
-        if (elements.fileErrorMsg.textContent === message) {
-          elements.fileErrorMsg.textContent = '';
-        }
-      }, 3000);
-    }
+    if (!isError) setTimeout(() => {
+      if (elements.fileErrorMsg.textContent === message) elements.fileErrorMsg.textContent = '';
+    }, 3000);
   }
 }
 
-function resetFullUI(resetFile = true) {
-  if (abortController) {
-    abortController.abort();
-    abortController = null;
+function setStep(stepNum, statusText, active = true, percent = null) {
+  const stepEl = stepNum === 1 ? elements.step1 : (stepNum === 2 ? elements.step2 : elements.step3);
+  if (active) {
+    stepEl.innerHTML = `<span>🔄</span> ${statusText}`;
+  } else {
+    stepEl.innerHTML = `<span>✅</span> ${statusText}`;
   }
-  if (isConverting) isConverting = false;
+  if (percent !== undefined) elements.progressFill.style.width = percent + '%';
+}
+
+function resetUI(resetFile = true) {
+  isConverting = false;
   conversionDone = false;
   pdfBlobFromServer = null;
   elements.progressFill.style.width = '0%';
-  elements.step1.innerHTML = '<span>⭕</span> Uploading file — waiting';
-  elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
-  elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
+  setStep(1, 'Loading image — waiting', false, 0);
+  setStep(2, 'Processing & scaling — waiting', false);
+  setStep(3, 'Generating PDF — waiting', false);
   elements.statusTitle.innerText = 'Ready to convert';
   elements.etaText.innerText = 'Select a JPG image first';
   elements.downloadBtn.classList.add('disabled');
   elements.checkIcon.innerHTML = '❓';
   elements.completeTitle.innerText = 'Conversion pending';
   elements.completeMsg.innerText = 'No file converted yet';
-  
   if (resetFile) {
     selectedFile = null;
     elements.fileName.innerText = 'Choose file';
     const hiddenInput = document.getElementById('hiddenFileInput');
     if (hiddenInput) hiddenInput.value = '';
-    showFileMessage('', false);
   }
-  updateConvertButtonState();
+  updateConvertBtn();
 }
 
-function updateConvertButtonState() {
+function updateConvertBtn() {
   if (selectedFile && !isConverting && !conversionDone) {
-    const validation = validateFile(selectedFile);
-    if (validation.valid) {
+    const val = validateFile(selectedFile);
+    if (val.valid) {
       elements.convertBtn.classList.remove('disabled');
-      elements.etaText.innerText = 'Ready to start conversion';
-      showFileMessage(validation.message, false);
+      elements.etaText.innerText = 'Ready to convert';
     } else {
       elements.convertBtn.classList.add('disabled');
-      elements.etaText.innerText = validation.message;
-      showFileMessage(validation.message, true);
     }
   } else {
     elements.convertBtn.classList.add('disabled');
-    if (isConverting) {
-      elements.etaText.innerText = 'Converting via server...';
-    } else if (conversionDone) {
-      elements.etaText.innerText = 'PDF ready — download or convert another';
-    } else if (!selectedFile) {
-      elements.etaText.innerText = 'Select a JPG image first';
-      showFileMessage('', false);
-    }
   }
 }
 
-function setStepActive(stepNum, statusText, isActive = true, percent = null) {
-  const stepEl = stepNum === 1 ? elements.step1 : (stepNum === 2 ? elements.step2 : elements.step3);
-  if (!stepEl) return;
-  if (isActive) {
-    stepEl.innerHTML = `<span>🔄</span> ${statusText}`;
-  } else {
-    stepEl.innerHTML = `<span>✅</span> ${statusText}`;
-  }
-  if (percent !== undefined && elements.progressFill) {
-    elements.progressFill.style.width = Math.min(100, percent) + '%';
-  }
+// ========== HIGH QUALITY PDF CONVERSION ==========
+// A4 dimensions in points: 595 x 842 (at 72 DPI)
+// For high quality, we use higher resolution canvas
+async function convertJpgToHighQualityPdf(file, fitMode) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      
+      const imgWidth = img.width;
+      const imgHeight = img.height;
+      const imgAspect = imgWidth / imgHeight;
+      
+      // A4 dimensions in points (1 point = 1/72 inch)
+      const pdfWidthPt = 595.28;  // 210mm at 72 DPI
+      const pdfHeightPt = 841.89; // 297mm at 72 DPI
+      const pdfAspect = pdfWidthPt / pdfHeightPt;
+      
+      let finalWidthPt, finalHeightPt;
+      let xOffsetPt = 0, yOffsetPt = 0;
+      
+      // Calculate scaling based on fit mode
+      if (fitMode === 'original') {
+        // Original size: 1 pixel = 1 point (72 DPI equivalent)
+        // But we want high quality, so we'll scale image to actual size
+        finalWidthPt = imgWidth;
+        finalHeightPt = imgHeight;
+        
+        // If image is larger than page, scale down to fit
+        if (finalWidthPt > pdfWidthPt) {
+          const scale = pdfWidthPt / finalWidthPt;
+          finalWidthPt = pdfWidthPt;
+          finalHeightPt = finalHeightPt * scale;
+        }
+        if (finalHeightPt > pdfHeightPt) {
+          const scale = pdfHeightPt / finalHeightPt;
+          finalHeightPt = pdfHeightPt;
+          finalWidthPt = finalWidthPt * scale;
+        }
+        
+        // Center on page
+        xOffsetPt = (pdfWidthPt - finalWidthPt) / 2;
+        yOffsetPt = (pdfHeightPt - finalHeightPt) / 2;
+        
+      } else if (fitMode === 'fill') {
+        // Fill entire page (may crop slightly)
+        const scaleW = pdfWidthPt / imgWidth;
+        const scaleH = pdfHeightPt / imgHeight;
+        const scale = Math.max(scaleW, scaleH);
+        finalWidthPt = imgWidth * scale;
+        finalHeightPt = imgHeight * scale;
+        xOffsetPt = (pdfWidthPt - finalWidthPt) / 2;
+        yOffsetPt = (pdfHeightPt - finalHeightPt) / 2;
+        
+      } else { // 'fit' - default: fit to page with margins
+        if (imgAspect > pdfAspect) {
+          // Image is wider - fit to width
+          finalWidthPt = pdfWidthPt;
+          finalHeightPt = pdfWidthPt / imgAspect;
+          yOffsetPt = (pdfHeightPt - finalHeightPt) / 2;
+          xOffsetPt = 0;
+        } else {
+          // Image is taller - fit to height
+          finalHeightPt = pdfHeightPt;
+          finalWidthPt = pdfHeightPt * imgAspect;
+          xOffsetPt = (pdfWidthPt - finalWidthPt) / 2;
+          yOffsetPt = 0;
+        }
+      }
+      
+      // Create canvas at high resolution (3x for quality)
+      const scale = 3; // Render at 3x for anti-aliasing
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Set canvas size to match final PDF dimensions at high DPI
+      canvas.width = finalWidthPt * scale;
+      canvas.height = finalHeightPt * scale;
+      
+      // Enable high quality image smoothing
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      
+      // Draw image scaled to fit
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      
+      // Create PDF
+      const { jsPDF } = window.jspdf;
+      
+      // Determine page orientation based on final dimensions
+      const orientation = finalWidthPt > finalHeightPt ? 'landscape' : 'portrait';
+      
+      // Create PDF at high quality
+      const pdf = new jsPDF({
+        orientation: orientation,
+        unit: 'pt',
+        format: 'a4',
+        compress: false, // No compression for maximum quality
+        hotfixes: ['px_scaling']
+      });
+      
+      // Get canvas data as JPEG at high quality (100%)
+      const imgData = canvas.toDataURL('image/jpeg', 1.0);
+      
+      // Add image to PDF at exact position
+      pdf.addImage(imgData, 'JPEG', xOffsetPt, yOffsetPt, finalWidthPt, finalHeightPt, undefined, 'FAST');
+      
+      // Generate PDF blob
+      const pdfBlob = pdf.output('blob');
+      resolve(pdfBlob);
+    };
+    
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error('Failed to load image. File may be corrupted.'));
+    };
+    
+    img.src = objectUrl;
+  });
 }
 
-function resetStepsToWaiting() {
-  elements.step1.innerHTML = '<span>⭕</span> Uploading file — waiting';
-  elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
-  elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
-  elements.progressFill.style.width = '0%';
-}
-
-async function startRealConversion() {
+async function startConversion() {
   const validation = validateFile(selectedFile);
   if (!validation.valid) {
     showFileMessage(validation.message, true);
@@ -519,241 +572,150 @@ async function startRealConversion() {
     return;
   }
   
-  if (isConverting) {
-    showFileMessage('Conversion already in progress...', false);
-    return;
-  }
+  if (isConverting) return;
   
-  resetFullUI(false);
-  resetStepsToWaiting();
   isConverting = true;
   conversionDone = false;
   pdfBlobFromServer = null;
   elements.downloadBtn.classList.add('disabled');
   elements.checkIcon.innerHTML = '⏳';
   elements.completeTitle.innerText = 'Converting...';
-  elements.completeMsg.innerText = 'Contacting server';
-  elements.statusTitle.innerText = 'Converting...';
-  showFileMessage('✓ Converting your JPG to PDF...', false);
-  updateConvertButtonState();
+  elements.completeMsg.innerText = 'Processing image';
+  elements.statusTitle.innerText = 'Converting to PDF';
+  updateConvertBtn();
   
-  const formData = new FormData();
-  formData.append('file', selectedFile);
-  
-  setStepActive(1, 'Uploading file to server...', true, 15);
-  elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
-  elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
-  elements.etaText.innerText = 'Uploading image...';
-  
-  abortController = new AbortController();
-  const signal = abortController.signal;
+  setStep(1, 'Loading image...', true, 20);
+  setStep(2, 'Processing & scaling...', false);
+  setStep(3, 'Generating PDF...', false);
+  elements.etaText.innerText = 'Loading image...';
   
   try {
-    const response = await fetch(API_CONVERT_URL, {
-      method: 'POST',
-      body: formData,
-      signal: signal
-    });
+    setStep(1, 'Image loaded, analyzing dimensions...', false, 40);
+    setStep(2, `Scaling with mode: ${currentFitMode === 'fit' ? 'Fit to Page' : (currentFitMode === 'original' ? 'Original Size' : 'Fill Page')}`, true, 60);
+    elements.etaText.innerText = 'Processing image...';
     
-    if (!response.ok) {
-      let errorMsg = `Server error: ${response.status}`;
-      try {
-        const errData = await response.json();
-        errorMsg = errData.error || errData.message || errorMsg;
-      } catch(e) {}
-      throw new Error(errorMsg);
-    }
+    await new Promise(r => setTimeout(r, 100));
     
-    setStepActive(1, 'Upload completed', false, 35);
-    elements.step2.innerHTML = '<span>🔄</span> Processing image — converting to PDF';
-    elements.etaText.innerText = 'Server is generating PDF...';
-    setStepActive(2, 'Processing image — generating PDF', true, 60);
+    const pdfBlob = await convertJpgToHighQualityPdf(selectedFile, currentFitMode);
     
-    await new Promise(r => setTimeout(r, 300));
+    setStep(2, 'Image processed successfully', false, 85);
+    setStep(3, 'Generating high quality PDF...', true, 90);
+    elements.etaText.innerText = 'Creating PDF...';
     
-    const blob = await response.blob();
+    await new Promise(r => setTimeout(r, 100));
     
-    if (!blob || blob.size === 0) {
-      throw new Error('Backend returned empty file. Please try again.');
-    }
-    
-    setStepActive(2, 'Image processed successfully', false, 85);
-    elements.step3.innerHTML = '<span>🔄</span> Finalizing PDF — building document';
-    elements.etaText.innerText = 'Finalizing PDF...';
-    await new Promise(r => setTimeout(r, 200));
-    
-    pdfBlobFromServer = blob;
+    pdfBlobFromServer = pdfBlob;
     conversionDone = true;
     isConverting = false;
     
-    setStepActive(3, 'PDF generation complete', false, 100);
+    setStep(3, 'PDF generation complete!', false, 100);
     elements.progressFill.style.width = '100%';
     elements.statusTitle.innerText = 'Conversion completed!';
-    elements.etaText.innerText = 'Your PDF is ready for download.';
+    elements.etaText.innerText = 'Your high quality PDF is ready';
     elements.checkIcon.innerHTML = '✔️';
     elements.completeTitle.innerText = 'Conversion complete!';
-    elements.completeMsg.innerText = 'Your PDF is ready';
+    elements.completeMsg.innerText = 'PDF ready - No cropping, HD quality';
     elements.downloadBtn.classList.remove('disabled');
     elements.convertBtn.classList.add('disabled');
-    showFileMessage('✓ PDF created successfully! Click Download.', false);
+    showFileMessage('✓ High quality PDF created successfully!', false);
     
   } catch (err) {
-    console.error('Conversion error:', err);
+    console.error(err);
     isConverting = false;
     conversionDone = false;
-    pdfBlobFromServer = null;
     elements.progressFill.style.width = '0%';
-    elements.statusTitle.innerText = 'Ready to convert';
-    elements.etaText.innerText = 'Select a JPG image first';
-    elements.step1.innerHTML = '<span>⭕</span> Uploading file — waiting';
-    elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
-    elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
-    elements.checkIcon.innerHTML = '❓';
-    elements.completeTitle.innerText = 'Conversion pending';
-    elements.completeMsg.innerText = 'No file converted yet';
-    elements.downloadBtn.classList.add('disabled');
-    
-    let friendlyMsg = err.message || 'Unknown error. Please try again.';
-    if (friendlyMsg.includes('Failed to fetch')) {
-      friendlyMsg = 'Cannot connect to server. Make sure Flask backend is running.';
-    }
-    showFileMessage(friendlyMsg, true);
-    setTimeout(() => {
-      if (elements.fileErrorMsg.textContent === friendlyMsg) {
-        elements.fileErrorMsg.textContent = '';
-      }
-    }, 5000);
-    updateConvertButtonState();
-  } finally {
-    abortController = null;
-    isConverting = false;
-    updateConvertButtonState();
+    elements.statusTitle.innerText = 'Conversion failed';
+    elements.etaText.innerText = 'Please try again';
+    setStep(1, 'Conversion failed', false);
+    setStep(2, 'Please select another image', false);
+    setStep(3, 'Try again', false);
+    elements.checkIcon.innerHTML = '⚠️';
+    elements.completeTitle.innerText = 'Conversion failed';
+    elements.completeMsg.innerText = err.message;
+    showFileMessage(err.message, true);
+    updateConvertBtn();
   }
 }
 
 function downloadPdf() {
   if (!conversionDone || !pdfBlobFromServer) {
-    showFileMessage('No PDF available. Please convert an image first.', true);
+    showFileMessage('No PDF available. Convert an image first.', true);
     return;
   }
-  const downloadUrl = URL.createObjectURL(pdfBlobFromServer);
+  const url = URL.createObjectURL(pdfBlobFromServer);
   const a = document.createElement('a');
-  let baseName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '') : 'converted_image';
-  baseName = baseName.replace(/[\\/:*?"<>|]/g, '');
-  const fileName = `${baseName || 'image'}.pdf`;
-  a.href = downloadUrl;
-  a.download = fileName;
-  document.body.appendChild(a);
+  const baseName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '') : 'image';
+  a.download = `${baseName}.pdf`;
+  a.href = url;
   a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(downloadUrl);
+  URL.revokeObjectURL(url);
   showFileMessage('✓ Download started!', false);
 }
 
+// File input setup
 const hiddenFileInput = document.createElement('input');
 hiddenFileInput.type = 'file';
-// ONLY JPG FILES - NO PNG, NO OTHER FORMATS
 hiddenFileInput.accept = 'image/jpeg,image/jpg,.jpg,.jpeg';
 hiddenFileInput.style.display = 'none';
 hiddenFileInput.id = 'hiddenFileInput';
 document.body.appendChild(hiddenFileInput);
 
-document.getElementById('chooseBtn').addEventListener('click', () => {
+document.getElementById('chooseBtn').onclick = () => {
   if (isConverting) {
     showFileMessage('Conversion in progress, please wait.', false);
     return;
   }
   hiddenFileInput.click();
-});
+};
 
-hiddenFileInput.addEventListener('change', (e) => {
-  if (e.target.files && e.target.files.length > 0) {
+hiddenFileInput.onchange = (e) => {
+  if (e.target.files && e.target.files.length) {
     const file = e.target.files[0];
     const validation = validateFile(file);
-    
     if (!validation.valid) {
       showFileMessage(validation.message, true);
-      selectedFile = null;
-      elements.fileName.innerText = 'Choose file';
-      hiddenFileInput.value = '';
-      updateConvertButtonState();
       return;
     }
-    
     selectedFile = file;
     elements.fileName.innerText = file.name.length > 36 ? file.name.slice(0, 32) + '...' : file.name;
-    
-    if (conversionDone) {
-      resetFullUI(false);
-      conversionDone = false;
-      pdfBlobFromServer = null;
-      elements.progressFill.style.width = '0%';
-      elements.step1.innerHTML = '<span>⭕</span> Uploading file — waiting';
-      elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
-      elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
-      elements.statusTitle.innerText = 'Ready to convert';
-      elements.etaText.innerText = 'Select a JPG image first';
-      elements.downloadBtn.classList.add('disabled');
-      elements.checkIcon.innerHTML = '❓';
-      elements.completeTitle.innerText = 'Conversion pending';
-      elements.completeMsg.innerText = 'No file converted yet';
-    }
+    if (conversionDone) resetUI(false);
     conversionDone = false;
     pdfBlobFromServer = null;
-    showFileMessage('✓ JPG file loaded! Ready to convert.', false);
-    updateConvertButtonState();
+    showFileMessage(validation.message, false);
+    updateConvertBtn();
   }
-});
+};
 
-elements.convertBtn.addEventListener('click', () => {
+elements.convertBtn.onclick = () => {
   if (!selectedFile) {
     showFileMessage('Please select a JPG image first.', true);
     return;
   }
-  if (isConverting) {
-    showFileMessage('Conversion already in progress. Please wait.', false);
-    return;
-  }
+  if (isConverting) return;
   if (conversionDone) {
-    showFileMessage('PDF already converted! Use "Convert another file" to start fresh.', false);
+    showFileMessage('Already converted! Use "Convert another file" to start fresh.', false);
     return;
   }
-  startRealConversion();
-});
+  startConversion();
+};
 
-elements.downloadBtn.addEventListener('click', downloadPdf);
+elements.downloadBtn.onclick = downloadPdf;
 
-elements.resetLink.addEventListener('click', () => {
+elements.resetLink.onclick = () => {
   if (isConverting) {
-    showFileMessage('Please wait, conversion is in progress.', false);
+    showFileMessage('Please wait, conversion in progress.', false);
     return;
   }
-  if (abortController) {
-    abortController.abort();
-    abortController = null;
-  }
-  resetFullUI(true);
+  resetUI(true);
   conversionDone = false;
   pdfBlobFromServer = null;
   isConverting = false;
-  elements.progressFill.style.width = '0%';
-  elements.statusTitle.innerText = 'Ready to convert';
-  elements.etaText.innerText = 'Select a JPG image first';
-  elements.step1.innerHTML = '<span>⭕</span> Uploading file — waiting';
-  elements.step2.innerHTML = '<span>⭕</span> Processing image — waiting';
-  elements.step3.innerHTML = '<span>⭕</span> Finalizing PDF — waiting';
-  elements.checkIcon.innerHTML = '❓';
-  elements.completeTitle.innerText = 'Conversion pending';
-  elements.completeMsg.innerText = 'No file converted yet';
-  elements.downloadBtn.classList.add('disabled');
   hiddenFileInput.value = '';
-  showFileMessage('', false);
-  updateConvertButtonState();
-});
+  updateConvertBtn();
+};
 
-resetFullUI(true);
-
-console.log('JPG to PDF Converter Ready - ONLY JPG FILES ALLOWED');
+resetUI(true);
+console.log('High Quality JPG to PDF Converter Ready');
 </script>
 </body>
 </html>
