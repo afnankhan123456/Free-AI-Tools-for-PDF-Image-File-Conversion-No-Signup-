@@ -177,7 +177,7 @@ def png_to_pdf():
 @app.route("/jpg-to-pdf", methods=["GET", "POST"])
 def jpg_to_pdf():
     if request.method == "POST":
-        from your_logic_file import jpg_to_pdf_logic
+        from logic import jpg_to_pdf_logic
         return jpg_to_pdf_logic(app)
     return render_template("pdf_tools/jpg_to_pdf.html")
 
