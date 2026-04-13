@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ==================== SEO META TAGS (white text for visibility) ==================== -->
-<meta name="description" content="Free high-quality JPG to PDF converter. Full HD resolution, auto-fit, no cropping. Convert JPEG images to PDF documents instantly in your browser.">
-<meta name="keywords" content="JPG to PDF, convert JPG to PDF, JPEG to PDF, free PDF converter, image to PDF, auto-fit PDF, HD PDF converter, online JPG to PDF">
+<!-- ==================== SEO META TAGS ==================== -->
+<meta name="description" content="Free JPG to PDF converter - Full HD quality, auto-fit, no cropping. Convert JPEG images to PDF instantly. 100% free, no signup required.">
+<meta name="keywords" content="JPG to PDF, convert JPG to PDF, JPEG to PDF, free PDF converter, image to PDF, auto-fit PDF, HD PDF converter, online JPG to PDF, free tool">
 <meta name="author" content="Free AI Tools">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf">
 
-<title>JPG to PDF Converter | Full HD Auto-Fit | Free Tool</title>
+<title>JPG to PDF Converter | Free | Full HD Auto-Fit | No Signup</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
@@ -25,9 +25,6 @@ body {
   min-height: 100vh;
   background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
   font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 32px 20px;
 }
 
@@ -37,6 +34,7 @@ body {
   margin: 0 auto;
 }
 
+/* ========== MAIN CONVERTER CARD ========== */
 .main-card {
   background: rgba(200, 225, 255, 0.25);
   backdrop-filter: blur(16px);
@@ -45,6 +43,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255,255,255,0.3);
   overflow: hidden;
+  margin-bottom: 30px;
 }
 
 .inner-card {
@@ -289,24 +288,147 @@ h1 {
   font-weight: bold;
 }
 
-/* ========== INTERNAL LINKS STYLES (SEO friendly, visible white text) ========== */
-.internal-links {
-  margin-top: 28px;
-  padding: 18px 16px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
+/* ========== INFO SECTIONS (VISIBLE FOR USERS) ========== */
+.info-section {
+  background: rgba(200, 225, 255, 0.2);
+  backdrop-filter: blur(12px);
   border-radius: 40px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.3);
+  padding: 32px 36px;
+  margin-top: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.internal-links p {
-  font-size: 0.85rem;
-  color: white;
-  font-weight: 500;
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin: 28px 0 20px 0;
+}
+
+.feature-item {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 18px 12px;
+  border-radius: 28px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.feature-icon {
+  font-size: 2.2rem;
   margin-bottom: 12px;
-  letter-spacing: 0.3px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.feature-item h4 {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.feature-item p {
+  color: #eef5ff;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.how-it-works {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 28px 0;
+}
+
+.step-card {
+  flex: 1;
+  min-width: 160px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 28px;
+  padding: 20px 16px;
+  text-align: center;
+}
+
+.step-num {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #5cb0ff, #3a8cff);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: white;
+}
+
+.step-card h4 {
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.step-card p {
+  color: #eef5ff;
+  font-size: 0.85rem;
+}
+
+.faq-list {
+  margin: 24px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 16px 22px;
+  transition: 0.2s;
+}
+
+.faq-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.faq-question {
+  font-weight: 700;
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.faq-question span {
+  font-size: 1.2rem;
+}
+
+.faq-answer {
+  color: #e0efff;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  padding-left: 28px;
+}
+
+.internal-links-footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.3);
+}
+
+.internal-links-footer p {
+  color: white;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 
 .links-row {
@@ -322,18 +444,32 @@ h1 {
   font-weight: 600;
   font-size: 0.9rem;
   background: rgba(58, 140, 255, 0.5);
-  padding: 6px 18px;
+  padding: 8px 20px;
   border-radius: 50px;
   transition: all 0.2s ease;
   border: 1px solid rgba(255,255,255,0.4);
   backdrop-filter: blur(4px);
-  display: inline-block;
 }
 
 .links-row a:hover {
   background: rgba(92, 176, 255, 0.8);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+
+.section-sub {
+  text-align: center;
+  color: #eef5ff;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
 }
 
 @media (max-width: 880px) {
@@ -349,18 +485,23 @@ h1 {
   h1 {
     font-size: 1.6rem;
   }
-  .links-row {
-    gap: 10px;
+  .info-section {
+    padding: 24px 20px;
+  }
+  .section-title {
+    font-size: 1.3rem;
   }
 }
 </style>
 </head>
 <body>
 <div class="wrapper">
+
+<!-- ========== MAIN CONVERTER CARD ========== -->
 <div class="main-card">
 <div class="inner-card">
 
-  <!-- ==================== LEFT COLUMN: FILE SELECTION ==================== -->
+  <!-- LEFT COLUMN: FILE SELECTION -->
   <div class="left">
     <div class="icon">📄</div>
     <h1>JPG to PDF</h1>
@@ -375,7 +516,7 @@ h1 {
     <div id="fileErrorMsg" class="error-msg"></div>
   </div>
 
-  <!-- ==================== CENTER COLUMN: PROGRESS & STEPS ==================== -->
+  <!-- CENTER COLUMN: PROGRESS -->
   <div class="center">
     <h3 id="statusTitle">Ready to convert</h3>
     <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Select a JPG image first</p>
@@ -387,36 +528,129 @@ h1 {
     </div>
   </div>
 
-  <!-- ==================== RIGHT COLUMN: RESULT & DOWNLOAD ==================== -->
+  <!-- RIGHT COLUMN: RESULT -->
   <div class="right">
     <div class="check" id="checkIcon">❓</div>
     <h3 id="completeTitle">Conversion pending</h3>
     <p id="completeMsg" style="opacity:0.8;">No file converted yet</p>
     <div class="download disabled" id="downloadBtn">Download PDF</div>
     <div class="link" id="resetLink">Convert another file →</div>
-    
-    <!-- ==================== SEO INTERNAL LINKS (White text, visible) ==================== -->
-    <div class="internal-links">
-      <p>⚡ More Free Tools:</p>
-      <div class="links-row">
-        <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf" target="_blank" rel="noopener noreferrer">PNG to PDF</a>
-        <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf" target="_blank" rel="noopener noreferrer">JPG to PDF</a>
-        <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word" target="_blank" rel="noopener noreferrer">PDF to Word</a>
-      </div>
-    </div>
   </div>
 
 </div>
+</div>
+
+<!-- ========== VISIBLE INFO SECTIONS FOR USERS (SEO + UX) ========== -->
+<div class="info-section">
+
+  <!-- FEATURES SECTION -->
+  <h2 class="section-title">✨ Why Use Our JPG to PDF Converter?</h2>
+  <p class="section-sub">Professional features - completely free, no hidden charges</p>
+  
+  <div class="features-grid">
+    <div class="feature-item">
+      <div class="feature-icon">🎯</div>
+      <h4>Full HD Quality</h4>
+      <p>Preserves original resolution, no compression loss</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">📐</div>
+      <h4>Auto Fit • No Crop</h4>
+      <p>Automatically fits image to A4 page with white margins</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">💯</div>
+      <h4>100% Free</h4>
+      <p>No payments, no subscriptions, unlimited usage</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🔒</div>
+      <h4>No Signup Required</h4>
+      <p>Convert instantly - no email, no registration</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">⚡</div>
+      <h4>Fast & Secure</h4>
+      <p>All processing happens in your browser - files never uploaded</p>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">🖼️</div>
+      <h4>Any JPG/JPEG</h4>
+      <p>Works with all JPG images up to 50MB</p>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS SECTION -->
+  <h2 class="section-title">📖 How to Convert JPG to PDF</h2>
+  <p class="section-sub">Simple 3-step process - takes just a few seconds</p>
+  
+  <div class="how-it-works">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <h4>Select Image</h4>
+      <p>Click "Browse" and choose your JPG/JPEG file</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <h4>Click Convert</h4>
+      <p>Press "Convert to PDF" - auto-fit & HD processing</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <h4>Download PDF</h4>
+      <p>Get your high-quality PDF instantly</p>
+    </div>
+  </div>
+
+  <!-- FAQ SECTION (USER VISIBLE) -->
+  <h2 class="section-title">❓ Frequently Asked Questions</h2>
+  
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question"><span>🔹</span> Is this JPG to PDF tool really free?</div>
+      <div class="faq-answer">✅ Yes! 100% completely free. No hidden fees, no premium upsells. Convert as many JPG files as you want.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><span>🔹</span> Do I need to sign up or create an account?</div>
+      <div class="faq-answer">❌ No signup required. Just select your JPG file and convert. No email, no registration, no personal data collection.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><span>🔹</span> What quality will my PDF have?</div>
+      <div class="faq-answer">📸 Full HD quality! We preserve original image resolution. Auto-fit ensures your image fits perfectly on A4 page without cropping.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><span>🔹</span> Can I convert multiple JPG images to one PDF?</div>
+      <div class="faq-answer">Currently this tool converts one JPG to PDF. For multiple images, try our PNG to PDF tool or convert one by one.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><span>🔹</span> Is my image uploaded to any server?</div>
+      <div class="faq-answer">🛡️ NO! All conversion happens locally in your browser. Your JPG files never leave your computer - completely private and secure.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question"><span>🔹</span> What file size is supported?</div>
+      <div class="faq-answer">📁 Supports JPG/JPEG files up to 50MB. Most photos and scanned documents work perfectly.</div>
+    </div>
+  </div>
+
+  <!-- INTERNAL LINKS FOR SEO + NAVIGATION -->
+  <div class="internal-links-footer">
+    <p>🚀 More Free Tools You May Like:</p>
+    <div class="links-row">
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf" target="_blank" rel="noopener noreferrer">📷 PNG to PDF</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf" target="_blank" rel="noopener noreferrer">🖼️ JPG to PDF</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word" target="_blank" rel="noopener noreferrer">📄 PDF to Word</a>
+    </div>
+    <p style="font-size: 0.75rem; margin-top: 16px; opacity: 0.7;">© Free AI Tools - Instant JPG to PDF Conversion | Full HD | Auto Fit</p>
+  </div>
+
 </div>
 </div>
 
 <script>
 // ============================================================
 // #==== HIGH QUALITY JPG TO PDF CONVERTER - AUTO FIT LOGIC
-// #==== Author: Free AI Tools
-// #==== Description: Automatically fits image to A4 page without cropping
-// #==== Maintains aspect ratio, HD quality, no server upload (client-side)
-// #==== Internal links added for SEO in white text
+// #==== Full HD | No Crop | White margins for perfect fit
+// #==== All processing done locally in browser - no server upload
 // ============================================================
 
 let selectedFile = null;
@@ -441,44 +675,24 @@ const elements = {
   fileErrorMsg: document.getElementById('fileErrorMsg')
 };
 
-// #==== File validation: only JPG/JPEG, max 50MB
 function validateFile(file) {
-  if (!file) {
-    return { valid: false, message: '❌ No file selected. Please choose a file first.' };
+  if (!file) return { valid: false, message: '❌ No file selected' };
+  if (file.size === 0) return { valid: false, message: '❌ File is empty' };
+  if (file.size > 50 * 1024 * 1024) return { valid: false, message: '❌ Max 50MB allowed' };
+  
+  const validMime = ['image/jpeg', 'image/jpg'];
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (!validMime.includes(file.type) || !(ext === 'jpg' || ext === 'jpeg')) {
+    return { valid: false, message: '❌ Only JPG/JPEG files allowed' };
   }
-  
-  if (file.size === 0) {
-    return { valid: false, message: '❌ File is empty. Please select a valid JPG image.' };
-  }
-  
-  if (file.size > 50 * 1024 * 1024) {
-    return { valid: false, message: '❌ File is too large (max 50MB). Please select a smaller JPG image.' };
-  }
-  
-  const validMimeTypes = ['image/jpeg', 'image/jpg'];
-  const validExtensions = ['jpg', 'jpeg'];
-  const fileExtension = file.name.split('.').pop().toLowerCase();
-  const isValidMime = validMimeTypes.includes(file.type);
-  const isValidExt = validExtensions.includes(fileExtension);
-  
-  if (!isValidMime || !isValidExt) {
-    return { valid: false, message: '❌ Only JPG/JPEG files are allowed. Please select a JPG image.' };
-  }
-  
-  return { valid: true, message: '✓ Valid JPG file ready for conversion' };
+  return { valid: true, message: '✓ JPG file ready' };
 }
 
-function showFileMessage(message, isError = false) {
+function showFileMessage(msg, isError = false) {
   if (elements.fileErrorMsg) {
-    elements.fileErrorMsg.textContent = message;
+    elements.fileErrorMsg.textContent = msg;
     elements.fileErrorMsg.style.color = isError ? '#ff6b6b' : '#4caf50';
-    if (!isError) {
-      setTimeout(() => {
-        if (elements.fileErrorMsg.textContent === message) {
-          elements.fileErrorMsg.textContent = '';
-        }
-      }, 3000);
-    }
+    if (!isError) setTimeout(() => { if (elements.fileErrorMsg.textContent === msg) elements.fileErrorMsg.textContent = ''; }, 3000);
   }
 }
 
@@ -496,7 +710,6 @@ function resetFullUI(resetFile = true) {
   elements.checkIcon.innerHTML = '❓';
   elements.completeTitle.innerText = 'Conversion pending';
   elements.completeMsg.innerText = 'No file converted yet';
-  
   if (resetFile) {
     selectedFile = null;
     elements.fileName.innerText = 'Choose file';
@@ -508,347 +721,149 @@ function resetFullUI(resetFile = true) {
 }
 
 function updateConvertButtonState() {
-  if (selectedFile && !isConverting && !conversionDone) {
-    const validation = validateFile(selectedFile);
-    if (validation.valid) {
-      elements.convertBtn.classList.remove('disabled');
-      elements.etaText.innerText = 'Ready to start conversion';
-      showFileMessage(validation.message, false);
-    } else {
-      elements.convertBtn.classList.add('disabled');
-      elements.etaText.innerText = validation.message;
-      showFileMessage(validation.message, true);
-    }
+  if (selectedFile && !isConverting && !conversionDone && validateFile(selectedFile).valid) {
+    elements.convertBtn.classList.remove('disabled');
+    elements.etaText.innerText = 'Ready to convert';
   } else {
     elements.convertBtn.classList.add('disabled');
-    if (isConverting) {
-      elements.etaText.innerText = 'Converting via browser...';
-    } else if (conversionDone) {
-      elements.etaText.innerText = 'PDF ready — download or convert another';
-    } else if (!selectedFile) {
-      elements.etaText.innerText = 'Select a JPG image first';
-      showFileMessage('', false);
-    }
+    if (!selectedFile) elements.etaText.innerText = 'Select a JPG image first';
+    else if (isConverting) elements.etaText.innerText = 'Converting...';
+    else if (conversionDone) elements.etaText.innerText = 'PDF ready';
   }
 }
 
-function setStepActive(stepNum, statusText, isActive = true, percent = null) {
+function setStepActive(stepNum, statusText, isActive, percent) {
   const stepEl = stepNum === 1 ? elements.step1 : (stepNum === 2 ? elements.step2 : elements.step3);
-  if (!stepEl) return;
-  if (isActive) {
-    stepEl.innerHTML = `<span>🔄</span> ${statusText}`;
-  } else {
-    stepEl.innerHTML = `<span>✅</span> ${statusText}`;
-  }
-  if (percent !== undefined && elements.progressFill) {
-    elements.progressFill.style.width = Math.min(100, percent) + '%';
-  }
+  if (stepEl) stepEl.innerHTML = `<span>${isActive ? '🔄' : '✅'}</span> ${statusText}`;
+  if (percent !== undefined) elements.progressFill.style.width = Math.min(100, percent) + '%';
 }
 
-function resetStepsToWaiting() {
-  elements.step1.innerHTML = '<span>⭕</span> Loading image — waiting';
-  elements.step2.innerHTML = '<span>⭕</span> Processing & auto-scaling — waiting';
-  elements.step3.innerHTML = '<span>⭕</span> Generating HD PDF — waiting';
-  elements.progressFill.style.width = '0%';
-}
-
-// ========== #==== HIGH QUALITY AUTO-FIT PDF CONVERSION CORE ==========
-// #==== Algorithm: Automatically scales JPG to fit A4 page without cropping
-// #==== Uses white margins for perfect aspect ratio preservation
 async function convertJpgToHDPdf(file) {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    const objectUrl = URL.createObjectURL(file);
-    
+    const url = URL.createObjectURL(file);
     img.onload = () => {
-      URL.revokeObjectURL(objectUrl);
-      
-      const imgWidth = img.width;
-      const imgHeight = img.height;
-      const imgAspect = imgWidth / imgHeight;
-      
-      // #==== A4 dimensions in points (1 point = 1/72 inch)
-      const pdfWidthPt = 595.28;
-      const pdfHeightPt = 841.89;
-      const pdfAspect = pdfWidthPt / pdfHeightPt;
-      
-      let finalWidthPt, finalHeightPt;
-      let xOffsetPt = 0, yOffsetPt = 0;
-      
-      // #==== AUTO FIT LOGIC - Scale image to page without any cropping
-      if (imgAspect > pdfAspect) {
-        // #==== Image is wider relative to page → fit to width
-        finalWidthPt = pdfWidthPt;
-        finalHeightPt = pdfWidthPt / imgAspect;
-        yOffsetPt = (pdfHeightPt - finalHeightPt) / 2;
-        xOffsetPt = 0;
+      URL.revokeObjectURL(url);
+      const imgW = img.width, imgH = img.height;
+      const aspect = imgW / imgH;
+      const pdfW = 595.28, pdfH = 841.89;
+      let finalW, finalH, xOff = 0, yOff = 0;
+      if (aspect > pdfW/pdfH) {
+        finalW = pdfW;
+        finalH = pdfW / aspect;
+        yOff = (pdfH - finalH) / 2;
       } else {
-        // #==== Image is taller → fit to height
-        finalHeightPt = pdfHeightPt;
-        finalWidthPt = pdfHeightPt * imgAspect;
-        xOffsetPt = (pdfWidthPt - finalWidthPt) / 2;
-        yOffsetPt = 0;
+        finalH = pdfH;
+        finalW = pdfH * aspect;
+        xOff = (pdfW - finalW) / 2;
       }
-      
-      // #==== Determine page orientation based on original image
-      const finalOrientation = (imgWidth > imgHeight) ? 'landscape' : 'portrait';
-      
-      // #==== High resolution canvas for superior quality (scale factor 4)
+      const orientation = imgW > imgH ? 'landscape' : 'portrait';
       const scale = 4;
       const canvas = document.createElement('canvas');
+      canvas.width = finalW * scale;
+      canvas.height = finalH * scale;
       const ctx = canvas.getContext('2d');
-      
-      canvas.width = finalWidthPt * scale;
-      canvas.height = finalHeightPt * scale;
-      
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      
       const { jsPDF } = window.jspdf;
-      
-      const pdf = new jsPDF({
-        orientation: finalOrientation,
-        unit: 'pt',
-        format: 'a4',
-        compress: false,
-        hotfixes: ['px_scaling']
-      });
-      
-      // #==== Maximum JPEG quality (1.0 = 100%)
+      const pdf = new jsPDF({ orientation, unit: 'pt', format: 'a4' });
       const imgData = canvas.toDataURL('image/jpeg', 1.0);
-      pdf.addImage(imgData, 'JPEG', xOffsetPt, yOffsetPt, finalWidthPt, finalHeightPt, undefined, 'FAST');
-      
-      const pdfBlob = pdf.output('blob');
-      resolve(pdfBlob);
+      pdf.addImage(imgData, 'JPEG', xOff, yOff, finalW, finalH);
+      resolve(pdf.output('blob'));
     };
-    
-    img.onerror = () => {
-      URL.revokeObjectURL(objectUrl);
-      reject(new Error('Failed to load image. File may be corrupted.'));
-    };
-    
-    img.src = objectUrl;
+    img.onerror = () => reject(new Error('Failed to load image'));
+    img.src = url;
   });
 }
 
 async function startRealConversion() {
-  const validation = validateFile(selectedFile);
-  if (!validation.valid) {
-    showFileMessage(validation.message, true);
-    alert(validation.message);
-    return;
-  }
-  
-  if (isConverting) {
-    showFileMessage('Conversion already in progress...', false);
-    return;
-  }
-  
+  if (!selectedFile || !validateFile(selectedFile).valid) return;
+  if (isConverting) return;
   resetFullUI(false);
-  resetStepsToWaiting();
   isConverting = true;
   conversionDone = false;
   pdfBlobFromServer = null;
   elements.downloadBtn.classList.add('disabled');
   elements.checkIcon.innerHTML = '⏳';
   elements.completeTitle.innerText = 'Converting...';
-  elements.completeMsg.innerText = 'Processing image';
-  elements.statusTitle.innerText = 'Converting to HD PDF';
   updateConvertButtonState();
   
   setStepActive(1, 'Loading image...', true, 20);
-  elements.step2.innerHTML = '<span>⭕</span> Processing & auto-scaling — waiting';
-  elements.step3.innerHTML = '<span>⭕</span> Generating HD PDF — waiting';
-  elements.etaText.innerText = 'Loading image...';
-  
   try {
-    setStepActive(1, 'Image loaded, analyzing dimensions...', false, 40);
-    setStepActive(2, 'Auto-scaling to fit A4 page without cropping...', true, 60);
-    elements.etaText.innerText = 'Processing image...';
-    
-    await new Promise(r => setTimeout(r, 100));
-    
+    setStepActive(1, 'Image loaded', false, 40);
+    setStepActive(2, 'Auto-scaling to A4...', true, 60);
     const pdfBlob = await convertJpgToHDPdf(selectedFile);
-    
-    setStepActive(2, 'Image processed successfully', false, 85);
-    setStepActive(3, 'Generating high quality PDF...', true, 90);
-    elements.etaText.innerText = 'Creating HD PDF...';
-    
-    await new Promise(r => setTimeout(r, 100));
-    
+    setStepActive(2, 'Image processed', false, 85);
+    setStepActive(3, 'Generating PDF...', true, 90);
+    await new Promise(r => setTimeout(r, 80));
     pdfBlobFromServer = pdfBlob;
     conversionDone = true;
     isConverting = false;
-    
-    setStepActive(3, 'PDF generation complete!', false, 100);
+    setStepActive(3, 'PDF ready!', false, 100);
     elements.progressFill.style.width = '100%';
-    elements.statusTitle.innerText = 'Conversion completed!';
-    elements.etaText.innerText = 'Your HD PDF is ready';
+    elements.statusTitle.innerText = 'Conversion complete!';
+    elements.etaText.innerText = 'PDF ready for download';
     elements.checkIcon.innerHTML = '✔️';
-    elements.completeTitle.innerText = 'Conversion complete!';
-    elements.completeMsg.innerText = 'PDF ready • Full HD • Auto-fitted • No cropping';
+    elements.completeTitle.innerText = 'Ready!';
+    elements.completeMsg.innerText = 'HD PDF • Auto-fitted';
     elements.downloadBtn.classList.remove('disabled');
     elements.convertBtn.classList.add('disabled');
-    showFileMessage('✓ HD PDF created successfully! Click Download.', false);
-    
+    showFileMessage('✓ PDF created! Click Download.', false);
   } catch (err) {
-    console.error('Conversion error:', err);
     isConverting = false;
-    conversionDone = false;
-    pdfBlobFromServer = null;
-    elements.progressFill.style.width = '0%';
-    elements.statusTitle.innerText = 'Ready to convert';
-    elements.etaText.innerText = 'Select a JPG image first';
-    elements.step1.innerHTML = '<span>⭕</span> Loading image — waiting';
-    elements.step2.innerHTML = '<span>⭕</span> Processing & auto-scaling — waiting';
-    elements.step3.innerHTML = '<span>⭕</span> Generating HD PDF — waiting';
-    elements.checkIcon.innerHTML = '❓';
-    elements.completeTitle.innerText = 'Conversion pending';
-    elements.completeMsg.innerText = 'No file converted yet';
-    elements.downloadBtn.classList.add('disabled');
-    
-    let friendlyMsg = err.message || 'Unknown error. Please try again.';
-    if (friendlyMsg.includes('Failed to fetch')) {
-      friendlyMsg = 'Cannot connect. Please check if backend is running.';
-    }
-    showFileMessage(friendlyMsg, true);
-    setTimeout(() => {
-      if (elements.fileErrorMsg.textContent === friendlyMsg) {
-        elements.fileErrorMsg.textContent = '';
-      }
-    }, 5000);
-    updateConvertButtonState();
-  } finally {
-    isConverting = false;
-    updateConvertButtonState();
+    showFileMessage('Conversion failed: ' + err.message, true);
+    resetFullUI(false);
   }
+  updateConvertButtonState();
 }
 
 function downloadPdf() {
-  if (!conversionDone || !pdfBlobFromServer) {
-    showFileMessage('No PDF available. Please convert an image first.', true);
-    return;
-  }
-  const downloadUrl = URL.createObjectURL(pdfBlobFromServer);
+  if (!conversionDone || !pdfBlobFromServer) return;
+  const url = URL.createObjectURL(pdfBlobFromServer);
   const a = document.createElement('a');
-  let baseName = selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '') : 'converted_image';
-  baseName = baseName.replace(/[\\/:*?"<>|]/g, '');
-  const fileName = `${baseName || 'image'}.pdf`;
-  a.href = downloadUrl;
-  a.download = fileName;
+  const name = (selectedFile ? selectedFile.name.replace(/\.jpe?g$/i, '') : 'image') + '.pdf';
+  a.href = url;
+  a.download = name;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  URL.revokeObjectURL(downloadUrl);
-  showFileMessage('✓ Download started!', false);
+  URL.revokeObjectURL(url);
 }
 
-// #==== Create hidden file input for better UX
-const hiddenFileInput = document.createElement('input');
-hiddenFileInput.type = 'file';
-hiddenFileInput.accept = 'image/jpeg,image/jpg,.jpg,.jpeg';
-hiddenFileInput.style.display = 'none';
-hiddenFileInput.id = 'hiddenFileInput';
-document.body.appendChild(hiddenFileInput);
+// File input handling
+const hiddenInput = document.createElement('input');
+hiddenInput.type = 'file';
+hiddenInput.accept = 'image/jpeg,image/jpg,.jpg,.jpeg';
+hiddenInput.style.display = 'none';
+hiddenInput.id = 'hiddenFileInput';
+document.body.appendChild(hiddenInput);
 
-// #==== File selection event
 document.getElementById('chooseBtn').addEventListener('click', () => {
-  if (isConverting) {
-    showFileMessage('Conversion in progress, please wait.', false);
-    return;
-  }
-  hiddenFileInput.click();
+  if (!isConverting) hiddenInput.click();
 });
 
-hiddenFileInput.addEventListener('change', (e) => {
-  if (e.target.files && e.target.files.length > 0) {
+hiddenInput.addEventListener('change', (e) => {
+  if (e.target.files && e.target.files[0]) {
     const file = e.target.files[0];
-    const validation = validateFile(file);
-    
-    if (!validation.valid) {
-      showFileMessage(validation.message, true);
-      selectedFile = null;
-      elements.fileName.innerText = 'Choose file';
-      hiddenFileInput.value = '';
-      updateConvertButtonState();
-      return;
-    }
-    
+    const v = validateFile(file);
+    if (!v.valid) { showFileMessage(v.message, true); return; }
     selectedFile = file;
-    elements.fileName.innerText = file.name.length > 36 ? file.name.slice(0, 32) + '...' : file.name;
-    
-    if (conversionDone) {
-      resetFullUI(false);
-      conversionDone = false;
-      pdfBlobFromServer = null;
-      elements.progressFill.style.width = '0%';
-      elements.step1.innerHTML = '<span>⭕</span> Loading image — waiting';
-      elements.step2.innerHTML = '<span>⭕</span> Processing & auto-scaling — waiting';
-      elements.step3.innerHTML = '<span>⭕</span> Generating HD PDF — waiting';
-      elements.statusTitle.innerText = 'Ready to convert';
-      elements.etaText.innerText = 'Select a JPG image first';
-      elements.downloadBtn.classList.add('disabled');
-      elements.checkIcon.innerHTML = '❓';
-      elements.completeTitle.innerText = 'Conversion pending';
-      elements.completeMsg.innerText = 'No file converted yet';
-    }
+    elements.fileName.innerText = file.name.length > 36 ? file.name.slice(0,32)+'...' : file.name;
+    if (conversionDone) resetFullUI(false);
     conversionDone = false;
     pdfBlobFromServer = null;
-    showFileMessage('✓ JPG file loaded! Ready to convert.', false);
+    showFileMessage('✓ File loaded', false);
     updateConvertButtonState();
   }
 });
 
-// #==== Convert button logic
-elements.convertBtn.addEventListener('click', () => {
-  if (!selectedFile) {
-    showFileMessage('Please select a JPG image first.', true);
-    return;
-  }
-  if (isConverting) {
-    showFileMessage('Conversion already in progress. Please wait.', false);
-    return;
-  }
-  if (conversionDone) {
-    showFileMessage('PDF already converted! Use "Convert another file" to start fresh.', false);
-    return;
-  }
-  startRealConversion();
-});
-
-// #==== Download button
+elements.convertBtn.addEventListener('click', startRealConversion);
 elements.downloadBtn.addEventListener('click', downloadPdf);
+elements.resetLink.addEventListener('click', () => { if(!isConverting) resetFullUI(true); });
 
-// #==== Reset / Convert another file
-elements.resetLink.addEventListener('click', () => {
-  if (isConverting) {
-    showFileMessage('Please wait, conversion is in progress.', false);
-    return;
-  }
-  resetFullUI(true);
-  conversionDone = false;
-  pdfBlobFromServer = null;
-  isConverting = false;
-  elements.progressFill.style.width = '0%';
-  elements.statusTitle.innerText = 'Ready to convert';
-  elements.etaText.innerText = 'Select a JPG image first';
-  elements.step1.innerHTML = '<span>⭕</span> Loading image — waiting';
-  elements.step2.innerHTML = '<span>⭕</span> Processing & auto-scaling — waiting';
-  elements.step3.innerHTML = '<span>⭕</span> Generating HD PDF — waiting';
-  elements.checkIcon.innerHTML = '❓';
-  elements.completeTitle.innerText = 'Conversion pending';
-  elements.completeMsg.innerText = 'No file converted yet';
-  elements.downloadBtn.classList.add('disabled');
-  hiddenFileInput.value = '';
-  showFileMessage('', false);
-  updateConvertButtonState();
-});
-
-// #==== Initial UI state
 resetFullUI(true);
-
-console.log('JPG to PDF Converter Active - Auto Fit Mode | SEO Optimized');
+console.log('JPG to PDF Converter Ready - Full HD Auto Fit');
 </script>
 </body>
 </html>
