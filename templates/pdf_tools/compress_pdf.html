@@ -27,12 +27,12 @@ body {
   padding: 0;
 }
 
-/* ========== TOP NAVIGATION BAR (AI Tools Hub) ========== */
+/* ========== TOP NAVIGATION BAR (WITH ORIGINAL LOGO) ========== */
 .navbar {
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  padding: 16px 32px;
+  padding: 12px 32px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -44,16 +44,21 @@ body {
 .logo-area {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
-.logo-icon {
-  font-size: 28px;
-  background: linear-gradient(135deg, #ffaa44, #ff7700);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 800;
+/* Original Logo Image Styling */
+.site-logo {
+  height: 48px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  transition: transform 0.2s ease;
+}
+
+.site-logo:hover {
+  transform: scale(1.02);
 }
 
 .logo-text {
@@ -456,6 +461,16 @@ h1 {
     gap: 12px;
     padding: 16px;
   }
+  .logo-area {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .site-logo {
+    height: 40px;
+  }
+  .logo-text {
+    font-size: 1.3rem;
+  }
   .nav-links {
     justify-content: center;
     gap: 18px;
@@ -469,10 +484,16 @@ h1 {
 </head>
 <body>
 
-<!-- ========== TOP NAVIGATION BAR ========== -->
+<!-- ========== TOP NAVIGATION BAR WITH ORIGINAL LOGO ========== -->
 <div class="navbar">
   <div class="logo-area">
-    <span class="logo-icon">🤖</span>
+    <!-- ORIGINAL LOGO FROM GITHUB -->
+    <img src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/raw/main/static/logo1.webp" 
+         alt="AI Tools Hub Logo" 
+         class="site-logo"
+         onerror="this.onerror=null; this.style.display='none'; document.getElementById('fallbackIcon').style.display='flex';">
+    <!-- Fallback icon in case image fails to load -->
+    <span id="fallbackIcon" style="display:none; font-size:2rem;">🤖</span>
     <span class="logo-text">AI Tools Hub</span>
   </div>
   <div class="nav-links">
@@ -664,7 +685,7 @@ async function compressPdfWithLib(file) {
   const arrayBuffer = await file.arrayBuffer();
   const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
   const pages = pdfDoc.getPages();
-  // downscale images if possible to reduce size (iterate xobjects)
+  // Downscale images to reduce size
   for (let i = 0; i < pages.length; i++) {
     const page = pages[i];
     const resources = page.node.Resources();
@@ -768,7 +789,7 @@ function download() {
   URL.revokeObjectURL(url);
 }
 
-// file input logic
+// File input logic
 const hiddenInput = document.createElement('input');
 hiddenInput.type = 'file';
 hiddenInput.accept = 'application/pdf,.pdf';
@@ -798,7 +819,7 @@ elements.resetLink.addEventListener('click', () => { if(!isCompressing) resetUI(
 
 resetUI(true);
 
-// Navigation handlers (soft scroll / same page anchors)
+// Navigation handlers
 document.getElementById('navHome')?.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
 document.getElementById('navImageTools')?.addEventListener('click', (e) => { e.preventDefault(); document.querySelector('.tools-grid')?.scrollIntoView({ behavior: 'smooth' }); });
 document.getElementById('navPdfTools')?.addEventListener('click', (e) => { e.preventDefault(); document.querySelector('.tools-grid')?.scrollIntoView({ behavior: 'smooth' }); });
