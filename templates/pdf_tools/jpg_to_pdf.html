@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JPG to PDF | Full HD | Auto Fit</title>
+
+<!-- ==================== SEO META TAGS (white text for visibility) ==================== -->
+<meta name="description" content="Free high-quality JPG to PDF converter. Full HD resolution, auto-fit, no cropping. Convert JPEG images to PDF documents instantly in your browser.">
+<meta name="keywords" content="JPG to PDF, convert JPG to PDF, JPEG to PDF, free PDF converter, image to PDF, auto-fit PDF, HD PDF converter, online JPG to PDF">
+<meta name="author" content="Free AI Tools">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf">
+
+<title>JPG to PDF Converter | Full HD Auto-Fit | Free Tool</title>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 * {
@@ -280,6 +289,53 @@ h1 {
   font-weight: bold;
 }
 
+/* ========== INTERNAL LINKS STYLES (SEO friendly, visible white text) ========== */
+.internal-links {
+  margin-top: 28px;
+  padding: 18px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 40px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.internal-links p {
+  font-size: 0.85rem;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.links-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.links-row a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: rgba(58, 140, 255, 0.5);
+  padding: 6px 18px;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(4px);
+  display: inline-block;
+}
+
+.links-row a:hover {
+  background: rgba(92, 176, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 @media (max-width: 880px) {
   .inner-card {
     padding: 24px 22px;
@@ -293,6 +349,9 @@ h1 {
   h1 {
     font-size: 1.6rem;
   }
+  .links-row {
+    gap: 10px;
+  }
 }
 </style>
 </head>
@@ -301,6 +360,7 @@ h1 {
 <div class="main-card">
 <div class="inner-card">
 
+  <!-- ==================== LEFT COLUMN: FILE SELECTION ==================== -->
   <div class="left">
     <div class="icon">📄</div>
     <h1>JPG to PDF</h1>
@@ -315,6 +375,7 @@ h1 {
     <div id="fileErrorMsg" class="error-msg"></div>
   </div>
 
+  <!-- ==================== CENTER COLUMN: PROGRESS & STEPS ==================== -->
   <div class="center">
     <h3 id="statusTitle">Ready to convert</h3>
     <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Select a JPG image first</p>
@@ -326,12 +387,23 @@ h1 {
     </div>
   </div>
 
+  <!-- ==================== RIGHT COLUMN: RESULT & DOWNLOAD ==================== -->
   <div class="right">
     <div class="check" id="checkIcon">❓</div>
     <h3 id="completeTitle">Conversion pending</h3>
     <p id="completeMsg" style="opacity:0.8;">No file converted yet</p>
     <div class="download disabled" id="downloadBtn">Download PDF</div>
     <div class="link" id="resetLink">Convert another file →</div>
+    
+    <!-- ==================== SEO INTERNAL LINKS (White text, visible) ==================== -->
+    <div class="internal-links">
+      <p>⚡ More Free Tools:</p>
+      <div class="links-row">
+        <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf" target="_blank" rel="noopener noreferrer">PNG to PDF</a>
+        <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf" target="_blank" rel="noopener noreferrer">JPG to PDF</a>
+        <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word" target="_blank" rel="noopener noreferrer">PDF to Word</a>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -340,13 +412,11 @@ h1 {
 
 <script>
 // ============================================================
-// HIGH QUALITY JPG TO PDF CONVERTER - AUTO FIT
-// - Automatically fits image to full page without cropping
-// - Maintains original aspect ratio
-// - Auto detects portrait/landscape orientation
-// - White margins added automatically for perfect fit
-// - High resolution output
-// - PDF logo instead of camera icon
+// #==== HIGH QUALITY JPG TO PDF CONVERTER - AUTO FIT LOGIC
+// #==== Author: Free AI Tools
+// #==== Description: Automatically fits image to A4 page without cropping
+// #==== Maintains aspect ratio, HD quality, no server upload (client-side)
+// #==== Internal links added for SEO in white text
 // ============================================================
 
 let selectedFile = null;
@@ -371,6 +441,7 @@ const elements = {
   fileErrorMsg: document.getElementById('fileErrorMsg')
 };
 
+// #==== File validation: only JPG/JPEG, max 50MB
 function validateFile(file) {
   if (!file) {
     return { valid: false, message: '❌ No file selected. Please choose a file first.' };
@@ -451,7 +522,7 @@ function updateConvertButtonState() {
   } else {
     elements.convertBtn.classList.add('disabled');
     if (isConverting) {
-      elements.etaText.innerText = 'Converting via server...';
+      elements.etaText.innerText = 'Converting via browser...';
     } else if (conversionDone) {
       elements.etaText.innerText = 'PDF ready — download or convert another';
     } else if (!selectedFile) {
@@ -481,7 +552,9 @@ function resetStepsToWaiting() {
   elements.progressFill.style.width = '0%';
 }
 
-// ========== HIGH QUALITY AUTO-FIT PDF CONVERSION ==========
+// ========== #==== HIGH QUALITY AUTO-FIT PDF CONVERSION CORE ==========
+// #==== Algorithm: Automatically scales JPG to fit A4 page without cropping
+// #==== Uses white margins for perfect aspect ratio preservation
 async function convertJpgToHDPdf(file) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -494,7 +567,7 @@ async function convertJpgToHDPdf(file) {
       const imgHeight = img.height;
       const imgAspect = imgWidth / imgHeight;
       
-      // A4 dimensions in points (1 point = 1/72 inch)
+      // #==== A4 dimensions in points (1 point = 1/72 inch)
       const pdfWidthPt = 595.28;
       const pdfHeightPt = 841.89;
       const pdfAspect = pdfWidthPt / pdfHeightPt;
@@ -502,25 +575,25 @@ async function convertJpgToHDPdf(file) {
       let finalWidthPt, finalHeightPt;
       let xOffsetPt = 0, yOffsetPt = 0;
       
-      // AUTO FIT LOGIC - Fit image to page without cropping
+      // #==== AUTO FIT LOGIC - Scale image to page without any cropping
       if (imgAspect > pdfAspect) {
-        // Image is wider - fit to width
+        // #==== Image is wider relative to page → fit to width
         finalWidthPt = pdfWidthPt;
         finalHeightPt = pdfWidthPt / imgAspect;
         yOffsetPt = (pdfHeightPt - finalHeightPt) / 2;
         xOffsetPt = 0;
       } else {
-        // Image is taller - fit to height
+        // #==== Image is taller → fit to height
         finalHeightPt = pdfHeightPt;
         finalWidthPt = pdfHeightPt * imgAspect;
         xOffsetPt = (pdfWidthPt - finalWidthPt) / 2;
         yOffsetPt = 0;
       }
       
-      // Determine page orientation
+      // #==== Determine page orientation based on original image
       const finalOrientation = (imgWidth > imgHeight) ? 'landscape' : 'portrait';
       
-      // Create high resolution canvas for quality
+      // #==== High resolution canvas for superior quality (scale factor 4)
       const scale = 4;
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
@@ -528,16 +601,12 @@ async function convertJpgToHDPdf(file) {
       canvas.width = finalWidthPt * scale;
       canvas.height = finalHeightPt * scale;
       
-      // High quality image rendering
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
-      
-      // Draw image with high quality
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       
       const { jsPDF } = window.jspdf;
       
-      // Create PDF with appropriate orientation
       const pdf = new jsPDF({
         orientation: finalOrientation,
         unit: 'pt',
@@ -546,10 +615,8 @@ async function convertJpgToHDPdf(file) {
         hotfixes: ['px_scaling']
       });
       
-      // Get high quality JPEG data (100% quality)
+      // #==== Maximum JPEG quality (1.0 = 100%)
       const imgData = canvas.toDataURL('image/jpeg', 1.0);
-      
-      // Add image to PDF at calculated position
       pdf.addImage(imgData, 'JPEG', xOffsetPt, yOffsetPt, finalWidthPt, finalHeightPt, undefined, 'FAST');
       
       const pdfBlob = pdf.output('blob');
@@ -643,7 +710,7 @@ async function startRealConversion() {
     
     let friendlyMsg = err.message || 'Unknown error. Please try again.';
     if (friendlyMsg.includes('Failed to fetch')) {
-      friendlyMsg = 'Cannot connect to server. Please check if backend is running.';
+      friendlyMsg = 'Cannot connect. Please check if backend is running.';
     }
     showFileMessage(friendlyMsg, true);
     setTimeout(() => {
@@ -677,7 +744,7 @@ function downloadPdf() {
   showFileMessage('✓ Download started!', false);
 }
 
-// Create hidden file input
+// #==== Create hidden file input for better UX
 const hiddenFileInput = document.createElement('input');
 hiddenFileInput.type = 'file';
 hiddenFileInput.accept = 'image/jpeg,image/jpg,.jpg,.jpeg';
@@ -685,7 +752,7 @@ hiddenFileInput.style.display = 'none';
 hiddenFileInput.id = 'hiddenFileInput';
 document.body.appendChild(hiddenFileInput);
 
-// File selection
+// #==== File selection event
 document.getElementById('chooseBtn').addEventListener('click', () => {
   if (isConverting) {
     showFileMessage('Conversion in progress, please wait.', false);
@@ -733,7 +800,7 @@ hiddenFileInput.addEventListener('change', (e) => {
   }
 });
 
-// Convert button
+// #==== Convert button logic
 elements.convertBtn.addEventListener('click', () => {
   if (!selectedFile) {
     showFileMessage('Please select a JPG image first.', true);
@@ -750,10 +817,10 @@ elements.convertBtn.addEventListener('click', () => {
   startRealConversion();
 });
 
-// Download button
+// #==== Download button
 elements.downloadBtn.addEventListener('click', downloadPdf);
 
-// Reset / Convert another file
+// #==== Reset / Convert another file
 elements.resetLink.addEventListener('click', () => {
   if (isConverting) {
     showFileMessage('Please wait, conversion is in progress.', false);
@@ -778,10 +845,10 @@ elements.resetLink.addEventListener('click', () => {
   updateConvertButtonState();
 });
 
-// Initial state
+// #==== Initial UI state
 resetFullUI(true);
 
-console.log('High Quality JPG to PDF Converter Ready - Auto Fit Mode');
+console.log('JPG to PDF Converter Active - Auto Fit Mode | SEO Optimized');
 </script>
 </body>
 </html>
