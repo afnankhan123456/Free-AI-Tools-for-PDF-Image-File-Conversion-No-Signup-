@@ -45,6 +45,12 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.logo-area:hover {
+  opacity: 0.9;
 }
 
 /* Original Logo Image Styling */
@@ -484,9 +490,9 @@ h1 {
 </head>
 <body>
 
-<!-- ========== TOP NAVIGATION BAR WITH ORIGINAL LOGO ========== -->
+<!-- ========== TOP NAVIGATION BAR WITH ORIGINAL LOGO & CLICKABLE LINKS ========== -->
 <div class="navbar">
-  <div class="logo-area">
+  <div class="logo-area" id="logoHomeLink">
     <!-- ORIGINAL LOGO FROM GITHUB -->
     <img src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/raw/main/static/logo1.webp" 
          alt="AI Tools Hub Logo" 
@@ -497,10 +503,11 @@ h1 {
     <span class="logo-text">AI Tools Hub</span>
   </div>
   <div class="nav-links">
-    <a href="#" id="navHome">Home</a>
-    <a href="#" id="navImageTools">Image Tools</a>
-    <a href="#" id="navPdfTools">PDF Tools</a>
-    <a href="#" id="navUtilityTools">Utility Tools</a>
+    <!-- Updated links with correct external/internal routing: all open in same tab for seamless navigation -->
+    <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" id="navHome">Home</a>
+    <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" id="navImageTools">Image Tools</a>
+    <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" id="navPdfTools">PDF Tools</a>
+    <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools" id="navUtilityTools">Utility Tools</a>
   </div>
 </div>
 
@@ -819,11 +826,18 @@ elements.resetLink.addEventListener('click', () => { if(!isCompressing) resetUI(
 
 resetUI(true);
 
-// Navigation handlers
-document.getElementById('navHome')?.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-document.getElementById('navImageTools')?.addEventListener('click', (e) => { e.preventDefault(); document.querySelector('.tools-grid')?.scrollIntoView({ behavior: 'smooth' }); });
-document.getElementById('navPdfTools')?.addEventListener('click', (e) => { e.preventDefault(); document.querySelector('.tools-grid')?.scrollIntoView({ behavior: 'smooth' }); });
-document.getElementById('navUtilityTools')?.addEventListener('click', (e) => { e.preventDefault(); document.querySelector('.faq-list-white')?.scrollIntoView({ behavior: 'smooth' }); });
+// ===== ACTIVE NAVIGATION: Logo click also redirects to main home page =====
+const logoHome = document.getElementById('logoHomeLink');
+if (logoHome) {
+  logoHome.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/';
+  });
+}
+// The nav links already have proper href attributes (Home, Image Tools, PDF Tools, Utility Tools)
+// They will navigate correctly as per the updated hrefs.
+
+// current tool card prevent default
 document.getElementById('currentToolCard')?.addEventListener('click', (e) => e.preventDefault());
 </script>
 </body>
