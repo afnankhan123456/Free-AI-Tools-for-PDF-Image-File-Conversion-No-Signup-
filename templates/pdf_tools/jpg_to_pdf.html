@@ -288,208 +288,139 @@ h1 {
   font-weight: bold;
 }
 
-/* ========== INFO SECTIONS (VISIBLE FOR USERS) ========== */
-.info-section {
-  background: rgba(200, 225, 255, 0.2);
-  backdrop-filter: blur(12px);
-  border-radius: 40px;
-  padding: 32px 36px;
-  margin-top: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  margin: 28px 0 20px 0;
-}
-
-.feature-item {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 18px 12px;
-  border-radius: 28px;
+/* ========== SIMPLE WHITE TEXT INFO SECTION (NO CARD STYLES) ========== */
+.simple-info {
   text-align: center;
-  backdrop-filter: blur(4px);
-  transition: transform 0.2s;
+  max-width: 1000px;
+  margin: 20px auto 0 auto;
+  padding: 20px 16px;
 }
 
-.feature-item:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.3);
+.simple-info p, 
+.simple-info h2, 
+.simple-info h3, 
+.simple-info div,
+.simple-info .faq-q,
+.simple-info .faq-a {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
-.feature-icon {
-  font-size: 2.2rem;
-  margin-bottom: 12px;
-}
-
-.feature-item h4 {
-  color: white;
-  font-size: 1.1rem;
-  margin-bottom: 8px;
+.simple-info h2 {
+  font-size: 1.8rem;
   font-weight: 700;
+  margin: 28px 0 12px 0;
+  letter-spacing: -0.3px;
 }
 
-.feature-item p {
-  color: #eef5ff;
-  font-size: 0.85rem;
-  opacity: 0.9;
+.simple-info h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 20px 0 10px 0;
 }
 
-.how-it-works {
+.simple-info .features-row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-  margin: 28px 0;
-}
-
-.step-card {
-  flex: 1;
-  min-width: 160px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 28px;
-  padding: 20px 16px;
-  text-align: center;
-}
-
-.step-num {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, #5cb0ff, #3a8cff);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  margin: 0 auto 14px;
-  font-weight: bold;
-  font-size: 1.3rem;
-  color: white;
+  gap: 24px;
+  margin: 20px 0 25px 0;
 }
 
-.step-card h4 {
-  color: white;
-  font-size: 1rem;
-  margin-bottom: 8px;
+.simple-info .feature-simple {
+  background: rgba(255,255,255,0.12);
+  padding: 8px 18px;
+  border-radius: 40px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
 }
 
-.step-card p {
-  color: #eef5ff;
-  font-size: 0.85rem;
-}
-
-.faq-list {
-  margin: 24px 0 20px 0;
+.simple-info .steps-simple {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0 25px 0;
 }
 
-.faq-item {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 24px;
-  padding: 16px 22px;
-  transition: 0.2s;
+.simple-info .step-simple {
+  background: rgba(255,255,255,0.1);
+  padding: 12px 24px;
+  border-radius: 60px;
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
-.faq-item:hover {
-  background: rgba(255, 255, 255, 0.25);
+.simple-info .faq-item {
+  margin: 12px auto;
+  max-width: 800px;
+  background: rgba(255,255,255,0.08);
+  padding: 14px 20px;
+  border-radius: 28px;
+  text-align: left;
 }
 
-.faq-question {
+.simple-info .faq-q {
   font-weight: 700;
-  color: white;
   font-size: 1rem;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  margin-bottom: 6px;
 }
 
-.faq-question span {
-  font-size: 1.2rem;
-}
-
-.faq-answer {
-  color: #e0efff;
+.simple-info .faq-a {
   font-size: 0.9rem;
+  opacity: 0.9;
   line-height: 1.4;
-  padding-left: 28px;
 }
 
-.internal-links-footer {
-  text-align: center;
-  margin-top: 24px;
-  padding-top: 20px;
+.simple-info .internal-links-simple {
+  margin: 32px 0 20px 0;
+  padding-top: 16px;
   border-top: 1px solid rgba(255,255,255,0.3);
 }
 
-.internal-links-footer p {
-  color: white;
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-
-.links-row {
+.simple-info .links-row-simple {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
+  gap: 18px;
+  margin: 12px 0;
 }
 
-.links-row a {
+.simple-info .links-row-simple a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
   background: rgba(58, 140, 255, 0.5);
   padding: 8px 20px;
   border-radius: 50px;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(255,255,255,0.4);
-  backdrop-filter: blur(4px);
+  transition: 0.2s;
+  border: 1px solid rgba(255,255,255,0.3);
 }
 
-.links-row a:hover {
+.simple-info .links-row-simple a:hover {
   background: rgba(92, 176, 255, 0.8);
   transform: translateY(-2px);
 }
 
-.section-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: white;
-  text-align: center;
-  margin-bottom: 16px;
-  letter-spacing: -0.3px;
+.simple-info hr {
+  margin: 20px auto;
+  border-color: rgba(255,255,255,0.2);
+  max-width: 300px;
 }
 
-.section-sub {
-  text-align: center;
-  color: #eef5ff;
-  margin-bottom: 20px;
-  font-size: 0.95rem;
-}
-
-@media (max-width: 880px) {
+@media (max-width: 680px) {
   .inner-card {
-    padding: 24px 22px;
-    gap: 20px;
+    padding: 24px 18px;
+    gap: 16px;
   }
-  .icon {
-    width: 54px;
-    height: 54px;
+  .simple-info h2 {
     font-size: 1.4rem;
   }
-  h1 {
-    font-size: 1.6rem;
-  }
-  .info-section {
-    padding: 24px 20px;
-  }
-  .section-title {
-    font-size: 1.3rem;
+  .simple-info .feature-simple, 
+  .simple-info .step-simple {
+    font-size: 0.85rem;
+    padding: 6px 14px;
   }
 }
 </style>
@@ -540,117 +471,87 @@ h1 {
 </div>
 </div>
 
-<!-- ========== VISIBLE INFO SECTIONS FOR USERS (SEO + UX) ========== -->
-<div class="info-section">
+<!-- ========== SIMPLE PLAIN TEXT SECTION (WHITE COLOR, NO CARDS) ========== -->
+<div class="simple-info">
 
-  <!-- FEATURES SECTION -->
-  <h2 class="section-title">✨ Why Use Our JPG to PDF Converter?</h2>
-  <p class="section-sub">Professional features - completely free, no hidden charges</p>
-  
-  <div class="features-grid">
-    <div class="feature-item">
-      <div class="feature-icon">🎯</div>
-      <h4>Full HD Quality</h4>
-      <p>Preserves original resolution, no compression loss</p>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">📐</div>
-      <h4>Auto Fit • No Crop</h4>
-      <p>Automatically fits image to A4 page with white margins</p>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">💯</div>
-      <h4>100% Free</h4>
-      <p>No payments, no subscriptions, unlimited usage</p>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">🔒</div>
-      <h4>No Signup Required</h4>
-      <p>Convert instantly - no email, no registration</p>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">⚡</div>
-      <h4>Fast & Secure</h4>
-      <p>All processing happens in your browser - files never uploaded</p>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">🖼️</div>
-      <h4>Any JPG/JPEG</h4>
-      <p>Works with all JPG images up to 50MB</p>
-    </div>
+  <!-- Features as simple text -->
+  <h2>✨ Why Use Our JPG to PDF Converter?</h2>
+  <div class="features-row">
+    <span class="feature-simple">🎯 Full HD Quality</span>
+    <span class="feature-simple">📐 Auto Fit • No Crop</span>
+    <span class="feature-simple">💯 100% Free</span>
+    <span class="feature-simple">🔒 No Signup Required</span>
+    <span class="feature-simple">⚡ Fast & Secure (Local)</span>
+    <span class="feature-simple">🖼️ Any JPG/JPEG up to 50MB</span>
   </div>
 
-  <!-- HOW IT WORKS SECTION -->
-  <h2 class="section-title">📖 How to Convert JPG to PDF</h2>
-  <p class="section-sub">Simple 3-step process - takes just a few seconds</p>
-  
-  <div class="how-it-works">
-    <div class="step-card">
-      <div class="step-num">1</div>
-      <h4>Select Image</h4>
-      <p>Click "Browse" and choose your JPG/JPEG file</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">2</div>
-      <h4>Click Convert</h4>
-      <p>Press "Convert to PDF" - auto-fit & HD processing</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <h4>Download PDF</h4>
-      <p>Get your high-quality PDF instantly</p>
-    </div>
+  <!-- How It Works as simple steps -->
+  <h2>📖 How to Convert JPG to PDF</h2>
+  <div class="steps-simple">
+    <span class="step-simple">1️⃣ Select JPG Image</span>
+    <span class="step-simple">2️⃣ Click Convert to PDF</span>
+    <span class="step-simple">3️⃣ Download HD PDF</span>
   </div>
 
-  <!-- FAQ SECTION (USER VISIBLE) -->
-  <h2 class="section-title">❓ Frequently Asked Questions</h2>
+  <!-- FAQ Section - plain white text -->
+  <h2>❓ Frequently Asked Questions</h2>
   
-  <div class="faq-list">
-    <div class="faq-item">
-      <div class="faq-question"><span>🔹</span> Is this JPG to PDF tool really free?</div>
-      <div class="faq-answer">✅ Yes! 100% completely free. No hidden fees, no premium upsells. Convert as many JPG files as you want.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question"><span>🔹</span> Do I need to sign up or create an account?</div>
-      <div class="faq-answer">❌ No signup required. Just select your JPG file and convert. No email, no registration, no personal data collection.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question"><span>🔹</span> What quality will my PDF have?</div>
-      <div class="faq-answer">📸 Full HD quality! We preserve original image resolution. Auto-fit ensures your image fits perfectly on A4 page without cropping.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question"><span>🔹</span> Can I convert multiple JPG images to one PDF?</div>
-      <div class="faq-answer">Currently this tool converts one JPG to PDF. For multiple images, try our PNG to PDF tool or convert one by one.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question"><span>🔹</span> Is my image uploaded to any server?</div>
-      <div class="faq-answer">🛡️ NO! All conversion happens locally in your browser. Your JPG files never leave your computer - completely private and secure.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question"><span>🔹</span> What file size is supported?</div>
-      <div class="faq-answer">📁 Supports JPG/JPEG files up to 50MB. Most photos and scanned documents work perfectly.</div>
-    </div>
+  <div class="faq-item">
+    <div class="faq-q">🔹 Is this JPG to PDF tool really free?</div>
+    <div class="faq-a">✅ Yes! 100% completely free. No hidden fees, no premium upsells. Convert unlimited JPG files.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-q">🔹 Do I need to sign up or create an account?</div>
+    <div class="faq-a">❌ No signup required. Just select your JPG file and convert. No email, no registration, no personal data collection.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-q">🔹 What quality will my PDF have?</div>
+    <div class="faq-a">📸 Full HD quality! We preserve original resolution. Auto-fit ensures perfect fit on A4 page without cropping.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-q">🔹 Can I convert multiple JPG images to one PDF?</div>
+    <div class="faq-a">Currently this tool converts one JPG to PDF. For multiple images, try our PNG to PDF tool or convert one by one.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-q">🔹 Is my image uploaded to any server?</div>
+    <div class="faq-a">🛡️ NO! All conversion happens locally in your browser. Your JPG files never leave your computer - completely private and secure.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-q">🔹 What file size is supported?</div>
+    <div class="faq-a">📁 Supports JPG/JPEG files up to 50MB. Most photos and scanned documents work perfectly.</div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-q">🔹 Does it work on mobile?</div>
+    <div class="faq-a">📱 Yes! Fully responsive design works on phones, tablets, and desktops.</div>
   </div>
 
-  <!-- INTERNAL LINKS FOR SEO + NAVIGATION -->
-  <div class="internal-links-footer">
-    <p>🚀 More Free Tools You May Like:</p>
-    <div class="links-row">
+  <!-- Internal Links for SEO (Plain White Text) -->
+  <div class="internal-links-simple">
+    <h3>🚀 More Free Tools</h3>
+    <div class="links-row-simple">
       <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf" target="_blank" rel="noopener noreferrer">📷 PNG to PDF</a>
       <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf" target="_blank" rel="noopener noreferrer">🖼️ JPG to PDF</a>
       <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word" target="_blank" rel="noopener noreferrer">📄 PDF to Word</a>
     </div>
-    <p style="font-size: 0.75rem; margin-top: 16px; opacity: 0.7;">© Free AI Tools - Instant JPG to PDF Conversion | Full HD | Auto Fit</p>
+    <hr>
+    <p style="font-size: 0.75rem; opacity: 0.8;">© Free AI Tools - Instant JPG to PDF Conversion | Full HD | Auto Fit | No Cropping</p>
+    <p style="font-size: 0.7rem; margin-top: 8px; opacity: 0.6;">⚡ 100% client-side conversion • Your files never leave your device</p>
   </div>
 
 </div>
+
 </div>
 
 <script>
 // ============================================================
 // #==== HIGH QUALITY JPG TO PDF CONVERTER - AUTO FIT LOGIC
-// #==== Full HD | No Crop | White margins for perfect fit
-// #==== All processing done locally in browser - no server upload
+// #==== Full HD | No Crop | White margins | Local processing
 // ============================================================
 
 let selectedFile = null;
@@ -679,7 +580,6 @@ function validateFile(file) {
   if (!file) return { valid: false, message: '❌ No file selected' };
   if (file.size === 0) return { valid: false, message: '❌ File is empty' };
   if (file.size > 50 * 1024 * 1024) return { valid: false, message: '❌ Max 50MB allowed' };
-  
   const validMime = ['image/jpeg', 'image/jpg'];
   const ext = file.name.split('.').pop().toLowerCase();
   if (!validMime.includes(file.type) || !(ext === 'jpg' || ext === 'jpeg')) {
