@@ -25,13 +25,114 @@ body {
   min-height: 100vh;
   background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
   font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
-  padding: 32px 20px;
+  padding: 0px 20px 32px 20px;
 }
 
 .wrapper {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+}
+
+/* ========== NEW AI TOOLS HUB NAVIGATION HEADER ========== */
+.ai-hub-header {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border-radius: 48px;
+  margin: 20px 0 28px 0;
+  padding: 12px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.2s;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.logo-area:hover {
+  transform: scale(1.02);
+}
+.logo-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 28px;
+  object-fit: cover;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border: 1px solid rgba(58,140,255,0.3);
+}
+.logo-text h2 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1a3a6e, #3a8cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.3px;
+}
+.logo-text p {
+  font-size: 0.7rem;
+  color: #4a6a8e;
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.nav-link {
+  background: #f0f4fa;
+  padding: 10px 22px;
+  border-radius: 44px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1a3a6e;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(58,140,255,0.2);
+  backdrop-filter: blur(4px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-link i {
+  font-style: normal;
+  font-size: 1.1rem;
+}
+.nav-link:hover {
+  background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(58,140,255,0.3);
+  border-color: transparent;
+}
+
+@media (max-width: 780px) {
+  .ai-hub-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    padding: 18px 20px;
+  }
+  .logo-area {
+    justify-content: center;
+  }
+  .nav-links {
+    justify-content: center;
+  }
+  body {
+    padding: 0px 12px 28px 12px;
+  }
 }
 
 /* ========== MAIN CONVERTER CARD ========== */
@@ -487,6 +588,23 @@ h1 {
 <body>
 <div class="wrapper">
 
+<!-- ========== AI TOOLS HUB HEADER (LOGO + NAVIGATION) ========== -->
+<div class="ai-hub-header">
+  <div class="logo-area" id="homeLogoLink">
+    <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="AI Tools Hub Logo" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI'">
+    <div class="logo-text">
+      <h2>AI Tools Hub</h2>
+      <p>Smart & Free Converters</p>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link"><i>🏠</i> Home</a>
+    <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link"><i>🖼️</i> Image Tools</a>
+    <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link"><i>📄</i> PDF Tools</a>
+    <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools" class="nav-link"><i>⚙️</i> Utility Tools</a>
+  </div>
+</div>
+
 <!-- ========== MAIN CONVERTER CARD ========== -->
 <div class="main-card">
 <div class="inner-card">
@@ -838,8 +956,16 @@ elements.convertBtn.addEventListener('click', startRealConversion);
 elements.downloadBtn.addEventListener('click', downloadPdf);
 elements.resetLink.addEventListener('click', () => { if(!isConverting) resetFullUI(true); });
 
+// Logo & homepage navigation (click on logo area redirects to homepage)
+const homeLogo = document.getElementById('homeLogoLink');
+if(homeLogo) {
+  homeLogo.addEventListener('click', () => {
+    window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/';
+  });
+}
+
 resetFullUI(true);
-console.log('JPG to PDF Converter Ready - Full HD Auto Fit');
+console.log('JPG to PDF Converter Ready - Full HD Auto Fit + AI Tools Hub Navigation');
 </script>
 </body>
 </html>
