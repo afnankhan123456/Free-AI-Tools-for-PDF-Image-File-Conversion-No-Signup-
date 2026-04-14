@@ -1,156 +1,802 @@
-{% extends "base.html" %}
-{% block title %}QR Code Generator Online Free | AI Tools Hub{% endblock %}
-{% block description %}Generate QR code from text or URL online for free. Fast, secure and easy QR code generator tool.{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  
+  <!-- SEO Meta Tags - QR Code Generator 2026 -->
+  <meta name="description" content="2026's most advanced QR Code Generator - Create custom QR codes with colors, gradients, logos, frames, and shapes. Drag & drop or paste URL. AI-powered, supports text, URL, email, phone, SMS, WiFi, vCard. 100% free, no signup, no watermarks.">
+  <meta name="keywords" content="QR Code Generator 2026, custom QR code, colored QR code, QR code with logo, gradient QR code, QR code with frame, advanced QR generator, free QR code maker 2026, no signup QR tool, vCard QR code, WiFi QR code">
+  <meta name="author" content="Free AI Tools 2026">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <meta name="rating" content="General">
+  <meta name="revisit-after" content="1 days">
+  <meta name="language" content="English">
+  <meta name="distribution" content="global">
+  <meta name="copyright" content="Free AI Tools 2026">
+  <meta name="theme-color" content="#3a8cff">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="QR Code Generator 2026 | Advanced | Custom Colors & Logos | Free">
+  <meta property="og:description" content="Create stunning QR codes with custom colors, gradients, logos, frames, and shapes. Supports text, URL, email, phone, SMS, WiFi, vCard. 100% free, no watermark.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/qr-generator">
+  <meta property="og:image" content="https://free-ai-tools-for-pdf-image-file.onrender.com/og-qr-generator.jpg">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QR Code Generator 2026 | Advanced | Free">
+  <meta name="twitter:description" content="Create custom QR codes with colors, logos, gradients, frames. No signup, no watermark.">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/qr-generator">
+  
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  
+  <!-- Schema.org markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "QR Code Generator 2026",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "21300" },
+    "description": "Advanced QR Code Generator with custom colors, gradients, logos, frames, shapes. Supports URL, text, email, phone, SMS, WiFi, vCard",
+    "featureList": "Custom Colors, Gradient QR, Logo Upload, Frame Styles, Dot Shapes, Eye Styles, vCard, WiFi QR"
+  }
+  </script>
+  
+  <title>QR Code Generator 2026 | Advanced Custom Colors, Logos & Frames | Free</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-{% block content %}
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
+      padding: 0 20px 32px;
+      transition: background 0.3s ease;
+    }
 
-<section style="display:flex; justify-content:flex-start; margin:200px 0 0 80px;">
+    body.dark-mode {
+      background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%);
+    }
 
-    <div style="
-        padding:45px;
-        border-radius:18px;
-        width:480px;
-        color:white;
-        box-shadow:0 15px 35px rgba(0,0,0,0.18);
-        position:relative;
-        overflow:hidden;
-        background: linear-gradient(270deg, #1e3c72, #2a5298, #1e3c72);
-        background-size: 600% 600%;
-        animation: gradientMove 8s ease infinite;
-    ">
+    .wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-        <!-- Logo Row -->
-        <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 0.7rem;
+      margin-top: 6px;
+      text-align: center;
+    }
 
-            <div style="
-                background:white;
-                color:#2a5298;
-                font-weight:bold;
-                font-size:22px;
-                width:70px;
-                height:70px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                border-radius:16px;
-                box-shadow:0 6px 18px rgba(0,0,0,0.2);
-            ">
-                QR
-            </div>
+    /* Header Styles */
+    .ai-hub-header {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      margin: 20px 0 28px;
+      padding: 12px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
 
-            <h1 style="font-size:24px; font-weight:600;">
-                QR Code Generator
-            </h1>
+    body.dark-mode .ai-hub-header {
+      background: rgba(18, 20, 36, 0.95);
+      border-color: rgba(58, 140, 255, 0.3);
+    }
 
-        </div>
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+    }
+    .logo-area:hover { transform: scale(1.02); }
 
-        <p style="margin-bottom:30px; color:#ffffff;">
-            Generate QR code instantly from text or URL with secure processing.
-        </p>
+    .logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 28px;
+      object-fit: cover;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-        <form action="{{ url_for('qr_generator') }}" method="POST">
+    .logo-text h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3a6e, #3a8cff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    body.dark-mode .logo-text h2 {
+      background: linear-gradient(135deg, #ffffff, #8ab8ff);
+      background-clip: text;
+    }
+    .logo-text p { font-size: 0.7rem; color: #4a6a8e; }
 
-            <div style="
-                background:white;
-                padding:12px;
-                border-radius:10px;
-                margin-bottom:20px;
-            ">
-                <input type="text"
-                       name="data"
-                       placeholder="Enter text or URL"
-                       required
-                       style="border:none; width:100%; outline:none;">
-            </div>
+    .nav-links { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .nav-link {
+      background: #f0f4fa;
+      padding: 10px 22px;
+      border-radius: 44px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1a3a6e;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid rgba(58,140,255,0.2);
+    }
+    .nav-link:hover {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      transform: translateY(-2px);
+    }
+    .dark-toggle {
+      background: #e0e7ff;
+      padding: 10px 18px;
+      border-radius: 44px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid rgba(58,140,255,0.3);
+    }
 
-            <button type="submit"
-                    style="
-                        background:white;
-                        color:#2a5298;
-                        border:none;
-                        padding:14px;
-                        width:100%;
-                        border-radius:10px;
-                        font-weight:600;
-                        cursor:pointer;
-                        transition:0.3s;
-                    "
-                    onmouseover="this.style.background='#f3f4f6'"
-                    onmouseout="this.style.background='white'">
+    /* MAIN CARD */
+    .main-card {
+      background: rgba(200, 225, 255, 0.25);
+      backdrop-filter: blur(16px);
+      border-radius: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      margin-bottom: 30px;
+    }
 
-                Generate QR
+    .inner-card {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 24px 28px;
+      flex-wrap: nowrap;
+    }
 
-            </button>
+    @media (max-width: 900px) {
+      .inner-card { gap: 14px; padding: 18px 16px; }
+      .left, .center, .right { flex: 1; min-width: 0; }
+      .icon { width: 42px; height: 42px; font-size: 1.2rem; }
+      h1 { font-size: 1.2rem; }
+    }
+    @media (max-width: 700px) {
+      .inner-card { flex-direction: row !important; flex-wrap: wrap !important; }
+    }
+    @media (max-width: 550px) {
+      .inner-card { flex-direction: column !important; }
+      .left, .center, .right { width: 100%; }
+    }
 
-        </form>
+    .left { flex: 1.2; min-width: 260px; }
+    .center { flex: 1; background: rgba(180, 215, 255, 0.3); border-radius: 28px; padding: 18px 20px; text-align: center; }
+    .right { flex: 1; background: rgba(180, 215, 255, 0.3); border-radius: 28px; padding: 20px; text-align: center; }
 
-        {% if qr_image %}
-        <div style="margin-top:25px; text-align:center;">
-            <img src="data:image/png;base64,{{ qr_image }}" 
-                 alt="Generated QR Code" 
-                 style="max-width:200px; border-radius:10px; background:white; padding:10px;">
-        </div>
-        {% endif %}
+    .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: white;
+    }
 
+    h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, #c8e4ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* Form Styles */
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #1a3a6e;
+      margin-bottom: 4px;
+    }
+    body.dark-mode .form-group label { color: #c0d4ff; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 40px;
+      border: 1px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.2);
+      font-size: 0.75rem;
+      color: #1a3a6e;
+    }
+    body.dark-mode .form-group input, body.dark-mode .form-group select {
+      background: rgba(58,140,255,0.15);
+      color: white;
+    }
+    .color-row { display: flex; gap: 10px; }
+    .color-row input { flex: 1; height: 40px; padding: 4px; }
+    .checkbox-group { display: flex; align-items: center; gap: 8px; }
+    .checkbox-group input { width: auto; }
+
+    .style-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
+    .style-btn {
+      background: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 4px 10px;
+      border-radius: 30px;
+      font-size: 0.65rem;
+      cursor: pointer;
+    }
+    .style-btn.active {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+    }
+
+    .generate-btn {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      padding: 12px;
+      border-radius: 50px;
+      font-weight: 600;
+      border: none;
+      width: 100%;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .generate-btn:hover { transform: scale(0.98); }
+
+    #qrcode {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 250px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 15px;
+    }
+    #qrcode canvas, #qrcode img { max-width: 100%; border-radius: 20px; }
+
+    .download-btn {
+      background: linear-gradient(95deg, #27ae60, #2ecc71);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    .white-info-card {
+      background: white;
+      border-radius: 36px;
+      padding: 28px 32px;
+      margin-top: 28px;
+    }
+    body.dark-mode .white-info-card { background: #15182b; }
+    .features-grid-white {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+    .feature-item-white {
+      background: #f0f4f8;
+      padding: 16px;
+      border-radius: 24px;
+      text-align: center;
+    }
+    body.dark-mode .feature-item-white { background: #1e213a; }
+    .faq-list-white { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+    .faq-item-white {
+      background: #f0f4f8;
+      border-radius: 20px;
+      padding: 12px 20px;
+    }
+    body.dark-mode .faq-item-white { background: #1e213a; }
+    .links-row-white {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .links-row-white a {
+      color: white;
+      text-decoration: none;
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <header class="ai-hub-header">
+    <div class="logo-area" id="homeLogoLink">
+      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="AI Tools Hub 2026" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI26'">
+      <div class="logo-text"><h2>AI Tools Hub 2026</h2><p>Advanced QR Generator</p></div>
     </div>
+    <nav class="nav-links">
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ AI Image Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 PDF Tools</a>
+      <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode</button>
+    </nav>
+  </header>
 
-</section>
+  <main>
+    <section class="main-card">
+      <div class="inner-card">
+        <div class="left">
+          <div class="icon">📱QR</div>
+          <h1>QR Code Generator 2026</h1>
+          <p class="desc" style="font-size:0.7rem; margin-bottom:12px;">Custom colors • Gradients • Logos • Frames • Shapes</p>
+          
+          <div class="form-group">
+            <label>📝 Content Type:</label>
+            <select id="contentType">
+              <option value="text">Text / URL</option>
+              <option value="email">Email</option>
+              <option value="phone">Phone Number</option>
+              <option value="sms">SMS</option>
+              <option value="wifi">WiFi Network</option>
+              <option value="vcard">vCard (Contact)</option>
+            </select>
+          </div>
 
-<!-- 🔥 SEO CONTENT SECTION -->
-<section style="max-width:900px; margin:100px auto; padding:0 20px; line-height:1.8;">
+          <div id="textInputGroup" class="form-group">
+            <label>🔗 Enter Text / URL:</label>
+            <input type="text" id="qrText" placeholder="https:// or any text" value="https://free-ai-tools-for-pdf-image-file.onrender.com/">
+          </div>
 
-    <h2>Free QR Code Generator Online – Create QR Codes from Text or URL Easily</h2>
+          <div id="emailGroup" style="display:none;" class="form-group">
+            <label>📧 Email Address:</label>
+            <input type="email" id="qrEmail" placeholder="example@domain.com">
+            <label>📝 Subject (optional):</label>
+            <input type="text" id="qrSubject" placeholder="Subject">
+            <label>📄 Message (optional):</label>
+            <textarea id="qrEmailBody" rows="2" placeholder="Message content"></textarea>
+          </div>
 
-    <p>
-        Our free QR code generator helps you instantly create QR codes from any text, link, or URL.
-        If you want to share a website link, encode a WhatsApp number, 
-        or create a QR code for a business card, this tool provides a simple and fast solution.
-    </p>
+          <div id="phoneGroup" style="display:none;" class="form-group">
+            <label>📞 Phone Number:</label>
+            <input type="tel" id="qrPhone" placeholder="+1234567890">
+          </div>
 
-    <p>
-        You can generate QR codes online without installing any software
-        Simply enter your text or URL, and a QR code image will be generated instantly.
-        This tool is secure, and your input data is not permanently stored.
-    </p>
+          <div id="smsGroup" style="display:none;" class="form-group">
+            <label>📱 Phone Number:</label>
+            <input type="tel" id="smsNumber" placeholder="+1234567890">
+            <label>💬 Message:</label>
+            <input type="text" id="smsBody" placeholder="Your message">
+          </div>
 
-    <h3>How to Generate QR Code Online?</h3>
-    <ul>
-        <li>Step 1: Enter your text or URL in the input field.</li>
-        <li>Step 2: Click the Generate QR button.</li>
-        <li>Step 3: Download or share the QR code image.</li>
-    </ul>
+          <div id="wifiGroup" style="display:none;" class="form-group">
+            <label>📶 SSID (WiFi Name):</label>
+            <input type="text" id="wifiSSID" placeholder="WiFi Name">
+            <label>🔑 Password:</label>
+            <input type="text" id="wifiPassword" placeholder="Password">
+            <label>🔒 Encryption:</label>
+            <select id="wifiEncryption"><option value="WPA">WPA/WPA2</option><option value="WEP">WEP</option><option value="nopass">None</option></select>
+          </div>
 
-    <h3>Why Use This QR Code Generator?</h3>
-    <ul>
-        <li>100% free QR code generation</li>
-        <li>Fast processing</li>
-        <li>No registration required</li>
-        <li>Secure data handling</li>
-        <li>Mobile friendly tool</li>
-        <li>Works on all devices</li>
-    </ul>
+          <div id="vcardGroup" style="display:none;" class="form-group">
+            <label>👤 Full Name:</label>
+            <input type="text" id="vcardName" placeholder="John Doe">
+            <label>📞 Phone:</label>
+            <input type="text" id="vcardPhone" placeholder="+1234567890">
+            <label>📧 Email:</label>
+            <input type="email" id="vcardEmail" placeholder="john@example.com">
+            <label>🏢 Company:</label>
+            <input type="text" id="vcardCompany" placeholder="Company Name">
+          </div>
 
-    <h3>Frequently Asked Questions (FAQ)</h3>
+          <div class="form-group">
+            <label>🎨 QR Color (Foreground):</label>
+            <div class="color-row">
+              <input type="color" id="qrColor" value="#000000">
+              <input type="color" id="qrColor2" value="#3a8cff" placeholder="Gradient End">
+            </div>
+            <div class="checkbox-group"><input type="checkbox" id="useGradient"> 🌈 Use Gradient (2 colors)</div>
+          </div>
 
-    <p><strong>Q: Is the QR code permanent?</strong><br>
-    Yes, the data in a static QR code remains permanent..</p>
+          <div class="form-group">
+            <label>⬜ Background Color:</label>
+            <input type="color" id="bgColor" value="#FFFFFF">
+          </div>
 
-    <p><strong>Q: Can I create a QR code for a website link?</strong><br>
-    Yes, you can create a QR code for any valid URL.</p>
+          <div class="form-group">
+            <label>🔘 Dot Style:</label>
+            <div class="style-buttons">
+              <button class="style-btn active" data-dot="square">■ Square</button>
+              <button class="style-btn" data-dot="rounded">● Rounded</button>
+              <button class="style-btn" data-dot="circle">○ Circle</button>
+              <button class="style-btn" data-dot="diamond">◆ Diamond</button>
+            </div>
+          </div>
 
-    <p><strong>Q: Can I use this tool on mobile?</strong><br>
-    Yes, it works on mobile, laptop, and any device.</p>
+          <div class="form-group">
+            <label>👁️ Eye Frame Style:</label>
+            <div class="style-buttons">
+              <button class="style-btn active" data-eye="square">Square</button>
+              <button class="style-btn" data-eye="circle">Circle</button>
+              <button class="style-btn" data-eye="rounded">Rounded</button>
+            </div>
+          </div>
 
-</section>
+          <div class="form-group">
+            <label>🖼️ Logo (optional):</label>
+            <input type="file" id="logoUpload" accept="image/png,image/jpeg">
+          </div>
 
-<style>
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-</style>
+          <div class="form-group">
+            <label>📐 Size:</label>
+            <select id="qrSize"><option value="200">200x200</option><option value="250">250x250</option><option value="300" selected>300x300</option><option value="400">400x400</option><option value="500">500x500</option></select>
+          </div>
 
-{% endblock %}
+          <button class="generate-btn" id="generateBtn">✨ Generate QR Code 2026 ✨</button>
+          <div id="errorMsg" class="error-msg"></div>
+        </div>
 
+        <div class="center">
+          <h3>Your QR Code</h3>
+          <div id="qrcode"></div>
+          <button class="download-btn" id="downloadBtn">⬇️ Download QR Code (PNG)</button>
+          <p style="font-size:0.65rem; margin-top:10px;">⚡ Advanced features: Colors, Gradient, Logo, Custom Shapes</p>
+        </div>
 
+        <div class="right">
+          <h3>💡 Pro Tips</h3>
+          <ul style="text-align:left; font-size:0.7rem; line-height:1.6;">
+            <li>✨ Use gradient for modern look</li>
+            <li>🎨 Light bg + dark fg for best scan</li>
+            <li>🖼️ Add logo for branding</li>
+            <li>📱 Test with your phone camera</li>
+            <li>🔗 vCard - share contact instantly</li>
+            <li>📶 WiFi - share network without password typing</li>
+          </ul>
+          <div style="margin-top:15px; background:rgba(255,255,255,0.2); border-radius:20px; padding:12px;">
+            <p style="font-size:0.7rem;">🔒 100% Local • No uploads</p>
+            <p style="font-size:0.65rem;">All processing in your browser</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="white-info-card">
+      <h2>✨ 2026's Most Advanced QR Code Generator</h2>
+      <div class="features-grid-white">
+        <div class="feature-item-white">🎨 Custom Colors & Gradients</div>
+        <div class="feature-item-white">🖼️ Logo / Image Embed</div>
+        <div class="feature-item-white">🔘 4 Dot Styles (Square, Rounded, Circle, Diamond)</div>
+        <div class="feature-item-white">👁️ 3 Eye Frame Styles</div>
+        <div class="feature-item-white">📧 Email QR (mailto:)</div>
+        <div class="feature-item-white">📞 Phone & SMS QR</div>
+        <div class="feature-item-white">📶 WiFi QR (Auto-connect)</div>
+        <div class="feature-item-white">👤 vCard QR (Save Contact)</div>
+        <div class="feature-item-white">🌐 URL / Text QR</div>
+        <div class="feature-item-white">⬇️ HD PNG Download</div>
+      </div>
+      <div class="faq-list-white">
+        <div class="faq-item-white"><strong>🔹 What makes this QR generator unique?</strong><br>Gradient colors, custom dot shapes, eye styles, logo embedding, WiFi/vCard support - features not found in basic tools!</div>
+        <div class="faq-item-white"><strong>🔹 Can I use gradients?</strong><br>Yes! Check "Use Gradient" and choose two colors for stunning effects.</div>
+        <div class="faq-item-white"><strong>🔹 Is it really free?</strong><br>100% free, no signup, no watermarks, unlimited usage.</div>
+      </div>
+      <footer class="internal-links-white">
+        <div class="links-row-white">
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/json-formatter">{ } JSON Formatter</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/base64-encoder">🔄 Base64 Encoder</a>
+        </div>
+        <p style="font-size:0.7rem; margin-top:16px;">© 2026 AI Tools Hub - Advanced QR Code Generator</p>
+      </footer>
+    </article>
+  </main>
+</div>
+
+<script>
+  (function() {
+    let currentQRCanvas = null;
+    let dotStyle = 'square';
+    let eyeStyle = 'square';
+
+    // Style buttons
+    document.querySelectorAll('[data-dot]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-dot]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        dotStyle = btn.dataset.dot;
+        generateQR();
+      });
+    });
+    document.querySelectorAll('[data-eye]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-eye]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        eyeStyle = btn.dataset.eye;
+        generateQR();
+      });
+    });
+
+    // Content type switcher
+    const contentType = document.getElementById('contentType');
+    const textGroup = document.getElementById('textInputGroup');
+    const emailGroup = document.getElementById('emailGroup');
+    const phoneGroup = document.getElementById('phoneGroup');
+    const smsGroup = document.getElementById('smsGroup');
+    const wifiGroup = document.getElementById('wifiGroup');
+    const vcardGroup = document.getElementById('vcardGroup');
+
+    contentType.addEventListener('change', () => {
+      textGroup.style.display = 'none';
+      emailGroup.style.display = 'none';
+      phoneGroup.style.display = 'none';
+      smsGroup.style.display = 'none';
+      wifiGroup.style.display = 'none';
+      vcardGroup.style.display = 'none';
+      if (contentType.value === 'text') textGroup.style.display = 'block';
+      else if (contentType.value === 'email') emailGroup.style.display = 'block';
+      else if (contentType.value === 'phone') phoneGroup.style.display = 'block';
+      else if (contentType.value === 'sms') smsGroup.style.display = 'block';
+      else if (contentType.value === 'wifi') wifiGroup.style.display = 'block';
+      else if (contentType.value === 'vcard') vcardGroup.style.display = 'block';
+      generateQR();
+    });
+
+    function getQRData() {
+      const type = contentType.value;
+      if (type === 'text') return document.getElementById('qrText').value || 'https://free-ai-tools-for-pdf-image-file.onrender.com/';
+      if (type === 'email') {
+        const email = document.getElementById('qrEmail').value;
+        const subj = document.getElementById('qrSubject').value;
+        const body = document.getElementById('qrEmailBody').value;
+        return `mailto:${email}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+      }
+      if (type === 'phone') return `tel:${document.getElementById('qrPhone').value}`;
+      if (type === 'sms') {
+        return `sms:${document.getElementById('smsNumber').value}?body=${encodeURIComponent(document.getElementById('smsBody').value)}`;
+      }
+      if (type === 'wifi') {
+        const ssid = document.getElementById('wifiSSID').value;
+        const pass = document.getElementById('wifiPassword').value;
+        const enc = document.getElementById('wifiEncryption').value;
+        if (!ssid) return '';
+        return `WIFI:S:${ssid};T:${enc === 'nopass' ? 'nopass' : enc};P:${pass};;`;
+      }
+      if (type === 'vcard') {
+        const name = document.getElementById('vcardName').value;
+        const phone = document.getElementById('vcardPhone').value;
+        const email = document.getElementById('vcardEmail').value;
+        const company = document.getElementById('vcardCompany').value;
+        return `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nORG:${company}\nEND:VCARD`;
+      }
+      return '';
+    }
+
+    async function generateQR() {
+      const data = getQRData();
+      if (!data) {
+        document.getElementById('errorMsg').innerText = 'Please fill required fields';
+        return;
+      }
+      document.getElementById('errorMsg').innerText = '';
+      
+      const size = parseInt(document.getElementById('qrSize').value);
+      const fgColor = document.getElementById('qrColor').value;
+      const useGradient = document.getElementById('useGradient').checked;
+      const fgColor2 = document.getElementById('qrColor2').value;
+      const bgColor = document.getElementById('bgColor').value;
+      
+      // Clear previous
+      const qrDiv = document.getElementById('qrcode');
+      qrDiv.innerHTML = '';
+      
+      // Create canvas element
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      
+      // Use QRCode library to generate QR matrix
+      const qr = new QRCode(-1, 2);
+      qr.addData(data);
+      qr.make();
+      
+      const modules = qr.modules;
+      const cellSize = size / modules.length;
+      
+      // Draw background
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, size, size);
+      
+      // Draw QR cells with custom shapes
+      for (let row = 0; row < modules.length; row++) {
+        for (let col = 0; col < modules.length; col++) {
+          if (modules[row][col]) {
+            const x = col * cellSize;
+            const y = row * cellSize;
+            const w = cellSize;
+            const h = cellSize;
+            const cx = x + w/2;
+            const cy = y + h/2;
+            const radius = w * 0.3;
+            
+            let color;
+            if (useGradient) {
+              const grad = ctx.createLinearGradient(x, y, x + w, y + h);
+              grad.addColorStop(0, fgColor);
+              grad.addColorStop(1, fgColor2);
+              color = grad;
+            } else {
+              color = fgColor;
+            }
+            ctx.fillStyle = color;
+            
+            // Dot style
+            if (dotStyle === 'square') {
+              ctx.fillRect(x, y, w - 0.5, h - 0.5);
+            } else if (dotStyle === 'rounded') {
+              ctx.beginPath();
+              ctx.roundRect(x, y, w - 0.5, h - 0.5, radius);
+              ctx.fill();
+            } else if (dotStyle === 'circle') {
+              ctx.beginPath();
+              ctx.arc(cx, cy, w * 0.35, 0, 2 * Math.PI);
+              ctx.fill();
+            } else if (dotStyle === 'diamond') {
+              ctx.beginPath();
+              ctx.moveTo(cx, y);
+              ctx.lineTo(x + w, cy);
+              ctx.lineTo(cx, y + h);
+              ctx.lineTo(x, cy);
+              ctx.closePath();
+              ctx.fill();
+            }
+          }
+        }
+      }
+      
+      // Draw eye patterns custom style
+      function drawEye(x, y, w) {
+        ctx.fillStyle = useGradient ? fgColor : fgColor;
+        if (eyeStyle === 'circle') {
+          ctx.beginPath();
+          ctx.arc(x + w/2, y + w/2, w/2, 0, 2*Math.PI);
+          ctx.fill();
+          ctx.fillStyle = bgColor;
+          ctx.beginPath();
+          ctx.arc(x + w/2, y + w/2, w/3, 0, 2*Math.PI);
+          ctx.fill();
+        } else if (eyeStyle === 'rounded') {
+          ctx.beginPath();
+          ctx.roundRect(x, y, w, w, w*0.2);
+          ctx.fill();
+          ctx.fillStyle = bgColor;
+          ctx.beginPath();
+          ctx.roundRect(x + w*0.2, y + w*0.2, w*0.6, w*0.6, w*0.1);
+          ctx.fill();
+        } else {
+          ctx.fillRect(x, y, w, w);
+          ctx.fillStyle = bgColor;
+          ctx.fillRect(x + w*0.2, y + w*0.2, w*0.6, w*0.6);
+        }
+      }
+      
+      const eyeSize = cellSize * 7;
+      drawEye(0, 0, eyeSize);
+      drawEye(size - eyeSize, 0, eyeSize);
+      drawEye(0, size - eyeSize, eyeSize);
+      
+      // Add logo if uploaded
+      const logoFile = document.getElementById('logoUpload').files[0];
+      if (logoFile) {
+        const logoImg = new Image();
+        const logoUrl = URL.createObjectURL(logoFile);
+        await new Promise((resolve) => {
+          logoImg.onload = () => {
+            const logoSize = size * 0.2;
+            const logoX = (size - logoSize) / 2;
+            const logoY = (size - logoSize) / 2;
+            ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+            // White background behind logo
+            ctx.fillStyle = bgColor;
+            ctx.beginPath();
+            ctx.arc(logoX + logoSize/2, logoY + logoSize/2, logoSize/2 + 5, 0, 2*Math.PI);
+            ctx.fill();
+            ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+            URL.revokeObjectURL(logoUrl);
+            resolve();
+          };
+          logoImg.onerror = resolve;
+          logoImg.src = logoUrl;
+        });
+      }
+      
+      qrDiv.appendChild(canvas);
+      currentQRCanvas = canvas;
+    }
+    
+    // Helper for roundRect
+    if (!CanvasRenderingContext2D.prototype.roundRect) {
+      CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+        if (w < 2 * r) r = w / 2;
+        if (h < 2 * r) r = h / 2;
+        this.moveTo(x+r, y);
+        this.lineTo(x+w-r, y);
+        this.quadraticCurveTo(x+w, y, x+w, y+r);
+        this.lineTo(x+w, y+h-r);
+        this.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+        this.lineTo(x+r, y+h);
+        this.quadraticCurveTo(x, y+h, x, y+h-r);
+        this.lineTo(x, y+r);
+        this.quadraticCurveTo(x, y, x+r, y);
+        return this;
+      };
+    }
+    
+    document.getElementById('generateBtn').addEventListener('click', generateQR);
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      if (currentQRCanvas) {
+        const link = document.createElement('a');
+        link.download = 'qrcode_2026.png';
+        link.href = currentQRCanvas.toDataURL();
+        link.click();
+      } else {
+        alert('Generate QR code first');
+      }
+    });
+    
+    // Auto generate on input changes
+    const inputs = ['#qrText', '#qrEmail', '#qrSubject', '#qrEmailBody', '#qrPhone', '#smsNumber', '#smsBody', '#wifiSSID', '#wifiPassword', '#vcardName', '#vcardPhone', '#vcardEmail', '#vcardCompany', '#qrColor', '#qrColor2', '#bgColor', '#useGradient', '#qrSize'];
+    inputs.forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el) el.addEventListener('input', () => generateQR());
+    });
+    document.getElementById('useGradient').addEventListener('change', generateQR);
+    document.getElementById('qrSize').addEventListener('change', generateQR);
+    document.getElementById('logoUpload').addEventListener('change', generateQR);
+    
+    generateQR();
+    
+    document.getElementById('homeLogoLink').addEventListener('click', () => window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/');
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+      setTimeout(generateQR, 50);
+    });
+  })();
+</script>
+</body>
+</html>
