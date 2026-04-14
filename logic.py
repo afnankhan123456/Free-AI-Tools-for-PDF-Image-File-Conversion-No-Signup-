@@ -1,4 +1,4 @@
-from flask import request, send_file, render_template
+from flask import request, send_file, render_template, after_this_request  # ✅ Cleanup ke liye
 from PIL import Image
 from PyPDF2 import PdfReader, PdfWriter, PdfMerger
 from pdf2docx import Converter
@@ -11,6 +11,7 @@ import qrcode
 import os
 import uuid
 import zipfile
+import tempfile  # ✅ Temporary files ke liye
 
 
 
@@ -217,9 +218,15 @@ def rotate_pdf_logic(app):
 
 
 # ---------------- PROTECT PDF ----------------
+
 def protect_pdf_logic(app):
+    from flask import send_file
+    
     file = request.files["file"]
     password = request.form["password"]
+
+    if not password or len(password) < 4:
+        return {"error": "Password must be at least 4 characters"}, 400
 
     reader = PdfReader(file)
     writer = PdfWriter()
@@ -227,7 +234,7 @@ def protect_pdf_logic(app):
     for page in reader.pages:
         writer.add_page(page)
 
-    writer.encrypt(password)
+    writer.encrypt(password)  # PyPDF2>=3.0.0 mein ye kaam karta hai
 
     output_path = os.path.join(
         app.config["PROCESSED_FOLDER"],
@@ -237,7 +244,7 @@ def protect_pdf_logic(app):
     with open(output_path, "wb") as f:
         writer.write(f)
 
-    return send_file(output_path, as_attachment=True)
+    return send_file(output_path, as_attachment=True, download_name="protected.pdf")
 
 
 # ---------------- UNLOCK PDF ----------------
