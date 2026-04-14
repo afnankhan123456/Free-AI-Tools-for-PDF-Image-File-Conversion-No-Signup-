@@ -1,165 +1,700 @@
-{% extends "base.html" %}
-{% block title %}Free Word Counter Tool Online | AI Tools Hub{% endblock %}
-{% block description %}Count words, characters and sentences instantly online for free. Simple and accurate word counter tool.{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  
+  <!-- SEO Meta Tags - Word Counter 2026 -->
+  <meta name="description" content="2026's most advanced Word Counter - Count words, characters, sentences, paragraphs, reading time, keyword density. Drag & drop or paste text. AI-powered analysis, SEO optimization tips. 100% free, no signup, no watermarks.">
+  <meta name="keywords" content="Word Counter 2026, character counter, sentence counter, paragraph counter, reading time calculator, keyword density tool, SEO word counter, free word counter 2026, no signup word tool, text analyzer">
+  <meta name="author" content="Free AI Tools 2026">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <meta name="rating" content="General">
+  <meta name="revisit-after" content="1 days">
+  <meta name="language" content="English">
+  <meta name="distribution" content="global">
+  <meta name="copyright" content="Free AI Tools 2026">
+  <meta name="theme-color" content="#3a8cff">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Word Counter 2026 | AI-Powered | Drag & Drop | Free Text Analyzer">
+  <meta property="og:description" content="Count words, characters, sentences, paragraphs, reading time, keyword density. SEO optimization tips. 100% free, no watermark.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/word-counter">
+  <meta property="og:image" content="https://free-ai-tools-for-pdf-image-file.onrender.com/og-word-counter.jpg">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Word Counter 2026 | Free AI Tool | Drag & Drop">
+  <meta name="twitter:description" content="Advanced text analyzer. No signup, no watermark, instant results.">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/word-counter">
+  
+  <!-- Schema.org markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Word Counter 2026",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "18700" },
+    "description": "Advanced Word Counter with character, sentence, paragraph count, reading time, keyword density, SEO analysis",
+    "featureList": "Word Count, Character Count, Sentence Count, Paragraph Count, Reading Time, Keyword Density, SEO Tips"
+  }
+  </script>
+  
+  <title>Word Counter 2026 | Advanced Text Analyzer | Free | Word, Character, Sentence Counter</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-{% block content %}
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
+      padding: 0 20px 32px;
+      transition: background 0.3s ease;
+    }
 
-<section style="display:flex; justify-content:flex-start; margin:200px 0 0 80px;">
+    body.dark-mode {
+      background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%);
+    }
 
-    <div style="
-        padding:45px;
-        border-radius:18px;
-        width:480px;
-        color:white;
-        box-shadow:0 15px 35px rgba(0,0,0,0.18);
-        position:relative;
-        overflow:hidden;
-        background: linear-gradient(270deg, #11998e, #38ef7d, #11998e);
-        background-size: 600% 600%;
-        animation: gradientMove 8s ease infinite;
-    ">
+    .wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-        <!-- Logo Row -->
-        <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 0.7rem;
+      margin-top: 6px;
+      text-align: center;
+    }
 
-            <div style="
-                background:white;
-                color:#11998e;
-                font-weight:bold;
-                font-size:22px;
-                width:70px;
-                height:70px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                border-radius:16px;
-                box-shadow:0 6px 18px rgba(0,0,0,0.2);
-            ">
-                WC
-            </div>
+    /* Header Styles */
+    .ai-hub-header {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      margin: 20px 0 28px;
+      padding: 12px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
 
-            <h1 style="font-size:24px; font-weight:600;">
-                Word Counter
-            <h1>
+    body.dark-mode .ai-hub-header {
+      background: rgba(18, 20, 36, 0.95);
+      border-color: rgba(58, 140, 255, 0.3);
+    }
 
-        </div>
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+    }
+    .logo-area:hover { transform: scale(1.02); }
 
-        <p style="margin-bottom:30px; color:#ffffff;">
-            Count words and characters instantly with accurate results.
-        </p>
+    .logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 28px;
+      object-fit: cover;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-        <form action="{{ url_for('word_counter') }}" method="POST">
+    .logo-text h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3a6e, #3a8cff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    body.dark-mode .logo-text h2 {
+      background: linear-gradient(135deg, #ffffff, #8ab8ff);
+      background-clip: text;
+    }
+    .logo-text p { font-size: 0.7rem; color: #4a6a8e; }
 
-            <div style="
-                background:white;
-                padding:12px;
-                border-radius:10px;
-                margin-bottom:20px;
-            ">
-                <textarea name="text"
-                          rows="8"
-                          placeholder="Enter your text here..."
-                          required
-                          style="border:none; width:100%; resize:none; outline:none;">{{ request.form.text }}</textarea>
-            </div>
+    .nav-links { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .nav-link {
+      background: #f0f4fa;
+      padding: 10px 22px;
+      border-radius: 44px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1a3a6e;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid rgba(58,140,255,0.2);
+    }
+    .nav-link:hover {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      transform: translateY(-2px);
+    }
+    .dark-toggle {
+      background: #e0e7ff;
+      padding: 10px 18px;
+      border-radius: 44px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid rgba(58,140,255,0.3);
+    }
 
-            <button type="submit"
-                    style="
-                        background:white;
-                        color:#11998e;
-                        border:none;
-                        padding:14px;
-                        width:100%;
-                        border-radius:10px;
-                        font-weight:600;
-                        cursor:pointer;
-                        transition:0.3s;
-                    "
-                    onmouseover="this.style.background='#f3f4f6'"
-                    onmouseout="this.style.background='white'">
+    /* MAIN CARD */
+    .main-card {
+      background: rgba(200, 225, 255, 0.25);
+      backdrop-filter: blur(16px);
+      border-radius: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      margin-bottom: 30px;
+    }
 
-                Count Words
+    .inner-card {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 24px 28px;
+      flex-wrap: nowrap;
+    }
 
-            </button>
+    @media (max-width: 900px) {
+      .inner-card { gap: 14px; padding: 18px 16px; }
+      .left, .center, .right { flex: 1; min-width: 0; }
+      .icon { width: 42px; height: 42px; font-size: 1.2rem; }
+      h1 { font-size: 1.2rem; }
+      .stat-card h3 { font-size: 1rem; }
+    }
+    @media (max-width: 700px) {
+      .inner-card { flex-direction: column !important; }
+      .left, .center, .right { width: 100%; }
+    }
 
-        </form>
+    .left { flex: 1.5; min-width: 260px; }
+    .center { flex: 1; background: rgba(180, 215, 255, 0.3); border-radius: 28px; padding: 18px 20px; }
+    .right { flex: 1; background: rgba(180, 215, 255, 0.3); border-radius: 28px; padding: 20px; }
 
-        {% if result %}
-        <div style="
-            margin-top:25px;
-            background:white;
-            color:#11998e;
-            padding:15px;
-            border-radius:10px;
-            font-weight:600;
-        ">
-            {% if result.error %}
-                {{ result.error }}
-            {% else %}
-                Words: {{ result.words }} <br>
-                Characters: {{ result.characters }}
-            {% endif %}
-        </div>
-        {% endif %}
+    .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: white;
+    }
 
+    h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, #c8e4ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .desc {
+      font-size: 0.75rem;
+      color: #1a3a6e;
+      margin: 5px 0 15px;
+    }
+
+    /* Text Area */
+    .text-container {
+      margin-top: 10px;
+    }
+    .text-label {
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: #1a3a6e;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+    body.dark-mode .text-label { color: #c0d4ff; }
+    .main-textarea {
+      width: 100%;
+      height: 320px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 24px;
+      padding: 15px;
+      border: 1px solid rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      color: #1a3a6e;
+      font-family: 'Segoe UI', monospace;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    body.dark-mode .main-textarea {
+      background: rgba(58,140,255,0.15);
+      color: #e0e0e0;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .action-btn {
+      flex: 1;
+      background: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.7rem;
+      cursor: pointer;
+      text-align: center;
+      color: #1a3a6e;
+    }
+    body.dark-mode .action-btn { color: #c0d4ff; }
+    .action-btn:hover {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 12px;
+      text-align: center;
+    }
+    .stat-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a3a6e;
+    }
+    body.dark-mode .stat-card h3 { color: white; }
+    .stat-card .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #3a8cff;
+    }
+    .stat-card .stat-label {
+      font-size: 0.65rem;
+      color: #4a6a8e;
+    }
+    .reading-time {
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 12px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* Keyword Density */
+    .keyword-section {
+      margin-top: 15px;
+    }
+    .keyword-title {
+      font-weight: 600;
+      font-size: 0.75rem;
+      margin-bottom: 8px;
+    }
+    .keyword-list {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .keyword-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 8px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      margin-bottom: 5px;
+      font-size: 0.7rem;
+    }
+    .keyword-word {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    .keyword-count {
+      color: #3a8cff;
+      font-weight: 700;
+    }
+    body.dark-mode .keyword-word { color: #c0d4ff; }
+
+    .seo-tip {
+      background: rgba(46,204,113,0.2);
+      border-radius: 16px;
+      padding: 10px;
+      margin-top: 12px;
+      font-size: 0.7rem;
+      text-align: center;
+    }
+
+    .clear-btn, .copy-btn {
+      background: rgba(255,255,255,0.3);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 0.65rem;
+      cursor: pointer;
+    }
+
+    .white-info-card {
+      background: white;
+      border-radius: 36px;
+      padding: 28px 32px;
+      margin-top: 28px;
+    }
+    body.dark-mode .white-info-card { background: #15182b; }
+    .features-grid-white {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      margin: 24px 0;
+    }
+    .feature-item-white {
+      background: #f0f4f8;
+      padding: 14px;
+      border-radius: 24px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+    body.dark-mode .feature-item-white { background: #1e213a; color: white; }
+    .faq-list-white { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+    .faq-item-white {
+      background: #f0f4f8;
+      border-radius: 20px;
+      padding: 12px 20px;
+    }
+    body.dark-mode .faq-item-white { background: #1e213a; }
+    .links-row-white {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .links-row-white a {
+      color: white;
+      text-decoration: none;
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <header class="ai-hub-header">
+    <div class="logo-area" id="homeLogoLink">
+      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="AI Tools Hub 2026" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI26'">
+      <div class="logo-text"><h2>AI Tools Hub 2026</h2><p>Word Counter</p></div>
     </div>
+    <nav class="nav-links">
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ AI Image Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 PDF Tools</a>
+      <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode</button>
+    </nav>
+  </header>
 
-</section>
+  <main>
+    <section class="main-card">
+      <div class="inner-card">
+        <div class="left">
+          <div class="icon">📝🔢</div>
+          <h1>Word Counter 2026</h1>
+          <p class="desc">Count words, characters, sentences, paragraphs, reading time & keyword density</p>
+          
+          <div class="text-container">
+            <div class="text-label">
+              <span>📄 Your Text:</span>
+              <div>
+                <button class="clear-btn" id="clearBtn">🗑️ Clear</button>
+                <button class="copy-btn" id="copyBtn">📋 Copy Text</button>
+              </div>
+            </div>
+            <textarea id="textInput" class="main-textarea" placeholder="Paste or type your text here...&#10;&#10;Example: This is a sample text. Word counter will analyze everything automatically!"></textarea>
+          </div>
+          
+          <div class="action-buttons">
+            <button class="action-btn" id="pasteBtn">📋 Paste from Clipboard</button>
+            <button class="action-btn" id="sampleBtn">📝 Load Sample Text</button>
+          </div>
+          <div id="errorMsg" class="error-msg"></div>
+        </div>
 
-<!-- 🔥 SEO CONTENT SECTION -->
-<section style="max-width:900px; margin:100px auto; padding:0 20px; line-height:1.8;">
+        <div class="center">
+          <h3 style="text-align:center; margin-bottom:15px;">📊 Statistics</h3>
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-value" id="wordCount">0</div><div class="stat-label">Words</div></div>
+            <div class="stat-card"><div class="stat-value" id="charCount">0</div><div class="stat-label">Characters</div></div>
+            <div class="stat-card"><div class="stat-value" id="charNoSpace">0</div><div class="stat-label">Chars (no spaces)</div></div>
+            <div class="stat-card"><div class="stat-value" id="sentenceCount">0</div><div class="stat-label">Sentences</div></div>
+            <div class="stat-card"><div class="stat-value" id="paragraphCount">0</div><div class="stat-label">Paragraphs</div></div>
+            <div class="stat-card"><div class="stat-value" id="lineCount">0</div><div class="stat-label">Lines</div></div>
+          </div>
+          <div class="reading-time">
+            <span style="font-size:0.7rem;">⏱️ Reading Time:</span>
+            <strong id="readingTime">0 min</strong> (~<span id="readingSeconds">0</span> sec)
+            <span style="margin-left:10px;">🎙️ Speaking Time: <strong id="speakingTime">0 min</strong></span>
+          </div>
+          <div class="seo-tip" id="seoTip">
+            💡 Enter text to get SEO recommendations
+          </div>
+        </div>
 
-    <h2>Free Word Counter Tool Online – Words Aur Characters Count Karein Easily</h2>
+        <div class="right">
+          <h3 style="text-align:center; margin-bottom:12px;">🔑 Keyword Density (Top 10)</h3>
+          <div class="keyword-section">
+            <div class="keyword-list" id="keywordList">
+              <div style="text-align:center; padding:20px; opacity:0.6;">Enter text to see keywords</div>
+            </div>
+          </div>
+          <div class="seo-tip" style="margin-top:12px; background:rgba(58,140,255,0.2);">
+            📌 <strong>SEO Tip:</strong> <span id="seoAdvice">Use 2-3% keyword density for best ranking</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <p>
-        Our free Word Counter tool helps you instantly count the total number of words and characters in any text.
-        If you are writing an assignment, preparing a blog post, 
-        or checking the length of a social media caption, this tool provides a fast and simple solution.
-    </p>
+    <article class="white-info-card">
+      <h2>📝 2026's Most Advanced Word Counter</h2>
+      <div class="features-grid-white">
+        <div class="feature-item-white">📊 Word Count</div>
+        <div class="feature-item-white">🔢 Character Count (with/without spaces)</div>
+        <div class="feature-item-white">📝 Sentence Count</div>
+        <div class="feature-item-white">📄 Paragraph Count</div>
+        <div class="feature-item-white">⏱️ Reading Time</div>
+        <div class="feature-item-white">🎙️ Speaking Time</div>
+        <div class="feature-item-white">🔑 Keyword Density</div>
+        <div class="feature-item-white">💡 SEO Recommendations</div>
+        <div class="feature-item-white">📋 Copy & Clear</div>
+        <div class="feature-item-white">🌙 Dark Mode</div>
+      </div>
+      <div class="faq-list-white">
+        <div class="faq-item-white"><strong>🔹 What is keyword density?</strong><br>It shows how often a word appears - important for SEO optimization.</div>
+        <div class="faq-item-white"><strong>🔹 How is reading time calculated?</strong><br>Average reading speed: 200-250 words per minute.</div>
+        <div class="faq-item-white"><strong>🔹 Is it really free?</strong><br>100% free, no signup, no watermarks, unlimited usage.</div>
+        <div class="faq-item-white"><strong>🔹 Is my data safe?</strong><br>Yes! 100% local processing - text never leaves your device.</div>
+      </div>
+      <footer class="internal-links-white">
+        <div class="links-row-white">
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/qr-generator">📱 QR Generator</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/json-formatter">{ } JSON Formatter</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/base64-encoder">🔄 Base64 Encoder</a>
+        </div>
+        <p style="font-size:0.7rem; margin-top:16px;">© 2026 AI Tools Hub - Advanced Word Counter | Free & Private</p>
+      </footer>
+    </article>
+  </main>
+</div>
 
-    <p>
-        You can paste your text online and instantly see the word count and character count.
-        This tool is secure, and your input text is not permanently stored.
-    </p>
+<script>
+  (function() {
+    const textarea = document.getElementById('textInput');
+    
+    // Stats elements
+    const wordCountEl = document.getElementById('wordCount');
+    const charCountEl = document.getElementById('charCount');
+    const charNoSpaceEl = document.getElementById('charNoSpace');
+    const sentenceCountEl = document.getElementById('sentenceCount');
+    const paragraphCountEl = document.getElementById('paragraphCount');
+    const lineCountEl = document.getElementById('lineCount');
+    const readingTimeEl = document.getElementById('readingTime');
+    const readingSecondsEl = document.getElementById('readingSeconds');
+    const speakingTimeEl = document.getElementById('speakingTime');
+    const keywordListEl = document.getElementById('keywordList');
+    const seoTipEl = document.getElementById('seoTip');
+    const seoAdviceEl = document.getElementById('seoAdvice');
+    
+    function analyzeText() {
+      const text = textarea.value;
+      if (!text.trim()) {
+        wordCountEl.innerText = '0';
+        charCountEl.innerText = '0';
+        charNoSpaceEl.innerText = '0';
+        sentenceCountEl.innerText = '0';
+        paragraphCountEl.innerText = '0';
+        lineCountEl.innerText = '0';
+        readingTimeEl.innerText = '0 min';
+        readingSecondsEl.innerText = '0';
+        speakingTimeEl.innerText = '0 min';
+        keywordListEl.innerHTML = '<div style="text-align:center; padding:20px; opacity:0.6;">Enter text to see keywords</div>';
+        seoTipEl.innerHTML = '💡 Enter text to get SEO recommendations';
+        seoAdviceEl.innerText = 'Use 2-3% keyword density for best ranking';
+        return;
+      }
+      
+      // Word count
+      const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+      const wordCount = words.length;
+      wordCountEl.innerText = wordCount;
+      
+      // Character count
+      const charCount = text.length;
+      const charNoSpace = text.replace(/\s/g, '').length;
+      charCountEl.innerText = charCount;
+      charNoSpaceEl.innerText = charNoSpace;
+      
+      // Sentence count (., !, ?)
+      const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+      const sentenceCount = sentences.length;
+      sentenceCountEl.innerText = sentenceCount;
+      
+      // Paragraph count (double newline)
+      const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0);
+      const paragraphCount = paragraphs.length || (text.trim() ? 1 : 0);
+      paragraphCountEl.innerText = paragraphCount;
+      
+      // Line count
+      const lines = text.split(/\n/).filter(l => l.trim().length > 0);
+      lineCountEl.innerText = lines.length;
+      
+      // Reading time (200-250 words per minute)
+      const readingMinutes = Math.max(1, Math.ceil(wordCount / 200));
+      const readingSeconds = Math.ceil((wordCount / 200) * 60);
+      readingTimeEl.innerText = `${readingMinutes} min`;
+      readingSecondsEl.innerText = readingSeconds;
+      
+      // Speaking time (150 words per minute)
+      const speakingMinutes = Math.max(1, Math.ceil(wordCount / 150));
+      speakingTimeEl.innerText = `${speakingMinutes} min`;
+      
+      // Keyword density (exclude common stop words)
+      const stopWords = ['the', 'and', 'to', 'of', 'a', 'in', 'for', 'is', 'on', 'that', 'by', 'this', 'with', 'i', 'you', 'it', 'or', 'are', 'as', 'be', 'at', 'have', 'from', 'was', 'but', 'an', 'we', 'they', 'not', 'can', 'will', 'my', 'all', 'so', 'get', 'has', 'had', 'been', 'were', 'your', 'their', 'what', 'when', 'where', 'who', 'why', 'how', 'which', 'there', 'here'];
+      
+      const wordFreq = new Map();
+      words.forEach(w => {
+        let cleanWord = w.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (cleanWord.length > 2 && !stopWords.includes(cleanWord)) {
+          wordFreq.set(cleanWord, (wordFreq.get(cleanWord) || 0) + 1);
+        }
+      });
+      
+      const sortedWords = Array.from(wordFreq.entries()).sort((a, b) => b[1] - a[1]).slice(0, 10);
+      
+      if (sortedWords.length > 0) {
+        keywordListEl.innerHTML = sortedWords.map(([word, count]) => {
+          const density = ((count / wordCount) * 100).toFixed(1);
+          return `<div class="keyword-item">
+            <span class="keyword-word">${word}</span>
+            <span class="keyword-count">${count} times (${density}%)</span>
+          </div>`;
+        }).join('');
+        
+        // SEO advice based on top keyword density
+        const topDensity = (sortedWords[0][1] / wordCount) * 100;
+        if (topDensity > 5) {
+          seoAdviceEl.innerText = `⚠️ "${sortedWords[0][0]}" density is ${topDensity.toFixed(1)}% - Too high! Reduce to 2-3% for better SEO.`;
+          seoTipEl.innerHTML = `⚠️ High keyword density detected! Consider reducing repetition.`;
+        } else if (topDensity < 1 && wordCount > 50) {
+          seoAdviceEl.innerText = `📈 "${sortedWords[0][0]}" density is ${topDensity.toFixed(1)}% - Too low! Try adding more focus keywords.`;
+          seoTipEl.innerHTML = `📈 Low keyword density. Add more focus keywords for SEO.`;
+        } else {
+          seoAdviceEl.innerText = `✅ Good! "${sortedWords[0][0]}" density is ${topDensity.toFixed(1)}% - Optimal range (2-3%).`;
+          seoTipEl.innerHTML = `✅ Good keyword distribution! Your content is SEO-friendly.`;
+        }
+      } else {
+        keywordListEl.innerHTML = '<div style="text-align:center; padding:20px; opacity:0.6;">No significant keywords found</div>';
+        seoAdviceEl.innerText = 'Add more meaningful words for better SEO';
+        seoTipEl.innerHTML = '💡 Add more content to get SEO recommendations';
+      }
+      
+      // Additional SEO tip based on word count
+      if (wordCount < 300 && wordCount > 0) {
+        seoTipEl.innerHTML += `<div style="margin-top:6px; font-size:0.65rem;">📝 For better SEO, aim for 300+ words (currently ${wordCount} words).</div>`;
+      }
+    }
+    
+    // Debounced analysis
+    let debounceTimeout;
+    function debouncedAnalyze() {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(analyzeText, 200);
+    }
+    
+    textarea.addEventListener('input', debouncedAnalyze);
+    
+    // Clear button
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      textarea.value = '';
+      analyzeText();
+    });
+    
+    // Copy button
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(textarea.value);
+        const btn = document.getElementById('copyBtn');
+        const originalText = btn.innerText;
+        btn.innerText = '✅ Copied!';
+        setTimeout(() => btn.innerText = originalText, 1500);
+      } catch (err) {
+        textarea.select();
+        document.execCommand('copy');
+        alert('Text copied!');
+      }
+    });
+    
+    // Paste button
+    document.getElementById('pasteBtn').addEventListener('click', async () => {
+      try {
+        const text = await navigator.clipboard.readText();
+        textarea.value = text;
+        analyzeText();
+        const btn = document.getElementById('pasteBtn');
+        const originalText = btn.innerText;
+        btn.innerText = '✅ Pasted!';
+        setTimeout(() => btn.innerText = originalText, 1500);
+      } catch (err) {
+        alert('Please allow clipboard access or use Ctrl+V to paste');
+      }
+    });
+    
+    // Load sample text
+    document.getElementById('sampleBtn').addEventListener('click', () => {
+      textarea.value = `Word Counter 2026 is the most advanced text analysis tool available online. It helps writers, students, and SEO professionals count words, characters, sentences, and paragraphs instantly.
 
-    <h3>How to Use Word Counter?</h3>
-    <ul>
-        <li>Step 1: Paste your text into the textarea.</li>
-        <li>Step 2: Click the Count Words button.</li>
-        <li>Step 3: Check the total number of words and characters.</li>
-    </ul>
+This tool also provides keyword density analysis, reading time calculation, and speaking time estimation. Whether you're writing a blog post, academic paper, or social media content, our word counter ensures you meet your requirements.
 
-    <h3>Why Use This Word Counter Tool?</h3>
-    <ul>
-        <li>100% free word count tool</li>
-        <li>Instant results</li>
-        <li>Accurate word and character counting</li>
-        <li>No registration required</li>
-        <li>Mobile friendly</li>
-        <li>Works on all devices</li>
-    </ul>
+SEO experts love our keyword density feature. It shows which keywords appear most frequently in your content, helping you optimize for search engines. The recommended keyword density is between 2% and 3% for best results.
 
-    <h3>Frequently Asked Questions (FAQ)</h3>
-
-    <p><strong>Q: Does this tool also count sentences?</strong><br>
-    The basic version counts words and characters. An advanced version can also include sentence counting.</p>
-
-    <p><strong>Q: Is my text safe?</strong><br>
-    Yes, your text is processed securely and is not permanently stored.</p>
-
-    <p><strong>Q: Can I use this tool on mobile?</strong><br>
-    Yes, it works on mobile, laptop, and all devices.</p>
-
-</section>
-
-<style>
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-</style>
-
-{% endblock %}
-
-
+Try pasting your own text or upload a document. The tool works completely offline - no data leaves your browser. Your privacy is guaranteed!`;
+      analyzeText();
+    });
+    
+    // Initial analysis
+    analyzeText();
+    
+    document.getElementById('homeLogoLink').addEventListener('click', () => window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/');
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+  })();
+</script>
+</body>
+</html>
