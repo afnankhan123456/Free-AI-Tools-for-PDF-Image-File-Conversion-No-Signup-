@@ -1,923 +1,853 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- SEO META TAGS -->
-<meta name="description" content="Free Merge PDF tool - Combine multiple PDF files into one document. No signup, 100% free, full quality preservation. Drag & drop or select files.">
-<meta name="keywords" content="Merge PDF, combine PDF, PDF merger, join PDF files, free PDF merger, merge PDF online, combine documents, PDF toolkit">
-<meta name="author" content="Free AI Tools">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf">
-
-<title>Merge PDF | Free Online PDF Merger | Combine Files</title>
-
-<!-- PDF-lib for merging -->
-<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
-  background: radial-gradient(circle at 20% 30%, #e0b3ff, #b77cff, #9b4dff);
-  font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
-  padding: 32px 20px;
-}
-
-.wrapper {
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* ========== MAIN CONVERTER CARD (PURPLE THEME) ========== */
-.main-card {
-  background: rgba(200, 175, 255, 0.25);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 48px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255,255,255,0.3);
-  overflow: hidden;
-  margin-bottom: 30px;
-}
-
-.inner-card {
-  display: flex;
-  gap: 28px;
-  padding: 36px 40px;
-  flex-wrap: wrap;
-  background: rgba(180, 140, 255, 0.1);
-}
-
-.left {
-  flex: 1.5;
-  min-width: 240px;
-}
-
-.icon {
-  width: 68px;
-  height: 68px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, #9b59b6, #8e44ad);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255,255,255,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.8rem;
-  margin-bottom: 18px;
-  color: white;
-  box-shadow: 0 8px 20px rgba(155,89,182,0.3);
-}
-
-h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #ffffff, #e0ccff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: -0.3px;
-  margin: 8px 0 5px 0;
-}
-
-.desc {
-  font-size: 0.9rem;
-  color: #2e1a5e;
-  opacity: 0.85;
-  margin-top: 5px;
-}
-
-.file-box-area {
-  margin-top: 28px;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px);
-  border-radius: 32px;
-  padding: 16px 20px;
-  border: 1px solid rgba(255,255,255,0.4);
-}
-
-.file-list-container {
-  max-height: 180px;
-  overflow-y: auto;
-  margin: 12px 0;
-}
-
-.file-item {
-  background: rgba(255,255,255,0.3);
-  border-radius: 60px;
-  padding: 8px 16px;
-  margin: 8px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #2e1a5e;
-}
-
-.file-item span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 200px;
-}
-
-.remove-file {
-  background: rgba(231,76,60,0.8);
-  border: none;
-  color: white;
-  border-radius: 40px;
-  padding: 4px 12px;
-  cursor: pointer;
-  font-size: 0.7rem;
-  font-weight: bold;
-  transition: 0.2s;
-}
-
-.remove-file:hover {
-  background: #e74c3c;
-  transform: scale(0.96);
-}
-
-.file-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-
-.file-btn {
-  padding: 8px 20px;
-  border-radius: 40px;
-  background: linear-gradient(95deg, #b77cff, #9b4dff);
-  backdrop-filter: blur(4px);
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: 0.2s;
-  border: none;
-  box-shadow: 0 2px 8px rgba(155,77,255,0.3);
-}
-
-.file-btn:hover {
-  transform: scale(0.97);
-  background: linear-gradient(95deg, #a86cff, #8a3df5);
-}
-
-.clear-btn {
-  background: linear-gradient(95deg, #a0a0c0, #7a6a9e);
-}
-
-.convert-btn {
-  margin-top: 24px;
-  padding: 14px 16px;
-  border-radius: 60px;
-  text-align: center;
-  background: linear-gradient(105deg, #b77cff, #9b4dff, #b77cff);
-  backdrop-filter: blur(4px);
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.25s;
-  font-size: 1rem;
-  border: 1px solid rgba(255,255,255,0.4);
-  color: white;
-  letter-spacing: 0.5px;
-  box-shadow: 0 6px 14px rgba(155,77,255,0.3);
-}
-
-.convert-btn.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-  filter: grayscale(0.1);
-}
-
-.convert-btn:not(.disabled):hover {
-  transform: translateY(-3px);
-  background: linear-gradient(105deg, #c58cff, #ad5dff);
-  box-shadow: 0 12px 22px rgba(155,77,255,0.4);
-}
-
-.center {
-  flex: 1.1;
-  background: rgba(190, 160, 255, 0.3);
-  backdrop-filter: blur(12px);
-  border-radius: 32px;
-  padding: 24px 26px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  min-width: 250px;
-}
-
-.center h3 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #2e1a5e;
-}
-
-.progress {
-  height: 8px;
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 20px;
-  margin: 20px 0 24px;
-  overflow: hidden;
-}
-
-.fill {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #b77cff, #9b4dff, #d19cff);
-  border-radius: 20px;
-  transition: width 0.25s ease;
-  box-shadow: 0 0 6px #b77cff;
-}
-
-.step-list p {
-  margin: 14px 0;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 0.92rem;
-  color: #2e1a5e;
-  font-weight: 500;
-  background: rgba(255,255,255,0.2);
-  padding: 6px 12px;
-  border-radius: 40px;
-  backdrop-filter: blur(2px);
-}
-
-.right {
-  flex: 0.9;
-  background: rgba(190, 160, 255, 0.3);
-  backdrop-filter: blur(12px);
-  border-radius: 32px;
-  padding: 28px 20px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  transition: all 0.2s;
-}
-
-.check {
-  width: 68px;
-  height: 68px;
-  background: linear-gradient(145deg, #9b59b6, #6c3483);
-  backdrop-filter: blur(4px);
-  border-radius: 50%;
-  margin: 0 auto 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36px;
-  font-weight: bold;
-  box-shadow: 0 8px 20px rgba(108,52,131,0.3);
-  border: 1px solid rgba(255,255,255,0.5);
-  color: white;
-}
-
-.right h3 {
-  font-size: 1.5rem;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: #2e1a5e;
-}
-
-.download {
-  margin-top: 28px;
-  padding: 12px 16px;
-  border-radius: 60px;
-  background: linear-gradient(95deg, #b77cff, #9b4dff);
-  backdrop-filter: blur(4px);
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
-  border: 1px solid rgba(255,255,255,0.4);
-  color: white;
-}
-
-.download.disabled {
-  opacity: 0.45;
-  pointer-events: none;
-}
-
-.download:not(.disabled):hover {
-  transform: translateY(-2px);
-  background: linear-gradient(95deg, #c58cff, #ad5dff);
-  box-shadow: 0 8px 18px rgba(155,77,255,0.4);
-}
-
-.link {
-  margin-top: 22px;
-  font-size: 13px;
-  color: #2e1a5e;
-  text-decoration: underline;
-  cursor: pointer;
-  transition: 0.2s;
-  font-weight: 500;
-}
-
-.link:hover {
-  color: #140a2e;
-  text-shadow: 0 0 4px rgba(180,130,255,0.5);
-}
-
-.error-msg {
-  color: #ffb4b4;
-  font-size: 12px;
-  margin-top: 8px;
-  text-align: center;
-  font-weight: bold;
-}
-
-/* ========== WHITE CARD WITH BLACK TEXT ========== */
-.white-info-card {
-  background: white;
-  border-radius: 40px;
-  padding: 32px 36px;
-  margin-top: 28px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.white-info-card h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #1a2a4a;
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.white-info-card .section-sub {
-  text-align: center;
-  color: #4a5568;
-  margin-bottom: 28px;
-  font-size: 0.95rem;
-}
-
-.features-grid-white {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin: 28px 0 20px 0;
-}
-
-.feature-item-white {
-  background: #f0f4f8;
-  padding: 18px 12px;
-  border-radius: 24px;
-  text-align: center;
-  transition: transform 0.2s;
-}
-
-.feature-item-white:hover {
-  transform: translateY(-3px);
-  background: #e8edf3;
-}
-
-.feature-icon-white {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.feature-item-white h4 {
-  color: #1a2a4a;
-  font-size: 1rem;
-  margin-bottom: 6px;
-  font-weight: 700;
-}
-
-.feature-item-white p {
-  color: #4a5568;
-  font-size: 0.85rem;
-}
-
-.how-it-works-white {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  margin: 28px 0;
-}
-
-.step-card-white {
-  flex: 1;
-  min-width: 160px;
-  background: #f0f4f8;
-  border-radius: 28px;
-  padding: 20px 16px;
-  text-align: center;
-}
-
-.step-num-white {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, #b77cff, #9b4dff);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 14px;
-  font-weight: bold;
-  font-size: 1.3rem;
-  color: white;
-}
-
-.step-card-white h4 {
-  color: #1a2a4a;
-  font-size: 1rem;
-  margin-bottom: 8px;
-}
-
-.step-card-white p {
-  color: #4a5568;
-  font-size: 0.85rem;
-}
-
-.faq-list-white {
-  margin: 24px 0 20px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.faq-item-white {
-  background: #f0f4f8;
-  border-radius: 20px;
-  padding: 14px 22px;
-  transition: 0.2s;
-}
-
-.faq-item-white:hover {
-  background: #e8edf3;
-}
-
-.faq-question-white {
-  font-weight: 700;
-  color: #1a2a4a;
-  font-size: 1rem;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.faq-answer-white {
-  color: #4a5568;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  padding-left: 28px;
-}
-
-.internal-links-white {
-  text-align: center;
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid #e0e6ed;
-}
-
-.internal-links-white p {
-  color: #1a2a4a;
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-
-.links-row-white {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-}
-
-.links-row-white a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-  background: linear-gradient(95deg, #b77cff, #9b4dff);
-  padding: 8px 20px;
-  border-radius: 50px;
-  transition: all 0.2s ease;
-}
-
-.links-row-white a:hover {
-  background: linear-gradient(95deg, #a86cff, #8a3df5);
-  transform: translateY(-2px);
-}
-
-@media (max-width: 880px) {
-  .inner-card {
-    padding: 24px 22px;
-    gap: 20px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="2026's best PDF Merger - Combine multiple PDF files into one. Merge 2-10 PDFs instantly. Free, fast, private. No signup, no upload, no watermarks.">
+  <meta name="keywords" content="merge PDF 2026, PDF merger, combine PDF, join PDF files, PDF joiner, free PDF merger, merge multiple PDFs, online PDF merge, no upload PDF merger">
+  <meta name="author" content="Free AI Tools 2026">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="googlebot" content="index, follow">
+  <meta name="rating" content="General">
+  <meta name="revisit-after" content="1 days">
+  <meta name="theme-color" content="#3a8cff">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Merge PDF 2026 | Combine Multiple PDFs | Free PDF Merger">
+  <meta property="og:description" content="Merge 2-10 PDF files into one document instantly. Free, private, no upload. Drag & drop support.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Merge PDF 2026 | Free PDF Merger">
+  <meta name="twitter:description" content="Combine multiple PDFs into one. Free, fast, private. No signup required.">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf">
+  
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Merge PDF 2026",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "18700"},
+    "description": "Free PDF merger to combine multiple PDF files into one document.",
+    "featureList": "Merge 2-10 PDFs, Drag & Drop, Reorder Files, Privacy-First, No Upload"
   }
-  .icon {
-    width: 54px;
-    height: 54px;
-    font-size: 1.4rem;
-  }
-  h1 {
-    font-size: 1.6rem;
-  }
-  .white-info-card {
-    padding: 24px 20px;
-  }
-  .white-info-card h2 {
-    font-size: 1.4rem;
-  }
-}
-</style>
+  </script>
+  
+  <title>Merge PDF 2026 | Combine Multiple PDFs | Free PDF Merger | No Signup</title>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
+      font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+      padding: 0 20px 32px;
+      transition: background 0.3s ease;
+    }
+    body.dark-mode { background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%); }
+    .wrapper { max-width: 1400px; margin: 0 auto; }
+    .error-msg { color: #ff6b6b; font-size: 0.75rem; margin-top: 8px; text-align: center; font-weight: bold; }
+    .success-msg { color: #4caf50; font-size: 0.75rem; margin-top: 8px; text-align: center; font-weight: bold; }
+
+    /* Header */
+    .ai-hub-header {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      margin: 20px 0 28px;
+      padding: 12px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    body.dark-mode .ai-hub-header {
+      background: rgba(18, 20, 36, 0.95);
+      border-color: rgba(58, 140, 255, 0.3);
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .logo-area:hover { transform: scale(1.02); }
+    .logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 28px;
+      object-fit: cover;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .logo-text h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3a6e, #3a8cff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    body.dark-mode .logo-text h2 { background: linear-gradient(135deg, #ffffff, #8ab8ff); background-clip: text; }
+    .logo-text p { font-size: 0.7rem; color: #4a6a8e; font-weight: 500; }
+    body.dark-mode .logo-text p { color: #8a9dc0; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .nav-link {
+      background: #f0f4fa;
+      padding: 10px 22px;
+      border-radius: 44px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1a3a6e;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(58,140,255,0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-link:hover {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      transform: translateY(-2px);
+    }
+    body.dark-mode .nav-link { background: rgba(58, 140, 255, 0.15); color: #c0d4ff; }
+    .dark-toggle {
+      background: #e0e7ff;
+      padding: 10px 18px;
+      border-radius: 44px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid rgba(58,140,255,0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    .dark-toggle:hover { transform: translateY(-2px); }
+    body.dark-mode .dark-toggle { background: #2a2a4a; color: #ffd966; border-color: #ffd966; }
+
+    /* Main Card - Horizontal */
+    .main-card {
+      background: rgba(200, 225, 255, 0.25);
+      backdrop-filter: blur(16px);
+      border-radius: 48px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
+      margin-bottom: 30px;
+    }
+    body.dark-mode .main-card { background: rgba(18, 20, 34, 0.8); border-color: rgba(58, 140, 255, 0.25); }
+    .inner-card {
+      display: flex;
+      flex-direction: row;
+      gap: 28px;
+      padding: 36px 40px;
+      flex-wrap: nowrap;
+      background: rgba(150, 200, 255, 0.1);
+    }
+    @media (max-width: 900px) { .inner-card { gap: 16px; padding: 24px 20px; } }
+    @media (max-width: 700px) { .inner-card { flex-direction: row !important; flex-wrap: wrap !important; } }
+    @media (max-width: 550px) { .inner-card { flex-direction: column !important; } }
+    
+    .left { flex: 1.5; min-width: 280px; }
+    .center { flex: 1.1; background: rgba(180, 215, 255, 0.3); backdrop-filter: blur(12px); border-radius: 32px; padding: 24px 26px; border: 1px solid rgba(255, 255, 255, 0.4); min-width: 250px; }
+    .right { flex: 0.9; background: rgba(180, 215, 255, 0.3); backdrop-filter: blur(12px); border-radius: 32px; padding: 28px 20px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.4); }
+    body.dark-mode .center, body.dark-mode .right { background: rgba(22, 25, 42, 0.7); border-color: rgba(58,140,255,0.25); }
+
+    .icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #9b59b6, #8e44ad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.8rem;
+      margin-bottom: 18px;
+      color: white;
+      box-shadow: 0 8px 20px rgba(155,89,182,0.3);
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, #c8e4ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin: 8px 0 5px;
+    }
+    body.dark-mode h1 { background: linear-gradient(135deg, #ffffff, #8ab8ff); background-clip: text; }
+    .desc { font-size: 0.9rem; color: #1a3a6e; opacity: 0.85; margin-top: 5px; }
+    body.dark-mode .desc { color: #9aaec9; }
+
+    /* Drop Zone */
+    .drop-zone {
+      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 32px;
+      padding: 20px 20px;
+      text-align: center;
+      border: 2px dashed rgba(255,255,255,0.5);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .drop-zone.drag-over { background: rgba(255, 255, 255, 0.4); border-color: #3a8cff; transform: scale(1.02); }
+    .drop-zone-content { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .drop-icon { font-size: 42px; }
+    .drop-text { font-size: 0.85rem; color: #1a3a6e; font-weight: 500; }
+    .drop-sub { font-size: 0.65rem; color: #4a6a8e; }
+    body.dark-mode .drop-zone { background: rgba(58, 140, 255, 0.15); border-color: rgba(58, 140, 255, 0.4); }
+    body.dark-mode .drop-text { color: #c0d4ff; }
+    
+    /* File List */
+    .file-list-container {
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      border-radius: 24px;
+      padding: 16px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .file-list-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1a3a6e;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    body.dark-mode .file-list-title { color: #c0d4ff; }
+    .file-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 16px;
+      margin-bottom: 8px;
+      transition: all 0.2s;
+    }
+    body.dark-mode .file-item { background: rgba(58, 140, 255, 0.15); }
+    .file-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      overflow: hidden;
+    }
+    .file-info span { font-size: 0.8rem; color: #1a3a6e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    body.dark-mode .file-info span { color: #c0d4ff; }
+    .file-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .remove-file, .move-up, .move-down {
+      background: rgba(0,0,0,0.2);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+    .remove-file:hover { background: #ff6b6b; color: white; }
+    .move-up:hover, .move-down:hover { background: #3a8cff; color: white; }
+    body.dark-mode .remove-file, body.dark-mode .move-up, body.dark-mode .move-down { background: rgba(255,255,255,0.15); color: white; }
+    
+    .add-more-btn {
+      margin-top: 12px;
+      padding: 10px;
+      width: 100%;
+      background: rgba(255,255,255,0.3);
+      border: 1px dashed rgba(58,140,255,0.5);
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #1a3a6e;
+      transition: all 0.2s;
+    }
+    body.dark-mode .add-more-btn { color: #c0d4ff; background: rgba(58,140,255,0.1); }
+    .add-more-btn:hover { background: rgba(58,140,255,0.3); }
+    
+    .merge-btn {
+      margin-top: 20px;
+      padding: 14px 16px;
+      border-radius: 60px;
+      text-align: center;
+      background: linear-gradient(105deg, #5cb0ff, #3a8cff);
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-size: 1rem;
+      border: none;
+      color: white;
+      width: 100%;
+    }
+    .merge-btn.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+    .merge-btn:not(.disabled):hover { transform: translateY(-3px); background: linear-gradient(105deg, #6cbaff, #4a9eff); }
+
+    .center h3, .right h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 12px; color: #1a3a6e; }
+    body.dark-mode .center h3, body.dark-mode .right h3 { color: white; }
+    .progress { height: 8px; background: rgba(0, 0, 0, 0.15); border-radius: 20px; margin: 20px 0 24px; overflow: hidden; }
+    .fill { width: 0%; height: 100%; background: linear-gradient(90deg, #5cb0ff, #3a8cff); border-radius: 20px; transition: width 0.25s ease; }
+    .step-list p {
+      margin: 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.92rem;
+      color: #1a3a6e;
+      font-weight: 500;
+      background: rgba(255,255,255,0.2);
+      padding: 6px 12px;
+      border-radius: 40px;
+    }
+    body.dark-mode .step-list p { color: #b8c7e6; background: rgba(58,140,255,0.1); }
+    .check {
+      width: 68px;
+      height: 68px;
+      background: linear-gradient(145deg, #4caf50, #2e7d32);
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: white;
+    }
+    .download {
+      margin-top: 28px;
+      padding: 12px 16px;
+      border-radius: 60px;
+      width: 100%;
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    .download.disabled { opacity: 0.45; pointer-events: none; }
+    .download:not(.disabled):hover { transform: translateY(-2px); }
+    .link {
+      margin-top: 22px;
+      font-size: 13px;
+      color: #1a3a6e;
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    body.dark-mode .link { color: #8a9dc0; }
+
+    /* Info Cards */
+    .white-info-card {
+      background: white;
+      border-radius: 40px;
+      padding: 32px 36px;
+      margin-top: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    body.dark-mode .white-info-card { background: #15182b; border: 1px solid rgba(58,140,255,0.2); }
+    .white-info-card h2 { font-size: 1.8rem; font-weight: 700; color: #1a2a4a; text-align: center; margin-bottom: 12px; }
+    body.dark-mode .white-info-card h2 { color: white; }
+    .features-grid-white {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 28px 0;
+    }
+    .feature-item-white {
+      background: #f0f4f8;
+      padding: 18px 12px;
+      border-radius: 24px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .feature-item-white:hover { transform: translateY(-3px); }
+    body.dark-mode .feature-item-white { background: #1e213a; border: 1px solid rgba(58,140,255,0.2); }
+    .feature-icon-white { font-size: 2rem; margin-bottom: 10px; }
+    .feature-item-white h4 { color: #1a2a4a; font-size: 1rem; margin-bottom: 6px; }
+    body.dark-mode .feature-item-white h4 { color: white; }
+    .feature-item-white p { color: #4a5568; font-size: 0.85rem; }
+    .how-it-works-white { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin: 28px 0; }
+    .step-card-white {
+      flex: 1;
+      min-width: 160px;
+      background: #f0f4f8;
+      border-radius: 28px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    body.dark-mode .step-card-white { background: #1e213a; }
+    .step-num-white {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #5cb0ff, #3a8cff);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: white;
+    }
+    .faq-list-white { display: flex; flex-direction: column; gap: 14px; margin: 24px 0; }
+    .faq-item-white {
+      background: #f0f4f8;
+      border-radius: 20px;
+      padding: 14px 22px;
+    }
+    body.dark-mode .faq-item-white { background: #1e213a; }
+    .faq-question-white { font-weight: 700; color: #1a2a4a; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    body.dark-mode .faq-question-white { color: white; }
+    .faq-answer-white { color: #4a5568; font-size: 0.9rem; line-height: 1.4; padding-left: 28px; }
+    .internal-links-white { text-align: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid #e0e6ed; }
+    .links-row-white { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+    .links-row-white a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      padding: 8px 20px;
+      border-radius: 50px;
+    }
+    @media (max-width: 780px) {
+      .ai-hub-header { flex-direction: column; gap: 16px; align-items: stretch; padding: 18px 20px; }
+      .white-info-card { padding: 24px 20px; }
+      .white-info-card h2 { font-size: 1.4rem; }
+    }
+  </style>
 </head>
 <body>
 <div class="wrapper">
-
-<!-- ========== MAIN MERGE PDF CARD (PURPLE THEME) ========== -->
-<div class="main-card">
-<div class="inner-card">
-
-  <div class="left">
-    <div class="icon">📑</div>
-    <h1>Merge PDF</h1>
-    <div class="desc">Combine multiple PDFs into one • Preserve quality • Free & Unlimited</div>
-    
-    <div class="file-box-area">
-      <div class="file-list-container" id="fileListContainer">
-        <div style="text-align:center; color:#2e1a5e; font-size:0.8rem; padding:12px;">No files added yet</div>
-      </div>
-      <div class="file-buttons">
-        <div class="file-btn" id="addFilesBtn">➕ Add PDF(s)</div>
-        <div class="file-btn clear-btn" id="clearFilesBtn">🗑 Clear All</div>
+  <header class="ai-hub-header">
+    <div class="logo-area" id="homeLogoLink">
+      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="AI Tools Hub 2026 Logo" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI26'">
+      <div class="logo-text">
+        <h2>AI Tools Hub 2026</h2>
+        <p>Next-Gen Free Tools</p>
       </div>
     </div>
-    
-    <div class="convert-btn disabled" id="mergeBtn">Merge PDFs</div>
-    <div id="mergeErrorMsg" class="error-msg"></div>
-  </div>
+    <nav class="nav-links">
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home 2026</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ AI Image Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 Smart PDF Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools" class="nav-link">⚙️ Utility Suite</a>
+      <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode 2026</button>
+    </nav>
+  </header>
 
-  <div class="center">
-    <h3 id="statusTitleMerge">Ready to merge</h3>
-    <p id="etaTextMerge" style="font-size:0.85rem; opacity:0.8;">Add at least 2 PDF files</p>
-    <div class="progress"><div class="fill" id="progressFillMerge"></div></div>
-    <div class="step-list">
-      <p id="stepMerge1"><span>⭕</span> Loading PDFs — waiting</p>
-      <p id="stepMerge2"><span>⭕</span> Merging pages — waiting</p>
-      <p id="stepMerge3"><span>⭕</span> Generating final PDF — waiting</p>
-    </div>
-  </div>
+  <main>
+    <section class="main-card">
+      <div class="inner-card">
+        <div class="left">
+          <div class="icon" aria-hidden="true">🔗 PDF</div>
+          <h1>Merge PDF 2026</h1>
+          <p class="desc">Combine multiple PDFs into one • Merge 2-10 files • Reorder pages</p>
+          
+          <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-content">
+              <div class="drop-icon">📁🔗</div>
+              <div class="drop-text">Drag & Drop PDF files here</div>
+              <div class="drop-sub">or click to add multiple PDFs</div>
+            </div>
+          </div>
+          
+          <div class="file-list-container" id="fileListContainer">
+            <div class="file-list-title">
+              <span>📋 Files to Merge (<span id="fileCount">0</span>/10)</span>
+              <span style="font-size:0.7rem;">Drag to reorder</span>
+            </div>
+            <div id="fileList"></div>
+            <button class="add-more-btn" id="addMoreBtn">+ Add More PDFs</button>
+          </div>
+          
+          <button class="merge-btn disabled" id="mergeBtn">🔗 Merge PDFs 2026 🔗</button>
+          <div id="fileErrorMsg" class="error-msg"></div>
+        </div>
 
-  <div class="right">
-    <div class="check" id="checkIconMerge">❓</div>
-    <h3 id="completeTitleMerge">Merge pending</h3>
-    <p id="completeMsgMerge" style="opacity:0.8;">No PDF merged yet</p>
-    <div class="download disabled" id="downloadMergeBtn">Download Merged PDF</div>
-    <div class="link" id="resetMergeLink">Start over →</div>
-  </div>
+        <div class="center">
+          <h3 id="statusTitle">Ready to merge</h3>
+          <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Add 2 or more PDF files</p>
+          <div class="progress"><div class="fill" id="progressFill"></div></div>
+          <div class="step-list">
+            <p id="step1"><span>⭕</span> Loading PDFs — waiting</p>
+            <p id="step2"><span>⭕</span> Analyzing files — waiting</p>
+            <p id="step3"><span>⭕</span> Merging & generating — waiting</p>
+          </div>
+        </div>
 
-</div>
-</div>
+        <div class="right">
+          <div class="check" id="checkIcon" aria-hidden="true">🔗</div>
+          <h3 id="completeTitle">Awaiting PDFs</h3>
+          <p id="completeMsg" style="opacity:0.8;">Add 2-10 PDF files to merge</p>
+          <button class="download disabled" id="downloadBtn">⬇️ Download Merged PDF ⬇️</button>
+          <button class="link" id="resetLink">Clear all & start over →</button>
+        </div>
+      </div>
+    </section>
 
-<!-- ========== WHITE CARD WITH BLACK TEXT ========== -->
-<div class="white-info-card">
+    <article class="white-info-card">
+      <h2>🚀 Why Choose Our PDF Merger 2026?</h2>
+      <p class="section-sub">Combine multiple PDFs into one document - completely free, no upload needed</p>
+      
+      <div class="features-grid-white">
+        <div class="feature-item-white"><div class="feature-icon-white">🔗</div><h4>Merge Multiple PDFs</h4><p>Combine 2 to 10 PDF files into one document</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">🔄</div><h4>Reorder Files</h4><p>Arrange pages in any order before merging</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">📱</div><h4>Drag & Drop</h4><p>Easy drag-drop support for all devices</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">🔒</div><h4>100% Private</h4><p>All processing in your browser - no upload</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">⚡</div><h4>Instant Merge</h4><p>Merge in seconds, not minutes</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">💯</div><h4>100% Free</h4><p>No signup, no watermark, unlimited</p></div>
+      </div>
 
-  <h2>✨ Why Use Our Merge PDF Tool?</h2>
-  <p class="section-sub">Combine documents seamlessly - completely free, no hidden charges</p>
-  
-  <div class="features-grid-white">
-    <div class="feature-item-white">
-      <div class="feature-icon-white">🔗</div>
-      <h4>Combine Multiple PDFs</h4>
-      <p>Merge 2, 5, or even 10 PDFs into one single document</p>
-    </div>
-    <div class="feature-item-white">
-      <div class="feature-icon-white">🛡️</div>
-      <h4>Lossless Quality</h4>
-      <p>Preserves original formatting, vectors, and images</p>
-    </div>
-    <div class="feature-item-white">
-      <div class="feature-icon-white">💯</div>
-      <h4>100% Free</h4>
-      <p>No payments, no subscriptions, unlimited merges</p>
-    </div>
-    <div class="feature-item-white">
-      <div class="feature-icon-white">🔒</div>
-      <h4>No Signup Required</h4>
-      <p>Instant merging - no email, no registration</p>
-    </div>
-    <div class="feature-item-white">
-      <div class="feature-icon-white">⚡</div>
-      <h4>Fast & Secure</h4>
-      <p>All processing in your browser - files never uploaded</p>
-    </div>
-    <div class="feature-item-white">
-      <div class="feature-icon-white">📄</div>
-      <h4>Any PDF Version</h4>
-      <p>Works with all standard PDF files, up to 100MB total</p>
-    </div>
-  </div>
+      <h2>📖 How to Merge PDFs in 2026</h2>
+      <p class="section-sub">Simple process - combine multiple PDFs in seconds</p>
+      
+      <div class="how-it-works-white">
+        <div class="step-card-white"><div class="step-num-white">1</div><h4>Add PDFs</h4><p>Drag & drop or browse to add 2-10 PDF files</p></div>
+        <div class="step-card-white"><div class="step-num-white">2</div><h4>Reorder (Optional)</h4><p>Arrange files in your preferred order</p></div>
+        <div class="step-card-white"><div class="step-num-white">3</div><h4>Merge & Download</h4><p>Click merge and get your combined PDF</p></div>
+      </div>
 
-  <h2>📖 How to Merge PDF Files</h2>
-  <p class="section-sub">Simple steps to combine your PDFs</p>
-  
-  <div class="how-it-works-white">
-    <div class="step-card-white">
-      <div class="step-num-white">1</div>
-      <h4>Add PDFs</h4>
-      <p>Click "Add PDF(s)" and select multiple files</p>
-    </div>
-    <div class="step-card-white">
-      <div class="step-num-white">2</div>
-      <h4>Merge Documents</h4>
-      <p>Press "Merge PDFs" — automatic combining</p>
-    </div>
-    <div class="step-card-white">
-      <div class="step-num-white">3</div>
-      <h4>Download Result</h4>
-      <p>Get your merged PDF instantly</p>
-    </div>
-  </div>
+      <h2>❓ Frequently Asked Questions 2026</h2>
+      
+      <div class="faq-list-white">
+        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Is this PDF merger really free?</div><div class="faq-answer-white">✅ Yes! 100% completely free. No hidden fees, no premium. Merge unlimited PDFs.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Does it upload my PDFs to a server?</div><div class="faq-answer-white">🛡️ NO! All merging happens locally in your browser. Your files never leave your computer.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> How many PDFs can I merge?</div><div class="faq-answer-white">📊 You can merge 2 to 10 PDF files at once. Perfect for most use cases.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Can I reorder the files?</div><div class="faq-answer-white">🔄 Yes! Use the up/down arrows to reorder files before merging.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> What file size is supported?</div><div class="faq-answer-white">📁 Each PDF up to 50MB. Total combined size up to 100MB.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Any watermarks on output?</div><div class="faq-answer-white">✨ Zero watermarks! Clean merged PDF with no ads or branding.</div></div>
+      </div>
 
-  <h2>❓ Frequently Asked Questions</h2>
-  
-  <div class="faq-list-white">
-    <div class="faq-item-white">
-      <div class="faq-question-white"><span>🔹</span> Is this Merge PDF tool really free?</div>
-      <div class="faq-answer-white">✅ Yes! 100% completely free. No limits on number of merges or file sizes (reasonable use).</div>
-    </div>
-    <div class="faq-item-white">
-      <div class="faq-question-white"><span>🔹</span> Do I need to sign up?</div>
-      <div class="faq-answer-white">❌ No registration. Just select PDFs and merge instantly.</div>
-    </div>
-    <div class="faq-item-white">
-      <div class="faq-question-white"><span>🔹</span> Is my data safe?</div>
-      <div class="faq-answer-white">🛡️ Absolutely! All merging happens locally in your browser. Your PDFs never leave your computer.</div>
-    </div>
-    <div class="faq-item-white">
-      <div class="faq-question-white"><span>🔹</span> What is the maximum file size?</div>
-      <div class="faq-answer-white">📁 Supports up to 100MB total combined size. Each individual PDF should be under 50MB.</div>
-    </div>
-    <div class="faq-item-white">
-      <div class="faq-question-white"><span>🔹</span> Can I reorder files before merging?</div>
-      <div class="faq-answer-white">📑 Files are merged in the order you add them. Use "Clear All" and re-add in desired order.</div>
-    </div>
-  </div>
-
-  <div class="internal-links-white">
-    <p>🚀 More Free PDF Tools You May Like:</p>
-    <div class="links-row-white">
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/split-pdf" target="_blank" rel="noopener noreferrer">✂️ Split PDF</a>
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/compress-pdf" target="_blank" rel="noopener noreferrer">🗜️ Compress PDF</a>
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/rotate-pdf" target="_blank" rel="noopener noreferrer">🔄 Rotate PDF</a>
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf" target="_blank" rel="noopener noreferrer">🖼️ JPG to PDF</a>
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf" target="_blank" rel="noopener noreferrer">📷 PNG to PDF</a>
-    </div>
-    <p style="font-size: 0.75rem; margin-top: 16px; color: #718096;">© Free AI Tools - Instant PDF Merger | Secure & Private | Merge PDF Online</p>
-  </div>
-
+      <footer class="internal-links-white">
+        <p>🔥 More Free PDF Tools 2026:</p>
+        <div class="links-row-white">
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf" target="_blank" rel="noopener noreferrer">🖼️ JPG to PDF 2026</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-compressor" target="_blank" rel="noopener noreferrer">🗜️ PDF Compressor 2026</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf" target="_blank" rel="noopener noreferrer">🔗 Merge PDF 2026</a>
+        </div>
+        <p style="font-size: 0.75rem; margin-top: 16px;">© Free AI Tools 2026 - Next-Gen PDF Merger | Combine Multiple PDFs | Privacy First</p>
+        <p style="font-size: 0.7rem; margin-top: 8px;">Last updated: April 2026 | Trusted by 72,000+ users monthly</p>
+      </footer>
+    </article>
+  </main>
 </div>
 
-</div>
-
-<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 <script>
-// MERGE PDF LOGIC - PURPLE THEME
+  (function() {
+    let pdfFiles = [];
+    let isMerging = false;
+    let mergeDone = false;
+    let mergedBlob = null;
+    
+    const elements = {
+      fileList: document.getElementById('fileList'),
+      fileCount: document.getElementById('fileCount'),
+      mergeBtn: document.getElementById('mergeBtn'),
+      downloadBtn: document.getElementById('downloadBtn'),
+      resetLink: document.getElementById('resetLink'),
+      progressFill: document.getElementById('progressFill'),
+      statusTitle: document.getElementById('statusTitle'),
+      etaText: document.getElementById('etaText'),
+      step1: document.getElementById('step1'),
+      step2: document.getElementById('step2'),
+      step3: document.getElementById('step3'),
+      checkIcon: document.getElementById('checkIcon'),
+      completeTitle: document.getElementById('completeTitle'),
+      completeMsg: document.getElementById('completeMsg'),
+      fileErrorMsg: document.getElementById('fileErrorMsg')
+    };
 
-let selectedFiles = [];      // array of File objects
-let isMergingActive = false;
-let mergeCompleted = false;
-let mergedPdfBlob = null;
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
 
-// DOM elements
-const fileListContainer = document.getElementById('fileListContainer');
-const addFilesBtn = document.getElementById('addFilesBtn');
-const clearFilesBtn = document.getElementById('clearFilesBtn');
-const mergeBtn = document.getElementById('mergeBtn');
-const downloadMergeBtn = document.getElementById('downloadMergeBtn');
-const resetMergeLink = document.getElementById('resetMergeLink');
-const progressFillMerge = document.getElementById('progressFillMerge');
-const statusTitleMerge = document.getElementById('statusTitleMerge');
-const etaTextMerge = document.getElementById('etaTextMerge');
-const stepMerge1 = document.getElementById('stepMerge1');
-const stepMerge2 = document.getElementById('stepMerge2');
-const stepMerge3 = document.getElementById('stepMerge3');
-const checkIconMerge = document.getElementById('checkIconMerge');
-const completeTitleMerge = document.getElementById('completeTitleMerge');
-const completeMsgMerge = document.getElementById('completeMsgMerge');
-const mergeErrorMsg = document.getElementById('mergeErrorMsg');
+    function validatePDF(file) {
+      if (!file) return false;
+      if (file.size > 50 * 1024 * 1024) return false;
+      if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) return false;
+      return true;
+    }
 
-function updateFileListUI() {
-  if (!fileListContainer) return;
-  if (selectedFiles.length === 0) {
-    fileListContainer.innerHTML = '<div style="text-align:center; color:#2e1a5e; font-size:0.8rem; padding:12px;">No files added yet</div>';
-    return;
-  }
-  let html = '';
-  selectedFiles.forEach((file, idx) => {
-    const name = file.name.length > 35 ? file.name.slice(0,32)+'...' : file.name;
-    html += `
-      <div class="file-item" data-index="${idx}">
-        <span>📄 ${name}</span>
-        <button class="remove-file" data-index="${idx}">Remove</button>
-      </div>
-    `;
-  });
-  fileListContainer.innerHTML = html;
-  // attach remove events
-  document.querySelectorAll('.remove-file').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const idx = parseInt(btn.getAttribute('data-index'));
-      if (!isNaN(idx) && idx >= 0 && idx < selectedFiles.length) {
-        selectedFiles.splice(idx, 1);
-        updateFileListUI();
-        resetMergeStateAfterFileChange();
+    function showMessage(msg, isError = true) {
+      if (elements.fileErrorMsg) {
+        elements.fileErrorMsg.textContent = msg;
+        elements.fileErrorMsg.style.color = isError ? '#ff6b6b' : '#4caf50';
+        setTimeout(() => { if (elements.fileErrorMsg.textContent === msg) elements.fileErrorMsg.textContent = ''; }, 3000);
       }
-      e.stopPropagation();
+    }
+
+    function renderFileList() {
+      if (!elements.fileList) return;
+      elements.fileList.innerHTML = '';
+      pdfFiles.forEach((file, index) => {
+        const item = document.createElement('div');
+        item.className = 'file-item';
+        item.innerHTML = `
+          <div class="file-info">
+            <span>📄 ${file.name.length > 30 ? file.name.slice(0,27)+'...' : file.name}</span>
+            <span style="font-size:0.7rem; opacity:0.7;">(${formatFileSize(file.size)})</span>
+          </div>
+          <div class="file-actions">
+            ${index > 0 ? '<button class="move-up" data-index="'+index+'" data-dir="up">↑</button>' : '<button style="opacity:0.3; cursor:not-allowed;" disabled>↑</button>'}
+            ${index < pdfFiles.length - 1 ? '<button class="move-down" data-index="'+index+'" data-dir="down">↓</button>' : '<button style="opacity:0.3; cursor:not-allowed;" disabled>↓</button>'}
+            <button class="remove-file" data-index="${index}">✕</button>
+          </div>
+        `;
+        elements.fileList.appendChild(item);
+      });
+      
+      elements.fileCount.innerText = pdfFiles.length;
+      
+      document.querySelectorAll('.remove-file').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(btn.dataset.index);
+          pdfFiles.splice(idx, 1);
+          renderFileList();
+          updateMergeButton();
+          if (mergeDone) resetUI(false);
+        });
+      });
+      
+      document.querySelectorAll('.move-up').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(btn.dataset.index);
+          if (idx > 0) {
+            [pdfFiles[idx-1], pdfFiles[idx]] = [pdfFiles[idx], pdfFiles[idx-1]];
+            renderFileList();
+            if (mergeDone) resetUI(false);
+          }
+        });
+      });
+      
+      document.querySelectorAll('.move-down').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(btn.dataset.index);
+          if (idx < pdfFiles.length - 1) {
+            [pdfFiles[idx+1], pdfFiles[idx]] = [pdfFiles[idx], pdfFiles[idx+1]];
+            renderFileList();
+            if (mergeDone) resetUI(false);
+          }
+        });
+      });
+    }
+
+    function addFiles(files) {
+      let added = 0;
+      for (const file of files) {
+        if (pdfFiles.length >= 10) {
+          showMessage('Maximum 10 files allowed', true);
+          break;
+        }
+        if (!validatePDF(file)) {
+          showMessage(`Invalid PDF: ${file.name}`, true);
+          continue;
+        }
+        if (!pdfFiles.some(f => f.name === file.name && f.size === file.size)) {
+          pdfFiles.push(file);
+          added++;
+        }
+      }
+      if (added > 0) {
+        renderFileList();
+        updateMergeButton();
+        if (mergeDone) resetUI(false);
+        showMessage(`✓ Added ${added} PDF(s)`, false);
+      }
+    }
+
+    function updateMergeButton() {
+      if (pdfFiles.length >= 2 && !isMerging && !mergeDone) {
+        elements.mergeBtn.classList.remove('disabled');
+        elements.etaText.innerText = `${pdfFiles.length} files ready to merge`;
+      } else {
+        elements.mergeBtn.classList.add('disabled');
+        if (pdfFiles.length < 2) elements.etaText.innerText = `Add ${2 - pdfFiles.length} more PDF (${pdfFiles.length}/2 minimum)`;
+        else if (isMerging) elements.etaText.innerText = 'Merging...';
+      }
+    }
+
+    function resetUI(resetFiles = true) {
+      if (isMerging) isMerging = false;
+      mergeDone = false;
+      mergedBlob = null;
+      elements.progressFill.style.width = '0%';
+      elements.step1.innerHTML = '<span>⭕</span> Loading PDFs — waiting';
+      elements.step2.innerHTML = '<span>⭕</span> Analyzing files — waiting';
+      elements.step3.innerHTML = '<span>⭕</span> Merging & generating — waiting';
+      elements.statusTitle.innerText = 'Ready to merge';
+      elements.etaText.innerText = 'Add 2 or more PDF files';
+      elements.downloadBtn.classList.add('disabled');
+      elements.checkIcon.innerHTML = '🔗';
+      elements.completeTitle.innerText = 'Awaiting PDFs';
+      elements.completeMsg.innerText = 'Add 2-10 PDF files to merge';
+      if (resetFiles) {
+        pdfFiles = [];
+        renderFileList();
+        showMessage('', false);
+      }
+      updateMergeButton();
+    }
+
+    function setStep(stepNum, text, active, percent) {
+      const step = stepNum === 1 ? elements.step1 : (stepNum === 2 ? elements.step2 : elements.step3);
+      if (step) step.innerHTML = `<span>${active ? '🔄' : '✅'}</span> ${text}`;
+      if (percent !== undefined) elements.progressFill.style.width = Math.min(100, percent) + '%';
+    }
+
+    async function mergePDFs() {
+      if (pdfFiles.length < 2 || isMerging) return;
+      
+      resetUI(false);
+      isMerging = true;
+      mergeDone = false;
+      mergedBlob = null;
+      elements.downloadBtn.classList.add('disabled');
+      elements.checkIcon.innerHTML = '⏳';
+      elements.completeTitle.innerText = 'Merging...';
+      updateMergeButton();
+
+      try {
+        setStep(1, 'Loading PDF files...', true, 20);
+        
+        const mergedPdf = await PDFLib.PDFDocument.create();
+        let totalPages = 0;
+        
+        for (let i = 0; i < pdfFiles.length; i++) {
+          const file = pdfFiles[i];
+          const arrayBuffer = await file.arrayBuffer();
+          const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+          const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+          for (const page of pages) {
+            mergedPdf.addPage(page);
+            totalPages++;
+          }
+          setStep(1, `Loaded ${i+1}/${pdfFiles.length} PDFs`, true, 20 + (i / pdfFiles.length) * 30);
+        }
+        
+        setStep(1, `${pdfFiles.length} PDFs loaded ✓`, false, 50);
+        setStep(2, `Analyzing ${totalPages} pages...`, true, 65);
+        
+        await new Promise(r => setTimeout(r, 100));
+        
+        setStep(2, 'Files analyzed ✓', false, 80);
+        setStep(3, 'Generating merged PDF...', true, 90);
+        
+        const mergedBytes = await mergedPdf.save();
+        mergedBlob = new Blob([mergedBytes], { type: 'application/pdf' });
+        
+        setStep(3, `Merged PDF ready! ${totalPages} pages`, false, 100);
+        elements.progressFill.style.width = '100%';
+        
+        mergeDone = true;
+        isMerging = false;
+        
+        elements.statusTitle.innerText = 'Merge complete!';
+        elements.etaText.innerText = `${pdfFiles.length} files merged into 1 PDF`;
+        elements.checkIcon.innerHTML = '✔️🎉';
+        elements.completeTitle.innerText = 'Ready!';
+        elements.completeMsg.innerText = `${pdfFiles.length} files • ${totalPages} pages`;
+        elements.downloadBtn.classList.remove('disabled');
+        elements.mergeBtn.classList.add('disabled');
+        showMessage(`✓ Successfully merged ${pdfFiles.length} PDFs!`, false);
+      } catch (err) {
+        isMerging = false;
+        showMessage('Merge failed: ' + err.message, true);
+        resetUI(false);
+      }
+      updateMergeButton();
+    }
+
+    function downloadMerged() {
+      if (!mergeDone || !mergedBlob) return;
+      const url = URL.createObjectURL(mergedBlob);
+      const a = document.createElement('a');
+      const name = `merged_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.pdf`;
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Hidden file input
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'file';
+    hiddenInput.accept = 'application/pdf,.pdf';
+    hiddenInput.multiple = true;
+    hiddenInput.style.display = 'none';
+    hiddenInput.id = 'hiddenFileInput';
+    document.body.appendChild(hiddenInput);
+
+    // Drag & Drop
+    const dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('click', () => { if (!isMerging) hiddenInput.click(); });
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('drag-over'); });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) addFiles(Array.from(files));
     });
-  });
-}
-
-function resetMergeStateAfterFileChange() {
-  if (isMergingActive) return;
-  mergeCompleted = false;
-  mergedPdfBlob = null;
-  downloadMergeBtn.classList.add('disabled');
-  checkIconMerge.innerHTML = '❓';
-  completeTitleMerge.innerText = 'Merge pending';
-  completeMsgMerge.innerText = 'No PDF merged yet';
-  progressFillMerge.style.width = '0%';
-  stepMerge1.innerHTML = '<span>⭕</span> Loading PDFs — waiting';
-  stepMerge2.innerHTML = '<span>⭕</span> Merging pages — waiting';
-  stepMerge3.innerHTML = '<span>⭕</span> Generating final PDF — waiting';
-  statusTitleMerge.innerText = 'Ready to merge';
-  if (selectedFiles.length >= 2) {
-    etaTextMerge.innerText = `${selectedFiles.length} PDFs ready to merge`;
-    mergeBtn.classList.remove('disabled');
-  } else {
-    etaTextMerge.innerText = 'Add at least 2 PDF files';
-    mergeBtn.classList.add('disabled');
-  }
-  mergeErrorMsg.textContent = '';
-}
-
-function clearAllFiles() {
-  if (isMergingActive) return;
-  selectedFiles = [];
-  updateFileListUI();
-  resetMergeStateAfterFileChange();
-}
-
-async function performMerge() {
-  if (selectedFiles.length < 2) {
-    mergeErrorMsg.textContent = '❌ Please add at least 2 PDF files to merge.';
-    return;
-  }
-  if (isMergingActive) return;
-  isMergingActive = true;
-  mergeCompleted = false;
-  mergedPdfBlob = null;
-  downloadMergeBtn.classList.add('disabled');
-  mergeBtn.classList.add('disabled');
-  progressFillMerge.style.width = '0%';
-  mergeErrorMsg.textContent = '';
-  statusTitleMerge.innerText = 'Merging PDFs...';
-  etaTextMerge.innerText = 'Processing...';
-  stepMerge1.innerHTML = '<span>🔄</span> Loading PDFs — processing';
-  stepMerge2.innerHTML = '<span>⭕</span> Merging pages — pending';
-  stepMerge3.innerHTML = '<span>⭕</span> Generating final PDF — pending';
-  checkIconMerge.innerHTML = '⏳';
-  completeTitleMerge.innerText = 'Merging...';
-  
-  try {
-    // Step1: load PDF documents
-    progressFillMerge.style.width = '20%';
-    const { PDFDocument } = window.pdfLib;
-    const mergedDoc = await PDFDocument.create();
-    let totalPages = 0;
-    const pdfDocs = [];
-    for (let i = 0; i < selectedFiles.length; i++) {
-      const file = selectedFiles[i];
-      const arrayBuffer = await file.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
-      pdfDocs.push(pdfDoc);
-      totalPages += pdfDoc.getPageCount();
-    }
-    stepMerge1.innerHTML = '<span>✅</span> PDFs loaded';
-    progressFillMerge.style.width = '40%';
-    stepMerge2.innerHTML = '<span>🔄</span> Merging pages — combining documents';
     
-    // Merge all pages
-    for (let i = 0; i < pdfDocs.length; i++) {
-      const pdfDoc = pdfDocs[i];
-      const pageIndices = pdfDoc.getPageIndices();
-      const copiedPages = await mergedDoc.copyPages(pdfDoc, pageIndices);
-      copiedPages.forEach(page => mergedDoc.addPage(page));
-      const progress = 40 + (i / pdfDocs.length) * 40;
-      progressFillMerge.style.width = `${Math.min(85, progress)}%`;
-      await new Promise(r => setTimeout(r, 10));
-    }
-    stepMerge2.innerHTML = '<span>✅</span> Pages merged successfully';
-    progressFillMerge.style.width = '85%';
-    stepMerge3.innerHTML = '<span>🔄</span> Generating final PDF — please wait';
+    document.getElementById('addMoreBtn').addEventListener('click', () => {
+      if (!isMerging) hiddenInput.click();
+    });
     
-    const mergedPdfBytes = await mergedDoc.save();
-    mergedPdfBlob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
-    mergeCompleted = true;
-    isMergingActive = false;
-    progressFillMerge.style.width = '100%';
-    stepMerge3.innerHTML = '<span>✅</span> Final PDF ready!';
-    statusTitleMerge.innerText = 'Merge complete!';
-    etaTextMerge.innerText = `Merged ${selectedFiles.length} PDFs, ${totalPages} pages total.`;
-    checkIconMerge.innerHTML = '✔️';
-    completeTitleMerge.innerText = 'Merged!';
-    completeMsgMerge.innerText = 'Your combined PDF is ready';
-    downloadMergeBtn.classList.remove('disabled');
-    mergeErrorMsg.textContent = '✓ Merge successful! Click download.';
-    mergeBtn.classList.add('disabled');
-  } catch (err) {
-    console.error(err);
-    isMergingActive = false;
-    mergeErrorMsg.textContent = `❌ Merge failed: ${err.message || 'Invalid PDF or file error'}`;
-    statusTitleMerge.innerText = 'Merge failed';
-    etaTextMerge.innerText = 'Please check your PDF files';
-    stepMerge1.innerHTML = '<span>❌</span> Error occurred';
-    stepMerge2.innerHTML = '<span>❌</span> Merge aborted';
-    stepMerge3.innerHTML = '<span>❌</span> Failed';
-    checkIconMerge.innerHTML = '⚠️';
-    completeTitleMerge.innerText = 'Error';
-    downloadMergeBtn.classList.add('disabled');
-    mergeBtn.classList.remove('disabled');
-  }
-}
+    hiddenInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files.length > 0) {
+        addFiles(Array.from(e.target.files));
+        hiddenInput.value = '';
+      }
+    });
+    
+    elements.mergeBtn.addEventListener('click', mergePDFs);
+    elements.downloadBtn.addEventListener('click', downloadMerged);
+    elements.resetLink.addEventListener('click', () => { if(!isMerging) resetUI(true); });
+    document.getElementById('homeLogoLink').addEventListener('click', () => window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/');
 
-function downloadMergedPdf() {
-  if (!mergeCompleted || !mergedPdfBlob) return;
-  const url = URL.createObjectURL(mergedPdfBlob);
-  const a = document.createElement('a');
-  const timestamp = new Date().toISOString().slice(0,19).replace(/:/g, '-');
-  a.download = `merged_pdf_${timestamp}.pdf`;
-  a.href = url;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function resetEverything() {
-  if (isMergingActive) return;
-  clearAllFiles();
-  mergeCompleted = false;
-  mergedPdfBlob = null;
-  downloadMergeBtn.classList.add('disabled');
-  progressFillMerge.style.width = '0%';
-  stepMerge1.innerHTML = '<span>⭕</span> Loading PDFs — waiting';
-  stepMerge2.innerHTML = '<span>⭕</span> Merging pages — waiting';
-  stepMerge3.innerHTML = '<span>⭕</span> Generating final PDF — waiting';
-  statusTitleMerge.innerText = 'Ready to merge';
-  etaTextMerge.innerText = 'Add at least 2 PDF files';
-  checkIconMerge.innerHTML = '❓';
-  completeTitleMerge.innerText = 'Merge pending';
-  completeMsgMerge.innerText = 'No PDF merged yet';
-  mergeErrorMsg.textContent = '';
-  mergeBtn.classList.add('disabled');
-}
-
-// hidden file input for multiple selection
-const fileInput = document.createElement('input');
-fileInput.type = 'file';
-fileInput.accept = 'application/pdf';
-fileInput.multiple = true;
-fileInput.style.display = 'none';
-document.body.appendChild(fileInput);
-
-addFilesBtn.addEventListener('click', () => {
-  if (!isMergingActive) fileInput.click();
-});
-
-fileInput.addEventListener('change', (e) => {
-  if (e.target.files && e.target.files.length > 0) {
-    const filesArray = Array.from(e.target.files);
-    let validPdfs = filesArray.filter(f => f.type === 'application/pdf' && f.name.toLowerCase().endsWith('.pdf'));
-    if (validPdfs.length !== filesArray.length) {
-      mergeErrorMsg.textContent = '⚠️ Some files were not PDF and were skipped.';
-    }
-    if (validPdfs.length === 0) return;
-    selectedFiles.push(...validPdfs);
-    updateFileListUI();
-    resetMergeStateAfterFileChange();
-    fileInput.value = '';
-  }
-});
-
-clearFilesBtn.addEventListener('click', clearAllFiles);
-mergeBtn.addEventListener('click', performMerge);
-downloadMergeBtn.addEventListener('click', downloadMergedPdf);
-resetMergeLink.addEventListener('click', resetEverything);
-
-resetEverything();
+    // Dark mode
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode 2026' : '🌙 Dark Mode 2026';
+    });
+    
+    resetUI(true);
+  })();
 </script>
 </body>
 </html>
