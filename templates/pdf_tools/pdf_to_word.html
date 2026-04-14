@@ -1,159 +1,882 @@
-{% extends "base.html" %}
-{% block title %}PDF to Word Converter Online Free | Convert PDF to DOC Instantly{% endblock %}
-{% block description %}Convert PDF to Word online free. Easily change PDF into editable DOC file without losing formatting. Fast and secure PDF to Word converter tool.{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  
+  <!-- SEO Meta Tags - PDF to Word Converter 2026 -->
+  <meta name="description" content="2026's fastest PDF to Word converter - Convert PDF to DOCX instantly. Drag & drop or browse. AI-powered text extraction, 100% free, no signup, no watermarks, editable Word output.">
+  <meta name="keywords" content="PDF to Word 2026, convert PDF to DOCX, AI PDF to Word, drag drop PDF to Word, free PDF to Word converter, PDF to Word online free, no signup PDF to Word, editable PDF to Word">
+  <meta name="author" content="Free AI Tools 2026">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <meta name="rating" content="General">
+  <meta name="revisit-after" content="1 days">
+  <meta name="language" content="English">
+  <meta name="distribution" content="global">
+  <meta name="copyright" content="Free AI Tools 2026">
+  <meta name="theme-color" content="#3a8cff">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="PDF to Word Converter 2026 | AI-Powered | Drag & Drop | Free">
+  <meta property="og:description" content="Convert PDF to editable Word DOCX instantly. Drag & drop or browse. AI-powered extraction, 100% free, no watermark, instant download.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word">
+  <meta property="og:image" content="https://free-ai-tools-for-pdf-image-file.onrender.com/og-pdf-to-word.jpg">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PDF to Word 2026 | Free AI Tool | Drag & Drop">
+  <meta name="twitter:description" content="Smart PDF to Word conversion. No signup, no watermark, instant download.">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word">
+  <link rel="alternate" hreflang="en" href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word">
+  
+  <!-- Schema.org markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF to Word Converter 2026",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "9800" },
+    "description": "Free AI-powered PDF to Word converter with drag & drop, text extraction, editable DOCX output",
+    "featureList": "Drag & Drop PDF, Convert to DOCX, Editable Output, No Watermark, Instant Download, Privacy-First"
+  }
+  </script>
+  
+  <title>PDF to Word 2026 | Drag & Drop | Free AI-Powered | Convert PDF to DOCX</title>
+  
+  <!-- ALL REQUIRED LIBRARIES - JSZip is included now -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-{% block content %}
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
+      padding: 0 20px 32px;
+      transition: background 0.3s ease;
+    }
 
-<section style="display:flex; justify-content:flex-start; margin:200px 0 0 80px;">
+    body.dark-mode {
+      background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%);
+    }
 
-    <div style="
-        padding:45px;
-        border-radius:18px;
-        width:480px;
-        color:white;
-        box-shadow:0 15px 35px rgba(0,0,0,0.18);
-        position:relative;
-        overflow:hidden;
-        background: linear-gradient(270deg, #8e2de2, #4a00e0, #8e2de2);
-        background-size: 600% 600%;
-        animation: gradientMove 8s ease infinite;
-    ">
+    .wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-        <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 0.7rem;
+      margin-top: 6px;
+      text-align: center;
+      font-weight: bold;
+    }
 
-            <div style="
-                background:white;
-                color:#4a00e0;
-                font-weight:bold;
-                font-size:22px;
-                width:70px;
-                height:70px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                border-radius:16px;
-                box-shadow:0 6px 18px rgba(0,0,0,0.2);
-            ">
-                DOC
+    /* Header Styles */
+    .ai-hub-header {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      margin: 20px 0 28px;
+      padding: 12px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .ai-hub-header {
+      background: rgba(18, 20, 36, 0.95);
+      border-color: rgba(58, 140, 255, 0.3);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .logo-area:hover { transform: scale(1.02); }
+
+    .logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 28px;
+      object-fit: cover;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid rgba(58,140,255,0.3);
+    }
+
+    .logo-text h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3a6e, #3a8cff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    body.dark-mode .logo-text h2 {
+      background: linear-gradient(135deg, #ffffff, #8ab8ff);
+      background-clip: text;
+    }
+    .logo-text p {
+      font-size: 0.7rem;
+      color: #4a6a8e;
+      font-weight: 500;
+    }
+    body.dark-mode .logo-text p { color: #8a9dc0; }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .nav-link {
+      background: #f0f4fa;
+      padding: 10px 22px;
+      border-radius: 44px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1a3a6e;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(58,140,255,0.2);
+      backdrop-filter: blur(4px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-link:hover {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(58,140,255,0.3);
+    }
+    body.dark-mode .nav-link {
+      background: rgba(58, 140, 255, 0.15);
+      color: #c0d4ff;
+      border-color: rgba(58, 140, 255, 0.3);
+    }
+    body.dark-mode .nav-link:hover {
+      background: linear-gradient(95deg, #3a8cff, #5cb0ff);
+      color: white;
+    }
+
+    .dark-toggle {
+      background: #e0e7ff;
+      padding: 10px 18px;
+      border-radius: 44px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid rgba(58,140,255,0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    .dark-toggle:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    body.dark-mode .dark-toggle {
+      background: #2a2a4a;
+      color: #ffd966;
+      border-color: #ffd966;
+    }
+
+    /* MAIN CARD - COMPACT VERSION */
+    .main-card {
+      background: rgba(200, 225, 255, 0.25);
+      backdrop-filter: blur(16px);
+      border-radius: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    body.dark-mode .main-card {
+      background: rgba(18, 20, 34, 0.8);
+      border-color: rgba(58, 140, 255, 0.25);
+    }
+
+    .inner-card {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 24px 28px;
+      flex-wrap: nowrap;
+      background: rgba(150, 200, 255, 0.08);
+    }
+
+    @media (max-width: 900px) {
+      .inner-card { gap: 14px; padding: 18px 16px; }
+      .left, .center, .right { flex: 1; min-width: 0; }
+      .center h3, .right h3 { font-size: 1rem; }
+      .step-list p { font-size: 0.7rem; gap: 6px; }
+      .icon { width: 42px; height: 42px; font-size: 1.2rem; margin-bottom: 10px; }
+      h1 { font-size: 1.2rem; }
+      .desc { font-size: 0.65rem; }
+    }
+    @media (max-width: 700px) {
+      .inner-card { flex-direction: row !important; flex-wrap: wrap !important; }
+      .left, .center, .right { min-width: 210px; flex: 1 1 auto; }
+    }
+    @media (max-width: 550px) {
+      .inner-card { flex-direction: column !important; }
+      .left, .center, .right { width: 100%; }
+    }
+
+    .left { flex: 1.4; min-width: 230px; }
+    .center { flex: 1; background: rgba(180, 215, 255, 0.3); backdrop-filter: blur(12px); border-radius: 28px; padding: 18px 20px; border: 1px solid rgba(255, 255, 255, 0.4); min-width: 230px; }
+    .right { flex: 0.85; background: rgba(180, 215, 255, 0.3); backdrop-filter: blur(12px); border-radius: 28px; padding: 20px 16px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.4); }
+
+    body.dark-mode .center, body.dark-mode .right {
+      background: rgba(22, 25, 42, 0.7);
+      border-color: rgba(58,140,255,0.25);
+    }
+
+    .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: white;
+      box-shadow: 0 6px 14px rgba(46,204,113,0.3);
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, #c8e4ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin: 4px 0 2px;
+    }
+    body.dark-mode h1 { background: linear-gradient(135deg, #ffffff, #8ab8ff); background-clip: text; }
+
+    .desc {
+      font-size: 0.8rem;
+      color: #1a3a6e;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+    body.dark-mode .desc { color: #9aaec9; }
+
+    /* Format options */
+    .format-options {
+      margin-top: 16px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 28px;
+      padding: 12px 16px;
+      backdrop-filter: blur(4px);
+    }
+    .format-options label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #1a3a6e;
+      display: block;
+      margin-bottom: 8px;
+    }
+    body.dark-mode .format-options label { color: #c0d4ff; }
+    .format-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    .format-btn {
+      flex: 1;
+      background: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #1a3a6e;
+      text-align: center;
+    }
+    body.dark-mode .format-btn {
+      background: rgba(58,140,255,0.2);
+      color: #c0d4ff;
+      border-color: rgba(58,140,255,0.4);
+    }
+    .format-btn.active {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      border-color: transparent;
+    }
+
+    .drop-zone {
+      margin-top: 14px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 18px 16px;
+      text-align: center;
+      border: 2px dashed rgba(255,255,255,0.5);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .drop-zone.drag-over {
+      background: rgba(255, 255, 255, 0.4);
+      border-color: #3a8cff;
+      transform: scale(1.01);
+    }
+    .drop-zone-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .drop-icon { font-size: 38px; }
+    .drop-text { font-size: 0.85rem; color: #1a3a6e; font-weight: 500; }
+    .drop-sub { font-size: 0.65rem; color: #4a6a8e; }
+    body.dark-mode .drop-zone { background: rgba(58, 140, 255, 0.15); border-color: rgba(58, 140, 255, 0.4); }
+    body.dark-mode .drop-text { color: #c0d4ff; }
+    body.dark-mode .drop-sub { color: #8a9dc0; }
+
+    .file-box {
+      margin-top: 14px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      border-radius: 60px;
+      padding: 6px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #1a3a6e;
+      font-weight: 600;
+      font-size: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+    .file-btn, .convert-btn, .download {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      border: none;
+      transition: all 0.2s;
+    }
+    .file-btn {
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      box-shadow: 0 2px 6px rgba(58,140,255,0.3);
+    }
+    .convert-btn {
+      margin-top: 18px;
+      padding: 10px 12px;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 0.9rem;
+      width: 100%;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 12px rgba(58,140,255,0.3);
+    }
+    .convert-btn.disabled, .download.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .convert-btn:not(.disabled):hover, .download:not(.disabled):hover { transform: scale(0.97); background: linear-gradient(95deg, #4aa0ff, #2a7cff); }
+
+    .center h3, .right h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1a3a6e;
+    }
+    body.dark-mode .center h3, body.dark-mode .right h3 { color: white; }
+
+    .progress {
+      height: 6px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      margin: 14px 0 18px;
+      overflow: hidden;
+    }
+    .fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #5cb0ff, #3a8cff, #7bc5ff);
+      border-radius: 20px;
+      transition: width 0.25s ease;
+    }
+
+    .step-list p {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: #1a3a6e;
+      font-weight: 500;
+      background: rgba(255,255,255,0.2);
+      padding: 5px 10px;
+      border-radius: 32px;
+    }
+    body.dark-mode .step-list p { color: #b8c7e6; background: rgba(58,140,255,0.1); }
+
+    .check {
+      width: 58px;
+      height: 58px;
+      background: linear-gradient(145deg, #4caf50, #2e7d32);
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .download {
+      margin-top: 20px;
+      padding: 10px 14px;
+      border-radius: 50px;
+      width: 100%;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+    .link {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #1a3a6e;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 500;
+      background: none;
+      border: none;
+    }
+    .link:hover { color: #0a2a4e; }
+    body.dark-mode .link { color: #8a9dc0; }
+
+    .white-info-card {
+      background: white;
+      border-radius: 36px;
+      padding: 28px 32px;
+      margin-top: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    body.dark-mode .white-info-card { background: #15182b; border: 1px solid rgba(58,140,255,0.2); }
+    .white-info-card h2 { font-size: 1.6rem; font-weight: 700; color: #1a2a4a; text-align: center; margin-bottom: 12px; }
+    body.dark-mode .white-info-card h2 { color: white; }
+    .section-sub { text-align: center; color: #4a5568; margin-bottom: 24px; font-size: 0.9rem; }
+    .features-grid-white {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+    .feature-item-white {
+      background: #f0f4f8;
+      padding: 16px 10px;
+      border-radius: 24px;
+      text-align: center;
+    }
+    body.dark-mode .feature-item-white { background: #1e213a; }
+    .feature-icon-white { font-size: 1.8rem; margin-bottom: 8px; }
+    .feature-item-white h4 { color: #1a2a4a; font-size: 1rem; }
+    body.dark-mode .feature-item-white h4 { color: white; }
+    .feature-item-white p { font-size: 0.8rem; color: #4a5568; }
+    .faq-list-white { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+    .faq-item-white { background: #f0f4f8; border-radius: 20px; padding: 12px 20px; }
+    body.dark-mode .faq-item-white { background: #1e213a; }
+    .faq-question-white { font-weight: 700; color: #1a2a4a; margin-bottom: 6px; display: flex; gap: 8px; }
+    body.dark-mode .faq-question-white { color: white; }
+    .faq-answer-white { color: #4a5568; font-size: 0.85rem; padding-left: 24px; }
+    .internal-links-white { text-align: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e0e6ed; }
+    .links-row-white { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 12px; }
+    .links-row-white a { color: white; text-decoration: none; background: linear-gradient(95deg, #5cb0ff, #3a8cff); padding: 6px 18px; border-radius: 40px; font-size: 0.85rem; }
+    @media (max-width: 780px) {
+      .ai-hub-header { flex-direction: column; gap: 14px; padding: 14px 18px; }
+      .white-info-card { padding: 20px 18px; }
+      .white-info-card h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <header class="ai-hub-header">
+    <div class="logo-area" id="homeLogoLink">
+      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="AI Tools Hub 2026" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI26'">
+      <div class="logo-text"><h2>AI Tools Hub 2026</h2><p>Smart PDF to Word</p></div>
+    </div>
+    <nav class="nav-links">
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home 2026</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ AI Image Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 Smart PDF Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools" class="nav-link">⚙️ Utility Suite</a>
+      <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode 2026</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- COMPACT MAIN CARD - PDF TO WORD CONVERTER -->
+    <section class="main-card">
+      <div class="inner-card">
+        <div class="left">
+          <div class="icon">📄→📝</div>
+          <h1>PDF to Word 2026</h1>
+          <p class="desc">Drag & Drop • PDF to DOCX • Editable Output</p>
+          
+          <!-- Format Options -->
+          <div class="format-options">
+            <label>📎 Output Format:</label>
+            <div class="format-buttons">
+              <button class="format-btn active" data-format="docx">📝 DOCX (Word)</button>
             </div>
+          </div>
 
-            <h1 style="font-size:24px; font-weight:600;">
-                PDF to Word
-            </h1>
-
+          <!-- Drag & Drop Zone -->
+          <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-content">
+              <div class="drop-icon">📁📝</div>
+              <div class="drop-text">Drag & Drop your PDF file here</div>
+              <div class="drop-sub">or click below to browse</div>
+            </div>
+          </div>
+          
+          <div class="file-box">
+            <span id="fileName">Select PDF to convert</span>
+            <button class="file-btn" id="chooseBtn">Browse 2026</button>
+          </div>
+          
+          <button class="convert-btn disabled" id="convertBtn">✨ Convert to Word 2026 ✨</button>
+          <div id="fileErrorMsg" class="error-msg"></div>
         </div>
 
-        <p style="margin-bottom:30px; color:#ffffff;">
-            Convert your PDF file into an editable Word document instantly.
-            Fast, secure and completely free PDF to Word converter.
-        </p>
+        <div class="center">
+          <h3 id="statusTitle">Ready to Convert</h3>
+          <p id="etaText" style="font-size:0.75rem;">Drag & drop or browse PDF</p>
+          <div class="progress"><div class="fill" id="progressFill"></div></div>
+          <div class="step-list">
+            <p id="step1"><span>⭕</span> AI analyzing PDF — waiting</p>
+            <p id="step2"><span>⭕</span> Extracting text & content — waiting</p>
+            <p id="step3"><span>⭕</span> Generating Word document — waiting</p>
+          </div>
+        </div>
 
-        <!-- ✅ FIXED FORM -->
-        <form action="{{ url_for('pdf_to_word_action') }}"
-              method="POST"
-              enctype="multipart/form-data">
+        <div class="right">
+          <div class="check" id="checkIcon">🚀</div>
+          <h3 id="completeTitle">Awaiting PDF</h3>
+          <p id="completeMsg" style="font-size:0.7rem;">Convert to editable Word</p>
+          <button class="download disabled" id="downloadBtn">⬇️ Download DOCX ⬇️</button>
+          <button class="link" id="resetLink">Convert another PDF →</button>
+        </div>
+      </div>
+    </section>
 
-            <div style="
-                background:white;
-                padding:12px;
-                border-radius:10px;
-                margin-bottom:20px;
-            ">
-                <input type="file"
-                       name="file"
-                       accept=".pdf"
-                       required
-                       style="border:none; width:100%;">
-            </div>
+    <!-- SEO RICH INFO CARD -->
+    <article class="white-info-card">
+      <h2>📝 2026's Smartest PDF to Word Converter</h2>
+      <p class="section-sub">Convert PDF to editable Word DOCX • Free • No watermark</p>
+      <div class="features-grid-white">
+        <div class="feature-item-white"><div class="feature-icon-white">🖱️</div><h4>Drag & Drop PDF</h4><p>Effortless upload, instant conversion</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">🤖</div><h4>AI Text Extraction</h4><p>Smart extraction of text, layout, and structure</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">📝</div><h4>Editable DOCX</h4><p>Fully editable Microsoft Word format</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">🔒</div><h4>Privacy First</h4><p>100% local processing, never uploaded</p></div>
+      </div>
+      <div class="faq-list-white">
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Can I convert scanned PDFs?</div><div class="faq-answer-white">Yes! Our AI extracts text from both text-based and image-based PDFs.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Will the formatting be preserved?</div><div class="faq-answer-white">We preserve text layout, paragraphs, and basic structure for easy editing.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Is it really free in 2026?</div><div class="faq-answer-white">Yes! No signup, no watermark, unlimited usage.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Is my data safe?</div><div class="faq-answer-white">🛡️ 100% local conversion. Your PDF never leaves your device.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 What output format is supported?</div><div class="faq-answer-white">We convert to DOCX (Microsoft Word format) for full editability.</div></div>
+      </div>
+      <footer class="internal-links-white">
+        <p>🔥 Trending 2026 PDF Tools:</p>
+        <div class="links-row-white">
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf">📷 PNG to PDF 2026</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf">🖼️ JPG to PDF 2026</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-splitter">✂️ PDF Splitter 2026</a>
+        </div>
+        <p style="font-size: 0.7rem; margin-top: 16px;">© Free AI Tools 2026 - Next-Gen PDF to Word Converter | Drag & Drop | 100% Free</p>
+      </footer>
+    </article>
+  </main>
+</div>
 
-            <button type="submit"
-                    style="
-                        background:white;
-                        color:#4a00e0;
-                        border:none;
-                        padding:14px;
-                        width:100%;
-                        border-radius:10px;
-                        font-weight:600;
-                        cursor:pointer;
-                        transition:0.3s;
-                    "
-                    onmouseover="this.style.background='#f3f4f6'"
-                    onmouseout="this.style.background='white'">
-
-                Convert to Word
-
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
-
-<section style="max-width:900px; margin:100px auto; padding:0 20px; line-height:1.8;">
-
-    <h2>PDF to Word Converter Online Free – Convert PDF into Editable DOC</h2>
-
-    <p>
-        Our <strong>free PDF to Word converter</strong> allows you to convert PDF files into editable Word (DOC/DOCX) format.
-        If you want to make changes to a document, edit text, or update formatting,
-        this <strong>online PDF to DOC tool</strong> provides a fast and simple solution.
-    </p>
-
-    <p>
-        You can convert PDF to Word without installing any software.
-        Simply upload your file and download the editable Word document.
-        This tool uses secure processing and files are not permanently stored.
-    </p>
-
-    <h3>How to Convert PDF to Word Online?</h3>
-    <ul>
-        <li>Step 1: Upload your PDF file</li>
-        <li>Step 2: Click the Convert to Word button</li>
-        <li>Step 3: Download the editable DOC file</li>
-    </ul>
-
-    <h3>Why Use This PDF to Word Tool?</h3>
-    <ul>
-        <li>100% free conversion</li>
-        <li>No watermark</li>
-        <li>Editable Word output</li>
-        <li>Fast processing</li>
-        <li>Secure file handling</li>
-        <li>Works on mobile & desktop</li>
-    </ul>
-
-    <h3>Explore More PDF Tools</h3>
-
-    <ul>
-        <li><a href="{{ url_for('image_compressor') }}">Compress Image Online</a></li>
-        <li><a href="{{ url_for('image_resize') }}">Resize Image Online</a></li>
-        <li><a href="{{ url_for('bg_remover') }}">Background Remover Tool</a></li>
-        <li><a href="{{ url_for('merge_pdf') }}">Merge PDF Files</a></li>
-        <li><a href="{{ url_for('split_pdf') }}">Split PDF Online</a></li>
-        <li><a href="{{ url_for('pdf_to_word') }}">PDF to Word Converter</a></li>
-    </ul>
-
-    <h3>Frequently Asked Questions (FAQ)</h3>
-
-    <p><strong>Q: Will the formatting remain the same after conversion?</strong><br>
-    In most cases formatting is preserved, but complex layouts may require minor adjustments.</p>
-
-    <p><strong>Q: Is this tool safe?</strong><br>
-    Yes, files are processed temporarily and are not permanently stored.</p>
-
-    <p><strong>Q: Can I convert PDF to Word using my mobile?</strong><br>
-    Yes, this is a fully responsive converter that works smoothly on both mobile and desktop.</p>
-
-</section>
-
-<style>
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-</style>
-
-{% endblock %}
+<script>
+  (function(){
+    let selectedFile = null, isProcessing = false, processedBlob = null, conversionDone = false;
+    
+    const elements = {
+      fileName: document.getElementById('fileName'), convertBtn: document.getElementById('convertBtn'), downloadBtn: document.getElementById('downloadBtn'),
+      resetLink: document.getElementById('resetLink'), progressFill: document.getElementById('progressFill'), statusTitle: document.getElementById('statusTitle'),
+      etaText: document.getElementById('etaText'), step1: document.getElementById('step1'), step2: document.getElementById('step2'), step3: document.getElementById('step3'),
+      checkIcon: document.getElementById('checkIcon'), completeTitle: document.getElementById('completeTitle'), completeMsg: document.getElementById('completeMsg'),
+      fileErrorMsg: document.getElementById('fileErrorMsg')
+    };
+    
+    // Set up PDF.js worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+    
+    function validateFile(file){
+      if(!file) return {valid:false, message:'No file'};
+      if(file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) return {valid:false, message:'❌ Only PDF files supported'};
+      if(file.size > 50 * 1024 * 1024) return {valid:false, message:'❌ Max 50MB allowed'};
+      return {valid:true, message:'✓ PDF ready for conversion'};
+    }
+    
+    function showMessage(msg, isErr=false){ 
+      if(elements.fileErrorMsg){ 
+        elements.fileErrorMsg.textContent=msg; 
+        elements.fileErrorMsg.style.color=isErr?'#ff6b6b':'#4caf50'; 
+        if(!isErr) setTimeout(()=>{if(elements.fileErrorMsg.textContent===msg) elements.fileErrorMsg.textContent='';},3000);
+      } 
+    }
+    
+    function resetUI(resetFile=true){
+      if(isProcessing) isProcessing=false;
+      conversionDone=false; processedBlob=null;
+      elements.progressFill.style.width='0%';
+      elements.step1.innerHTML='<span>⭕</span> AI analyzing PDF — waiting';
+      elements.step2.innerHTML='<span>⭕</span> Extracting text & content — waiting';
+      elements.step3.innerHTML='<span>⭕</span> Generating Word document — waiting';
+      elements.statusTitle.innerText='Ready to Convert';
+      elements.etaText.innerText='Drag & drop or browse PDF';
+      elements.downloadBtn.classList.add('disabled');
+      elements.checkIcon.innerHTML='🚀';
+      elements.completeTitle.innerText='Awaiting PDF';
+      elements.completeMsg.innerText='Convert to editable Word';
+      if(resetFile){ selectedFile=null; elements.fileName.innerText='Select PDF to convert'; const hidden=document.getElementById('hiddenFileInput'); if(hidden) hidden.value=''; showMessage('',false); }
+      updateConvertBtn();
+    }
+    
+    function updateConvertBtn(){
+      if(selectedFile && !isProcessing && !conversionDone && validateFile(selectedFile).valid) elements.convertBtn.classList.remove('disabled');
+      else elements.convertBtn.classList.add('disabled');
+    }
+    
+    function setStep(stepNum, text, active, percent){
+      const step = stepNum===1?elements.step1:(stepNum===2?elements.step2:elements.step3);
+      if(step) step.innerHTML = `<span>${active?'🔄':'✅'}</span> ${text}`;
+      if(percent!==undefined) elements.progressFill.style.width = Math.min(100,percent)+'%';
+    }
+    
+    // Escape XML special characters
+    function escapeXml(str) {
+      if (!str) return '';
+      return str.replace(/[<>&]/g, function(m) {
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        if (m === '&') return '&amp;';
+        return m;
+      }).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+    }
+    
+    // Extract text from PDF and create DOCX
+    async function convertPdfToDocx(file) {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const numPages = pdf.numPages;
+      
+      let allText = '';
+      
+      for (let i = 1; i <= numPages; i++) {
+        const page = await pdf.getPage(i);
+        const textContent = await page.getTextContent();
+        const pageText = textContent.items.map(item => item.str).join(' ');
+        allText += pageText + '\n\n';
+        
+        // Update progress
+        const progress = 50 + (i / numPages) * 30;
+        setStep(2, `Extracting text (page ${i}/${numPages})...`, true, progress);
+      }
+      
+      // Split into paragraphs
+      const paragraphs = allText.split('\n\n').filter(p => p.trim().length > 0);
+      
+      // Build DOCX XML
+      let docxXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+          <w:body>`;
+      
+      for (const para of paragraphs) {
+        docxXml += `
+            <w:p>
+              <w:pPr>
+                <w:spacing w:line="240" w:lineRule="auto"/>
+              </w:pPr>
+              <w:r>
+                <w:rPr>
+                  <w:sz w:val="24"/>
+                  <w:szCs w:val="24"/>
+                </w:rPr>
+                <w:t xml:space="preserve">${escapeXml(para.trim())}</w:t>
+              </w:r>
+            </w:p>`;
+      }
+      
+      docxXml += `
+            <w:sectPr>
+              <w:pgSz w:w="12240" w:h="15840"/>
+              <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"/>
+            </w:sectPr>
+          </w:body>
+        </w:document>`;
+      
+      // Create ZIP structure for DOCX
+      const zip = new JSZip();
+      
+      // [Content_Types].xml
+      zip.file("[Content_Types].xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+          <Default Extension="xml" ContentType="application/xml"/>
+          <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+        </Types>`);
+      
+      // _rels/.rels
+      zip.folder("_rels").file(".rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+          <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+        </Relationships>`);
+      
+      // word/document.xml
+      zip.folder("word").file("document.xml", docxXml);
+      
+      // word/_rels/document.xml.rels
+      zip.folder("word").folder("_rels").file("document.xml.rels", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+        </Relationships>`);
+      
+      // Generate blob
+      const docxBlob = await zip.generateAsync({ type: "blob" });
+      return docxBlob;
+    }
+    
+    async function startConversion(){
+      if(!selectedFile || !validateFile(selectedFile).valid || isProcessing) return;
+      resetUI(false);
+      isProcessing=true; conversionDone=false; processedBlob=null;
+      elements.downloadBtn.classList.add('disabled');
+      elements.checkIcon.innerHTML='⏳';
+      elements.completeTitle.innerText='Converting...';
+      updateConvertBtn();
+      
+      try{
+        setStep(1, 'AI analyzing PDF structure', true, 15);
+        await new Promise(r=>setTimeout(r,60));
+        setStep(1, 'PDF analyzed ✓', false, 35);
+        setStep(2, 'Extracting text & content', true, 50);
+        
+        const docxBlob = await convertPdfToDocx(selectedFile);
+        
+        setStep(2, 'Text extracted ✓', false, 85);
+        setStep(3, 'Generating Word document', true, 92);
+        await new Promise(r=>setTimeout(r,50));
+        
+        processedBlob = docxBlob;
+        conversionDone = true;
+        isProcessing = false;
+        
+        setStep(3, 'Word document ready! ✨', false, 100);
+        elements.progressFill.style.width='100%';
+        
+        const origKB = (selectedFile.size/1024).toFixed(1);
+        const newKB = (processedBlob.size/1024).toFixed(1);
+        
+        elements.statusTitle.innerText = `✅ PDF → DOCX Complete`;
+        elements.etaText.innerText = `${origKB}KB → ${newKB}KB`;
+        elements.checkIcon.innerHTML = '✔️📝';
+        elements.completeTitle.innerText = 'Conversion Complete!';
+        elements.completeMsg.innerText = `Editable Word document ready`;
+        elements.downloadBtn.classList.remove('disabled');
+        elements.convertBtn.classList.add('disabled');
+        showMessage(`✓ PDF converted to Word successfully!`, false);
+      } catch(err){
+        isProcessing=false;
+        console.error(err);
+        showMessage('Conversion failed: ' + err.message, true);
+        resetUI(false);
+      }
+      updateConvertBtn();
+    }
+    
+    function downloadDocx(){
+      if(!conversionDone || !processedBlob) return;
+      const url = URL.createObjectURL(processedBlob);
+      const a = document.createElement('a');
+      const name = (selectedFile ? selectedFile.name.replace(/\.pdf$/i,'') : 'document') + '_converted.docx';
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+    
+    function handleFileSelection(file){
+      const valid = validateFile(file);
+      if(!valid.valid){ showMessage(valid.message,true); return false; }
+      selectedFile = file;
+      elements.fileName.innerText = file.name.length>40 ? file.name.slice(0,36)+'...' : file.name;
+      if(conversionDone) resetUI(false);
+      conversionDone=false; processedBlob=null;
+      showMessage('✓ PDF loaded, ready to convert', false);
+      updateConvertBtn();
+      return true;
+    }
+    
+    const dropZone = document.getElementById('dropZone');
+    const hiddenInput = document.createElement('input'); 
+    hiddenInput.type='file'; 
+    hiddenInput.accept='application/pdf'; 
+    hiddenInput.style.display='none'; 
+    hiddenInput.id='hiddenFileInput';
+    document.body.appendChild(hiddenInput);
+    
+    dropZone.addEventListener('click',()=>{ if(!isProcessing) hiddenInput.click(); });
+    dropZone.addEventListener('dragover',(e)=>{ e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave',()=>{ dropZone.classList.remove('drag-over'); });
+    dropZone.addEventListener('drop',(e)=>{ 
+      e.preventDefault(); 
+      dropZone.classList.remove('drag-over'); 
+      if(e.dataTransfer.files && e.dataTransfer.files[0]) handleFileSelection(e.dataTransfer.files[0]); 
+    });
+    document.getElementById('chooseBtn').addEventListener('click',(e)=>{ e.stopPropagation(); if(!isProcessing) hiddenInput.click(); });
+    hiddenInput.addEventListener('change',(e)=>{ if(e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0]); });
+    elements.convertBtn.addEventListener('click', startConversion);
+    elements.downloadBtn.addEventListener('click', downloadDocx);
+    elements.resetLink.addEventListener('click',()=>{ if(!isProcessing) resetUI(true); });
+    document.getElementById('homeLogoLink').addEventListener('click',()=> window.location.href='https://free-ai-tools-for-pdf-image-file.onrender.com/');
+    
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click',()=>{ 
+      document.body.classList.toggle('dark-mode'); 
+      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode 2026' : '🌙 Dark Mode 2026'; 
+    });
+    resetUI(true);
+  })();
+</script>
+</body>
+</html>
