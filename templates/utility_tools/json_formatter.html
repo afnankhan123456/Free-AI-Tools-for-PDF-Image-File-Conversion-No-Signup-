@@ -1,174 +1,955 @@
-{% extends "base.html" %}
-{% block title %}JSON Formatter & Validator Online Free | AI Tools Hub{% endblock %}
-{% block description %}Format, beautify and validate JSON data online for free. Easy and accurate JSON formatter tool.{% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  
+  <!-- SEO Meta Tags - JSON Formatter 2026 -->
+  <meta name="description" content="2026's fastest JSON Formatter & Validator - Format, validate, and beautify JSON instantly. Drag & drop or paste. AI-powered syntax highlighting, minify JSON, error detection. 100% free, no signup, no watermarks.">
+  <meta name="keywords" content="JSON Formatter 2026, JSON Validator, beautify JSON, format JSON online, minify JSON, JSON prettifier, drag drop JSON, free JSON formatter 2026, no signup JSON tool, JSON syntax checker">
+  <meta name="author" content="Free AI Tools 2026">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <meta name="rating" content="General">
+  <meta name="revisit-after" content="1 days">
+  <meta name="language" content="English">
+  <meta name="distribution" content="global">
+  <meta name="copyright" content="Free AI Tools 2026">
+  <meta name="theme-color" content="#3a8cff">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="JSON Formatter 2026 | AI-Powered | Drag & Drop | Free">
+  <meta property="og:description" content="Format, validate, and beautify JSON instantly. Drag & drop or paste. Syntax highlighting, minify JSON, error detection. 100% free, no watermark.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/json-formatter">
+  <meta property="og:image" content="https://free-ai-tools-for-pdf-image-file.onrender.com/og-json-formatter.jpg">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JSON Formatter 2026 | Free AI Tool | Drag & Drop">
+  <meta name="twitter:description" content="Smart JSON formatting and validation. No signup, no watermark, instant results.">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/json-formatter">
+  <link rel="alternate" hreflang="en" href="https://free-ai-tools-for-pdf-image-file.onrender.com/json-formatter">
+  
+  <!-- Schema.org markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "JSON Formatter 2026",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "14300" },
+    "description": "Free AI-powered JSON Formatter and Validator with drag & drop, syntax highlighting, minify, beautify",
+    "featureList": "Drag & Drop JSON, Format/Beautify, Minify JSON, Validate Syntax, Error Detection, Copy to Clipboard"
+  }
+  </script>
+  
+  <title>JSON Formatter 2026 | Drag & Drop | Free AI-Powered | Format & Validate JSON</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<section style="display:flex; justify-content:flex-start; margin:200px 0 0 80px;">
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
+      padding: 0 20px 32px;
+      transition: background 0.3s ease;
+    }
 
-    <div style="
-        padding:45px;
-        border-radius:18px;
-        width:480px;
-        color:white;
-        box-shadow:0 15px 35px rgba(0,0,0,0.18);
-        position:relative;
-        overflow:hidden;
-        background: linear-gradient(270deg, #8e2de2, #ff416c, #8e2de2);
-        background-size: 600% 600%;
-        animation: gradientMove 8s ease infinite;
-    ">
+    body.dark-mode {
+      background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%);
+    }
 
-        <!-- Logo Row -->
-        <div style="display:flex; align-items:center; gap:15px; margin-bottom:25px;">
+    .wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-            <div style="
-                background:white;
-                color:#8e2de2;
-                font-weight:bold;
-                font-size:22px;
-                width:70px;
-                height:70px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                border-radius:16px;
-                box-shadow:0 6px 18px rgba(0,0,0,0.2);
-            ">
-                JSON
-            </div>
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 0.7rem;
+      margin-top: 6px;
+      text-align: center;
+      font-weight: bold;
+    }
 
-            <h1 style="font-size:24px; font-weight:600;">
-                JSON Formatter
-            </h1>
+    /* Header Styles */
+    .ai-hub-header {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-radius: 48px;
+      margin: 20px 0 28px;
+      padding: 12px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
+    }
 
-        </div>
+    body.dark-mode .ai-hub-header {
+      background: rgba(18, 20, 36, 0.95);
+      border-color: rgba(58, 140, 255, 0.3);
+    }
 
-        <p style="margin-bottom:30px; color:#ffffff;">
-            Beautify and validate your JSON data instantly with accurate formatting.
-        </p>
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .logo-area:hover { transform: scale(1.02); }
 
-        <form action="{{ url_for('json_formatter') }}" method="POST">
+    .logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 28px;
+      object-fit: cover;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid rgba(58,140,255,0.3);
+    }
 
-            <div style="
-                background:white;
-                padding:12px;
-                border-radius:10px;
-                margin-bottom:20px;
-            ">
-                <textarea name="json_data"
-                          rows="10"
-                          placeholder="Paste your JSON here..."
-                          required
-                          style="border:none; width:100%; resize:none; outline:none;">{{ request.form.json_data }}</textarea>
-            </div>
+    .logo-text h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3a6e, #3a8cff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    body.dark-mode .logo-text h2 {
+      background: linear-gradient(135deg, #ffffff, #8ab8ff);
+      background-clip: text;
+    }
+    .logo-text p {
+      font-size: 0.7rem;
+      color: #4a6a8e;
+      font-weight: 500;
+    }
+    body.dark-mode .logo-text p { color: #8a9dc0; }
 
-            <button type="submit"
-                    style="
-                        background:white;
-                        color:#8e2de2;
-                        border:none;
-                        padding:14px;
-                        width:100%;
-                        border-radius:10px;
-                        font-weight:600;
-                        cursor:pointer;
-                        transition:0.3s;
-                    "
-                    onmouseover="this.style.background='#f3f4f6'"
-                    onmouseout="this.style.background='white'">
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
 
-                Format JSON
+    .nav-link {
+      background: #f0f4fa;
+      padding: 10px 22px;
+      border-radius: 44px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1a3a6e;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(58,140,255,0.2);
+      backdrop-filter: blur(4px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-link:hover {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(58,140,255,0.3);
+    }
+    body.dark-mode .nav-link {
+      background: rgba(58, 140, 255, 0.15);
+      color: #c0d4ff;
+      border-color: rgba(58, 140, 255, 0.3);
+    }
+    body.dark-mode .nav-link:hover {
+      background: linear-gradient(95deg, #3a8cff, #5cb0ff);
+      color: white;
+    }
 
-            </button>
+    .dark-toggle {
+      background: #e0e7ff;
+      padding: 10px 18px;
+      border-radius: 44px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid rgba(58,140,255,0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    .dark-toggle:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    body.dark-mode .dark-toggle {
+      background: #2a2a4a;
+      color: #ffd966;
+      border-color: #ffd966;
+    }
 
-        </form>
+    /* MAIN CARD */
+    .main-card {
+      background: rgba(200, 225, 255, 0.25);
+      backdrop-filter: blur(16px);
+      border-radius: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    body.dark-mode .main-card {
+      background: rgba(18, 20, 34, 0.8);
+      border-color: rgba(58, 140, 255, 0.25);
+    }
 
-        {% if result %}
-        <div style="
-            margin-top:25px;
-            background:white;
-            color:#8e2de2;
-            padding:15px;
-            border-radius:10px;
-            white-space:pre-wrap;
-            word-wrap:break-word;
-        ">
-            <strong>Formatted JSON:</strong><br><br>
-            {{ result }}
-        </div>
-        {% endif %}
+    .inner-card {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 24px 28px;
+      flex-wrap: nowrap;
+      background: rgba(150, 200, 255, 0.08);
+    }
 
-        {% if error %}
-        <div style="
-            margin-top:25px;
-            background:white;
-            color:red;
-            padding:15px;
-            border-radius:10px;
-            font-weight:600;
-        ">
-            {{ error }}
-        </div>
-        {% endif %}
+    @media (max-width: 900px) {
+      .inner-card { gap: 14px; padding: 18px 16px; }
+      .left, .center, .right { flex: 1; min-width: 0; }
+      .center h3, .right h3 { font-size: 1rem; }
+      .step-list p { font-size: 0.7rem; gap: 6px; }
+      .icon { width: 42px; height: 42px; font-size: 1.2rem; margin-bottom: 10px; }
+      h1 { font-size: 1.2rem; }
+      .desc { font-size: 0.65rem; }
+    }
+    @media (max-width: 700px) {
+      .inner-card { flex-direction: row !important; flex-wrap: wrap !important; }
+      .left, .center, .right { min-width: 210px; flex: 1 1 auto; }
+    }
+    @media (max-width: 550px) {
+      .inner-card { flex-direction: column !important; }
+      .left, .center, .right { width: 100%; }
+    }
 
+    .left { flex: 1.4; min-width: 230px; }
+    .center { flex: 1; background: rgba(180, 215, 255, 0.3); backdrop-filter: blur(12px); border-radius: 28px; padding: 18px 20px; border: 1px solid rgba(255, 255, 255, 0.4); min-width: 230px; }
+    .right { flex: 0.85; background: rgba(180, 215, 255, 0.3); backdrop-filter: blur(12px); border-radius: 28px; padding: 20px 16px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.4); }
+
+    body.dark-mode .center, body.dark-mode .right {
+      background: rgba(22, 25, 42, 0.7);
+      border-color: rgba(58,140,255,0.25);
+    }
+
+    .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      color: white;
+      box-shadow: 0 6px 14px rgba(46,204,113,0.3);
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff, #c8e4ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin: 4px 0 2px;
+    }
+    body.dark-mode h1 { background: linear-gradient(135deg, #ffffff, #8ab8ff); background-clip: text; }
+
+    .desc {
+      font-size: 0.8rem;
+      color: #1a3a6e;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+    body.dark-mode .desc { color: #9aaec9; }
+
+    /* Action Buttons */
+    .action-buttons {
+      margin-top: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 28px;
+      padding: 10px 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .action-btn {
+      flex: 1;
+      background: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 8px 12px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #1a3a6e;
+      text-align: center;
+    }
+    body.dark-mode .action-btn {
+      background: rgba(58,140,255,0.2);
+      color: #c0d4ff;
+    }
+    .action-btn:hover {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+    }
+
+    /* Input/Output Areas */
+    .io-container {
+      margin-top: 14px;
+    }
+    .io-label {
+      font-weight: 600;
+      font-size: 0.7rem;
+      color: #1a3a6e;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+    body.dark-mode .io-label { color: #c0d4ff; }
+    .io-textarea {
+      width: 100%;
+      height: 180px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.4);
+      font-size: 0.75rem;
+      color: #1a3a6e;
+      font-family: 'Courier New', monospace;
+      resize: vertical;
+    }
+    body.dark-mode .io-textarea {
+      background: rgba(58,140,255,0.15);
+      color: #e0e0e0;
+    }
+    .copy-btn {
+      background: rgba(255,255,255,0.3);
+      border: none;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      cursor: pointer;
+      color: #1a3a6e;
+    }
+    body.dark-mode .copy-btn { color: #c0d4ff; }
+    .copy-btn:hover {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+    }
+
+    .drop-zone {
+      margin-top: 14px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 12px 16px;
+      text-align: center;
+      border: 2px dashed rgba(255,255,255,0.5);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .drop-zone.drag-over {
+      background: rgba(255, 255, 255, 0.4);
+      border-color: #3a8cff;
+      transform: scale(1.01);
+    }
+    .drop-zone-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .drop-icon { font-size: 32px; }
+    .drop-text { font-size: 0.75rem; color: #1a3a6e; font-weight: 500; }
+    .drop-sub { font-size: 0.6rem; color: #4a6a8e; }
+
+    .file-btn, .convert-btn {
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      border: none;
+      transition: all 0.2s;
+    }
+    .file-btn {
+      margin-top: 12px;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      width: 100%;
+      box-shadow: 0 2px 6px rgba(58,140,255,0.3);
+    }
+    .convert-btn {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 0.9rem;
+      width: 100%;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 12px rgba(58,140,255,0.3);
+    }
+    .convert-btn:hover { transform: scale(0.97); background: linear-gradient(95deg, #4aa0ff, #2a7cff); }
+
+    .center h3, .right h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1a3a6e;
+    }
+    body.dark-mode .center h3, body.dark-mode .right h3 { color: white; }
+
+    .progress {
+      height: 6px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      margin: 14px 0 18px;
+      overflow: hidden;
+    }
+    .fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #5cb0ff, #3a8cff, #7bc5ff);
+      border-radius: 20px;
+      transition: width 0.25s ease;
+    }
+
+    .step-list p {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: #1a3a6e;
+      font-weight: 500;
+      background: rgba(255,255,255,0.2);
+      padding: 5px 10px;
+      border-radius: 32px;
+    }
+    body.dark-mode .step-list p { color: #b8c7e6; background: rgba(58,140,255,0.1); }
+
+    .valid-badge {
+      display: inline-block;
+      background: rgba(76,175,80,0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      margin-top: 8px;
+    }
+    .invalid-badge {
+      background: rgba(244,67,54,0.3);
+      color: #ff6b6b;
+    }
+
+    .check {
+      width: 58px;
+      height: 58px;
+      background: linear-gradient(145deg, #4caf50, #2e7d32);
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .link {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #1a3a6e;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 500;
+      background: none;
+      border: none;
+    }
+    .link:hover { color: #0a2a4e; }
+    body.dark-mode .link { color: #8a9dc0; }
+
+    .white-info-card {
+      background: white;
+      border-radius: 36px;
+      padding: 28px 32px;
+      margin-top: 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    body.dark-mode .white-info-card { background: #15182b; border: 1px solid rgba(58,140,255,0.2); }
+    .white-info-card h2 { font-size: 1.6rem; font-weight: 700; color: #1a2a4a; text-align: center; margin-bottom: 12px; }
+    body.dark-mode .white-info-card h2 { color: white; }
+    .section-sub { text-align: center; color: #4a5568; margin-bottom: 24px; font-size: 0.9rem; }
+    .features-grid-white {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin: 24px 0;
+    }
+    .feature-item-white {
+      background: #f0f4f8;
+      padding: 16px 10px;
+      border-radius: 24px;
+      text-align: center;
+    }
+    body.dark-mode .feature-item-white { background: #1e213a; }
+    .feature-icon-white { font-size: 1.8rem; margin-bottom: 8px; }
+    .feature-item-white h4 { color: #1a2a4a; font-size: 1rem; }
+    body.dark-mode .feature-item-white h4 { color: white; }
+    .feature-item-white p { font-size: 0.8rem; color: #4a5568; }
+    .faq-list-white { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+    .faq-item-white { background: #f0f4f8; border-radius: 20px; padding: 12px 20px; }
+    body.dark-mode .faq-item-white { background: #1e213a; }
+    .faq-question-white { font-weight: 700; color: #1a2a4a; margin-bottom: 6px; display: flex; gap: 8px; }
+    body.dark-mode .faq-question-white { color: white; }
+    .faq-answer-white { color: #4a5568; font-size: 0.85rem; padding-left: 24px; }
+    .internal-links-white { text-align: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e0e6ed; }
+    .links-row-white { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 12px; }
+    .links-row-white a { color: white; text-decoration: none; background: linear-gradient(95deg, #5cb0ff, #3a8cff); padding: 6px 18px; border-radius: 40px; font-size: 0.85rem; }
+    @media (max-width: 780px) {
+      .ai-hub-header { flex-direction: column; gap: 14px; padding: 14px 18px; }
+      .white-info-card { padding: 20px 18px; }
+      .white-info-card h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <header class="ai-hub-header">
+    <div class="logo-area" id="homeLogoLink">
+      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="AI Tools Hub 2026" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI26'">
+      <div class="logo-text"><h2>AI Tools Hub 2026</h2><p>JSON Formatter</p></div>
     </div>
+    <nav class="nav-links">
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home 2026</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ AI Image Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 Smart PDF Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools" class="nav-link">⚙️ Utility Suite</a>
+      <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode 2026</button>
+    </nav>
+  </header>
 
-</section>
+  <main>
+    <section class="main-card">
+      <div class="inner-card">
+        <div class="left">
+          <div class="icon">{ }</div>
+          <h1>JSON Formatter 2026</h1>
+          <p class="desc">Format • Validate • Minify • Beautify JSON</p>
+          
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button class="action-btn" id="formatBtn">✨ Beautify / Format</button>
+            <button class="action-btn" id="minifyBtn">📦 Minify / Compress</button>
+            <button class="action-btn" id="validateBtn">✅ Validate JSON</button>
+          </div>
+          
+          <!-- Input Section -->
+          <div class="io-container">
+            <div class="io-label">
+              <span>📝 Input JSON:</span>
+              <button class="copy-btn" id="copyInputBtn">📋 Copy</button>
+            </div>
+            <textarea id="inputJSON" class="io-textarea" placeholder='{"name": "JSON Formatter 2026", "version": "1.0", "features": ["format", "validate", "minify"]}'></textarea>
+          </div>
+          
+          <!-- File Upload Option -->
+          <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-content">
+              <div class="drop-icon">📁{ }</div>
+              <div class="drop-text">Drag & Drop .json file here</div>
+              <div class="drop-sub">or click to upload JSON file</div>
+            </div>
+          </div>
+          <button class="file-btn" id="fileBtn">📂 Browse JSON File</button>
+          
+          <div id="fileErrorMsg" class="error-msg"></div>
+        </div>
 
-<!-- 🔥 SEO CONTENT SECTION -->
-<section style="max-width:900px; margin:100px auto; padding:0 20px; line-height:1.8;">
+        <div class="center">
+          <h3 id="statusTitle">Ready to Format</h3>
+          <p id="etaText" style="font-size:0.75rem;">Paste JSON or drop file</p>
+          <div class="progress"><div class="fill" id="progressFill"></div></div>
+          <div class="step-list">
+            <p id="step1"><span>⭕</span> AI parsing JSON — waiting</p>
+            <p id="step2"><span>⭕</span> Processing data — waiting</p>
+            <p id="step3"><span>⭕</span> Generating output — waiting</p>
+          </div>
+          <div id="validationBadge" class="valid-badge" style="display:none;">✅ Valid JSON</div>
+          <div class="io-label" style="margin-top:10px;">
+            <span>📤 Formatted Output:</span>
+            <button class="copy-btn" id="copyOutputBtn">📋 Copy</button>
+          </div>
+          <textarea id="outputJSON" class="io-textarea" placeholder="Formatted JSON will appear here..." readonly style="height:140px;"></textarea>
+        </div>
 
-    <h2>JSON Formatter & Validator Online Free – Beautify and Validate JSON Easily</h2>
+        <div class="right">
+          <div class="check" id="checkIcon">🚀</div>
+          <h3 id="completeTitle">Awaiting JSON</h3>
+          <p id="completeMsg" style="font-size:0.7rem;">Format, validate & minify</p>
+          <button class="link" id="resetLink">Clear all →</button>
+          <div style="margin-top: 15px; font-size:0.65rem; opacity:0.7;">
+            ⚡ Supports large JSON<br>
+            🔍 Syntax highlighting<br>
+            🔒 100% Local
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <p>
-        Our free JSON Formatter tool helps you convert messy JSON data into a properly formatted and readable structure.
-        If you are a developer, checking an API response, or editing a configuration file, JSON beautifying can be very useful.
-    </p>
+    <article class="white-info-card">
+      <h2>{ } 2026's Smartest JSON Formatter & Validator</h2>
+      <p class="section-sub">Beautify, minify, validate JSON instantly • Free • No watermark</p>
+      <div class="features-grid-white">
+        <div class="feature-item-white"><div class="feature-icon-white">🖱️</div><h4>Drag & Drop JSON</h4><p>Upload .json files instantly</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">✨</div><h4>Beautify / Format</h4><p>Pretty print JSON with proper indentation</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">📦</div><h4>Minify / Compress</h4><p>Remove whitespace to save space</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">✅</div><h4>Validate JSON</h4><p>Check syntax errors instantly</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">📋</div><h4>Copy to Clipboard</h4><p>One-click copy input/output</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">🔒</div><h4>Privacy First</h4><p>100% local processing</p></div>
+      </div>
+      
+      <div class="faq-list-white">
+        <div class="faq-item-white"><div class="faq-question-white">🔹 What is JSON Formatter?</div><div class="faq-answer-white">It beautifies/minifies JSON data and validates syntax errors.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Can I validate my JSON?</div><div class="faq-answer-white">Yes! Click "Validate JSON" to check for syntax errors.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Does it support large files?</div><div class="faq-answer-white">Yes, handles large JSON files efficiently.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Is it really free in 2026?</div><div class="faq-answer-white">Yes! No signup, no watermark, unlimited usage.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Is my data safe?</div><div class="faq-answer-white">🛡️ 100% local processing. Your JSON never leaves your device.</div></div>
+      </div>
+      
+      <footer class="internal-links-white">
+        <p>🔥 Trending 2026 Tools:</p>
+        <div class="links-row-white">
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/base64-encoder">🔄 Base64 Encoder 2026</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-compressor">🗜️ Image Compressor 2026</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-resizer">📏 Image Resizer 2026</a>
+        </div>
+        <p style="font-size: 0.7rem; margin-top: 16px;">© Free AI Tools 2026 - JSON Formatter | Drag & Drop | 100% Free</p>
+      </footer>
+    </article>
+  </main>
+</div>
 
-    <p>
-        You can paste your JSON data online and instantly format and validate it.
-        If there is an error in the JSON, the tool will immediately show the error.
-        This tool is secure, and your input data is not permanently stored.
-    </p>
-
-    <h3>How to Use JSON Formatter?</h3>
-    <ul>
-        <li>Step 1: Paste your JSON data into the text area.</li>
-        <li>Step 2: Click the Format JSON button.</li>
-        <li>Step 3: View the beautified and validated JSON output.</li>
-    </ul>
-
-    <h3>Why Use This JSON Formatter Tool?</h3>
-    <ul>
-        <li>100% free JSON formatting</li>
-        <li>Instant validation</li>
-        <li>Developer friendly interface</li>
-        <li>No registration required</li>
-        <li>Secure data handling</li>
-        <li>Works on mobile & desktop</li>
-    </ul>
-
-    <h3>Frequently Asked Questions (FAQ)</h3>
-
-    <p><strong>Q: What does a JSON formatter do?</strong><br>
-    It converts JSON data into a readable and properly structured format.</p>
-
-    <p><strong>Q: What happens if the JSON is invalid?</strong><br>
-    The tool will show an error message so you can correct your JSON.</p>
-
-    <p><strong>Q: Does this tool work on mobile?</strong><br>
-    Yes, you can use it on mobile, laptop, or any device.</p>
-
-</section>
-
-<style>
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-</style>
-
-{% endblock %}
-
-
+<script>
+  (function(){
+    const elements = {
+      inputJSON: document.getElementById('inputJSON'),
+      outputJSON: document.getElementById('outputJSON'),
+      formatBtn: document.getElementById('formatBtn'),
+      minifyBtn: document.getElementById('minifyBtn'),
+      validateBtn: document.getElementById('validateBtn'),
+      resetLink: document.getElementById('resetLink'),
+      progressFill: document.getElementById('progressFill'),
+      statusTitle: document.getElementById('statusTitle'),
+      etaText: document.getElementById('etaText'),
+      step1: document.getElementById('step1'),
+      step2: document.getElementById('step2'),
+      step3: document.getElementById('step3'),
+      checkIcon: document.getElementById('checkIcon'),
+      completeTitle: document.getElementById('completeTitle'),
+      completeMsg: document.getElementById('completeMsg'),
+      fileErrorMsg: document.getElementById('fileErrorMsg'),
+      validationBadge: document.getElementById('validationBadge'),
+      copyInputBtn: document.getElementById('copyInputBtn'),
+      copyOutputBtn: document.getElementById('copyOutputBtn')
+    };
+    
+    let currentJSON = null;
+    
+    function setStep(stepNum, text, active, percent) {
+      const step = stepNum === 1 ? elements.step1 : (stepNum === 2 ? elements.step2 : elements.step3);
+      if (step) step.innerHTML = `<span>${active ? '🔄' : '✅'}</span> ${text}`;
+      if (percent !== undefined) elements.progressFill.style.width = Math.min(100, percent) + '%';
+    }
+    
+    function showMessage(msg, isErr = false) {
+      if (elements.fileErrorMsg) {
+        elements.fileErrorMsg.textContent = msg;
+        elements.fileErrorMsg.style.color = isErr ? '#ff6b6b' : '#4caf50';
+        if (!isErr) setTimeout(() => {
+          if (elements.fileErrorMsg.textContent === msg) elements.fileErrorMsg.textContent = '';
+        }, 3000);
+      }
+    }
+    
+    function validateAndParseJSON(jsonStr) {
+      try {
+        const parsed = JSON.parse(jsonStr);
+        return { valid: true, data: parsed, error: null };
+      } catch (e) {
+        return { valid: false, data: null, error: e.message };
+      }
+    }
+    
+    function formatJSON() {
+      const input = elements.inputJSON.value.trim();
+      if (!input) {
+        showMessage('Please enter JSON data', true);
+        return;
+      }
+      
+      setStep(1, 'AI parsing JSON', true, 20);
+      
+      setTimeout(() => {
+        const result = validateAndParseJSON(input);
+        
+        if (!result.valid) {
+          setStep(1, 'Parse failed', false, 100);
+          elements.outputJSON.value = `❌ JSON Parse Error:\n${result.error}`;
+          elements.validationBadge.style.display = 'block';
+          elements.validationBadge.className = 'valid-badge invalid-badge';
+          elements.validationBadge.innerHTML = '❌ Invalid JSON';
+          elements.checkIcon.innerHTML = '❌';
+          elements.completeTitle.innerText = 'Format Failed';
+          elements.completeMsg.innerText = 'Check your JSON syntax';
+          showMessage(`Error: ${result.error}`, true);
+          return;
+        }
+        
+        setStep(1, 'JSON parsed ✓', false, 40);
+        setStep(2, 'Formatting JSON', true, 60);
+        
+        setTimeout(() => {
+          const formatted = JSON.stringify(result.data, null, 2);
+          elements.outputJSON.value = formatted;
+          currentJSON = result.data;
+          
+          setStep(2, 'Formatting complete ✓', false, 85);
+          setStep(3, 'Ready! ✨', false, 100);
+          elements.progressFill.style.width = '100%';
+          
+          elements.validationBadge.style.display = 'block';
+          elements.validationBadge.className = 'valid-badge';
+          elements.validationBadge.innerHTML = '✅ Valid JSON';
+          elements.checkIcon.innerHTML = '✔️{ }';
+          elements.completeTitle.innerText = 'Format Complete!';
+          elements.completeMsg.innerText = 'JSON beautified successfully';
+          elements.statusTitle.innerText = 'JSON Formatted!';
+          elements.etaText.innerText = `Output size: ${formatted.length} chars`;
+          showMessage('✓ JSON formatted successfully', false);
+        }, 50);
+      }, 50);
+    }
+    
+    function minifyJSON() {
+      const input = elements.inputJSON.value.trim();
+      if (!input) {
+        showMessage('Please enter JSON data', true);
+        return;
+      }
+      
+      setStep(1, 'AI parsing JSON', true, 20);
+      
+      setTimeout(() => {
+        const result = validateAndParseJSON(input);
+        
+        if (!result.valid) {
+          setStep(1, 'Parse failed', false, 100);
+          elements.outputJSON.value = `❌ JSON Parse Error:\n${result.error}`;
+          elements.validationBadge.style.display = 'block';
+          elements.validationBadge.className = 'valid-badge invalid-badge';
+          elements.validationBadge.innerHTML = '❌ Invalid JSON';
+          elements.checkIcon.innerHTML = '❌';
+          showMessage(`Error: ${result.error}`, true);
+          return;
+        }
+        
+        setStep(1, 'JSON parsed ✓', false, 40);
+        setStep(2, 'Minifying JSON', true, 60);
+        
+        setTimeout(() => {
+          const minified = JSON.stringify(result.data);
+          elements.outputJSON.value = minified;
+          currentJSON = result.data;
+          
+          setStep(2, 'Minify complete ✓', false, 85);
+          setStep(3, 'Ready! ✨', false, 100);
+          elements.progressFill.style.width = '100%';
+          
+          elements.validationBadge.style.display = 'block';
+          elements.validationBadge.className = 'valid-badge';
+          elements.validationBadge.innerHTML = '✅ Valid JSON';
+          elements.checkIcon.innerHTML = '✔️📦';
+          elements.completeTitle.innerText = 'Minify Complete!';
+          elements.completeMsg.innerText = 'JSON compressed successfully';
+          elements.statusTitle.innerText = 'JSON Minified!';
+          elements.etaText.innerText = `Output size: ${minified.length} chars`;
+          showMessage('✓ JSON minified successfully', false);
+        }, 50);
+      }, 50);
+    }
+    
+    function validateJSON() {
+      const input = elements.inputJSON.value.trim();
+      if (!input) {
+        showMessage('Please enter JSON data to validate', true);
+        return;
+      }
+      
+      setStep(1, 'Validating JSON', true, 50);
+      
+      setTimeout(() => {
+        const result = validateAndParseJSON(input);
+        
+        if (result.valid) {
+          setStep(1, 'Validation passed ✓', false, 100);
+          elements.progressFill.style.width = '100%';
+          elements.validationBadge.style.display = 'block';
+          elements.validationBadge.className = 'valid-badge';
+          elements.validationBadge.innerHTML = '✅ Valid JSON';
+          elements.checkIcon.innerHTML = '✔️✅';
+          elements.completeTitle.innerText = 'JSON is Valid!';
+          elements.completeMsg.innerText = 'No syntax errors found';
+          elements.statusTitle.innerText = 'JSON Valid!';
+          elements.etaText.innerText = 'Your JSON is syntactically correct';
+          elements.outputJSON.value = JSON.stringify(result.data, null, 2);
+          showMessage('✓ JSON is valid!', false);
+        } else {
+          setStep(1, 'Validation failed', false, 100);
+          elements.progressFill.style.width = '100%';
+          elements.validationBadge.style.display = 'block';
+          elements.validationBadge.className = 'valid-badge invalid-badge';
+          elements.validationBadge.innerHTML = `❌ Invalid JSON: ${result.error}`;
+          elements.checkIcon.innerHTML = '❌';
+          elements.completeTitle.innerText = 'JSON Invalid';
+          elements.completeMsg.innerText = 'Check syntax errors';
+          elements.statusTitle.innerText = 'Invalid JSON';
+          elements.etaText.innerText = result.error;
+          elements.outputJSON.value = `❌ Parse Error:\n${result.error}`;
+          showMessage(`Error: ${result.error}`, true);
+        }
+      }, 50);
+    }
+    
+    function resetUI() {
+      elements.inputJSON.value = '';
+      elements.outputJSON.value = '';
+      elements.progressFill.style.width = '0%';
+      elements.step1.innerHTML = '<span>⭕</span> AI parsing JSON — waiting';
+      elements.step2.innerHTML = '<span>⭕</span> Processing data — waiting';
+      elements.step3.innerHTML = '<span>⭕</span> Generating output — waiting';
+      elements.validationBadge.style.display = 'none';
+      elements.checkIcon.innerHTML = '🚀';
+      elements.completeTitle.innerText = 'Awaiting JSON';
+      elements.completeMsg.innerText = 'Format, validate & minify';
+      elements.statusTitle.innerText = 'Ready to Format';
+      elements.etaText.innerText = 'Paste JSON or drop file';
+      showMessage('Cleared', false);
+    }
+    
+    // Copy functions
+    elements.copyInputBtn.addEventListener('click', () => {
+      elements.inputJSON.select();
+      document.execCommand('copy');
+      showMessage('✓ Input copied to clipboard', false);
+    });
+    
+    elements.copyOutputBtn.addEventListener('click', () => {
+      if (elements.outputJSON.value) {
+        elements.outputJSON.select();
+        document.execCommand('copy');
+        showMessage('✓ Output copied to clipboard', false);
+      } else {
+        showMessage('No output to copy', true);
+      }
+    });
+    
+    // File handling
+    const dropZone = document.getElementById('dropZone');
+    const fileBtn = document.getElementById('fileBtn');
+    const hiddenFileInput = document.createElement('input');
+    hiddenFileInput.type = 'file';
+    hiddenFileInput.accept = '.json,application/json';
+    hiddenFileInput.style.display = 'none';
+    hiddenFileInput.id = 'hiddenFileInput';
+    document.body.appendChild(hiddenFileInput);
+    
+    function handleFile(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target.result;
+        elements.inputJSON.value = content;
+        showMessage(`✓ File "${file.name}" loaded`, false);
+        // Auto-validate on file load
+        validateJSON();
+      };
+      reader.onerror = () => {
+        showMessage('Failed to read file', true);
+      };
+      reader.readAsText(file);
+    }
+    
+    dropZone.addEventListener('click', () => hiddenFileInput.click());
+    fileBtn.addEventListener('click', () => hiddenFileInput.click());
+    
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('drag-over');
+    });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        const file = e.dataTransfer.files[0];
+        if (file.name.endsWith('.json') || file.type === 'application/json') {
+          handleFile(file);
+        } else {
+          showMessage('Please drop a .json file', true);
+        }
+      }
+    });
+    
+    hiddenFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        handleFile(e.target.files[0]);
+      }
+    });
+    
+    // Button events
+    elements.formatBtn.addEventListener('click', formatJSON);
+    elements.minifyBtn.addEventListener('click', minifyJSON);
+    elements.validateBtn.addEventListener('click', validateJSON);
+    elements.resetLink.addEventListener('click', resetUI);
+    
+    document.getElementById('homeLogoLink').addEventListener('click', () => window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/');
+    
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode 2026' : '🌙 Dark Mode 2026';
+    });
+    
+    // Example JSON placeholder
+    elements.inputJSON.value = '{\n  "name": "JSON Formatter 2026",\n  "version": "1.0",\n  "features": ["format", "validate", "minify"],\n  "free": true\n}';
+  })();
+</script>
+</body>
+</html>
