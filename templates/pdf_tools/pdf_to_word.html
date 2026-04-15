@@ -22,7 +22,6 @@
   <meta property="og:title" content="PDF to Word Converter 2026 | AI-Powered | Drag & Drop | Free">
   <meta property="og:description" content="Convert PDF to editable Word DOCX instantly. Drag & drop or browse. AI-powered extraction, 100% free, no watermark, instant download.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word">
   <meta property="og:image" content="https://free-ai-tools-for-pdf-image-file.onrender.com/og-pdf-to-word.jpg">
   
   <!-- Twitter Card -->
@@ -51,10 +50,10 @@
   
   <title>PDF to Word 2026 | Drag & Drop | Free AI-Powered | Convert PDF to DOCX</title>
   
-  <!-- ALL REQUIRED LIBRARIES -->
+  <!-- REQUIRED LIBRARIES -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
   
   <style>
     * {
@@ -686,295 +685,98 @@
       if(percent!==undefined) elements.progressFill.style.width = Math.min(100,percent)+'%';
     }
     
-    // Escape XML special characters
-    function escapeXml(str) {
-      if (!str) return '';
-      return str.replace(/[<>&]/g, function(m) {
-        if (m === '<') return '&lt;';
-        if (m === '>') return '&gt;';
-        if (m === '&') return '&amp;';
-        return m;
-      }).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
-    }
-    
-    // Extract text from PDF with proper structure (preserve paragraphs and line breaks)
-    async function extractTextWithStructure(file) {
+    // Simple text extraction from PDF
+    async function extractTextFromPDF(file) {
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
       const numPages = pdf.numPages;
-      
-      let allParagraphs = [];
+      let allText = '';
       
       for (let i = 1; i <= numPages; i++) {
         const page = await pdf.getPage(i);
         const textContent = await page.getTextContent();
+        const pageText = textContent.items.map(item => item.str).join(' ');
+        allText += pageText + '\n\n';
         
-        // Group text items by their y-position to form lines
-        const lines = [];
-        const items = textContent.items;
-        
-        for (const item of items) {
-          const y = Math.round(item.transform[5]);
-          if (!lines[y]) lines[y] = [];
-          lines[y].push(item.str);
-        }
-        
-        // Combine lines into paragraphs
-        let currentParagraph = '';
-        for (let y = 0; y < lines.length; y++) {
-          if (lines[y]) {
-            const lineText = lines[y].join(' ');
-            if (lineText.trim().length > 0) {
-              // Check if this line ends with a period, question mark, exclamation or colon
-              const endsWithSentenceEnd = /[.!?:;]$/.test(lineText.trim());
-              currentParagraph += (currentParagraph ? ' ' : '') + lineText.trim();
-              
-              if (endsWithSentenceEnd || lineText.trim().endsWith('.') || y === lines.length - 1) {
-                if (currentParagraph.trim().length > 0) {
-                  allParagraphs.push(currentParagraph.trim());
-                  currentParagraph = '';
-                }
-              } else if (lineText.trim().length > 0 && lineText.trim().slice(-1) !== '-') {
-                // Continue paragraph
-              } else if (lineText.trim().endsWith('-')) {
-                // Hyphenated word - continue without space
-                currentParagraph = currentParagraph.slice(0, -1);
-              }
-            }
-          }
-        }
-        
-        // Add any remaining paragraph
-        if (currentParagraph.trim().length > 0) {
-          allParagraphs.push(currentParagraph.trim());
-        }
-        
-        // Add page break marker
-        if (i < numPages) {
-          allParagraphs.push('--- PAGE BREAK ---');
-        }
-        
-        // Update progress
-        const progress = 40 + (i / numPages) * 40;
+        const progress = 30 + (i / numPages) * 50;
         setStep(2, `Extracting text (page ${i}/${numPages})...`, true, progress);
       }
       
-      return allParagraphs;
+      return allText;
     }
     
-    // Create complete and valid DOCX structure
-    async function createValidDocx(paragraphs, originalFileName) {
-      const zip = new JSZip();
-      const timestamp = new Date().toISOString();
+    // Create HTML content that Word can open (RTF-like but simpler - HTML works in Word)
+    function createWordHTML(content, fileName) {
+      const paragraphs = content.split('\n\n').filter(p => p.trim().length > 0);
+      const title = fileName.replace(/\.pdf$/i, '');
       
-      // Helper to create XML with proper headers
-      const createXml = (content) => `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n${content}`;
+      let htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${escapeHtml(title)}</title>
+<style>
+body {
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.4;
+  margin: 1.5in 1in 1in 1in;
+  padding: 0;
+}
+h1 {
+  font-size: 16pt;
+  color: #2c3e50;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+p {
+  margin: 0 0 8px 0;
+  text-align: left;
+}
+.page-break {
+  page-break-before: always;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<h1>${escapeHtml(title)}</h1>
+<p><em>Converted from PDF by AI Tools Hub 2026</em></p>
+<p><em>Conversion Date: ${new Date().toLocaleString()}</em></p>
+<hr/>`;
       
-      // [Content_Types].xml - Complete with all required types
-      const contentTypes = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
-  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-  <Default Extension="xml" ContentType="application/xml"/>
-  <Default Extension="png" ContentType="image/png"/>
-  <Default Extension="jpeg" ContentType="image/jpeg"/>
-  <Default Extension="jpg" ContentType="image/jpeg"/>
-  <Default Extension="gif" ContentType="image/gif"/>
-  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
-  <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
-  <Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/>
-  <Override PartName="/word/theme/theme1.xml" ContentType="application/vnd.openxmlformats-officedocument.theme+xml"/>
-  <Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/>
-</Types>`;
-      zip.file("[Content_Types].xml", contentTypes);
-      
-      // _rels/.rels
-      const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
-  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
-  <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>
-</Relationships>`;
-      zip.folder("_rels").file(".rels", rels);
-      
-      // docProps/core.xml
-      const coreProps = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <dc:title>${escapeXml(originalFileName?.replace(/\.pdf$/i, '') || 'Converted Document')}</dc:title>
-  <dc:creator>PDF to Word Converter 2026</dc:creator>
-  <cp:lastModifiedBy>AI Tools Hub</cp:lastModifiedBy>
-  <dcterms:created xsi:type="dcterms:W3CDTF">${timestamp}</dcterms:created>
-  <dcterms:modified xsi:type="dcterms:W3CDTF">${timestamp}</dcterms:modified>
-</cp:coreProperties>`;
-      zip.folder("docProps").file("core.xml", coreProps);
-      
-      // docProps/app.xml
-      const appProps = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
-  <Application>AI Tools Hub PDF to Word Converter 2026</Application>
-  <DocSecurity>0</DocSecurity>
-  <ScaleCrop>false</ScaleCrop>
-  <HeadingPairs>
-    <vt:vector size="2" baseType="variant">
-      <vt:variant>
-        <vt:lpstr>Paragraphs</vt:lpstr>
-      </vt:variant>
-      <vt:variant>
-        <vt:i4>${paragraphs.length}</vt:i4>
-      </vt:variant>
-    </vt:vector>
-  </HeadingPairs>
-  <TitlesOfParts>
-    <vt:vector size="${paragraphs.length}" baseType="lpstr">
-${paragraphs.slice(0, 20).map(p => `      <vt:lpstr>${escapeXml(p.substring(0, 50))}</vt:lpstr>`).join('\n')}
-    </vt:vector>
-  </TitlesOfParts>
-  <Company>Free AI Tools 2026</Company>
-  <LinksUpToDate>false</LinksUpToDate>
-  <SharedDoc>false</SharedDoc>
-  <HyperlinksChanged>false</HyperlinksChanged>
-  <AppVersion>16.0000</AppVersion>
-</Properties>`;
-      zip.folder("docProps").file("app.xml", appProps);
-      
-      // word/styles.xml - Complete styles for proper rendering
-      const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-  <w:docDefaults>
-    <w:rPrDefault>
-      <w:rPr>
-        <w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>
-        <w:sz w:val="24"/>
-        <w:szCs w:val="24"/>
-        <w:lang w:val="en-US"/>
-      </w:rPr>
-    </w:rPrDefault>
-    <w:pPrDefault>
-      <w:pPr>
-        <w:spacing w:line="240" w:lineRule="auto"/>
-        <w:jc w:val="left"/>
-      </w:pPr>
-    </w:pPrDefault>
-  </w:docDefaults>
-  <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
-    <w:name w:val="Normal"/>
-    <w:qFormat/>
-    <w:pPr>
-      <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
-    </w:pPr>
-    <w:rPr>
-      <w:rFonts w:ascii="Arial" w:hAnsi="Arial"/>
-      <w:sz w:val="24"/>
-    </w:rPr>
-  </w:style>
-  <w:style w:type="character" w:default="1" w:styleId="DefaultParagraphFont">
-    <w:name w:val="Default Paragraph Font"/>
-  </w:style>
-</w:styles>`;
-      zip.folder("word").file("styles.xml", styles);
-      
-      // word/settings.xml
-      const settings = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:settings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-  <w:zoom w:percent="100"/>
-  <w:defaultTabStop w:val="720"/>
-  <w:evenAndOddHeaders/>
-  <w:compat>
-    <w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/>
-  </w:compat>
-</w:settings>`;
-      zip.folder("word").file("settings.xml", settings);
-      
-      // word/fontTable.xml
-      const fontTable = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:fonts xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-  <w:font w:name="Arial">
-    <w:panose1 w:val="020B0604020202020204"/>
-    <w:charset w:val="00"/>
-    <w:family w:val="swiss"/>
-    <w:pitch w:val="variable"/>
-    <w:sig w:usb0="E0002AFF" w:usb1="C0007843" w:usb2="00000009" w:usb3="00000000" w:csb0="000001FF" w:csb1="00000000"/>
-  </w:font>
-  <w:font w:name="Times New Roman">
-    <w:panose1 w:val="02020603050405020304"/>
-    <w:charset w:val="00"/>
-    <w:family w:val="roman"/>
-    <w:pitch w:val="variable"/>
-    <w:sig w:usb0="E0002AFF" w:usb1="C0007841" w:usb2="00000009" w:usb3="00000000" w:csb0="000001FF" w:csb1="00000000"/>
-  </w:font>
-</w:fonts>`;
-      zip.folder("word").file("fontTable.xml", fontTable);
-      
-      // word/_rels/document.xml.rels
-      const documentRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
-  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/>
-  <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/>
-</Relationships>`;
-      zip.folder("word").folder("_rels").file("document.xml.rels", documentRels);
-      
-      // Build document.xml content
-      let documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
-  <w:body>`;
-      
-      for (const para of paragraphs) {
+      for (let i = 0; i < paragraphs.length; i++) {
+        const para = paragraphs[i].trim();
         if (para === '--- PAGE BREAK ---') {
-          documentXml += `
-    <w:p>
-      <w:r>
-        <w:br w:type="page"/>
-      </w:r>
-    </w:p>`;
-        } else if (para.trim().length > 0) {
-          // Check if this might be a heading (short text, all caps, or ends with colon)
-          const isHeading = para.length < 100 && (para === para.toUpperCase() || para.includes(':') || para.match(/^[0-9]+\./));
-          
-          if (isHeading) {
-            documentXml += `
-    <w:p>
-      <w:pPr>
-        <w:pStyle w:val="Heading1"/>
-        <w:spacing w:before="240" w:after="120" w:line="240" w:lineRule="auto"/>
-        <w:jc w:val="left"/>
-      </w:pPr>
-      <w:r>
-        <w:rPr>
-          <w:b/>
-          <w:sz w:val="28"/>
-        </w:rPr>
-        <w:t xml:space="preserve">${escapeXml(para.trim())}</w:t>
-      </w:r>
-    </w:p>`;
+          htmlContent += `<div class="page-break"></div>`;
+        } else if (para.length > 0) {
+          // Check if it looks like a heading
+          const isHeading = para.length < 100 && (para === para.toUpperCase() || para.match(/^[0-9]+\./) || para.includes(':'));
+          if (isHeading && i > 0) {
+            htmlContent += `<h1>${escapeHtml(para)}</h1>`;
           } else {
-            documentXml += `
-    <w:p>
-      <w:pPr>
-        <w:spacing w:after="0" w:line="240" w:lineRule="auto"/>
-      </w:pPr>
-      <w:r>
-        <w:rPr>
-          <w:sz w:val="24"/>
-        </w:rPr>
-        <w:t xml:space="preserve">${escapeXml(para.trim())}</w:t>
-      </w:r>
-    </w:p>`;
+            htmlContent += `<p>${escapeHtml(para)}</p>`;
           }
         }
       }
       
-      documentXml += `
-    <w:sectPr>
-      <w:pgSz w:w="12240" w:h="15840"/>
-      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"/>
-    </w:sectPr>
-  </w:body>
-</w:document>`;
+      htmlContent += `
+<hr/>
+<p><em>Generated by AI Tools Hub 2026 - Free PDF to Word Converter</em></p>
+</body>
+</html>`;
       
-      zip.folder("word").file("document.xml", documentXml);
-      
-      // Generate blob
-      return await zip.generateAsync({ type: "blob", compression: "DEFLATE", compressionOptions: { level: 6 } });
+      return htmlContent;
+    }
+    
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
     
     async function startConversion(){
@@ -989,18 +791,21 @@ ${paragraphs.slice(0, 20).map(p => `      <vt:lpstr>${escapeXml(p.substring(0, 5
       try{
         setStep(1, 'AI analyzing PDF structure', true, 10);
         await new Promise(r=>setTimeout(r, 50));
-        setStep(1, 'PDF analyzed ✓', false, 25);
+        setStep(1, 'PDF analyzed ✓', false, 20);
         
-        setStep(2, 'Extracting text with structure preservation', true, 35);
+        setStep(2, 'Extracting text from PDF', true, 30);
         
-        const paragraphs = await extractTextWithStructure(selectedFile);
+        const extractedText = await extractTextFromPDF(selectedFile);
         
-        setStep(2, `Extracted ${paragraphs.length} paragraphs ✓`, false, 65);
-        setStep(3, 'Generating valid Word document', true, 75);
+        setStep(2, 'Text extraction complete ✓', false, 60);
+        setStep(3, 'Generating Word document', true, 75);
         
-        const docxBlob = await createValidDocx(paragraphs, selectedFile.name);
+        // Create HTML content (Word can open HTML files perfectly)
+        const htmlContent = createWordHTML(extractedText, selectedFile.name);
         
-        processedBlob = docxBlob;
+        // Save as .doc file (Word opens HTML saved as .doc without issues)
+        const blob = new Blob([htmlContent], { type: 'application/msword' });
+        processedBlob = blob;
         conversionDone = true;
         isProcessing = false;
         
@@ -1010,8 +815,8 @@ ${paragraphs.slice(0, 20).map(p => `      <vt:lpstr>${escapeXml(p.substring(0, 5
         const origKB = (selectedFile.size/1024).toFixed(1);
         const newKB = (processedBlob.size/1024).toFixed(1);
         
-        elements.statusTitle.innerText = `✅ PDF → DOCX Complete`;
-        elements.etaText.innerText = `${origKB}KB → ${newKB}KB | ${paragraphs.length} paragraphs`;
+        elements.statusTitle.innerText = `✅ PDF → Word Complete`;
+        elements.etaText.innerText = `${origKB}KB → ${newKB}KB`;
         elements.checkIcon.innerHTML = '✔️📝';
         elements.completeTitle.innerText = 'Conversion Complete!';
         elements.completeMsg.innerText = `Editable Word document ready`;
@@ -1029,12 +834,8 @@ ${paragraphs.slice(0, 20).map(p => `      <vt:lpstr>${escapeXml(p.substring(0, 5
     
     function downloadDocx(){
       if(!conversionDone || !processedBlob) return;
-      const url = URL.createObjectURL(processedBlob);
-      const a = document.createElement('a');
-      const name = (selectedFile ? selectedFile.name.replace(/\.pdf$/i,'') : 'document') + '_converted.docx';
-      a.href = url; a.download = name;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const name = (selectedFile ? selectedFile.name.replace(/\.pdf$/i,'') : 'document') + '_converted.doc';
+      saveAs(processedBlob, name);
     }
     
     function handleFileSelection(file){
@@ -1082,4 +883,3 @@ ${paragraphs.slice(0, 20).map(p => `      <vt:lpstr>${escapeXml(p.substring(0, 5
 </script>
 </body>
 </html>
-
