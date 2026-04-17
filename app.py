@@ -38,8 +38,7 @@ app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB
 # ======================================================
 @app.errorhandler(RequestEntityTooLarge)
 def handle_file_too_large(e):
-    flash("File size exceeds 5MB limit. Please upload a smaller file.")
-    return redirect(request.url)
+    return jsonify({"error": "File size exceeds 5MB limit. Please upload a smaller file."}), 413
 
 
 UPLOAD_FOLDER = "uploads"
@@ -55,15 +54,25 @@ ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
 
 # ======================================================
 # 🔥 HEAVY TOOL CONCURRENT LIMIT (MAX 3 USERS)
-# Only for:
-# - pdf_to_jpg
-# - split_pdf
 # ======================================================
 heavy_tool_semaphore = threading.BoundedSemaphore(3)
 
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+# ======================================================
+# 🔥 UNIVERSAL FILE SIZE CHECK BEFORE PROCESSING
+# ======================================================
+def check_file_size(file_obj, max_size_mb=5):
+    if file_obj:
+        file_obj.seek(0, os.SEEK_END)
+        size = file_obj.tell()
+        file_obj.seek(0)
+        if size > max_size_mb * 1024 * 1024:
+            return False
+    return True
 
 
 # ===============================
@@ -73,12 +82,12 @@ def allowed_file(filename):
 def home():
     return render_template("home.html")
     
-# ==== Google route add
+
 @app.route("/google3e04282ea741df4b.html")
 def google_verify():
     return send_from_directory("static", "google3e04282ea741df4b.html")
 
-#=============
+
 @app.route("/sitemap.xml")
 def sitemap():
     pages = [
@@ -105,13 +114,9 @@ def sitemap():
     ]
 
     sitemap_xml = render_template("sitemap_template.xml", pages=pages)
-
-    response = app.response_class(
-        sitemap_xml,
-        mimetype='application/xml'
-    )
-
+    response = app.response_class(sitemap_xml, mimetype='application/xml')
     return response
+
 
 # ===============================
 # CATEGORY PAGES
@@ -226,51 +231,75 @@ def resize_pdf():
 
 
 # ===============================
-# PDF TOOL ACTION ROUTES (POST)
+# PDF TOOL ACTION ROUTES (POST) WITH FILE SIZE CHECK
 # ===============================
 
 @app.route("/png-to-pdf-action", methods=["POST"])
 def png_to_pdf_action():
+    if 'files' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    files = request.files.getlist('files')
+    for file in files:
+        if file and not check_file_size(file):
+            return jsonify({"error": "File size exceeds 5MB limit"}), 413
     return png_to_pdf_logic(app)
 
 
 @app.route("/jpg-to-pdf-action", methods=["POST"])
 def jpg_to_pdf_action():
+    if 'files' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    files = request.files.getlist('files')
+    for file in files:
+        if file and not check_file_size(file):
+            return jsonify({"error": "File size exceeds 5MB limit"}), 413
     return jpg_to_pdf_logic(app)
 
 
 @app.route("/pdf-to-word-action", methods=["POST"])
 def pdf_to_word_action():
+    if 'pdf' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    file = request.files['pdf']
+    if file and not check_file_size(file):
+        return jsonify({"error": "File size exceeds 5MB limit"}), 413
     return pdf_to_word_logic(app)
 
 
 @app.route("/word-to-pdf-action", methods=["POST"])
 def word_to_pdf_action():
+    if 'word_file' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    file = request.files['word_file']
+    if file and not check_file_size(file):
+        return jsonify({"error": "File size exceeds 5MB limit"}), 413
     return word_to_pdf_logic(app)
 
 
-# ======================================================
-# 🔥 HEAVY TOOL 1: PDF TO JPG (LIMITED TO 3 USERS)
-# ======================================================
 @app.route("/pdf-to-jpg-action", methods=["POST"])
 def pdf_to_jpg_action():
+    if 'pdf' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    file = request.files['pdf']
+    if file and not check_file_size(file):
+        return jsonify({"error": "File size exceeds 5MB limit"}), 413
     if not heavy_tool_semaphore.acquire(blocking=False):
-        return "Server busy. Please try again after few seconds."
-
+        return jsonify({"error": "Server busy. Please try again later."}), 503
     try:
         return pdf_to_jpg_logic(app)
     finally:
         heavy_tool_semaphore.release()
 
 
-# ======================================================
-# 🔥 HEAVY TOOL 2: SPLIT PDF (LIMITED TO 3 USERS)
-# ======================================================
 @app.route("/split-pdf-action", methods=["POST"])
 def split_pdf_action():
+    if 'pdf' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    file = request.files['pdf']
+    if file and not check_file_size(file):
+        return jsonify({"error": "File size exceeds 5MB limit"}), 413
     if not heavy_tool_semaphore.acquire(blocking=False):
-        return "Server busy. Please try again after few seconds."
-
+        return jsonify({"error": "Server busy. Please try again later."}), 503
     try:
         return split_pdf_logic(app)
     finally:
@@ -279,21 +308,42 @@ def split_pdf_action():
 
 @app.route("/merge-pdf-action", methods=["POST"])
 def merge_pdf_action():
+    if 'files' not in request.files:
+        return jsonify({"error": "No files uploaded"}), 400
+    files = request.files.getlist('files')
+    for file in files:
+        if file and not check_file_size(file):
+            return jsonify({"error": "One or more files exceed 5MB limit"}), 413
     return merge_pdf_logic(app)
 
 
 @app.route("/compress-pdf-action", methods=["POST"])
 def compress_pdf_action():
+    if 'pdf' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    file = request.files['pdf']
+    if file and not check_file_size(file):
+        return jsonify({"error": "File size exceeds 5MB limit"}), 413
     return compress_pdf_logic(app)
 
 
 @app.route("/rotate-pdf-action", methods=["POST"])
 def rotate_pdf_action():
+    if 'pdf' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    file = request.files['pdf']
+    if file and not check_file_size(file):
+        return jsonify({"error": "File size exceeds 5MB limit"}), 413
     return rotate_pdf_logic(app)
 
 
 @app.route("/resize-pdf-action", methods=["POST"])
 def resize_pdf_action():
+    if 'pdf' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    file = request.files['pdf']
+    if file and not check_file_size(file):
+        return jsonify({"error": "File size exceeds 5MB limit"}), 413
     return resize_pdf_logic(app)
 
 
@@ -303,6 +353,11 @@ def resize_pdf_action():
 @app.route("/image-resize", methods=["GET", "POST"])
 def image_resize():
     if request.method == "POST":
+        if 'image' not in request.files:
+            return jsonify({"error": "No file uploaded"}), 400
+        file = request.files['image']
+        if file and not check_file_size(file):
+            return jsonify({"error": "File size exceeds 5MB limit"}), 413
         return image_resize_logic(app)
     return render_template("image_tools/image_resize.html")
 
@@ -312,28 +367,27 @@ def image_resize():
 # ===============================
 @app.route("/image-compressor", methods=["GET", "POST"])
 def image_compressor():
-
     if request.method == "POST":
-
         file = request.files.get("file")
-        quality = request.form.get("quality", 60)
-
         if not file or file.filename == "":
             flash("No file selected")
             return redirect(request.url)
+        
+        if not check_file_size(file):
+            flash("File size exceeds 5MB limit")
+            return redirect(request.url)
 
         if file and allowed_file(file.filename):
-
             unique_name = str(uuid.uuid4()) + "_" + secure_filename(file.filename)
             upload_path = os.path.join(UPLOAD_FOLDER, unique_name)
             file.save(upload_path)
-
+            
+            quality = request.form.get("quality", 60)
             img = Image.open(upload_path)
             output_path = os.path.join(PROCESSED_FOLDER, unique_name)
             img.save(output_path, optimize=True, quality=int(quality))
-
+            
             return send_file(output_path, as_attachment=True)
-
         else:
             flash("Invalid file type")
             return redirect(request.url)
@@ -341,22 +395,16 @@ def image_compressor():
     return render_template("image_tools/image_compress.html")
 
 
-#=================================
-from flask import send_from_directory
-
 @app.route('/robots.txt')
 def robots():
     return send_from_directory('static', 'robots.txt')
 
-# =============== YANDEX ROUTE
+
 @app.route('/yandex_3c01d903358ab76d.html')
 def yandex_verify():
     return send_from_directory('.', 'yandex_3c01d903358ab76d.html')
 
 
-# ===============================
-# LOCAL RUN
-# ===============================
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
