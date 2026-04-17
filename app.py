@@ -1,9 +1,10 @@
 import os
 from flask import send_from_directory
 import uuid
-import threading  # 🔥 Used for concurrent user limit
+import threading
 from flask import Flask, render_template, request, send_file, redirect, flash, jsonify
 from werkzeug.utils import secure_filename
+from werkzeug.exceptions import RequestEntityTooLarge
 from PIL import Image
 
 from logic import (
@@ -15,12 +16,9 @@ from logic import (
     split_pdf_logic,
     compress_pdf_logic,
     rotate_pdf_logic,
-    protect_pdf_logic,
-    unlock_pdf_logic,
     resize_pdf_logic,
     pdf_to_jpg_logic,
     image_resize_logic,
-    bg_remover_logic,
     base64_encoder_logic,
     json_formatter_logic,
     qr_generator_logic,
@@ -34,6 +32,15 @@ app.secret_key = "supersecretkey"
 # 🔥 5MB MAX UPLOAD LIMIT (Global Limit for All Tools)
 # ======================================================
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB
+
+# ======================================================
+# 🔥 ERROR HANDLER FOR FILE TOO LARGE
+# ======================================================
+@app.errorhandler(RequestEntityTooLarge)
+def handle_file_too_large(e):
+    flash("File size exceeds 5MB limit. Please upload a smaller file.")
+    return redirect(request.url)
+
 
 UPLOAD_FOLDER = "uploads"
 PROCESSED_FOLDER = "processed"
@@ -51,7 +58,6 @@ ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
 # Only for:
 # - pdf_to_jpg
 # - split_pdf
-# - bg_remover
 # ======================================================
 heavy_tool_semaphore = threading.BoundedSemaphore(3)
 
@@ -67,7 +73,7 @@ def allowed_file(filename):
 def home():
     return render_template("home.html")
     
-# ==== Gogle rout add
+# ==== Google route add
 @app.route("/google3e04282ea741df4b.html")
 def google_verify():
     return send_from_directory("static", "google3e04282ea741df4b.html")
@@ -80,7 +86,6 @@ def sitemap():
         "https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/image-compressor",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/image-resize",
-        "https://free-ai-tools-for-pdf-image-file.onrender.com/bg-remover",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf",
@@ -91,8 +96,6 @@ def sitemap():
         "https://free-ai-tools-for-pdf-image-file.onrender.com/split-pdf",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/compress-pdf",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/rotate-pdf",
-        "https://free-ai-tools-for-pdf-image-file.onrender.com/unlock-pdf",
-        "https://free-ai-tools-for-pdf-image-file.onrender.com/protect-pdf",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/resize-pdf",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools",
         "https://free-ai-tools-for-pdf-image-file.onrender.com/word-counter",
@@ -217,16 +220,6 @@ def rotate_pdf():
     return render_template("pdf_tools/rotate_pdf.html")
 
 
-@app.route("/unlock-pdf")
-def unlock_pdf():
-    return render_template("pdf_tools/unlock_pdf.html")
-
-
-@app.route("/protect-pdf")
-def protect_pdf():
-    return render_template("pdf_tools/protect_pdf.html")
-
-
 @app.route("/resize-pdf")
 def resize_pdf():
     return render_template("pdf_tools/resize_pdf.html")
@@ -299,37 +292,9 @@ def rotate_pdf_action():
     return rotate_pdf_logic(app)
 
 
-@app.route("/protect-pdf-action", methods=["POST"])
-def protect_pdf_action():
-    return protect_pdf_logic(app)
-
-
-@app.route("/unlock-pdf-action", methods=["POST"])
-def unlock_pdf_action():
-    return unlock_pdf_logic(app)
-
-
 @app.route("/resize-pdf-action", methods=["POST"])
 def resize_pdf_action():
     return resize_pdf_logic(app)
-
-
-# ======================================================
-# 🔥 HEAVY TOOL 3: BACKGROUND REMOVER (LIMITED TO 3 USERS)
-# ======================================================
-@app.route("/bg-remover", methods=["GET", "POST"])
-def bg_remover():
-
-    if request.method == "POST":
-        if not heavy_tool_semaphore.acquire(blocking=False):
-            return "Server busy. Please try again after few seconds."
-
-        try:
-            return bg_remover_logic(app)
-        finally:
-            heavy_tool_semaphore.release()
-
-    return render_template("image_tools/bg_remover.html")
 
 
 # ===============================
@@ -383,7 +348,7 @@ from flask import send_from_directory
 def robots():
     return send_from_directory('static', 'robots.txt')
 
-# =============== YANDEX ROUTE (yaha add karo)
+# =============== YANDEX ROUTE
 @app.route('/yandex_3c01d903358ab76d.html')
 def yandex_verify():
     return send_from_directory('.', 'yandex_3c01d903358ab76d.html')
@@ -395,10 +360,6 @@ def yandex_verify():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
-
-
-
 
 
 
