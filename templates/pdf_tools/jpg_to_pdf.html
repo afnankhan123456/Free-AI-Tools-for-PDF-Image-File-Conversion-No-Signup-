@@ -4,50 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   
-  <!-- ==================== SEO META TAGS ==================== -->
-  <meta name="description" content="Free JPG to PDF converter - Convert JPEG images to PDF instantly. AI auto-fit, high quality, no upload required. 100% free, no signup, no watermarks. Max 5MB file size.">
-  <meta name="keywords" content="JPG to PDF, convert JPG to PDF, JPEG to PDF, image to PDF converter, free JPG to PDF, online JPG to PDF, compress JPG to PDF, best JPG to PDF converter, free image to PDF, JPG to PDF online free">
+  <meta name="description" content="Free JPG to PDF converter - Convert JPEG images to PDF instantly. AI auto-fit, high quality, no upload required. 100% free, no signup, no watermarks.">
+  <meta name="keywords" content="JPG to PDF, convert JPG to PDF, JPEG to PDF, image to PDF converter, free JPG to PDF, online JPG to PDF, best JPG to PDF converter">
   <meta name="author" content="Free AI Tools Hub">
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-  <meta name="googlebot" content="index, follow">
-  <meta name="bingbot" content="index, follow">
-  <meta name="rating" content="General">
-  <meta name="revisit-after" content="1 days">
-  <meta name="language" content="English">
-  <meta name="distribution" content="global">
-  <meta name="copyright" content="Free AI Tools Hub">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#3a8cff">
   
-  <!-- ==================== OPEN GRAPH / SOCIAL MEDIA ==================== -->
-  <meta property="og:title" content="JPG to PDF Converter | Free Online Tool | Convert Images to PDF">
-  <meta property="og:description" content="Convert JPG to PDF instantly. Free, fast, private. No signup, no watermark. Max 5MB file size.">
+  <meta property="og:title" content="JPG to PDF Converter | Free Online Tool">
+  <meta property="og:description" content="Convert JPG to PDF instantly. Free, fast, private. No signup, no watermark.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf">
   
-  <!-- ==================== TWITTER CARD ==================== -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JPG to PDF Converter | Free Online Tool">
-  <meta name="twitter:description" content="Convert JPG to PDF instantly. Free, fast, private conversion tool. Max 5MB.">
-  
-  <!-- ==================== CANONICAL URL ==================== -->
-  <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf">
-  
-  <!-- ==================== SCHEMA.ORG STRUCTURED DATA ==================== -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "JPG to PDF Converter",
-    "applicationCategory": "UtilityApplication",
-    "operatingSystem": "Web Browser",
-    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "15800"},
-    "description": "Free JPG to PDF converter with AI auto-fit. Convert images to PDF instantly. Max 5MB file size.",
-    "featureList": "JPG to PDF, AI Auto-Fit, High Quality, Drag & Drop, Privacy-First, No Upload Required"
-  }
-  </script>
-  
-  <title>JPG to PDF Converter | Free Online Image to PDF Tool | No Signup | Max 5MB</title>
+  <title>JPG to PDF Converter | Free Online Image to PDF Tool</title>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   
@@ -64,7 +31,6 @@
     .wrapper { max-width: 1400px; margin: 0 auto; }
     .error-msg { color: #ff6b6b; font-size: 0.75rem; margin-top: 8px; text-align: center; font-weight: bold; }
 
-    /* ==================== HEADER STYLES ==================== */
     .ai-hub-header {
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(12px);
@@ -134,7 +100,6 @@
     .dark-toggle:hover { transform: translateY(-2px); }
     body.dark-mode .dark-toggle { background: #2a2a4a; color: #ffd966; border-color: #ffd966; }
 
-    /* ==================== MAIN CARD STYLES ==================== */
     .main-card {
       background: rgba(200, 225, 255, 0.25);
       backdrop-filter: blur(16px);
@@ -187,7 +152,6 @@
     .desc { font-size: 0.9rem; color: #1a3a6e; opacity: 0.85; margin-top: 5px; }
     body.dark-mode .desc { color: #9aaec9; }
 
-    /* ==================== DRAG & DROP ZONE (NO BROWSE CARD) ==================== */
     .drop-zone {
       margin-top: 16px;
       background: rgba(255, 255, 255, 0.2);
@@ -208,7 +172,6 @@
     body.dark-mode .drop-text { color: #c0d4ff; }
     body.dark-mode .drop-sub { color: #8a9dc0; }
 
-    /* ==================== CONVERT BUTTON ==================== */
     .convert-btn {
       margin-top: 20px;
       padding: 14px 16px;
@@ -226,7 +189,6 @@
     .convert-btn.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
     .convert-btn:not(.disabled):hover { transform: translateY(-3px); background: linear-gradient(105deg, #6cbaff, #4a9eff); }
 
-    /* ==================== PROGRESS & STATUS STYLES ==================== */
     .center h3, .right h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 12px; color: #1a3a6e; }
     body.dark-mode .center h3, body.dark-mode .right h3 { color: white; }
     .progress { height: 8px; background: rgba(0, 0, 0, 0.15); border-radius: 20px; margin: 20px 0 24px; overflow: hidden; }
@@ -281,7 +243,6 @@
     }
     body.dark-mode .link { color: #8a9dc0; }
 
-    /* ==================== INFO CARD STYLES ==================== */
     .white-info-card {
       background: white;
       border-radius: 40px;
@@ -365,7 +326,6 @@
 </head>
 <body>
 <div class="wrapper">
-  <!-- ==================== HEADER SECTION ==================== -->
   <header class="ai-hub-header">
     <div class="logo-area" id="homeLogoLink">
       <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="Free AI Tools Hub Logo" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI'">
@@ -384,33 +344,28 @@
   </header>
 
   <main>
-    <!-- ==================== MAIN CONVERTER CARD ==================== -->
     <section class="main-card">
       <div class="inner-card">
-        <!-- ==================== LEFT PANEL - INPUT SECTION ==================== -->
         <div class="left">
           <div class="icon">🖼️ JPG</div>
           <h1>JPG to PDF Converter</h1>
-          <p class="desc">Convert JPG to PDF • AI Auto-Fit • High Quality • Max 5MB</p>
+          <p class="desc">Convert JPG to PDF • AI Auto-Fit • High Quality</p>
           
-          <!-- ==================== DRAG & DROP ZONE (NO BROWSE CARD) ==================== -->
           <div class="drop-zone" id="dropZone">
             <div class="drop-zone-content">
               <div class="drop-icon">🖼️➡️📄</div>
               <div class="drop-text">Drag & Drop JPG Image Here</div>
-              <div class="drop-sub">Click to Select File (Max 5MB)</div>
+              <div class="drop-sub">Click to Select File</div>
             </div>
           </div>
           
-          <!-- ==================== CONVERT BUTTON ==================== -->
-          <button class="convert-btn disabled" id="convertBtn">✨ Convert to PDF Now ✨</button>
+          <button class="convert-btn disabled" id="convertBtn">✨ Convert to PDF ✨</button>
           <div id="fileErrorMsg" class="error-msg"></div>
         </div>
 
-        <!-- ==================== CENTER PANEL - PROGRESS & STATUS ==================== -->
         <div class="center">
           <h3 id="statusTitle">Ready to Convert</h3>
-          <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Drag & drop or click to select JPG (Max 5MB)</p>
+          <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Drag & drop or click to select JPG</p>
           <div class="progress"><div class="fill" id="progressFill"></div></div>
           <div class="step-list">
             <p id="step1"><span>⭕</span> Loading JPG Image — Waiting</p>
@@ -419,50 +374,44 @@
           </div>
         </div>
 
-        <!-- ==================== RIGHT PANEL - RESULT & DOWNLOAD ==================== -->
         <div class="right">
           <div class="check" id="checkIcon">🖼️</div>
           <h3 id="completeTitle">Awaiting Image</h3>
-          <p id="completeMsg" style="opacity:0.8;">Select a JPG file to begin conversion (Max 5MB)</p>
+          <p id="completeMsg" style="opacity:0.8;">Select a JPG file to begin conversion</p>
           <button class="download disabled" id="downloadBtn">⬇️ Download PDF File ⬇️</button>
           <button class="link" id="resetLink">Convert Another File →</button>
         </div>
       </div>
     </section>
 
-    <!-- ==================== SEO RICH CONTENT - FEATURES & FAQ ==================== -->
     <article class="white-info-card">
       <h2>Professional JPG to PDF Converter - Free & Private</h2>
-      <p class="section-sub">Transform your JPG images into high-quality PDF documents instantly. Perfect for photos, scans, and documents.</p>
+      <p class="section-sub">Transform your JPG images into high-quality PDF documents instantly.</p>
       
       <div class="features-grid-white">
         <div class="feature-item-white"><div class="feature-icon-white">🎨</div><h4>High Quality Output</h4><p>Preserves original image quality in PDF</p></div>
         <div class="feature-item-white"><div class="feature-icon-white">🤖</div><h4>AI Smart Auto-Fit</h4><p>Automatically adjusts image to fit perfect page dimensions</p></div>
-        <div class="feature-item-white"><div class="feature-icon-white">📱</div><h4>High Resolution Support</h4><p>Handles images up to 4K resolution</p></div>
         <div class="feature-item-white"><div class="feature-icon-white">⚡</div><h4>Lightning Fast Processing</h4><p>Convert images to PDF in under 2 seconds</p></div>
-        <div class="feature-item-white"><div class="feature-icon-white">🔒</div><h4>Complete Privacy Protection</h4><p>100% local conversion - your files never leave your device</p></div>
+        <div class="feature-item-white"><div class="feature-icon-white">🔒</div><h4>Complete Privacy Protection</h4><p>100% local conversion - files never leave your device</p></div>
         <div class="feature-item-white"><div class="feature-icon-white">💯</div><h4>Completely Free Service</h4><p>No registration, no watermark, unlimited conversions</p></div>
-        <div class="feature-item-white"><div class="feature-icon-white">📦</div><h4>5MB Max File Size</h4><p>Optimized for fast & efficient conversions</p></div>
       </div>
 
       <h2>How to Convert JPG to PDF - Simple Steps</h2>
       <p class="section-sub">Follow these easy steps to convert your images to PDF format</p>
       
       <div class="how-it-works-white">
-        <div class="step-card-white"><div class="step-num-white">1</div><h4>Upload Your JPG</h4><p>Drag & drop your JPG file or click to select from your device (Max 5MB)</p></div>
+        <div class="step-card-white"><div class="step-num-white">1</div><h4>Upload Your JPG</h4><p>Drag & drop your JPG file or click to select from your device</p></div>
         <div class="step-card-white"><div class="step-num-white">2</div><h4>Click Convert</h4><p>Press the convert button and wait 2 seconds</p></div>
         <div class="step-card-white"><div class="step-num-white">3</div><h4>Download PDF</h4><p>Get your professionally formatted PDF document instantly</p></div>
       </div>
 
-      <h2>Frequently Asked Questions About JPG to PDF Conversion</h2>
+      <h2>Frequently Asked Questions</h2>
       
       <div class="faq-list-white">
         <div class="faq-item-white"><div class="faq-question-white">🔹 Is this JPG to PDF converter completely free?</div><div class="faq-answer-white">Yes, our service is 100% free with no hidden charges. You can convert unlimited JPG files without any cost.</div></div>
         <div class="faq-item-white"><div class="faq-question-white">🔹 Does it preserve image quality?</div><div class="faq-answer-white">Yes! Our converter maintains high image quality in the output PDF document.</div></div>
         <div class="faq-item-white"><div class="faq-question-white">🔹 Where are my files processed?</div><div class="faq-answer-white">All conversion happens directly in your browser. Your images never get uploaded to any server, ensuring complete privacy.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white">🔹 What is the maximum file size allowed?</div><div class="faq-answer-white">Maximum file size is 5MB, which works perfectly for most images and ensures fast conversion speeds.</div></div>
         <div class="faq-item-white"><div class="faq-question-white">🔹 Will there be watermarks on my PDF?</div><div class="faq-answer-white">No watermarks ever! Your output PDF will be clean and professional without any branding or ads.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white">🔹 Can I convert multiple JPG files?</div><div class="faq-answer-white">Yes, you can convert unlimited JPG files one at a time. Each conversion is fast and efficient.</div></div>
       </div>
 
       <footer class="internal-links-white">
@@ -471,31 +420,22 @@
           <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf">PNG to PDF Converter</a>
           <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word">PDF to Word Converter</a>
           <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf">Merge PDF Files</a>
-          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-compressor">Image Compressor Tool</a>
         </div>
-        <p style="font-size: 0.75rem; margin-top: 16px;">© Free AI Tools Hub - Professional JPG to PDF Converter | Privacy-Focused | No Upload Required | Max 5MB</p>
-        <p style="font-size: 0.7rem; margin-top: 8px;">Trusted by over 100,000 users for fast, reliable image to PDF conversion</p>
+        <p style="font-size: 0.75rem; margin-top: 16px;">© Free AI Tools Hub - Professional JPG to PDF Converter | Privacy-Focused | No Upload Required</p>
       </footer>
     </article>
   </main>
 </div>
 
 <script>
-// ==================== MAIN APPLICATION LOGIC ====================
-// This script handles: JPG file selection, validation, conversion to PDF, and download functionality
-// Uses: jspdf library for PDF generation, HTML5 File API for file handling
-
 (function() {
-    // ==================== CONFIGURATION ====================
-    const MAX_SIZE = 5 * 1024 * 1024; // 5MB maximum file size limit
+    const MAX_SIZE = 5 * 1024 * 1024; // 5MB limit - hidden from user
     
-    // ==================== STATE VARIABLES ====================
     let selectedFile = null;
     let isConverting = false;
     let conversionDone = false;
     let pdfBlob = null;
     
-    // ==================== DOM ELEMENT REFERENCES ====================
     const elements = {
       convertBtn: document.getElementById('convertBtn'),
       downloadBtn: document.getElementById('downloadBtn'),
@@ -512,30 +452,19 @@
       fileErrorMsg: document.getElementById('fileErrorMsg')
     };
 
-    // ==================== UTILITY FUNCTIONS ====================
-    function formatSize(bytes) {
-      if (bytes === 0) return '0 Bytes';
-      const k = 1024;
-      const sizes = ['Bytes', 'KB', 'MB'];
-      const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-    }
-
-    // ==================== FILE VALIDATION FUNCTION ====================
     function validateFile(file) {
       if (!file) return { valid: false, message: 'No file selected' };
       if (file.size === 0) return { valid: false, message: 'File is empty' };
       if (file.size > MAX_SIZE) {
-        return { valid: false, message: `File too large: ${(file.size/1024/1024).toFixed(2)}MB. Maximum 5MB allowed.` };
+        return { valid: false, message: 'File too large. Please select a smaller file.' };
       }
       const ext = file.name.split('.').pop().toLowerCase();
       if (file.type !== 'image/jpeg' && file.type !== 'image/jpg' && ext !== 'jpg' && ext !== 'jpeg') {
         return { valid: false, message: 'Only JPG/JPEG files are supported' };
       }
-      return { valid: true, message: 'JPG file ready for conversion' };
+      return { valid: true, message: 'Ready' };
     }
 
-    // ==================== MESSAGE DISPLAY FUNCTION ====================
     function showMessage(msg, isError = false) {
       if (elements.fileErrorMsg) {
         elements.fileErrorMsg.textContent = msg;
@@ -546,7 +475,6 @@
       }
     }
 
-    // ==================== FILE SELECTION HANDLER ====================
     function handleFileSelection(file) {
       const valid = validateFile(file);
       if (!valid.valid) { 
@@ -559,12 +487,11 @@
       if (conversionDone) resetUI(false);
       conversionDone = false;
       pdfBlob = null;
-      showMessage('JPG file loaded successfully - Ready to convert', false);
+      showMessage('✓ JPG loaded - Ready to convert', false);
       updateConvertBtn();
       return true;
     }
 
-    // ==================== UI RESET FUNCTION ====================
     function resetUI(resetFile = true) {
       if (isConverting) isConverting = false;
       conversionDone = false;
@@ -574,11 +501,11 @@
       elements.step2.innerHTML = '<span>⭕</span> Processing & Scaling — Waiting';
       elements.step3.innerHTML = '<span>⭕</span> Generating PDF Document — Waiting';
       elements.statusTitle.innerText = 'Ready to Convert';
-      elements.etaText.innerText = 'Drag & drop or click to select JPG (Max 5MB)';
+      elements.etaText.innerText = 'Drag & drop or click to select JPG';
       elements.downloadBtn.classList.add('disabled');
       elements.checkIcon.innerHTML = '🖼️';
       elements.completeTitle.innerText = 'Awaiting Image';
-      elements.completeMsg.innerText = 'Select a JPG file to begin conversion (Max 5MB)';
+      elements.completeMsg.innerText = 'Select a JPG file to begin conversion';
       if (resetFile) {
         selectedFile = null;
         const hidden = document.getElementById('hiddenFileInput');
@@ -588,27 +515,24 @@
       updateConvertBtn();
     }
 
-    // ==================== CONVERT BUTTON STATE UPDATE ====================
     function updateConvertBtn() {
       if (selectedFile && !isConverting && !conversionDone && validateFile(selectedFile).valid) {
         elements.convertBtn.classList.remove('disabled');
-        elements.etaText.innerText = 'Ready to convert - Click the button';
+        elements.etaText.innerText = 'Ready to convert';
       } else {
         elements.convertBtn.classList.add('disabled');
-        if (!selectedFile) elements.etaText.innerText = 'Drag & drop or click to select JPG (Max 5MB)';
-        else if (isConverting) elements.etaText.innerText = 'Converting your file...';
-        else if (conversionDone) elements.etaText.innerText = 'PDF ready - Click download';
+        if (!selectedFile) elements.etaText.innerText = 'Drag & drop or click to select JPG';
+        else if (isConverting) elements.etaText.innerText = 'Converting...';
+        else if (conversionDone) elements.etaText.innerText = 'PDF ready';
       }
     }
 
-    // ==================== STEP PROGRESS UPDATE ====================
     function setStep(stepNum, text, active, percent) {
       const step = stepNum === 1 ? elements.step1 : (stepNum === 2 ? elements.step2 : elements.step3);
       if (step) step.innerHTML = `<span>${active ? '🔄' : '✅'}</span> ${text}`;
       if (percent !== undefined) elements.progressFill.style.width = Math.min(100, percent) + '%';
     }
 
-    // ==================== CORE CONVERSION FUNCTION ====================
     async function convertJPGToPDF() {
       if (!selectedFile || isConverting) return;
       
@@ -636,7 +560,7 @@
         URL.revokeObjectURL(url);
         
         setStep(1, `JPG loaded (${img.width}x${img.height})`, false, 40);
-        setStep(2, 'Processing image and scaling to A4...', true, 60);
+        setStep(2, 'Processing image and scaling...', true, 60);
         
         const aspect = img.width / img.height;
         const pdfWidth = 595.28;
@@ -684,10 +608,10 @@
         elements.etaText.innerText = 'Your PDF is ready to download';
         elements.checkIcon.innerHTML = '✔️🎉';
         elements.completeTitle.innerText = 'Ready!';
-        elements.completeMsg.innerText = `${img.width}x${img.height} → PDF • Auto-fitted`;
+        elements.completeMsg.innerText = `${img.width}x${img.height} → PDF`;
         elements.downloadBtn.classList.remove('disabled');
         elements.convertBtn.classList.add('disabled');
-        showMessage('PDF created successfully! Click download button.', false);
+        showMessage('✓ PDF created successfully!', false);
       } catch (err) {
         isConverting = false;
         showMessage('Conversion failed: ' + err.message, true);
@@ -696,7 +620,6 @@
       updateConvertBtn();
     }
 
-    // ==================== DOWNLOAD FUNCTION ====================
     function downloadPDF() {
       if (!conversionDone || !pdfBlob) return;
       const url = URL.createObjectURL(pdfBlob);
@@ -710,7 +633,6 @@
       URL.revokeObjectURL(url);
     }
 
-    // ==================== FILE SELECTION HANDLERS ====================
     const hiddenInput = document.createElement('input');
     hiddenInput.type = 'file';
     hiddenInput.accept = 'image/jpeg,image/jpg,.jpg,.jpeg';
@@ -718,7 +640,6 @@
     hiddenInput.id = 'hiddenFileInput';
     document.body.appendChild(hiddenInput);
 
-    // ==================== DRAG & DROP HANDLERS ====================
     const dropZone = document.getElementById('dropZone');
     dropZone.addEventListener('click', () => { if (!isConverting) hiddenInput.click(); });
     dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
@@ -730,27 +651,22 @@
       if (files && files.length > 0) handleFileSelection(files[0]);
     });
     
-    // ==================== HIDDEN INPUT CHANGE HANDLER ====================
     hiddenInput.addEventListener('change', (e) => {
       if (e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0]);
     });
     
-    // ==================== BUTTON EVENT LISTENERS ====================
     elements.convertBtn.addEventListener('click', convertJPGToPDF);
     elements.downloadBtn.addEventListener('click', downloadPDF);
     elements.resetLink.addEventListener('click', () => { if(!isConverting) resetUI(true); });
     
-    // ==================== LOGO CLICK HANDLER ====================
     document.getElementById('homeLogoLink').addEventListener('click', () => window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/');
 
-    // ==================== DARK MODE TOGGLE ====================
     const darkToggle = document.getElementById('darkModeToggle');
     darkToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
       darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
     });
     
-    // ==================== INITIALIZE APPLICATION ====================
     resetUI(true);
   })();
 </script>
