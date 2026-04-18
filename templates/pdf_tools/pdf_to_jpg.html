@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="2026's best PDF to JPG converter - Convert each PDF page to high-quality JPG images. Extract images from PDF instantly. Free, fast, private. No signup, no upload, no watermarks.">
-  <meta name="keywords" content="PDF to JPG 2026, convert PDF to JPG, PDF to image, extract PDF pages, JPG from PDF, free PDF to JPG, online PDF converter, no upload PDF to JPG">
-  <meta name="author" content="Free AI Tools 2026">
+  <meta name="description" content="Free PDF to JPG converter - Convert each PDF page to high-quality JPG images. Extract images from PDF instantly. 100% free, private, no upload, no signup.">
+  <meta name="keywords" content="PDF to JPG, convert PDF to JPG, PDF to image, extract PDF pages, JPG from PDF, free PDF to JPG, online PDF converter">
+  <meta name="author" content="Free AI Tools Hub">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <meta name="googlebot" content="index, follow">
   <meta name="rating" content="General">
@@ -15,14 +15,14 @@
   <meta name="theme-color" content="#3a8cff">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="PDF to JPG 2026 | Convert PDF Pages to Images | Free">
-  <meta property="og:description" content="Convert each page of your PDF to high-quality JPG images. 100% free, private, no upload. Extract images from PDF instantly.">
+  <meta property="og:title" content="PDF to JPG | Convert PDF Pages to Images | Free Tool">
+  <meta property="og:description" content="Convert each page of your PDF to high-quality JPG images. Free, private, no upload. Extract images instantly.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-jpg">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PDF to JPG 2026 | Free PDF to Image Converter">
+  <meta name="twitter:title" content="PDF to JPG | Free PDF to Image Converter">
   <meta name="twitter:description" content="Convert PDF pages to JPG images. Free, fast, private. No signup required.">
   
   <!-- Canonical -->
@@ -33,7 +33,7 @@
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "PDF to JPG Converter 2026",
+    "name": "PDF to JPG Converter",
     "applicationCategory": "UtilityApplication",
     "operatingSystem": "Web Browser",
     "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
@@ -43,7 +43,7 @@
   }
   </script>
   
-  <title>PDF to JPG 2026 | Convert PDF Pages to Images | Free | No Signup</title>
+  <title>PDF to JPG | Convert PDF Pages to Images | Free | No Signup</title>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -61,7 +61,6 @@
     body.dark-mode { background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%); }
     .wrapper { max-width: 1400px; margin: 0 auto; }
     .error-msg { color: #ff6b6b; font-size: 0.75rem; margin-top: 8px; text-align: center; font-weight: bold; }
-    .success-msg { color: #4caf50; font-size: 0.75rem; margin-top: 8px; text-align: center; font-weight: bold; }
 
     /* Header */
     .ai-hub-header {
@@ -77,17 +76,8 @@
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.6);
     }
-    body.dark-mode .ai-hub-header {
-      background: rgba(18, 20, 36, 0.95);
-      border-color: rgba(58, 140, 255, 0.3);
-    }
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
+    body.dark-mode .ai-hub-header { background: rgba(18, 20, 36, 0.95); border-color: rgba(58, 140, 255, 0.3); }
+    .logo-area { display: flex; align-items: center; gap: 14px; cursor: pointer; transition: transform 0.2s; }
     .logo-area:hover { transform: scale(1.02); }
     .logo-img {
       width: 52px;
@@ -229,40 +219,26 @@
     }
     body.dark-mode .quality-btn { color: #c0d4ff; }
 
-    /* Drop Zone */
+    /* Drop Zone Only - No File Box */
     .drop-zone {
       margin-top: 16px;
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(8px);
       border-radius: 32px;
-      padding: 20px 20px;
+      padding: 35px 20px;
       text-align: center;
       border: 2px dashed rgba(255,255,255,0.5);
       transition: all 0.3s ease;
       cursor: pointer;
     }
     .drop-zone.drag-over { background: rgba(255, 255, 255, 0.4); border-color: #3a8cff; transform: scale(1.02); }
-    .drop-zone-content { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    .drop-icon { font-size: 42px; }
-    .drop-text { font-size: 0.85rem; color: #1a3a6e; font-weight: 500; }
-    .drop-sub { font-size: 0.65rem; color: #4a6a8e; }
+    .drop-zone-content { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .drop-icon { font-size: 52px; }
+    .drop-text { font-size: 1rem; color: #1a3a6e; font-weight: 500; }
+    .drop-sub { font-size: 0.75rem; color: #4a6a8e; }
     body.dark-mode .drop-zone { background: rgba(58, 140, 255, 0.15); border-color: rgba(58, 140, 255, 0.4); }
     body.dark-mode .drop-text { color: #c0d4ff; }
-    
-    .file-box {
-      margin-top: 16px;
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(8px);
-      border-radius: 80px;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #1a3a6e;
-      font-weight: 600;
-      border: 1px solid rgba(255,255,255,0.4);
-    }
-    body.dark-mode .file-box { background: rgba(30, 34, 52, 0.8); color: #c0d4ff; border-color: rgba(58,140,255,0.3); }
+    body.dark-mode .drop-sub { color: #8a9dc0; }
     
     .convert-btn {
       margin-top: 20px;
@@ -430,18 +406,18 @@
 <div class="wrapper">
   <header class="ai-hub-header">
     <div class="logo-area" id="homeLogoLink">
-      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="AI Tools Hub 2026 Logo" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI26'">
+      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="Free AI Tools Hub Logo" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI'">
       <div class="logo-text">
-        <h2>AI Tools Hub 2026</h2>
-        <p>Next-Gen Free Tools</p>
+        <h2>Free AI Tools Hub</h2>
+        <p>PDF to JPG Converter</p>
       </div>
     </div>
     <nav class="nav-links">
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home 2026</a>
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ AI Image Tools</a>
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 Smart PDF Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ Image Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 PDF Tools</a>
       <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools" class="nav-link">⚙️ Utility Suite</a>
-      <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode 2026</button>
+      <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode</button>
     </nav>
   </header>
 
@@ -449,21 +425,16 @@
     <section class="main-card">
       <div class="inner-card">
         <div class="left">
-          <div class="icon" aria-hidden="true">🖼️ PDF</div>
-          <h1>PDF to JPG 2026</h1>
+          <div class="icon">🖼️ PDF</div>
+          <h1>PDF to JPG Converter</h1>
           <p class="desc">Convert each PDF page to high-quality JPG • Extract images • Bulk download</p>
           
           <div class="drop-zone" id="dropZone">
             <div class="drop-zone-content">
               <div class="drop-icon">📄➡️🖼️</div>
               <div class="drop-text">Drag & Drop PDF file here</div>
-              <div class="drop-sub">or click to browse</div>
+              <div class="drop-sub">Click to select PDF</div>
             </div>
-          </div>
-          
-          <div class="file-box">
-            <span id="fileName">Select PDF file</span>
-            <button class="file-btn" id="chooseBtn" style="background:linear-gradient(95deg,#5cb0ff,#3a8cff); padding:8px 20px; border-radius:40px; color:white; border:none; cursor:pointer;">Browse 2026</button>
           </div>
           
           <div class="quality-selector">
@@ -480,13 +451,13 @@
             <p>🖼️ Output: <span id="outputInfo" class="size-value">JPG images</span></p>
           </div>
           
-          <button class="convert-btn disabled" id="convertBtn">🖼️ Convert to JPG 2026 🖼️</button>
+          <button class="convert-btn disabled" id="convertBtn">🖼️ Convert to JPG 🖼️</button>
           <div id="fileErrorMsg" class="error-msg"></div>
         </div>
 
         <div class="center">
           <h3 id="statusTitle">Ready to convert</h3>
-          <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Drag & drop or browse PDF</p>
+          <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Drag & drop or click to select PDF</p>
           <div class="progress"><div class="fill" id="progressFill"></div></div>
           <div class="step-list">
             <p id="step1"><span>⭕</span> Loading PDF — waiting</p>
@@ -496,7 +467,7 @@
         </div>
 
         <div class="right">
-          <div class="check" id="checkIcon" aria-hidden="true">🖼️</div>
+          <div class="check" id="checkIcon">🖼️</div>
           <h3 id="completeTitle">Awaiting PDF</h3>
           <p id="completeMsg" style="opacity:0.8;">Select a PDF to convert</p>
           <button class="download disabled" id="downloadBtn">⬇️ Download All JPGs (ZIP) ⬇️</button>
@@ -506,7 +477,7 @@
     </section>
 
     <article class="white-info-card">
-      <h2>🚀 Why Choose Our PDF to JPG Converter 2026?</h2>
+      <h2>Professional PDF to JPG Converter - Free & Private</h2>
       <p class="section-sub">Extract high-quality images from any PDF - completely free, no upload needed</p>
       
       <div class="features-grid-white">
@@ -518,44 +489,48 @@
         <div class="feature-item-white"><div class="feature-icon-white">💯</div><h4>100% Free</h4><p>No signup, no watermark, unlimited</p></div>
       </div>
 
-      <h2>📖 How to Convert PDF to JPG in 2026</h2>
-      <p class="section-sub">Simple 3-step process - extract images in seconds</p>
+      <h2>How to Convert PDF to JPG - Simple Steps</h2>
+      <p class="section-sub">Extract images in seconds</p>
       
       <div class="how-it-works-white">
-        <div class="step-card-white"><div class="step-num-white">1</div><h4>Select PDF</h4><p>Drag & drop or browse your PDF file</p></div>
+        <div class="step-card-white"><div class="step-num-white">1</div><h4>Select PDF</h4><p>Drag & drop or click to select your PDF file</p></div>
         <div class="step-card-white"><div class="step-num-white">2</div><h4>Choose Quality</h4><p>Pick High, Best, or Maximum quality</p></div>
         <div class="step-card-white"><div class="step-num-white">3</div><h4>Download ZIP</h4><p>Get all JPG images in one ZIP file</p></div>
       </div>
 
-      <h2>❓ Frequently Asked Questions 2026</h2>
+      <h2>Frequently Asked Questions</h2>
       
       <div class="faq-list-white">
-        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Is this PDF to JPG converter really free?</div><div class="faq-answer-white">✅ Yes! 100% completely free. No hidden fees, no premium. Convert unlimited PDFs.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Does it upload my PDF to a server?</div><div class="faq-answer-white">🛡️ NO! All conversion happens locally in your browser. Your files never leave your computer.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Will each page become a separate JPG?</div><div class="faq-answer-white">📄 Yes! Each PDF page is converted to a separate high-quality JPG image.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> What image quality is available?</div><div class="faq-answer-white">🎨 3 levels: High (80%), Best (95%), Maximum (100%). Best quality recommended.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> What file size is supported?</div><div class="faq-answer-white">📁 Supports PDF files up to 50MB. Most documents work perfectly.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Any watermarks on output?</div><div class="faq-answer-white">✨ Zero watermarks! Clean JPG images with no ads or branding.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Is this PDF to JPG converter really free?</div><div class="faq-answer-white">✅ Yes! 100% completely free. No hidden fees, no premium. Convert unlimited PDFs.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Does it upload my PDF to a server?</div><div class="faq-answer-white">🛡️ NO! All conversion happens locally in your browser. Your files never leave your computer.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Will each page become a separate JPG?</div><div class="faq-answer-white">📄 Yes! Each PDF page is converted to a separate high-quality JPG image.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 What image quality is available?</div><div class="faq-answer-white">🎨 3 levels: High (80%), Best (95%), Maximum (100%). Best quality recommended.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Any watermarks on output?</div><div class="faq-answer-white">✨ Zero watermarks! Clean JPG images with no ads or branding.</div></div>
       </div>
 
       <footer class="internal-links-white">
-        <p>🔥 More Free PDF Tools 2026:</p>
+        <p>🔥 More Free PDF Tools:</p>
         <div class="links-row-white">
-          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/word-to-pdf" target="_blank" rel="noopener noreferrer">📝 Word to PDF 2026</a>
-          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-jpg" target="_blank" rel="noopener noreferrer">🖼️ PDF to JPG 2026</a>
-          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf" target="_blank" rel="noopener noreferrer">🔗 Merge PDF 2026</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/word-to-pdf">Word to PDF Converter</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf">Merge PDF Files</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-compressor">PDF Compressor</a>
         </div>
-        <p style="font-size: 0.75rem; margin-top: 16px;">© Free AI Tools 2026 - Next-Gen PDF to JPG Converter | Extract Images | Privacy First</p>
-        <p style="font-size: 0.7rem; margin-top: 8px;">Last updated: April 2026 | Trusted by 68,000+ users monthly</p>
+        <p style="font-size: 0.75rem; margin-top: 16px;">© Free AI Tools Hub - Professional PDF to JPG Converter | Privacy-Focused | No Upload Required</p>
+        <p style="font-size: 0.7rem; margin-top: 8px;">Trusted by over 68,000 users for fast, reliable PDF to image conversion</p>
       </footer>
     </article>
   </main>
 </div>
 
 <script>
+  // ==================== PDF.JS WORKER CONFIGURATION ====================
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
   
   (function() {
+    // ==================== CONFIGURATION ====================
+    const MAX_SIZE = 5 * 1024 * 1024; // 5MB hidden limit
+    
+    // ==================== STATE VARIABLES ====================
     let selectedFile = null;
     let isConverting = false;
     let conversionDone = false;
@@ -563,8 +538,8 @@
     let currentQuality = 0.95;
     let totalPages = 0;
     
+    // ==================== DOM ELEMENTS ====================
     const elements = {
-      fileName: document.getElementById('fileName'),
       convertBtn: document.getElementById('convertBtn'),
       downloadBtn: document.getElementById('downloadBtn'),
       resetLink: document.getElementById('resetLink'),
@@ -582,6 +557,7 @@
       totalPagesSpan: document.getElementById('totalPages')
     };
 
+    // ==================== UTILITY FUNCTIONS ====================
     function formatFileSize(bytes) {
       if (bytes === 0) return '0 Bytes';
       const k = 1024;
@@ -590,14 +566,17 @@
       return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
 
+    // ==================== FILE VALIDATION (5MB HIDDEN LIMIT) ====================
     function validatePDF(file) {
-      if (!file) return { valid: false, message: '❌ No file selected' };
-      if (file.size === 0) return { valid: false, message: '❌ File is empty' };
-      if (file.size > 50 * 1024 * 1024) return { valid: false, message: '❌ Max 50MB allowed' };
-      if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
-        return { valid: false, message: '❌ Only PDF files are supported' };
+      if (!file) return { valid: false, message: 'No file selected' };
+      if (file.size === 0) return { valid: false, message: 'File is empty' };
+      if (file.size > MAX_SIZE) {
+        return { valid: false, message: 'File too large. Please select a smaller PDF.' };
       }
-      return { valid: true, message: '✓ PDF ready for conversion' };
+      if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+        return { valid: false, message: 'Only PDF files are supported' };
+      }
+      return { valid: true, message: 'PDF ready for conversion' };
     }
 
     function showMessage(msg, isError = false) {
@@ -608,11 +587,16 @@
       }
     }
 
+    // ==================== FILE SELECTION HANDLER ====================
     function handleFileSelection(file) {
       const valid = validatePDF(file);
-      if (!valid.valid) { showMessage(valid.message, true); return false; }
+      if (!valid.valid) { 
+        showMessage(valid.message, true);
+        const hidden = document.getElementById('hiddenFileInput');
+        if (hidden) hidden.value = '';
+        return false; 
+      }
       selectedFile = file;
-      elements.fileName.innerText = file.name.length > 36 ? file.name.slice(0,32)+'...' : file.name;
       if (conversionDone) resetUI(false);
       conversionDone = false;
       imageBlobs = [];
@@ -622,6 +606,7 @@
       return true;
     }
 
+    // ==================== UI RESET ====================
     function resetUI(resetFile = true) {
       if (isConverting) isConverting = false;
       conversionDone = false;
@@ -631,7 +616,7 @@
       elements.step2.innerHTML = '<span>⭕</span> Analyzing pages — waiting';
       elements.step3.innerHTML = '<span>⭕</span> Converting to JPG — waiting';
       elements.statusTitle.innerText = 'Ready to convert';
-      elements.etaText.innerText = 'Drag & drop or browse PDF';
+      elements.etaText.innerText = 'Drag & drop or click to select PDF';
       elements.downloadBtn.classList.add('disabled');
       elements.checkIcon.innerHTML = '🖼️';
       elements.completeTitle.innerText = 'Awaiting PDF';
@@ -639,7 +624,6 @@
       elements.pageInfo.style.display = 'none';
       if (resetFile) {
         selectedFile = null;
-        elements.fileName.innerText = 'Select PDF file';
         const hidden = document.getElementById('hiddenFileInput');
         if (hidden) hidden.value = '';
         showMessage('', false);
@@ -653,7 +637,7 @@
         elements.etaText.innerText = 'Ready to convert';
       } else {
         elements.convertBtn.classList.add('disabled');
-        if (!selectedFile) elements.etaText.innerText = 'Drag & drop or browse PDF';
+        if (!selectedFile) elements.etaText.innerText = 'Drag & drop or click to select PDF';
         else if (isConverting) elements.etaText.innerText = 'Converting...';
         else if (conversionDone) elements.etaText.innerText = 'JPGs ready!';
       }
@@ -665,6 +649,7 @@
       if (percent !== undefined) elements.progressFill.style.width = Math.min(100, percent) + '%';
     }
 
+    // ==================== CORE CONVERSION FUNCTION ====================
     async function convertPDFToJPG() {
       if (!selectedFile || isConverting) return;
       
@@ -733,6 +718,7 @@
       updateConvertBtn();
     }
 
+    // ==================== DOWNLOAD ALL AS ZIP ====================
     async function downloadAllJPGs() {
       if (!conversionDone || imageBlobs.length === 0) return;
       
@@ -744,7 +730,7 @@
       saveAs(zipBlob, `pdf_images_${Date.now()}.zip`);
     }
 
-    // Quality buttons
+    // ==================== QUALITY BUTTONS ====================
     document.querySelectorAll('.quality-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.quality-btn').forEach(b => b.classList.remove('active'));
@@ -756,7 +742,7 @@
       });
     });
 
-    // Hidden file input
+    // ==================== FILE INPUT HANDLERS ====================
     const hiddenInput = document.createElement('input');
     hiddenInput.type = 'file';
     hiddenInput.accept = 'application/pdf,.pdf';
@@ -764,7 +750,6 @@
     hiddenInput.id = 'hiddenFileInput';
     document.body.appendChild(hiddenInput);
 
-    // Drag & Drop
     const dropZone = document.getElementById('dropZone');
     dropZone.addEventListener('click', () => { if (!isConverting) hiddenInput.click(); });
     dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
@@ -776,29 +761,27 @@
       if (files && files.length > 0) handleFileSelection(files[0]);
     });
     
-    document.getElementById('chooseBtn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (!isConverting) hiddenInput.click();
-    });
-    
     hiddenInput.addEventListener('change', (e) => {
       if (e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0]);
     });
     
+    // ==================== BUTTON EVENT LISTENERS ====================
     elements.convertBtn.addEventListener('click', convertPDFToJPG);
     elements.downloadBtn.addEventListener('click', downloadAllJPGs);
     elements.resetLink.addEventListener('click', () => { if(!isConverting) resetUI(true); });
     document.getElementById('homeLogoLink').addEventListener('click', () => window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/');
 
-    // Dark mode
+    // ==================== DARK MODE TOGGLE ====================
     const darkToggle = document.getElementById('darkModeToggle');
     darkToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
-      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode 2026' : '🌙 Dark Mode 2026';
+      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
     });
     
+    // ==================== INITIALIZE ====================
     resetUI(true);
   })();
 </script>
 </body>
 </html>
+
