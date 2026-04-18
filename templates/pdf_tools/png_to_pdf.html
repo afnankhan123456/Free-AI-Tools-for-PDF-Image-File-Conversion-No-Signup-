@@ -436,12 +436,12 @@
           <h1>PNG to PDF Converter</h1>
           <p class="desc">Convert PNG to PDF • Transparency Support • Multiple Quality Options • No Upload Required</p>
           
-          <!-- ==================== DRAG & DROP ZONE (NO FILE NAME CARD) ==================== -->
+          <!-- ==================== DRAG & DROP ZONE (NO FILE NAME CARD, NO SIZE MENTION) ==================== -->
           <div class="drop-zone" id="dropZone">
             <div class="drop-zone-content">
               <div class="drop-icon">🖼️➡️📄</div>
               <div class="drop-text">Drag & Drop PNG Image Here</div>
-              <div class="drop-sub">Click to Select File (Max 5MB)</div>
+              <div class="drop-sub">Click to Select File</div>
             </div>
           </div>
           
@@ -470,7 +470,7 @@
         <!-- ==================== CENTER PANEL - PROGRESS & STATUS ==================== -->
         <div class="center">
           <h3 id="statusTitle">Ready to Convert</h3>
-          <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Drag & drop or click to select PNG file (Max 5MB)</p>
+          <p id="etaText" style="font-size:0.85rem; opacity:0.8;">Drag & drop or click to select PNG file</p>
           <div class="progress"><div class="fill" id="progressFill"></div></div>
           <div class="step-list">
             <p id="step1"><span>⭕</span> Loading PNG Image — Waiting</p>
@@ -520,7 +520,6 @@
         <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Does it preserve PNG transparency?</div><div class="faq-answer-white">Absolutely! Our converter maintains transparent backgrounds from your PNG files in the output PDF document.</div></div>
         <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Where are my files processed?</div><div class="faq-answer-white">All conversion happens directly in your browser. Your images never get uploaded to any server, ensuring complete privacy.</div></div>
         <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> What quality options are available?</div><div class="faq-answer-white">We offer Standard Quality (85%), High Quality (95%), and Maximum Quality (100%) output options for your PDF files.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> What is the maximum file size limit?</div><div class="faq-answer-white">Each PNG file can be up to 5MB, which works perfectly for most images and ensures fast conversion speeds.</div></div>
         <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Will there be watermarks on my PDF?</div><div class="faq-answer-white">No watermarks ever! Your output PDF will be clean and professional without any branding or ads.</div></div>
         <div class="faq-item-white"><div class="faq-question-white"><span>🔹</span> Can I convert multiple PNG files?</div><div class="faq-answer-white">Yes, you can convert unlimited PNG files one at a time. Each conversion is fast and efficient.</div></div>
       </div>
@@ -542,12 +541,12 @@
 
 <script>
 // ==================== MAIN APPLICATION LOGIC ====================
-// This script handles: PNG file selection, validation, conversion to PDF, and download functionality
+// This script handles: PNG file selection, validation (5MB hidden limit), conversion to PDF, and download functionality
 // Uses: jspdf library for PDF generation, HTML5 File API for file handling
 
 (function() {
     // ==================== CONFIGURATION ====================
-    const MAX_SIZE = 5 * 1024 * 1024; // 5MB maximum file size limit
+    const MAX_SIZE = 5 * 1024 * 1024; // 5MB maximum file size limit (hidden from UI)
     
     // ==================== STATE VARIABLES ====================
     let selectedFile = null;        // Stores the selected PNG file
@@ -586,12 +585,12 @@
       return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
 
-    // ==================== FILE VALIDATION FUNCTION ====================
+    // ==================== FILE VALIDATION FUNCTION (5MB HIDDEN LIMIT) ====================
     function validatePNG(file) {
       if (!file) return { valid: false, message: 'No file selected' };
       if (file.size === 0) return { valid: false, message: 'File is empty' };
       if (file.size > MAX_SIZE) {
-        return { valid: false, message: `File too large: ${(file.size/1024/1024).toFixed(2)}MB. Maximum 5MB allowed.` };
+        return { valid: false, message: `File too large. Please select a smaller file.` };
       }
       const ext = file.name.split('.').pop().toLowerCase();
       if (file.type !== 'image/png' && ext !== 'png') {
@@ -641,7 +640,7 @@
       elements.step2.innerHTML = '<span>⭕</span> Processing & Scaling — Waiting';
       elements.step3.innerHTML = '<span>⭕</span> Generating PDF Document — Waiting';
       elements.statusTitle.innerText = 'Ready to Convert';
-      elements.etaText.innerText = 'Drag & drop or click to select PNG file (Max 5MB)';
+      elements.etaText.innerText = 'Drag & drop or click to select PNG file';
       elements.downloadBtn.classList.add('disabled');
       elements.checkIcon.innerHTML = '🖼️';
       elements.completeTitle.innerText = 'Awaiting Image';
@@ -663,7 +662,7 @@
         elements.etaText.innerText = 'Ready to convert - Click the button';
       } else {
         elements.convertBtn.classList.add('disabled');
-        if (!selectedFile) elements.etaText.innerText = 'Drag & drop or click to select PNG file (Max 5MB)';
+        if (!selectedFile) elements.etaText.innerText = 'Drag & drop or click to select PNG file';
         else if (isConverting) elements.etaText.innerText = 'Converting your file...';
         else if (conversionDone) elements.etaText.innerText = 'PDF ready - Click download';
       }
@@ -842,3 +841,4 @@
 
 </body>
 </html>
+
