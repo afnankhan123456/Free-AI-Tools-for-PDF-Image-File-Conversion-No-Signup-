@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   
   <!-- SEO Meta Tags - PDF Splitter 2026 -->
-  <meta name="description" content="2026's fastest PDF Splitter - Split PDF pages instantly. Drag & drop or browse. Extract single pages, split by range, or extract every page as separate PDF. 100% free, no signup, no watermarks.">
+  <meta name="description" content="2026's fastest PDF Splitter - Split PDF pages instantly. Drag & drop or click. Extract single pages, split by range, or extract every page as separate PDF. 100% free, no signup, no watermarks.">
   <meta name="keywords" content="PDF Splitter 2026, split PDF online free, extract PDF pages, AI PDF Splitter, drag drop PDF split, separate PDF pages, free PDF splitter 2026, no signup PDF tool, split PDF by range">
   <meta name="author" content="Free AI Tools 2026">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -20,10 +20,9 @@
   
   <!-- Open Graph / Social Media -->
   <meta property="og:title" content="PDF Splitter 2026 | AI-Powered | Drag & Drop | Free PDF Page Splitter">
-  <meta property="og:description" content="Split PDF pages instantly. Drag & drop or browse. Extract single pages, split by range, or separate all pages. 100% free, no watermark, instant download.">
+  <meta property="og:description" content="Split PDF pages instantly. Drag & drop or click. Extract single pages, split by range, or separate all pages. 100% free, no watermark, instant download.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-splitter">
-  <meta property="og:image" content="https://free-ai-tools-for-pdf-image-file.onrender.com/og-pdf-splitter.jpg">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -377,12 +376,13 @@
       text-align: center;
     }
 
+    /* Drag & Drop Zone Only - No file box */
     .drop-zone {
       margin-top: 14px;
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(8px);
-      border-radius: 28px;
-      padding: 18px 16px;
+      border-radius: 32px;
+      padding: 28px 20px;
       text-align: center;
       border: 2px dashed rgba(255,255,255,0.5);
       transition: all 0.3s ease;
@@ -397,59 +397,42 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
-    .drop-icon { font-size: 38px; }
-    .drop-text { font-size: 0.85rem; color: #1a3a6e; font-weight: 500; }
-    .drop-sub { font-size: 0.65rem; color: #4a6a8e; }
+    .drop-icon { font-size: 44px; }
+    .drop-text { font-size: 0.9rem; color: #1a3a6e; font-weight: 500; }
+    .drop-sub { font-size: 0.7rem; color: #4a6a8e; }
     body.dark-mode .drop-zone { background: rgba(58, 140, 255, 0.15); border-color: rgba(58, 140, 255, 0.4); }
     body.dark-mode .drop-text { color: #c0d4ff; }
     body.dark-mode .drop-sub { color: #8a9dc0; }
 
-    .file-box {
-      margin-top: 14px;
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(8px);
-      border-radius: 60px;
-      padding: 6px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #1a3a6e;
-      font-weight: 600;
-      font-size: 0.8rem;
-      border: 1px solid rgba(255,255,255,0.4);
-    }
-    .file-btn, .convert-btn, .download {
+    /* No separate file box, no browse button */
+
+    .convert-btn {
+      margin-top: 20px;
+      padding: 12px 16px;
+      border-radius: 50px;
+      text-align: center;
       background: linear-gradient(95deg, #5cb0ff, #3a8cff);
       color: white;
       cursor: pointer;
       font-weight: 600;
       border: none;
-      transition: all 0.2s;
-    }
-    .file-btn {
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      box-shadow: 0 2px 6px rgba(58,140,255,0.3);
-    }
-    .convert-btn {
-      margin-top: 18px;
-      padding: 10px 12px;
-      border-radius: 50px;
-      text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       width: 100%;
       letter-spacing: 0.3px;
       box-shadow: 0 4px 12px rgba(58,140,255,0.3);
+      transition: all 0.2s;
     }
-    .convert-btn.disabled, .download.disabled {
+    .convert-btn.disabled {
       opacity: 0.5;
       cursor: not-allowed;
       pointer-events: none;
     }
-    .convert-btn:not(.disabled):hover, .download:not(.disabled):hover { transform: scale(0.97); background: linear-gradient(95deg, #4aa0ff, #2a7cff); }
+    .convert-btn:not(.disabled):hover {
+      transform: scale(0.98);
+      background: linear-gradient(95deg, #4aa0ff, #2a7cff);
+    }
 
     .center h3, .right h3 {
       font-size: 1.2rem;
@@ -507,9 +490,16 @@
       padding: 10px 14px;
       border-radius: 50px;
       width: 100%;
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      color: white;
       font-weight: bold;
+      cursor: pointer;
+      border: none;
       font-size: 0.85rem;
+      transition: all 0.2s;
     }
+    .download.disabled { opacity: 0.5; pointer-events: none; }
+    .download:not(.disabled):hover { transform: scale(0.97); background: linear-gradient(95deg, #4aa0ff, #2a7cff); }
     .link {
       margin-top: 16px;
       font-size: 12px;
@@ -618,18 +608,13 @@
             <div id="pageInfo" class="page-info">📄 Load a PDF to see page count</div>
           </div>
 
-          <!-- Drag & Drop Zone -->
+          <!-- Drag & Drop Zone Only (no separate browse button) -->
           <div class="drop-zone" id="dropZone">
             <div class="drop-zone-content">
               <div class="drop-icon">📁✂️</div>
               <div class="drop-text">Drag & Drop your PDF file here</div>
-              <div class="drop-sub">or click below to browse</div>
+              <div class="drop-sub">or click to select PDF</div>
             </div>
-          </div>
-          
-          <div class="file-box">
-            <span id="fileName">Select PDF to split</span>
-            <button class="file-btn" id="chooseBtn">Browse 2026</button>
           </div>
           
           <button class="convert-btn disabled" id="convertBtn">✨ Split PDF 2026 ✨</button>
@@ -638,7 +623,7 @@
 
         <div class="center">
           <h3 id="statusTitle">Ready to Split</h3>
-          <p id="etaText" style="font-size:0.75rem;">Drag & drop or browse PDF</p>
+          <p id="etaText" style="font-size:0.75rem;">Drag & drop or click to select PDF</p>
           <div class="progress"><div class="fill" id="progressFill"></div></div>
           <div class="step-list">
             <p id="step1"><span>⭕</span> AI analyzing PDF — waiting</p>
@@ -690,6 +675,9 @@
 
 <script>
   (function(){
+    // 5MB hidden limit
+    const MAX_SIZE = 5 * 1024 * 1024;
+    
     let selectedFile = null, isProcessing = false, processedBlob = null, conversionDone = false;
     let currentMode = 'single';
     let totalPages = 0;
@@ -697,7 +685,7 @@
     let zipBlob = null;
     
     const elements = {
-      fileName: document.getElementById('fileName'), convertBtn: document.getElementById('convertBtn'), downloadBtn: document.getElementById('downloadBtn'),
+      convertBtn: document.getElementById('convertBtn'), downloadBtn: document.getElementById('downloadBtn'),
       resetLink: document.getElementById('resetLink'), progressFill: document.getElementById('progressFill'), statusTitle: document.getElementById('statusTitle'),
       etaText: document.getElementById('etaText'), step1: document.getElementById('step1'), step2: document.getElementById('step2'), step3: document.getElementById('step3'),
       checkIcon: document.getElementById('checkIcon'), completeTitle: document.getElementById('completeTitle'), completeMsg: document.getElementById('completeMsg'),
@@ -734,7 +722,7 @@
     function validateFile(file){
       if(!file) return {valid:false, message:'No file'};
       if(file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) return {valid:false, message:'❌ Only PDF files supported'};
-      if(file.size > 150 * 1024 * 1024) return {valid:false, message:'❌ Max 150MB allowed'};
+      if(file.size > MAX_SIZE) return {valid:false, message:`File too large. Please select a smaller PDF.`};
       return {valid:true, message:'✓ PDF ready for splitting'};
     }
     
@@ -754,12 +742,12 @@
       elements.step2.innerHTML='<span>⭕</span> Processing split — waiting';
       elements.step3.innerHTML='<span>⭕</span> Generating output — waiting';
       elements.statusTitle.innerText='Ready to Split';
-      elements.etaText.innerText='Drag & drop or browse PDF';
+      elements.etaText.innerText='Drag & drop or click to select PDF';
       elements.downloadBtn.classList.add('disabled');
       elements.checkIcon.innerHTML='🚀';
       elements.completeTitle.innerText='Awaiting PDF';
       elements.completeMsg.innerText='Split pages instantly';
-      if(resetFile){ selectedFile=null; totalPages=0; elements.fileName.innerText='Select PDF to split'; elements.pageInfo.innerText='📄 Load a PDF to see page count'; const hidden=document.getElementById('hiddenFileInput'); if(hidden) hidden.value=''; showMessage('',false); }
+      if(resetFile){ selectedFile=null; totalPages=0; elements.pageInfo.innerText='📄 Load a PDF to see page count'; const hidden=document.getElementById('hiddenFileInput'); if(hidden) hidden.value=''; showMessage('',false); }
       updateConvertBtn();
     }
     
@@ -887,7 +875,6 @@
       const valid = validateFile(file);
       if(!valid.valid){ showMessage(valid.message,true); return false; }
       selectedFile = file;
-      elements.fileName.innerText = file.name.length>40 ? file.name.slice(0,36)+'...' : file.name;
       
       // Get page count
       try {
@@ -907,14 +894,22 @@
     }
     
     const dropZone = document.getElementById('dropZone');
-    const hiddenInput = document.createElement('input'); hiddenInput.type='file'; hiddenInput.accept='application/pdf'; hiddenInput.style.display='none'; hiddenInput.id='hiddenFileInput';
+    const hiddenInput = document.createElement('input'); 
+    hiddenInput.type='file'; 
+    hiddenInput.accept='application/pdf'; 
+    hiddenInput.style.display='none'; 
+    hiddenInput.id='hiddenFileInput';
     document.body.appendChild(hiddenInput);
     
     dropZone.addEventListener('click',()=>{ if(!isProcessing) hiddenInput.click(); });
     dropZone.addEventListener('dragover',(e)=>{ e.preventDefault(); dropZone.classList.add('drag-over'); });
     dropZone.addEventListener('dragleave',()=>{ dropZone.classList.remove('drag-over'); });
-    dropZone.addEventListener('drop',(e)=>{ e.preventDefault(); dropZone.classList.remove('drag-over'); if(e.dataTransfer.files && e.dataTransfer.files[0]) handleFileSelection(e.dataTransfer.files[0]); });
-    document.getElementById('chooseBtn').addEventListener('click',(e)=>{ e.stopPropagation(); if(!isProcessing) hiddenInput.click(); });
+    dropZone.addEventListener('drop',(e)=>{ 
+      e.preventDefault(); 
+      dropZone.classList.remove('drag-over'); 
+      if(e.dataTransfer.files && e.dataTransfer.files[0]) handleFileSelection(e.dataTransfer.files[0]); 
+    });
+    
     hiddenInput.addEventListener('change',(e)=>{ if(e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0]); });
     elements.convertBtn.addEventListener('click', startConversion);
     elements.downloadBtn.addEventListener('click', downloadPdf);
@@ -927,3 +922,7 @@
 </script>
 </body>
 </html>
+
+
+
+
