@@ -4,89 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   
-  <!-- SEO Meta Tags - PDF Rotator 2026 -->
-  <meta name="description" content="2026's fastest PDF Rotator - Rotate PDF pages instantly. Drag & drop or browse. Rotate single pages or entire PDF 90°, 180°, 270°. 100% free, no signup, no watermarks.">
-  <meta name="keywords" content="PDF Rotator 2026, rotate PDF online free, rotate PDF pages, AI PDF Rotator, drag drop PDF rotate, rotate PDF 90 degrees, PDF page rotator, free PDF rotator 2026, no signup PDF tool">
+  <!-- SEO Meta Tags - PDF Rotator 2026 (Free Angle) -->
+  <meta name="description" content="2026's most advanced PDF Rotator - Rotate PDF pages at any angle (0-360°). Free, drag & drop, custom angle, 90° presets. 100% free, no signup, no watermarks.">
+  <meta name="keywords" content="PDF Rotator 2026, rotate PDF any angle, custom PDF rotation, free PDF rotator, drag drop PDF rotate, rotate PDF free, AI PDF rotator, PDF angle rotator">
   <meta name="author" content="Free AI Tools 2026">
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <meta name="googlebot" content="index, follow">
-  <meta name="bingbot" content="index, follow">
-  <meta name="rating" content="General">
-  <meta name="revisit-after" content="1 days">
-  <meta name="language" content="English">
-  <meta name="distribution" content="global">
-  <meta name="copyright" content="Free AI Tools 2026">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <meta name="theme-color" content="#3a8cff">
   
-  <!-- Open Graph / Social Media -->
-  <meta property="og:title" content="PDF Rotator 2026 | AI-Powered | Drag & Drop | Free PDF Rotation">
-  <meta property="og:description" content="Rotate PDF pages instantly. Drag & drop or browse. Rotate 90°, 180°, 270°. 100% free, no watermark, instant download.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="PDF Rotator 2026 | Any Angle (0-360°) | Free Custom PDF Rotation">
+  <meta property="og:description" content="Rotate PDF pages at any angle you want! 0° to 360° custom rotation. 100% free, no watermark, instant download.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-rotator">
-  <meta property="og:image" content="https://free-ai-tools-for-pdf-image-file.onrender.com/og-pdf-rotator.jpg">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PDF Rotator 2026 | Free AI Tool | Drag & Drop">
-  <meta name="twitter:description" content="Smart PDF rotation. No signup, no watermark, instant download.">
+  <meta name="twitter:title" content="PDF Rotator 2026 | Any Angle Rotation">
+  <meta name="twitter:description" content="Rotate PDF pages at any angle from 0° to 360°. Unique free tool!">
   
   <!-- Canonical -->
   <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-rotator">
-  <link rel="alternate" hreflang="en" href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-rotator">
   
-  <!-- Schema.org markup -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "PDF Rotator 2026",
-    "applicationCategory": "UtilityApplication",
-    "operatingSystem": "Web Browser",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "12400" },
-    "description": "Free AI-powered PDF Rotator with drag & drop, rotate pages 90/180/270 degrees",
-    "featureList": "Drag & Drop PDF, Rotate 90°/180°/270°, All Pages or Single Page, No Watermark, Instant Download"
-  }
-  </script>
+  <title>PDF Rotator 2026 | Rotate PDF at Any Angle (0-360°) | Free Custom Rotation</title>
   
-  <title>PDF Rotator 2026 | Drag & Drop | Free AI-Powered | Rotate PDF Pages</title>
-  
-  <!-- Libraries for PDF manipulation -->
+  <!-- Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
   
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       min-height: 100vh;
       background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
-      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Arial', sans-serif;
+      font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
       padding: 0 20px 32px;
       transition: background 0.3s ease;
     }
+    body.dark-mode { background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%); }
+    .wrapper { max-width: 1400px; margin: 0 auto; }
+    .error-msg { color: #ff6b6b; font-size: 0.7rem; margin-top: 6px; text-align: center; font-weight: bold; }
 
-    body.dark-mode {
-      background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%);
-    }
-
-    .wrapper {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .error-msg {
-      color: #ff6b6b;
-      font-size: 0.7rem;
-      margin-top: 6px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    /* Header Styles */
+    /* Header */
     .ai-hub-header {
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(12px);
@@ -99,59 +57,15 @@
       justify-content: space-between;
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.6);
-      transition: all 0.3s ease;
     }
-
-    body.dark-mode .ai-hub-header {
-      background: rgba(18, 20, 36, 0.95);
-      border-color: rgba(58, 140, 255, 0.3);
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
+    body.dark-mode .ai-hub-header { background: rgba(18, 20, 36, 0.95); border-color: rgba(58, 140, 255, 0.3); }
+    .logo-area { display: flex; align-items: center; gap: 14px; cursor: pointer; transition: transform 0.2s; }
     .logo-area:hover { transform: scale(1.02); }
-
-    .logo-img {
-      width: 52px;
-      height: 52px;
-      border-radius: 28px;
-      object-fit: cover;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border: 1px solid rgba(58,140,255,0.3);
-    }
-
-    .logo-text h2 {
-      font-size: 1.45rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #1a3a6e, #3a8cff);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    body.dark-mode .logo-text h2 {
-      background: linear-gradient(135deg, #ffffff, #8ab8ff);
-      background-clip: text;
-    }
-    .logo-text p {
-      font-size: 0.7rem;
-      color: #4a6a8e;
-      font-weight: 500;
-    }
-    body.dark-mode .logo-text p { color: #8a9dc0; }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-    }
-
+    .logo-img { width: 52px; height: 52px; border-radius: 28px; object-fit: cover; background: white; }
+    .logo-text h2 { font-size: 1.45rem; font-weight: 800; background: linear-gradient(135deg, #1a3a6e, #3a8cff); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    body.dark-mode .logo-text h2 { background: linear-gradient(135deg, #ffffff, #8ab8ff); background-clip: text; }
+    .logo-text p { font-size: 0.7rem; color: #4a6a8e; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
     .nav-link {
       background: #f0f4fa;
       padding: 10px 22px;
@@ -160,158 +74,80 @@
       font-size: 0.9rem;
       color: #1a3a6e;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
       border: 1px solid rgba(58,140,255,0.2);
-      backdrop-filter: blur(4px);
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
-    .nav-link:hover {
-      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(58,140,255,0.3);
-    }
-    body.dark-mode .nav-link {
-      background: rgba(58, 140, 255, 0.15);
-      color: #c0d4ff;
-      border-color: rgba(58, 140, 255, 0.3);
-    }
-    body.dark-mode .nav-link:hover {
-      background: linear-gradient(95deg, #3a8cff, #5cb0ff);
-      color: white;
-    }
-
+    .nav-link:hover { background: linear-gradient(95deg, #5cb0ff, #3a8cff); color: white; transform: translateY(-2px); }
+    body.dark-mode .nav-link { background: rgba(58, 140, 255, 0.15); color: #c0d4ff; }
     .dark-toggle {
       background: #e0e7ff;
       padding: 10px 18px;
       border-radius: 44px;
       font-weight: 600;
-      font-size: 0.9rem;
       cursor: pointer;
       border: 1px solid rgba(58,140,255,0.3);
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-family: inherit;
-      transition: all 0.2s ease;
     }
-    .dark-toggle:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-    body.dark-mode .dark-toggle {
-      background: #2a2a4a;
-      color: #ffd966;
-      border-color: #ffd966;
-    }
+    .dark-toggle:hover { transform: translateY(-2px); }
+    body.dark-mode .dark-toggle { background: #2a2a4a; color: #ffd966; }
 
-    /* MAIN CARD - COMPACT VERSION */
+    /* Main Card */
     .main-card {
       background: rgba(200, 225, 255, 0.25);
       backdrop-filter: blur(16px);
-      border-radius: 40px;
+      border-radius: 48px;
       border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
       margin-bottom: 30px;
-      transition: all 0.3s ease;
     }
-    body.dark-mode .main-card {
-      background: rgba(18, 20, 34, 0.8);
-      border-color: rgba(58, 140, 255, 0.25);
-    }
-
+    body.dark-mode .main-card { background: rgba(18, 20, 34, 0.8); border-color: rgba(58, 140, 255, 0.25); }
     .inner-card {
       display: flex;
       flex-direction: row;
-      gap: 20px;
-      padding: 24px 28px;
-      flex-wrap: nowrap;
-      background: rgba(150, 200, 255, 0.08);
+      gap: 28px;
+      padding: 36px 40px;
+      flex-wrap: wrap;
     }
-
-    @media (max-width: 900px) {
-      .inner-card { gap: 14px; padding: 18px 16px; }
-      .left, .center, .right { flex: 1; min-width: 0; }
-      .center h3, .right h3 { font-size: 1rem; }
-      .step-list p { font-size: 0.7rem; gap: 6px; }
-      .icon { width: 42px; height: 42px; font-size: 1.2rem; margin-bottom: 10px; }
-      h1 { font-size: 1.2rem; }
-      .desc { font-size: 0.65rem; }
-    }
-    @media (max-width: 700px) {
-      .inner-card { flex-direction: row !important; flex-wrap: wrap !important; }
-      .left, .center, .right { min-width: 210px; flex: 1 1 auto; }
-    }
-    @media (max-width: 550px) {
-      .inner-card { flex-direction: column !important; }
-      .left, .center, .right { width: 100%; }
-    }
-
-    .left { flex: 1.4; min-width: 230px; }
-    .center { flex: 1; background: rgba(180, 215, 255, 0.3); backdrop-filter: blur(12px); border-radius: 28px; padding: 18px 20px; border: 1px solid rgba(255, 255, 255, 0.4); min-width: 230px; }
-    .right { flex: 0.85; background: rgba(180, 215, 255, 0.3); backdrop-filter: blur(12px); border-radius: 28px; padding: 20px 16px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.4); }
-
-    body.dark-mode .center, body.dark-mode .right {
-      background: rgba(22, 25, 42, 0.7);
-      border-color: rgba(58,140,255,0.25);
-    }
+    @media (max-width: 700px) { .inner-card { flex-direction: column; } }
+    
+    .left { flex: 1.5; min-width: 280px; }
+    .center { flex: 1.1; background: rgba(180, 215, 255, 0.3); border-radius: 32px; padding: 24px 26px; }
+    .right { flex: 0.9; background: rgba(180, 215, 255, 0.3); border-radius: 32px; padding: 28px 20px; text-align: center; }
+    body.dark-mode .center, body.dark-mode .right { background: rgba(22, 25, 42, 0.7); }
 
     .icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 20px;
+      width: 68px;
+      height: 68px;
+      border-radius: 24px;
       background: linear-gradient(135deg, #8e44ad, #6c3483);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 1.6rem;
-      margin-bottom: 12px;
+      font-size: 1.8rem;
+      margin-bottom: 18px;
       color: white;
-      box-shadow: 0 6px 14px rgba(142,68,173,0.3);
     }
+    h1 { font-size: 2rem; font-weight: 700; margin: 8px 0 5px; background: linear-gradient(135deg, #ffffff, #c8e4ff); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .desc { font-size: 0.9rem; color: #1a3a6e; }
 
-    h1 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #ffffff, #c8e4ff);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      margin: 4px 0 2px;
-    }
-    body.dark-mode h1 { background: linear-gradient(135deg, #ffffff, #8ab8ff); background-clip: text; }
-
-    .desc {
-      font-size: 0.8rem;
-      color: #1a3a6e;
-      opacity: 0.85;
-      margin-top: 4px;
-    }
-    body.dark-mode .desc { color: #9aaec9; }
-
-    /* Rotation Options */
-    .rotation-options {
-      margin-top: 16px;
+    /* Rotation controls */
+    .rotation-controls {
+      margin-top: 20px;
       background: rgba(255, 255, 255, 0.25);
       border-radius: 28px;
-      padding: 12px 16px;
-      backdrop-filter: blur(4px);
+      padding: 16px;
     }
-    .rotation-options label {
-      font-weight: 600;
-      font-size: 0.8rem;
-      color: #1a3a6e;
-      display: block;
-      margin-bottom: 8px;
-    }
-    body.dark-mode .rotation-options label { color: #c0d4ff; }
-    .rotation-buttons {
+    .preset-buttons {
       display: flex;
       gap: 12px;
-      justify-content: space-between;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
-    .rot-btn {
+    .preset-btn {
       flex: 1;
       background: rgba(255,255,255,0.3);
       border: 1px solid rgba(255,255,255,0.5);
@@ -320,235 +156,119 @@
       font-weight: 600;
       font-size: 0.8rem;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
       color: #1a3a6e;
       text-align: center;
     }
-    body.dark-mode .rot-btn {
-      background: rgba(58,140,255,0.2);
-      color: #c0d4ff;
-      border-color: rgba(58,140,255,0.4);
+    .preset-btn:hover { background: linear-gradient(95deg, #5cb0ff, #3a8cff); color: white; }
+    body.dark-mode .preset-btn { color: #c0d4ff; background: rgba(58,140,255,0.2); }
+    .custom-angle {
+      margin-top: 16px;
+      border-top: 1px dashed rgba(255,255,255,0.4);
+      padding-top: 16px;
     }
-    .rot-btn.active {
-      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
-      color: white;
-      border-color: transparent;
-    }
-    .rot-btn:hover:not(.active) {
-      background: rgba(255,255,255,0.5);
-      transform: translateY(-2px);
-    }
-    .page-toggle {
-      margin-top: 12px;
+    .angle-label {
       display: flex;
-      gap: 12px;
-      align-items: center;
       justify-content: space-between;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1a3a6e;
+      margin-bottom: 8px;
     }
-    .page-toggle label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    body.dark-mode .angle-label { color: #c0d4ff; }
+    .angle-slider {
+      width: 100%;
+      height: 6px;
+      -webkit-appearance: none;
+      background: linear-gradient(90deg, #f44336, #ff9800, #4caf50);
+      border-radius: 10px;
+    }
+    .angle-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
       cursor: pointer;
+      border: 2px solid #3a8cff;
     }
-    .page-number-input {
-      width: 60px;
-      padding: 4px 8px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.5);
-      background: rgba(255,255,255,0.2);
-      text-align: center;
+    .angle-value {
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
+      padding: 2px 12px;
+      border-radius: 40px;
+      color: white;
+    }
+    .scope-selector {
+      margin-top: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
       font-size: 0.75rem;
     }
+    .scope-selector label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    #singlePageNum { width: 60px; padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.5); background: rgba(255,255,255,0.2); text-align: center; }
 
+    /* Drop Zone only */
     .drop-zone {
-      margin-top: 14px;
+      margin-top: 16px;
       background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(8px);
-      border-radius: 28px;
-      padding: 18px 16px;
+      border-radius: 32px;
+      padding: 35px 20px;
       text-align: center;
       border: 2px dashed rgba(255,255,255,0.5);
-      transition: all 0.3s ease;
       cursor: pointer;
     }
-    .drop-zone.drag-over {
-      background: rgba(255, 255, 255, 0.4);
-      border-color: #3a8cff;
-      transform: scale(1.01);
-    }
-    .drop-zone-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-    .drop-icon { font-size: 38px; }
-    .drop-text { font-size: 0.85rem; color: #1a3a6e; font-weight: 500; }
-    .drop-sub { font-size: 0.65rem; color: #4a6a8e; }
+    .drop-zone.drag-over { background: rgba(255, 255, 255, 0.4); border-color: #3a8cff; transform: scale(1.02); }
+    .drop-icon { font-size: 52px; }
+    .drop-text { font-size: 1rem; color: #1a3a6e; font-weight: 500; }
+    .drop-sub { font-size: 0.75rem; color: #4a6a8e; }
     body.dark-mode .drop-zone { background: rgba(58, 140, 255, 0.15); border-color: rgba(58, 140, 255, 0.4); }
     body.dark-mode .drop-text { color: #c0d4ff; }
-    body.dark-mode .drop-sub { color: #8a9dc0; }
 
-    .file-box {
-      margin-top: 14px;
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(8px);
-      border-radius: 60px;
-      padding: 6px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #1a3a6e;
-      font-weight: 600;
-      font-size: 0.8rem;
-      border: 1px solid rgba(255,255,255,0.4);
-    }
-    .file-btn, .convert-btn, .download {
-      background: linear-gradient(95deg, #5cb0ff, #3a8cff);
-      color: white;
-      cursor: pointer;
-      font-weight: 600;
-      border: none;
-      transition: all 0.2s;
-    }
-    .file-btn {
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      box-shadow: 0 2px 6px rgba(58,140,255,0.3);
-    }
     .convert-btn {
-      margin-top: 18px;
-      padding: 10px 12px;
-      border-radius: 50px;
-      text-align: center;
-      font-size: 0.9rem;
-      width: 100%;
-      letter-spacing: 0.3px;
-      box-shadow: 0 4px 12px rgba(58,140,255,0.3);
-    }
-    .convert-btn.disabled, .download.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-    .convert-btn:not(.disabled):hover, .download:not(.disabled):hover { transform: scale(0.97); background: linear-gradient(95deg, #4aa0ff, #2a7cff); }
-
-    .center h3, .right h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #1a3a6e;
-    }
-    body.dark-mode .center h3, body.dark-mode .right h3 { color: white; }
-
-    .progress {
-      height: 6px;
-      background: rgba(0, 0, 0, 0.15);
-      border-radius: 20px;
-      margin: 14px 0 18px;
-      overflow: hidden;
-    }
-    .fill {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(90deg, #5cb0ff, #3a8cff, #7bc5ff);
-      border-radius: 20px;
-      transition: width 0.25s ease;
-    }
-
-    .step-list p {
-      margin: 10px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.8rem;
-      color: #1a3a6e;
-      font-weight: 500;
-      background: rgba(255,255,255,0.2);
-      padding: 5px 10px;
-      border-radius: 32px;
-    }
-    body.dark-mode .step-list p { color: #b8c7e6; background: rgba(58,140,255,0.1); }
-
-    .check {
-      width: 58px;
-      height: 58px;
-      background: linear-gradient(145deg, #4caf50, #2e7d32);
-      border-radius: 50%;
-      margin: 0 auto 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      font-weight: bold;
-      color: white;
-    }
-
-    .download {
       margin-top: 20px;
-      padding: 10px 14px;
-      border-radius: 50px;
-      width: 100%;
+      padding: 14px 16px;
+      border-radius: 60px;
+      background: linear-gradient(105deg, #5cb0ff, #3a8cff);
       font-weight: bold;
-      font-size: 0.85rem;
-    }
-    .link {
-      margin-top: 16px;
-      font-size: 12px;
-      color: #1a3a6e;
-      text-decoration: underline;
       cursor: pointer;
-      font-weight: 500;
-      background: none;
+      font-size: 1rem;
       border: none;
+      color: white;
+      width: 100%;
     }
-    .link:hover { color: #0a2a4e; }
-    body.dark-mode .link { color: #8a9dc0; }
+    .convert-btn.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+    .progress { height: 8px; background: rgba(0,0,0,0.15); border-radius: 20px; margin: 20px 0; overflow: hidden; }
+    .fill { width: 0%; height: 100%; background: linear-gradient(90deg, #5cb0ff, #3a8cff); transition: width 0.25s; }
+    .step-list p { margin: 14px 0; display: flex; align-items: center; gap: 14px; font-size: 0.9rem; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 40px; }
+    .check { width: 68px; height: 68px; background: linear-gradient(145deg, #4caf50, #2e7d32); border-radius: 50%; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; font-size: 36px; color: white; }
+    .download { margin-top: 28px; padding: 12px 16px; border-radius: 60px; width: 100%; background: linear-gradient(95deg, #5cb0ff, #3a8cff); color: white; font-weight: bold; cursor: pointer; border: none; }
+    .download.disabled { opacity: 0.45; pointer-events: none; }
+    .link { margin-top: 22px; font-size: 13px; color: #1a3a6e; text-decoration: underline; cursor: pointer; background: none; border: none; }
 
     .white-info-card {
       background: white;
-      border-radius: 36px;
-      padding: 28px 32px;
+      border-radius: 40px;
+      padding: 32px 36px;
       margin-top: 28px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     }
-    body.dark-mode .white-info-card { background: #15182b; border: 1px solid rgba(58,140,255,0.2); }
-    .white-info-card h2 { font-size: 1.6rem; font-weight: 700; color: #1a2a4a; text-align: center; margin-bottom: 12px; }
-    body.dark-mode .white-info-card h2 { color: white; }
-    .section-sub { text-align: center; color: #4a5568; margin-bottom: 24px; font-size: 0.9rem; }
-    .features-grid-white {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 18px;
-      margin: 24px 0;
-    }
-    .feature-item-white {
-      background: #f0f4f8;
-      padding: 16px 10px;
-      border-radius: 24px;
-      text-align: center;
-    }
+    body.dark-mode .white-info-card { background: #15182b; }
+    .white-info-card h2 { font-size: 1.8rem; text-align: center; }
+    .features-grid-white { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin: 28px 0; }
+    .feature-item-white { background: #f0f4f8; padding: 18px; border-radius: 24px; text-align: center; }
     body.dark-mode .feature-item-white { background: #1e213a; }
-    .feature-icon-white { font-size: 1.8rem; margin-bottom: 8px; }
-    .feature-item-white h4 { color: #1a2a4a; font-size: 1rem; }
-    body.dark-mode .feature-item-white h4 { color: white; }
-    .feature-item-white p { font-size: 0.8rem; color: #4a5568; }
-    .faq-list-white { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
-    .faq-item-white { background: #f0f4f8; border-radius: 20px; padding: 12px 20px; }
+    .faq-list-white { margin: 24px 0; }
+    .faq-item-white { background: #f0f4f8; border-radius: 20px; padding: 14px 22px; margin-bottom: 10px; }
     body.dark-mode .faq-item-white { background: #1e213a; }
-    .faq-question-white { font-weight: 700; color: #1a2a4a; margin-bottom: 6px; display: flex; gap: 8px; }
-    body.dark-mode .faq-question-white { color: white; }
-    .faq-answer-white { color: #4a5568; font-size: 0.85rem; padding-left: 24px; }
     .internal-links-white { text-align: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e0e6ed; }
-    .links-row-white { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 12px; }
-    .links-row-white a { color: white; text-decoration: none; background: linear-gradient(95deg, #5cb0ff, #3a8cff); padding: 6px 18px; border-radius: 40px; font-size: 0.85rem; }
+    .links-row-white { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+    .links-row-white a { color: white; text-decoration: none; background: linear-gradient(95deg, #5cb0ff, #3a8cff); padding: 8px 20px; border-radius: 50px; }
     @media (max-width: 780px) {
-      .ai-hub-header { flex-direction: column; gap: 14px; padding: 14px 18px; }
-      .white-info-card { padding: 20px 18px; }
-      .white-info-card h2 { font-size: 1.3rem; }
+      .ai-hub-header { flex-direction: column; }
+      .white-info-card { padding: 24px 20px; }
     }
   </style>
 </head>
@@ -556,313 +276,376 @@
 <div class="wrapper">
   <header class="ai-hub-header">
     <div class="logo-area" id="homeLogoLink">
-      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="AI Tools Hub 2026" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI26'">
-      <div class="logo-text"><h2>AI Tools Hub 2026</h2><p>Smart PDF Rotator</p></div>
+      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="Free AI Tools Hub" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI'">
+      <div class="logo-text"><h2>Free AI Tools Hub</h2><p>PDF Rotator - Any Angle</p></div>
     </div>
     <nav class="nav-links">
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home 2026</a>
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ AI Image Tools</a>
-      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 Smart PDF Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ Image Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 PDF Tools</a>
       <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools" class="nav-link">⚙️ Utility Suite</a>
-      <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode 2026</button>
+      <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode</button>
     </nav>
   </header>
 
   <main>
-    <!-- COMPACT MAIN CARD - PDF ROTATOR -->
     <section class="main-card">
       <div class="inner-card">
         <div class="left">
           <div class="icon">🔄 PDF</div>
           <h1>PDF Rotator 2026</h1>
-          <p class="desc">Drag & Drop • Rotate Pages • 90°/180°/270°</p>
+          <p class="desc">Rotate PDF pages at ANY angle • 0° to 360° • Free & Private</p>
           
-          <!-- Rotation Options -->
-          <div class="rotation-options">
-            <label>🔄 Rotation Angle:</label>
-            <div class="rotation-buttons">
-              <button class="rot-btn" data-angle="90">90° Clockwise</button>
-              <button class="rot-btn" data-angle="180">180°</button>
-              <button class="rot-btn" data-angle="270">90° Counter-Clockwise</button>
+          <!-- Rotation Controls -->
+          <div class="rotation-controls">
+            <div class="preset-buttons">
+              <button class="preset-btn" data-angle="90">90° Clockwise</button>
+              <button class="preset-btn" data-angle="180">180°</button>
+              <button class="preset-btn" data-angle="270">90° Counter-Clockwise</button>
             </div>
-            <div class="page-toggle">
-              <label>
-                <input type="radio" name="scope" value="all" checked> All Pages
+            <div class="custom-angle">
+              <div class="angle-label">
+                <span>🎯 Custom Angle (0° - 360°)</span>
+                <span class="angle-value" id="angleValue">0°</span>
+              </div>
+              <input type="range" id="angleSlider" class="angle-slider" min="0" max="360" value="0" step="1">
+            </div>
+            <div class="scope-selector">
+              <label><input type="radio" name="scope" value="all" checked> All Pages</label>
+              <label><input type="radio" name="scope" value="single"> Single Page: 
+                <input type="number" id="singlePageNum" min="1" value="1" disabled style="opacity:0.6">
               </label>
-              <label>
-                <input type="radio" name="scope" value="single"> Single Page:
-              </label>
-              <input type="number" id="pageNumber" class="page-number-input" min="1" value="1" disabled style="opacity:0.6">
             </div>
           </div>
 
-          <!-- Drag & Drop Zone + Browse inside same card -->
+          <!-- Drag & Drop Zone Only -->
           <div class="drop-zone" id="dropZone">
             <div class="drop-zone-content">
               <div class="drop-icon">📁🔄</div>
               <div class="drop-text">Drag & Drop your PDF file here</div>
-              <div class="drop-sub">or click below to browse</div>
+              <div class="drop-sub">or click to select PDF</div>
             </div>
           </div>
           
-          <div class="file-box">
-            <span id="fileName">Select PDF to rotate</span>
-            <button class="file-btn" id="chooseBtn">Browse 2026</button>
-          </div>
-          
-          <button class="convert-btn disabled" id="convertBtn">✨ Rotate PDF 2026 ✨</button>
+          <button class="convert-btn disabled" id="convertBtn">✨ Rotate PDF (Custom Angle) ✨</button>
           <div id="fileErrorMsg" class="error-msg"></div>
         </div>
 
         <div class="center">
           <h3 id="statusTitle">Ready to Rotate</h3>
-          <p id="etaText" style="font-size:0.75rem;">Drag & drop or browse PDF</p>
+          <p id="etaText" style="font-size:0.85rem;">Drag & drop or click to select PDF</p>
           <div class="progress"><div class="fill" id="progressFill"></div></div>
           <div class="step-list">
-            <p id="step1"><span>⭕</span> AI analyzing PDF — waiting</p>
-            <p id="step2"><span>⭕</span> Processing rotation — waiting</p>
-            <p id="step3"><span>⭕</span> Generating rotated PDF — waiting</p>
+            <p id="step1"><span>⭕</span> Loading PDF — waiting</p>
+            <p id="step2"><span>⭕</span> Rotating pages — waiting</p>
+            <p id="step3"><span>⭕</span> Generating output — waiting</p>
           </div>
         </div>
 
         <div class="right">
-          <div class="check" id="checkIcon">🚀</div>
+          <div class="check" id="checkIcon">🔄</div>
           <h3 id="completeTitle">Awaiting PDF</h3>
-          <p id="completeMsg" style="font-size:0.7rem;">Rotate pages instantly</p>
+          <p id="completeMsg">Select a PDF to rotate (any angle)</p>
           <button class="download disabled" id="downloadBtn">⬇️ Download Rotated PDF ⬇️</button>
           <button class="link" id="resetLink">Rotate another PDF →</button>
         </div>
       </div>
     </section>
 
-    <!-- SEO RICH INFO CARD -->
     <article class="white-info-card">
-      <h2>🔄 2026's Smartest PDF Rotator</h2>
-      <p class="section-sub">Rotate PDF pages in seconds • Free • No watermark</p>
+      <h2>✨ Unique PDF Rotator – Any Angle (0° to 360°) ✨</h2>
+      <p class="section-sub">No other free tool gives you this freedom – rotate PDF pages at any custom angle!</p>
       <div class="features-grid-white">
-        <div class="feature-item-white"><div class="feature-icon-white">🖱️</div><h4>Drag & Drop PDF</h4><p>Effortless upload, instant rotation</p></div>
-        <div class="feature-item-white"><div class="feature-icon-white">🔄</div><h4>Multiple Angles</h4><p>90°, 180°, 270° rotation options</p></div>
-        <div class="feature-item-white"><div class="feature-icon-white">📄</div><h4>All or Single Page</h4><p>Rotate entire PDF or specific page</p></div>
-        <div class="feature-item-white"><div class="feature-icon-white">🔒</div><h4>Privacy First</h4><p>100% local processing, never uploaded</p></div>
+        <div class="feature-item-white"><div>🎛️</div><h4>Custom Angle Slider</h4><p>0° to 360° – any angle you want</p></div>
+        <div class="feature-item-white"><div>⚡</div><h4>Preset Buttons</h4><p>Quick 90°, 180°, 270° rotation</p></div>
+        <div class="feature-item-white"><div>📄</div><h4>All or Single Page</h4><p>Rotate entire PDF or specific page</p></div>
+        <div class="feature-item-white"><div>🔒</div><h4>100% Private</h4><p>Local processing, no upload</p></div>
       </div>
       <div class="faq-list-white">
-        <div class="faq-item-white"><div class="faq-question-white">🔹 Can I rotate specific pages?</div><div class="faq-answer-white">Yes! Choose "Single Page" and enter the page number to rotate just that page.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white">🔹 Does it preserve quality?</div><div class="faq-answer-white">Absolutely! PDF rotation is lossless - your original quality remains intact.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white">🔹 Is it really free in 2026?</div><div class="faq-answer-white">Yes! No signup, no watermark, unlimited usage.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white">🔹 Is my data safe?</div><div class="faq-answer-white">🛡️ 100% local conversion. Your PDF never leaves your device.</div></div>
+        <div class="faq-item-white"><strong>🔹 How is this different?</strong><br>Most PDF rotators only allow 90°, 180°, 270°. Our tool lets you rotate at ANY angle (like 15°, 45°, 123°) – perfect for scanned documents, photos, or creative layouts.</div>
+        <div class="faq-item-white"><strong>🔹 Does it work with all PDFs?</strong><br>Yes! Text, images, scanned pages – all are rotated accurately.</div>
+        <div class="faq-item-white"><strong>🔹 Is it really free?</strong><br>Absolutely! No signup, no watermark, unlimited usage.</div>
       </div>
       <footer class="internal-links-white">
-        <p>🔥 Trending 2026 PDF Tools:</p>
         <div class="links-row-white">
-          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf">📷 PNG to PDF 2026</a>
-          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf">🖼️ JPG to PDF 2026</a>
-          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word">📄 PDF to Word 2026</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/png-to-pdf">PNG to PDF</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf">JPG to PDF</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf">Merge PDF</a>
         </div>
-        <p style="font-size: 0.7rem; margin-top: 16px;">© Free AI Tools 2026 - Next-Gen PDF Rotator | Drag & Drop | 100% Free</p>
+        <p style="font-size:0.75rem; margin-top:16px;">© Free AI Tools Hub - Advanced PDF Rotator | Any Angle | 100% Free</p>
       </footer>
     </article>
   </main>
 </div>
 
 <script>
-  (function(){
-    let selectedFile = null, isProcessing = false, processedBlob = null, conversionDone = false;
-    let currentAngle = 90;
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+  
+  (function() {
+    const MAX_SIZE = 5 * 1024 * 1024; // 5MB hidden limit
     
-    const elements = {
-      fileName: document.getElementById('fileName'), convertBtn: document.getElementById('convertBtn'), downloadBtn: document.getElementById('downloadBtn'),
-      resetLink: document.getElementById('resetLink'), progressFill: document.getElementById('progressFill'), statusTitle: document.getElementById('statusTitle'),
-      etaText: document.getElementById('etaText'), step1: document.getElementById('step1'), step2: document.getElementById('step2'), step3: document.getElementById('step3'),
-      checkIcon: document.getElementById('checkIcon'), completeTitle: document.getElementById('completeTitle'), completeMsg: document.getElementById('completeMsg'),
-      fileErrorMsg: document.getElementById('fileErrorMsg'), pageNumber: document.getElementById('pageNumber')
-    };
+    let selectedFile = null, isProcessing = false, conversionDone = false, rotatedBlob = null;
+    let currentAngle = 0;
     
-    // Rotation buttons
-    const rotBtns = document.querySelectorAll('.rot-btn');
-    rotBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        rotBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentAngle = parseInt(btn.dataset.angle);
-      });
-    });
-    rotBtns[0].classList.add('active');
-    
-    // Page scope radio buttons
+    // DOM elements
+    const angleSlider = document.getElementById('angleSlider');
+    const angleValue = document.getElementById('angleValue');
+    const presetBtns = document.querySelectorAll('.preset-btn');
+    const convertBtn = document.getElementById('convertBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resetLink = document.getElementById('resetLink');
+    const progressFill = document.getElementById('progressFill');
+    const statusTitle = document.getElementById('statusTitle');
+    const etaText = document.getElementById('etaText');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const checkIcon = document.getElementById('checkIcon');
+    const completeTitle = document.getElementById('completeTitle');
+    const completeMsg = document.getElementById('completeMsg');
+    const fileErrorMsg = document.getElementById('fileErrorMsg');
+    const singlePageNum = document.getElementById('singlePageNum');
     const radioAll = document.querySelector('input[value="all"]');
     const radioSingle = document.querySelector('input[value="single"]');
+    
+    // Angle slider
+    angleSlider.addEventListener('input', function() {
+      currentAngle = parseInt(this.value);
+      angleValue.innerText = currentAngle + '°';
+    });
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        let angle = parseInt(btn.dataset.angle);
+        angleSlider.value = angle;
+        currentAngle = angle;
+        angleValue.innerText = angle + '°';
+      });
+    });
+    
+    // Scope radio
     radioSingle.addEventListener('change', () => {
-      elements.pageNumber.disabled = !radioSingle.checked;
-      elements.pageNumber.style.opacity = radioSingle.checked ? '1' : '0.6';
+      singlePageNum.disabled = !radioSingle.checked;
+      singlePageNum.style.opacity = radioSingle.checked ? '1' : '0.6';
     });
     radioAll.addEventListener('change', () => {
-      elements.pageNumber.disabled = true;
-      elements.pageNumber.style.opacity = '0.6';
+      singlePageNum.disabled = true;
+      singlePageNum.style.opacity = '0.6';
     });
     
-    function validateFile(file){
-      if(!file) return {valid:false, message:'No file'};
-      if(file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) return {valid:false, message:'❌ Only PDF files supported'};
-      if(file.size > 150 * 1024 * 1024) return {valid:false, message:'❌ Max 150MB allowed'};
-      return {valid:true, message:'✓ PDF ready for rotation'};
+    function validateFile(file) {
+      if(!file) return { valid: false, message: 'No file' };
+      if(file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) return { valid: false, message: 'Only PDF files supported' };
+      if(file.size > MAX_SIZE) return { valid: false, message: 'File too large. Please select a smaller PDF.' };
+      return { valid: true, message: 'PDF ready' };
     }
     
-    function showMessage(msg, isErr=false){ 
-      if(elements.fileErrorMsg){ 
-        elements.fileErrorMsg.textContent=msg; 
-        elements.fileErrorMsg.style.color=isErr?'#ff6b6b':'#4caf50'; 
-        if(!isErr) setTimeout(()=>{if(elements.fileErrorMsg.textContent===msg) elements.fileErrorMsg.textContent='';},3000);
-      } 
+    function showMessage(msg, isErr) {
+      fileErrorMsg.textContent = msg;
+      fileErrorMsg.style.color = isErr ? '#ff6b6b' : '#4caf50';
+      if(!isErr) setTimeout(() => { if(fileErrorMsg.textContent === msg) fileErrorMsg.textContent = ''; }, 3000);
     }
     
-    function resetUI(resetFile=true){
-      if(isProcessing) isProcessing=false;
-      conversionDone=false; processedBlob=null;
-      elements.progressFill.style.width='0%';
-      elements.step1.innerHTML='<span>⭕</span> AI analyzing PDF — waiting';
-      elements.step2.innerHTML='<span>⭕</span> Processing rotation — waiting';
-      elements.step3.innerHTML='<span>⭕</span> Generating rotated PDF — waiting';
-      elements.statusTitle.innerText='Ready to Rotate';
-      elements.etaText.innerText='Drag & drop or browse PDF';
-      elements.downloadBtn.classList.add('disabled');
-      elements.checkIcon.innerHTML='🚀';
-      elements.completeTitle.innerText='Awaiting PDF';
-      elements.completeMsg.innerText='Rotate pages instantly';
-      if(resetFile){ selectedFile=null; elements.fileName.innerText='Select PDF to rotate'; const hidden=document.getElementById('hiddenFileInput'); if(hidden) hidden.value=''; showMessage('',false); }
+    function resetUI(resetFile) {
+      isProcessing = false;
+      conversionDone = false;
+      rotatedBlob = null;
+      progressFill.style.width = '0%';
+      step1.innerHTML = '<span>⭕</span> Loading PDF — waiting';
+      step2.innerHTML = '<span>⭕</span> Rotating pages — waiting';
+      step3.innerHTML = '<span>⭕</span> Generating output — waiting';
+      statusTitle.innerText = 'Ready to Rotate';
+      etaText.innerText = 'Drag & drop or click to select PDF';
+      downloadBtn.classList.add('disabled');
+      checkIcon.innerHTML = '🔄';
+      completeTitle.innerText = 'Awaiting PDF';
+      completeMsg.innerText = 'Select a PDF to rotate (any angle)';
+      if(resetFile) {
+        selectedFile = null;
+        const hidden = document.getElementById('hiddenFileInput');
+        if(hidden) hidden.value = '';
+        showMessage('', false);
+      }
       updateConvertBtn();
     }
     
-    function updateConvertBtn(){
-      if(selectedFile && !isProcessing && !conversionDone && validateFile(selectedFile).valid) elements.convertBtn.classList.remove('disabled');
-      else elements.convertBtn.classList.add('disabled');
-    }
-    
-    function setStep(stepNum, text, active, percent){
-      const step = stepNum===1?elements.step1:(stepNum===2?elements.step2:elements.step3);
-      if(step) step.innerHTML = `<span>${active?'🔄':'✅'}</span> ${text}`;
-      if(percent!==undefined) elements.progressFill.style.width = Math.min(100,percent)+'%';
-    }
-    
-    // Rotate PDF function
-    async function rotatePdf(file, angle, scope, pageNum) {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-      const pages = pdfDoc.getPages();
-      const totalPages = pages.length;
-      
-      // Convert angle to rotation degrees
-      const rotationDeg = angle === 90 ? 90 : (angle === 180 ? 180 : 270);
-      
-      if (scope === 'all') {
-        // Rotate all pages
-        for (let i = 0; i < pages.length; i++) {
-          pages[i].setRotation(PDFLib.degrees(rotationDeg));
-        }
+    function updateConvertBtn() {
+      if(selectedFile && !isProcessing && !conversionDone && validateFile(selectedFile).valid) {
+        convertBtn.classList.remove('disabled');
+        etaText.innerText = 'Ready to rotate';
       } else {
-        // Rotate single page (1-indexed input)
-        let targetPage = Math.min(Math.max(1, pageNum), totalPages) - 1;
-        pages[targetPage].setRotation(PDFLib.degrees(rotationDeg));
+        convertBtn.classList.add('disabled');
+        if(!selectedFile) etaText.innerText = 'Drag & drop or click to select PDF';
+        else if(isProcessing) etaText.innerText = 'Rotating...';
+      }
+    }
+    
+    function setStep(stepNum, text, active, percent) {
+      const step = stepNum === 1 ? step1 : (stepNum === 2 ? step2 : step3);
+      step.innerHTML = `<span>${active ? '🔄' : '✅'}</span> ${text}`;
+      if(percent !== undefined) progressFill.style.width = Math.min(100, percent) + '%';
+    }
+    
+    // Free-angle rotation using canvas (supports any angle)
+    async function rotatePDFWithAngle(file, angleDeg, scope, pageNum) {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const totalPages = pdf.numPages;
+      
+      const newPdf = await PDFLib.PDFDocument.create();
+      
+      let startPage = 1, endPage = totalPages;
+      let singleTarget = null;
+      if(scope === 'single') {
+        singleTarget = Math.min(Math.max(1, pageNum), totalPages);
+        startPage = singleTarget;
+        endPage = singleTarget;
       }
       
-      const pdfBytes = await pdfDoc.save();
+      for(let i = startPage; i <= endPage; i++) {
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: 1.5 }); // good resolution
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+        
+        // Create a new canvas for rotated image
+        const rad = angleDeg * Math.PI / 180;
+        const cos = Math.abs(Math.cos(rad));
+        const sin = Math.abs(Math.sin(rad));
+        const newWidth = canvas.width * cos + canvas.height * sin;
+        const newHeight = canvas.width * sin + canvas.height * cos;
+        
+        const rotatedCanvas = document.createElement('canvas');
+        rotatedCanvas.width = newWidth;
+        rotatedCanvas.height = newHeight;
+        const rotCtx = rotatedCanvas.getContext('2d');
+        rotCtx.translate(newWidth/2, newHeight/2);
+        rotCtx.rotate(rad);
+        rotCtx.drawImage(canvas, -canvas.width/2, -canvas.height/2);
+        
+        const imgData = rotatedCanvas.toDataURL('image/jpeg', 0.95);
+        const imgBlob = await fetch(imgData).then(r => r.blob());
+        const imgBytes = await imgBlob.arrayBuffer();
+        const embeddedImage = await newPdf.embedJpg(imgBytes);
+        const pageObj = newPdf.addPage([newWidth, newHeight]);
+        pageObj.drawImage(embeddedImage, { x: 0, y: 0, width: newWidth, height: newHeight });
+        
+        setStep(2, `Rotating page ${i}${scope === 'single' ? '' : '/'+totalPages}...`, true, 40 + (i/totalPages)*50);
+      }
+      
+      const pdfBytes = await newPdf.save();
       return new Blob([pdfBytes], { type: 'application/pdf' });
     }
     
-    async function startConversion(){
+    async function startConversion() {
       if(!selectedFile || !validateFile(selectedFile).valid || isProcessing) return;
       resetUI(false);
-      isProcessing=true; conversionDone=false; processedBlob=null;
-      elements.downloadBtn.classList.add('disabled');
-      elements.checkIcon.innerHTML='⏳';
-      elements.completeTitle.innerText='Processing Rotation...';
+      isProcessing = true;
+      conversionDone = false;
+      rotatedBlob = null;
+      downloadBtn.classList.add('disabled');
+      checkIcon.innerHTML = '⏳';
+      completeTitle.innerText = 'Rotating...';
       updateConvertBtn();
       
-      try{
-        setStep(1, 'AI analyzing PDF structure', true, 20);
-        await new Promise(r=>setTimeout(r,60));
+      try {
+        setStep(1, 'Loading PDF...', true, 15);
+        await new Promise(r => setTimeout(r, 50));
+        setStep(1, 'PDF loaded ✓', false, 30);
         
         const scope = document.querySelector('input[name="scope"]:checked').value;
         let pageNum = 1;
-        if (scope === 'single') {
-          pageNum = parseInt(elements.pageNumber.value) || 1;
-        }
+        if(scope === 'single') pageNum = parseInt(singlePageNum.value) || 1;
         
-        setStep(1, 'PDF analyzed ✓', false, 40);
-        setStep(2, `Rotating ${scope === 'all' ? 'all pages' : `page ${pageNum}`} ${currentAngle}°`, true, 65);
+        setStep(2, `Rotating ${scope === 'all' ? 'all pages' : 'page '+pageNum} to ${currentAngle}°...`, true, 45);
         
-        const rotatedBlob = await rotatePdf(selectedFile, currentAngle, scope, pageNum);
-        
-        setStep(2, 'Rotation applied ✓', false, 85);
-        setStep(3, 'Generating rotated PDF', true, 92);
-        await new Promise(r=>setTimeout(r,50));
-        
-        processedBlob = rotatedBlob;
+        const blob = await rotatePDFWithAngle(selectedFile, currentAngle, scope, pageNum);
+        rotatedBlob = blob;
         conversionDone = true;
         isProcessing = false;
         
-        setStep(3, 'PDF rotated successfully! ✨', false, 100);
-        elements.progressFill.style.width='100%';
-        
-        const origKB = (selectedFile.size/1024).toFixed(1);
-        const newKB = (processedBlob.size/1024).toFixed(1);
-        
-        elements.statusTitle.innerText = `✅ ${scope === 'all' ? 'All pages' : `Page ${pageNum}`} rotated ${currentAngle}°`;
-        elements.etaText.innerText = `${origKB}KB → ${newKB}KB`;
-        elements.checkIcon.innerHTML = '✔️🔄';
-        elements.completeTitle.innerText = 'Rotation Complete!';
-        elements.completeMsg.innerText = `Rotated ${currentAngle}° • Ready to download`;
-        elements.downloadBtn.classList.remove('disabled');
-        elements.convertBtn.classList.add('disabled');
-        showMessage(`✓ PDF rotated successfully! ${origKB}KB → ${newKB}KB`, false);
-      } catch(err){
-        isProcessing=false;
-        console.error(err);
+        setStep(3, 'PDF ready! ✨', false, 100);
+        progressFill.style.width = '100%';
+        statusTitle.innerText = 'Rotation Complete!';
+        etaText.innerText = `${(selectedFile.size/1024).toFixed(1)}KB → ${(blob.size/1024).toFixed(1)}KB`;
+        checkIcon.innerHTML = '✔️🔄';
+        completeTitle.innerText = 'Ready!';
+        completeMsg.innerText = `Rotated ${currentAngle}° • Download now`;
+        downloadBtn.classList.remove('disabled');
+        convertBtn.classList.add('disabled');
+        showMessage('✓ PDF rotated successfully!', false);
+      } catch(err) {
+        isProcessing = false;
         showMessage('Rotation failed: ' + err.message, true);
         resetUI(false);
       }
       updateConvertBtn();
     }
     
-    function downloadPdf(){
-      if(!conversionDone || !processedBlob) return;
-      const url = URL.createObjectURL(processedBlob);
+    function downloadPDF() {
+      if(!conversionDone || !rotatedBlob) return;
+      const url = URL.createObjectURL(rotatedBlob);
       const a = document.createElement('a');
-      const name = (selectedFile ? selectedFile.name.replace(/\.pdf$/i,'') : 'document') + '_rotated_2026.pdf';
-      a.href = url; a.download = name;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      const name = (selectedFile ? selectedFile.name.replace(/\.pdf$/i, '') : 'document') + '_rotated.pdf';
+      a.href = url;
+      a.download = name;
+      a.click();
       URL.revokeObjectURL(url);
     }
     
-    function handleFileSelection(file){
+    function handleFileSelection(file) {
       const valid = validateFile(file);
-      if(!valid.valid){ showMessage(valid.message,true); return false; }
+      if(!valid.valid) { showMessage(valid.message, true); return false; }
       selectedFile = file;
-      elements.fileName.innerText = file.name.length>40 ? file.name.slice(0,36)+'...' : file.name;
       if(conversionDone) resetUI(false);
-      conversionDone=false; processedBlob=null;
+      conversionDone = false;
+      rotatedBlob = null;
       showMessage('✓ PDF loaded, ready to rotate', false);
       updateConvertBtn();
       return true;
     }
     
+    // Drag & Drop + Click
     const dropZone = document.getElementById('dropZone');
-    const hiddenInput = document.createElement('input'); hiddenInput.type='file'; hiddenInput.accept='application/pdf'; hiddenInput.style.display='none'; hiddenInput.id='hiddenFileInput';
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'file';
+    hiddenInput.accept = 'application/pdf';
+    hiddenInput.style.display = 'none';
+    hiddenInput.id = 'hiddenFileInput';
     document.body.appendChild(hiddenInput);
     
-    dropZone.addEventListener('click',()=>{ if(!isProcessing) hiddenInput.click(); });
-    dropZone.addEventListener('dragover',(e)=>{ e.preventDefault(); dropZone.classList.add('drag-over'); });
-    dropZone.addEventListener('dragleave',()=>{ dropZone.classList.remove('drag-over'); });
-    dropZone.addEventListener('drop',(e)=>{ e.preventDefault(); dropZone.classList.remove('drag-over'); if(e.dataTransfer.files && e.dataTransfer.files[0]) handleFileSelection(e.dataTransfer.files[0]); });
-    document.getElementById('chooseBtn').addEventListener('click',(e)=>{ e.stopPropagation(); if(!isProcessing) hiddenInput.click(); });
-    hiddenInput.addEventListener('change',(e)=>{ if(e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0]); });
-    elements.convertBtn.addEventListener('click', startConversion);
-    elements.downloadBtn.addEventListener('click', downloadPdf);
-    elements.resetLink.addEventListener('click',()=>{ if(!isProcessing) resetUI(true); });
-    document.getElementById('homeLogoLink').addEventListener('click',()=> window.location.href='https://free-ai-tools-for-pdf-image-file.onrender.com/');
+    dropZone.addEventListener('click', () => { if(!isProcessing) hiddenInput.click(); });
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('drag-over'); });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if(file) handleFileSelection(file);
+    });
+    hiddenInput.addEventListener('change', (e) => {
+      if(e.target.files && e.target.files[0]) handleFileSelection(e.target.files[0]);
+    });
+    
+    convertBtn.addEventListener('click', startConversion);
+    downloadBtn.addEventListener('click', downloadPDF);
+    resetLink.addEventListener('click', () => { resetUI(true); });
+    document.getElementById('homeLogoLink').addEventListener('click', () => window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/');
+    
     const darkToggle = document.getElementById('darkModeToggle');
-    darkToggle.addEventListener('click',()=>{ document.body.classList.toggle('dark-mode'); darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode 2026' : '🌙 Dark Mode 2026'; });
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+    
     resetUI(true);
   })();
 </script>
 </body>
 </html>
+
+
+
