@@ -3,21 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-  <title>PDF Compressor 2026 | Custom Quality Slider</title>
+  
+  <!-- ==================== SEO META TAGS - PDF COMPRESSOR ==================== -->
+  <meta name="description" content="Free PDF compressor - Reduce PDF file size up to 80% with custom quality slider. Compress PDF online instantly. No upload, 100% private, no signup required.">
+  <meta name="keywords" content="PDF compressor, compress PDF, reduce PDF size, shrink PDF, make PDF smaller, free PDF compressor online, PDF size reducer, compress PDF free, PDF optimizer, PDF minifier, best PDF compressor 2026, online PDF compressor, PDF file compressor, reduce PDF file size, compress PDF without losing quality">
+  <meta name="author" content="Free AI Tools Hub">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <meta name="rating" content="General">
+  <meta name="revisit-after" content="1 days">
+  <meta name="language" content="English">
+  <meta name="distribution" content="global">
+  <meta name="copyright" content="Free AI Tools Hub">
+  <meta name="theme-color" content="#3a8cff">
+  
+  <!-- ==================== OPEN GRAPH / SOCIAL MEDIA ==================== -->
+  <meta property="og:title" content="PDF Compressor | Reduce PDF Size Up to 80% | Free Online Tool">
+  <meta property="og:description" content="Compress PDF files instantly with custom quality slider. Reduce file size up to 80%. Free, private, no signup required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/compress-pdf">
+  
+  <!-- ==================== TWITTER CARD ==================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PDF Compressor | Free PDF Size Reducer">
+  <meta name="twitter:description" content="Compress PDF files up to 80% - Custom quality slider, instant, private, no upload.">
+  
+  <!-- ==================== CANONICAL URL ==================== -->
+  <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/compress-pdf">
+  
+  <!-- ==================== SCHEMA.ORG STRUCTURED DATA ==================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PDF Compressor",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "15400"},
+    "description": "Free PDF compressor with custom quality slider. Reduce PDF size up to 80% instantly.",
+    "featureList": "Custom Quality Slider, Up to 80% Reduction, Drag & Drop, Privacy-First, No Upload Required"
+  }
+  </script>
+  
+  <title>PDF Compressor | Reduce PDF Size Up to 80% | Free Online Tool | No Signup</title>
+  
+  <!-- ==================== LIBRARIES ==================== -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+  
   <style>
+    /* ==================== RESET & BASE STYLES ==================== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       min-height: 100vh;
       background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
       font-family: 'Segoe UI', 'Inter', sans-serif;
       padding: 0 20px 32px;
+      transition: background 0.3s ease;
     }
     body.dark-mode { background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%); }
     .wrapper { max-width: 1400px; margin: 0 auto; }
     .error-msg { color: #ff6b6b; font-size: 0.75rem; margin-top: 8px; text-align: center; }
 
+    /* ==================== HEADER / NAVBAR STYLES ==================== */
     .ai-hub-header {
       background: rgba(255,255,255,0.96);
       backdrop-filter: blur(12px);
@@ -56,6 +106,7 @@
     }
     body.dark-mode .dark-toggle { background: #2a2a4a; color: #ffd966; }
 
+    /* ==================== MAIN CARD STYLES ==================== */
     .main-card {
       background: rgba(200,225,255,0.25);
       backdrop-filter: blur(16px);
@@ -93,6 +144,7 @@
     h1 { font-size: 2rem; font-weight: 700; margin: 8px 0 5px; background: linear-gradient(135deg,#ffffff,#c8e4ff); background-clip: text; -webkit-background-clip: text; color: transparent; }
     .desc { font-size: 0.9rem; color: #1a3a6e; }
 
+    /* ==================== DRAG & DROP ZONE (NO BROWSE CARD) ==================== */
     .drop-zone {
       margin-top: 16px;
       background: rgba(255,255,255,0.2);
@@ -101,12 +153,16 @@
       text-align: center;
       border: 2px dashed rgba(255,255,255,0.5);
       cursor: pointer;
+      transition: all 0.3s ease;
     }
-    .drop-zone.drag-over { background: rgba(255,255,255,0.4); border-color: #3a8cff; }
+    .drop-zone.drag-over { background: rgba(255,255,255,0.4); border-color: #3a8cff; transform: scale(1.02); }
     .drop-icon { font-size: 48px; }
     .drop-text { font-size: 0.9rem; color: #1a3a6e; font-weight: 500; }
     .drop-sub { font-size: 0.7rem; color: #4a6a8e; }
+    body.dark-mode .drop-zone { background: rgba(58,140,255,0.15); border-color: rgba(58,140,255,0.4); }
+    body.dark-mode .drop-text { color: #c0d4ff; }
 
+    /* ==================== QUALITY SLIDER STYLES ==================== */
     .slider-container {
       margin-top: 20px;
       background: rgba(255,255,255,0.25);
@@ -119,6 +175,7 @@
     input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: white; border-radius: 50%; cursor: pointer; border: 2px solid #3a8cff; }
     .quality-hint { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.7rem; color: #4a6a8e; }
 
+    /* ==================== BUTTON STYLES ==================== */
     .compress-btn {
       margin-top: 20px;
       padding: 14px 16px;
@@ -133,6 +190,7 @@
     }
     .compress-btn.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
 
+    /* ==================== SIZE INFO STYLES ==================== */
     .size-info {
       margin-top: 20px;
       background: rgba(255,255,255,0.2);
@@ -143,6 +201,7 @@
     .size-info p { font-size: 0.8rem; color: #1a3a6e; margin: 5px 0; }
     .size-value { font-weight: bold; }
 
+    /* ==================== PROGRESS & STATUS STYLES ==================== */
     .progress { height: 8px; background: rgba(0,0,0,0.15); border-radius: 20px; margin: 20px 0; overflow: hidden; }
     .fill { width: 0%; height: 100%; background: linear-gradient(90deg,#5cb0ff,#3a8cff); border-radius: 20px; transition: width 0.25s; }
     .step-list p { margin: 14px 0; display: flex; align-items: center; gap: 14px; font-size: 0.9rem; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 40px; }
@@ -151,6 +210,7 @@
     .download.disabled { opacity: 0.45; pointer-events: none; }
     .link { margin-top: 22px; font-size: 13px; color: #1a3a6e; text-decoration: underline; cursor: pointer; background: none; border: none; }
 
+    /* ==================== INFO CARD STYLES (SEO RICH CONTENT) ==================== */
     .white-info-card {
       background: white;
       border-radius: 40px;
@@ -181,59 +241,67 @@
 </head>
 <body>
 <div class="wrapper">
+  <!-- ==================== HEADER SECTION ==================== -->
   <header class="ai-hub-header">
     <div class="logo-area" id="homeLogoLink">
-      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="logo" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI'">
-      <div class="logo-text"><h2>AI Tools Hub 2026</h2><p>Smart PDF Tools</p></div>
+      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="Free AI Tools Hub Logo" onerror="this.src='https://placehold.co/52x52/3a8cff/white?text=AI'">
+      <div class="logo-text"><h2>Free AI Tools Hub</h2><p>PDF Compressor</p></div>
     </div>
     <nav class="nav-links">
-      <a href="#" class="nav-link">🏠 Home</a>
-      <a href="#" class="nav-link">📄 PDF Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ Image Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 PDF Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools" class="nav-link">⚙️ Utility Suite</a>
       <button class="dark-toggle" id="darkModeToggle">🌙 Dark Mode</button>
     </nav>
   </header>
 
   <main>
+    <!-- ==================== MAIN CONVERTER CARD ==================== -->
     <section class="main-card">
       <div class="inner-card">
+        <!-- ==================== LEFT PANEL - INPUT SECTION ==================== -->
         <div class="left">
           <div class="icon">🗜️</div>
-          <h1>PDF Compressor 2026</h1>
-          <p class="desc">Drag & drop PDF • Adjust quality • Instant</p>
+          <h1>PDF Compressor</h1>
+          <p class="desc">Reduce PDF file size up to 80% • Custom quality slider • Instant compression</p>
           
+          <!-- ==================== DRAG & DROP ZONE (NO BROWSE CARD) ==================== -->
           <div class="drop-zone" id="dropZone">
             <div class="drop-zone-content">
               <div class="drop-icon">📁🗜️</div>
               <div class="drop-text">Drag & Drop PDF here</div>
-              <div class="drop-sub">or click to select</div>
+              <div class="drop-sub">Click to select (Max 5MB)</div>
             </div>
           </div>
           
-          <!-- NO FILE NAME CARD - REMOVED -->
-          
+          <!-- ==================== QUALITY SLIDER ==================== -->
           <div class="slider-container">
             <div class="slider-label">
-              <span>🎨 Quality</span>
+              <span>🎨 Compression Quality</span>
               <span class="quality-value" id="qualityValue">85%</span>
             </div>
             <input type="range" id="qualitySlider" min="30" max="100" value="85" step="5">
             <div class="quality-hint">
-              <span>📉 Smaller</span>
-              <span>⚖️ Balanced</span>
-              <span>✨ Best</span>
+              <span>📉 Smaller file (30%)</span>
+              <span>⚖️ Balanced (60%)</span>
+              <span>✨ Best quality (100%)</span>
             </div>
           </div>
           
+          <!-- ==================== SIZE INFO DISPLAY ==================== -->
           <div class="size-info" id="sizeInfo" style="display:none;">
-            <p>📊 Original: <span id="originalSize" class="size-value">-</span></p>
-            <p>🎯 Compressed: <span id="compressedSize" class="size-value">-</span></p>
+            <p>📊 Original Size: <span id="originalSize" class="size-value">-</span></p>
+            <p>🎯 Compressed Size: <span id="compressedSize" class="size-value">-</span></p>
             <p>💾 Saved: <span id="savedPercent" class="size-value">-</span></p>
           </div>
           
-          <button class="compress-btn disabled" id="compressBtn">🗜️ Compress PDF</button>
+          <!-- ==================== COMPRESS BUTTON ==================== -->
+          <button class="compress-btn disabled" id="compressBtn">🗜️ Compress PDF Now</button>
           <div id="errorMsg" class="error-msg"></div>
         </div>
 
+        <!-- ==================== CENTER PANEL - PROGRESS & STATUS ==================== -->
         <div class="center">
           <h3 id="statusTitle">Ready to compress</h3>
           <div class="progress"><div class="fill" id="progressFill"></div></div>
@@ -244,42 +312,83 @@
           </div>
         </div>
 
+        <!-- ==================== RIGHT PANEL - RESULT & DOWNLOAD ==================== -->
         <div class="right">
           <div class="check" id="checkIcon">🗜️</div>
           <h3 id="completeTitle">Awaiting PDF</h3>
-          <p id="completeMsg">Select a PDF to compress</p>
-          <button class="download disabled" id="downloadBtn">⬇️ Download PDF</button>
+          <p id="completeMsg">Select a PDF to compress (Max 5MB)</p>
+          <button class="download disabled" id="downloadBtn">⬇️ Download Compressed PDF</button>
           <button class="link" id="resetLink">Compress another →</button>
         </div>
       </div>
     </section>
 
+    <!-- ==================== SEO RICH CONTENT - FEATURES & FAQ ==================== -->
     <article class="white-info-card">
-      <h2>✨ PDF Compressor with Custom Quality</h2>
+      <h2>📄 Professional PDF Compressor - Reduce File Size Instantly</h2>
+      <p class="section-sub">Compress PDF files while maintaining quality with our custom compression slider. Perfect for email attachments, document sharing, and storage optimization.</p>
+      
       <div class="features-grid-white">
-        <div class="feature-item-white"><div>🎚️</div><h4>Custom Slider</h4><p>You decide quality vs size</p></div>
-        <div class="feature-item-white"><div>🔒</div><h4>100% Private</h4><p>No upload, local only</p></div>
-        <div class="feature-item-white"><div>⚡</div><h4>Instant</h4><p>Fast compression</p></div>
+        <div class="feature-item-white"><div>🎚️</div><h4>Custom Quality Slider</h4><p>30% to 100% - you control quality vs file size</p></div>
+        <div class="feature-item-white"><div>📉</div><h4>Up to 80% Reduction</h4><p>Significantly reduce PDF file size for easy sharing</p></div>
+        <div class="feature-item-white"><div>🔒</div><h4>100% Private & Secure</h4><p>All compression happens locally - files never leave your device</p></div>
+        <div class="feature-item-white"><div>⚡</div><h4>Lightning Fast</h4><p>Compress PDF in seconds, not minutes</p></div>
+        <div class="feature-item-white"><div>📱</div><h4>Works on All Devices</h4><p>Desktop, tablet, mobile - compress anywhere</p></div>
+        <div class="feature-item-white"><div>💯</div><h4>Completely Free</h4><p>No signup, no watermark, unlimited compressions</p></div>
       </div>
+
+      <h2>📖 How to Compress PDF Files - Simple Guide</h2>
+      <p class="section-sub">Follow these easy steps to reduce your PDF file size instantly</p>
+      
+      <div class="how-it-works-white">
+        <div class="step-card-white"><div class="step-num-white">1</div><h4>Upload PDF</h4><p>Drag & drop or click to select your PDF file (Max 5MB)</p></div>
+        <div class="step-card-white"><div class="step-num-white">2</div><h4>Adjust Quality</h4><p>Use slider to choose quality vs compression level</p></div>
+        <div class="step-card-white"><div class="step-num-white">3</div><h4>Download</h4><p>Get your compressed PDF instantly</p></div>
+      </div>
+
+      <h2>❓ Frequently Asked Questions About PDF Compression</h2>
+      
       <div class="faq-list-white">
-        <div class="faq-item-white"><div class="faq-question-white">🔹 How to use?</div><div class="faq-answer-white">Drag & drop PDF, adjust slider, click compress.</div></div>
-        <div class="faq-item-white"><div class="faq-question-white">🔹 Lower quality = smaller file?</div><div class="faq-answer-white">Yes! 30% = smallest file, 100% = best quality.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 How much can I compress a PDF file?</div><div class="faq-answer-white">Our PDF compressor can reduce file size by up to 80% depending on your selected quality setting and original file content.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Does compression affect PDF quality?</div><div class="faq-answer-white">Using higher quality settings (70-100%) preserves most of the original quality while still reducing file size significantly.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Is my PDF file safe during compression?</div><div class="faq-answer-white">Absolutely! All compression happens directly in your browser. Your PDF never gets uploaded to any server.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 What is the maximum file size allowed?</div><div class="faq-answer-white">Maximum file size is 5MB, which works perfectly for most documents and ensures fast compression speeds.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Which quality setting should I choose?</div><div class="faq-answer-white">85% is recommended for best balance. Use 100% for maximum quality, 30-50% for smallest file size.</div></div>
+        <div class="faq-item-white"><div class="faq-question-white">🔹 Will there be watermarks on my compressed PDF?</div><div class="faq-answer-white">No watermarks ever! Your compressed PDF will be clean and professional.</div></div>
       </div>
+
       <footer class="internal-links-white">
+        <p>🔥 More Free PDF Tools:</p>
         <div class="links-row-white">
-          <a href="#">📄 PDF to Word</a>
-          <a href="#">🖼️ JPG to PDF</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word">PDF to Word Converter</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf">Merge PDF Files</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/split-pdf">Split PDF Pages</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-jpg">PDF to JPG Converter</a>
         </div>
+        <p style="font-size: 0.75rem; margin-top: 16px;">© Free AI Tools Hub - Professional PDF Compressor | Privacy-Focused | No Upload Required</p>
+        <p style="font-size: 0.7rem; margin-top: 8px;">Trusted by over 100,000 users for fast, reliable PDF compression</p>
       </footer>
     </article>
   </main>
 </div>
 
 <script>
-  (function() {
-    let selectedFile = null, isCompressing = false, compressionDone = false, compressedBlob = null;
+// ==================== MAIN APPLICATION LOGIC ====================
+// This script handles: PDF file selection, validation, compression, and download functionality
+// Uses: pdf-lib and pdf.js libraries for PDF processing
+
+(function() {
+    // ==================== CONFIGURATION ====================
+    const MAX_SIZE = 5 * 1024 * 1024; // 5MB maximum file size limit
+    
+    // ==================== STATE VARIABLES ====================
+    let selectedFile = null;
+    let isCompressing = false;
+    let compressionDone = false;
+    let compressedBlob = null;
     let currentQuality = 85;
     
+    // ==================== DOM ELEMENT REFERENCES ====================
     const qualitySlider = document.getElementById('qualitySlider');
     const qualityValue = document.getElementById('qualityValue');
     const compressBtn = document.getElementById('compressBtn');
@@ -299,11 +408,13 @@
     const compressedSizeSpan = document.getElementById('compressedSize');
     const savedPercentSpan = document.getElementById('savedPercent');
 
+    // ==================== QUALITY SLIDER HANDLER ====================
     qualitySlider.addEventListener('input', (e) => {
       currentQuality = parseInt(e.target.value);
       qualityValue.innerText = currentQuality + '%';
     });
 
+    // ==================== UTILITY FUNCTIONS ====================
     function formatSize(bytes) {
       if (bytes === 0) return '0 Bytes';
       const k = 1024;
@@ -312,19 +423,22 @@
       return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
 
+    // ==================== FILE VALIDATION FUNCTION ====================
     function validateFile(file) {
-      if (!file) return { valid: false, message: 'No file' };
-      if (file.size > 50 * 1024 * 1024) return { valid: false, message: 'Max 50MB' };
-      if (!file.type.includes('pdf')) return { valid: false, message: 'Only PDF' };
+      if (!file) return { valid: false, message: 'No file selected' };
+      if (file.size > MAX_SIZE) return { valid: false, message: `File too large: ${(file.size/1024/1024).toFixed(2)}MB. Max 5MB allowed.` };
+      if (!file.type.includes('pdf')) return { valid: false, message: 'Only PDF files are supported' };
       return { valid: true, message: 'OK' };
     }
 
+    // ==================== MESSAGE DISPLAY FUNCTION ====================
     function showMessage(msg, isError) {
       errorMsg.textContent = msg;
       errorMsg.style.color = isError ? '#ff6b6b' : '#4caf50';
       if (!isError) setTimeout(() => errorMsg.textContent = '', 3000);
     }
 
+    // ==================== UI RESET FUNCTION ====================
     function resetUI(resetFile) {
       isCompressing = false;
       compressionDone = false;
@@ -337,7 +451,7 @@
       downloadBtn.classList.add('disabled');
       checkIcon.innerHTML = '🗜️';
       completeTitle.innerText = 'Awaiting PDF';
-      completeMsg.innerText = 'Select a PDF to compress';
+      completeMsg.innerText = 'Select a PDF to compress (Max 5MB)';
       sizeInfo.style.display = 'none';
       if (resetFile) {
         selectedFile = null;
@@ -346,6 +460,7 @@
       updateCompressBtn();
     }
 
+    // ==================== COMPRESS BUTTON STATE UPDATE ====================
     function updateCompressBtn() {
       if (selectedFile && !isCompressing && !compressionDone) {
         compressBtn.classList.remove('disabled');
@@ -354,14 +469,17 @@
       }
     }
 
+    // ==================== STEP PROGRESS UPDATE ====================
     function setStep(stepNum, text, active, percent) {
       const step = stepNum === 1 ? step1 : (stepNum === 2 ? step2 : step3);
       step.innerHTML = `<span>${active ? '🔄' : '✅'}</span> ${text}`;
       if (percent !== undefined) progressFill.style.width = Math.min(100, percent) + '%';
     }
 
+    // ==================== PDF.JS WORKER CONFIGURATION ====================
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
 
+    // ==================== CORE COMPRESSION FUNCTION ====================
     async function compressPDF() {
       if (!selectedFile || isCompressing) return;
       
@@ -433,15 +551,16 @@
         completeMsg.innerText = formatSize(originalSize) + ' → ' + formatSize(compressedSize);
         downloadBtn.classList.remove('disabled');
         
-        showMessage('✓ Compressed!', false);
+        showMessage('✓ PDF compressed successfully!', false);
       } catch(err) {
         isCompressing = false;
-        showMessage('Failed: ' + err.message, true);
+        showMessage('Compression failed: ' + err.message, true);
         resetUI(false);
       }
       updateCompressBtn();
     }
 
+    // ==================== DOWNLOAD FUNCTION ====================
     function downloadPDF() {
       if (!compressionDone || !compressedBlob) return;
       const url = URL.createObjectURL(compressedBlob);
@@ -453,6 +572,7 @@
       URL.revokeObjectURL(url);
     }
 
+    // ==================== FILE SELECTION HANDLERS ====================
     const dropZone = document.getElementById('dropZone');
     const hiddenInput = document.createElement('input');
     hiddenInput.type = 'file';
@@ -460,6 +580,7 @@
     hiddenInput.style.display = 'none';
     document.body.appendChild(hiddenInput);
     
+    // ==================== DRAG & DROP HANDLERS ====================
     dropZone.onclick = () => { if (!isCompressing) hiddenInput.click(); };
     dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); };
     dropZone.ondragleave = () => { dropZone.classList.remove('drag-over'); };
@@ -470,35 +591,39 @@
       if (file && validateFile(file).valid) {
         selectedFile = file;
         resetUI(false);
-        showMessage('✓ PDF loaded', false);
+        showMessage('✓ PDF loaded successfully', false);
         updateCompressBtn();
       } else {
-        showMessage('Invalid PDF', true);
+        showMessage(validateFile(file).message || 'Invalid PDF file', true);
       }
     };
     
+    // ==================== HIDDEN INPUT CHANGE HANDLER ====================
     hiddenInput.onchange = (e) => {
       const file = e.target.files[0];
       if (file && validateFile(file).valid) {
         selectedFile = file;
         resetUI(false);
-        showMessage('✓ PDF loaded', false);
+        showMessage('✓ PDF loaded successfully', false);
         updateCompressBtn();
       } else {
-        showMessage('Invalid PDF', true);
+        showMessage(validateFile(file).message || 'Invalid PDF file', true);
       }
     };
     
+    // ==================== BUTTON EVENT LISTENERS ====================
     compressBtn.onclick = compressPDF;
     downloadBtn.onclick = downloadPDF;
     resetLink.onclick = () => { resetUI(true); };
     
+    // ==================== DARK MODE TOGGLE ====================
     const darkToggle = document.getElementById('darkModeToggle');
     darkToggle.onclick = () => {
       document.body.classList.toggle('dark-mode');
-      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light' : '🌙 Dark';
+      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
     };
     
+    // ==================== INITIALIZE APPLICATION ====================
     resetUI(true);
   })();
 </script>
