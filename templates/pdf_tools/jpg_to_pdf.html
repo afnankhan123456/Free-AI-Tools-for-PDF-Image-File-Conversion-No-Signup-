@@ -235,30 +235,11 @@
     .right { flex: 1.2; background: rgba(180,215,255,0.3); border-radius: 32px; padding: 28px 20px; text-align: center; }
     body.dark-mode .right { background: rgba(22,25,42,0.7); }
 
-    /* ===== JPG to PDF Logo - DOUBLED SIZE (400px) ===== */
-    .logo-large {
-      display: inline-block;
-      margin: 0 auto 20px auto;
-      text-align: center;
-      width: 100%;
-    }
-    .logo-large img {
-      width: 400px;   /* doubled from 200px */
-      height: auto;
-      display: inline-block;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
-      transition: transform 0.2s;
-    }
-    .logo-large img:hover {
-      transform: scale(1.02);
-    }
-    .left .logo-large {
-      text-align: left;
-      margin-bottom: 0;
-    }
-    /* Drop zone icon also doubled */
+    /* Logo removed - no .logo-large styles needed */
+    
+    /* Drop zone icon size remains */
     .drop-icon-img {
-      width: 400px;   /* doubled */
+      width: 400px;
       height: auto;
       margin-bottom: 5px;
       background: transparent;
@@ -271,14 +252,15 @@
       height: auto;
       max-width: 360px;
     }
+    
     /* Drag & drop text double size */
     .drop-zone-text {
-      font-size: 2rem;   /* was 1rem */
+      font-size: 2rem;
       color: #1a3a6e;
       font-weight: 500;
     }
     .drop-zone-sub {
-      font-size: 1.5rem;   /* was 0.75rem */
+      font-size: 1.5rem;
       color: #4a6a8e;
     }
     body.dark-mode .drop-zone-text { color: #c0d4ff; }
@@ -312,7 +294,15 @@
     }
     body.dark-mode .status-text { color: #c0d4ff; }
 
-    h1 { font-size: 2rem; font-weight: 700; margin: 8px 0 5px; background: linear-gradient(135deg,#ffffff,#c8e4ff); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    h1 { 
+      font-size: 2rem; 
+      font-weight: 700; 
+      margin: 8px 0 5px; 
+      background: linear-gradient(135deg,#1a3a6e,#3a8cff); 
+      background-clip: text; 
+      -webkit-background-clip: text; 
+      color: transparent; 
+    }
     .desc { font-size: 0.9rem; color: #1a3a6e; }
 
     .drop-zone {
@@ -520,7 +510,6 @@
       .left { flex: auto; }
       .right { flex: auto; }
       .links-row-white a { padding: 6px 14px; font-size: 0.8rem; }
-      .logo-large img { width: 280px; }
       .drop-icon-img { width: 280px; }
       .drop-zone-text { font-size: 1.3rem; }
       .drop-zone-sub { font-size: 1rem; }
@@ -558,10 +547,7 @@
     <section class="main-card">
       <div class="inner-card">
         <div class="left">
-          <!-- Logo size doubled here -->
-          <div class="logo-large">
-            <img src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/logo_pic/jpg%20to%20pdf.png?raw=true" alt="JPG to PDF Logo" onerror="this.onerror=null; this.parentElement.innerHTML='🖼️➡️📄';">
-          </div>
+          <!-- Logo removed as requested – only heading remains -->
           <h1>JPG to PDF Converter</h1>
           <p class="desc">Convert JPG images to PDF • AI Auto-Fit • High Quality</p>
           
@@ -954,4 +940,3 @@ function showCard(id) {
 </script>
 </body>
 </html>
-
