@@ -235,7 +235,7 @@
     .right { flex: 1.2; background: rgba(180,215,255,0.3); border-radius: 32px; padding: 28px 20px; text-align: center; }
     body.dark-mode .right { background: rgba(22,25,42,0.7); }
 
-    /* ===== JPG to PDF Logo - DOUBLED SIZE ===== */
+    /* ===== JPG to PDF Logo - DOUBLED SIZE (400px) ===== */
     .logo-large {
       display: inline-block;
       margin: 0 auto 20px auto;
@@ -243,7 +243,7 @@
       width: 100%;
     }
     .logo-large img {
-      width: 200px;   /* was 100px, doubled */
+      width: 400px;   /* doubled from 200px */
       height: auto;
       display: inline-block;
       filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
@@ -252,14 +252,13 @@
     .logo-large img:hover {
       transform: scale(1.02);
     }
-    /* Adjust for left panel alignment */
     .left .logo-large {
       text-align: left;
       margin-bottom: 0;
     }
     /* Drop zone icon also doubled */
     .drop-icon-img {
-      width: 200px;   /* was 100px, doubled */
+      width: 400px;   /* doubled */
       height: auto;
       margin-bottom: 5px;
       background: transparent;
@@ -270,9 +269,21 @@
     .drop-icon-img img {
       width: 90%;
       height: auto;
-      max-width: 180px;
+      max-width: 360px;
     }
-    
+    /* Drag & drop text double size */
+    .drop-zone-text {
+      font-size: 2rem;   /* was 1rem */
+      color: #1a3a6e;
+      font-weight: 500;
+    }
+    .drop-zone-sub {
+      font-size: 1.5rem;   /* was 0.75rem */
+      color: #4a6a8e;
+    }
+    body.dark-mode .drop-zone-text { color: #c0d4ff; }
+    body.dark-mode .drop-zone-sub { color: #8a9dc0; }
+
     .status-panel {
       margin-top: 20px;
       background: transparent;
@@ -316,11 +327,7 @@
     }
     .drop-zone.drag-over { background: rgba(255,255,255,0.4); border-color: #3a8cff; transform: scale(1.02); }
     .drop-zone-content { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    .drop-zone-text { font-size: 1rem; color: #1a3a6e; font-weight: 500; }
-    .drop-zone-sub { font-size: 0.75rem; color: #4a6a8e; }
     body.dark-mode .drop-zone { background: rgba(58,140,255,0.15); border-color: rgba(58,140,255,0.4); }
-    body.dark-mode .drop-zone-text { color: #c0d4ff; }
-    body.dark-mode .drop-zone-sub { color: #8a9dc0; }
 
     .convert-btn {
       margin-top: 20px;
@@ -513,9 +520,10 @@
       .left { flex: auto; }
       .right { flex: auto; }
       .links-row-white a { padding: 6px 14px; font-size: 0.8rem; }
-      /* Responsive: reduce logo size on mobile (still larger than before) */
-      .logo-large img { width: 140px; }
-      .drop-icon-img { width: 140px; }
+      .logo-large img { width: 280px; }
+      .drop-icon-img { width: 280px; }
+      .drop-zone-text { font-size: 1.3rem; }
+      .drop-zone-sub { font-size: 1rem; }
     }
   </style>
 </head>
@@ -559,9 +567,12 @@
           
           <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-label="Drag and drop area or click to select JPG">
             <div class="drop-zone-content">
-              <!-- Drop icon also doubled -->
-              <div class="drop-icon-img">
-                <img src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/logo_pic/jpg%20to%20pdf.png?raw=true" alt="JPG to PDF Logo" onerror="this.onerror=null; this.parentElement.parentElement.querySelector('.drop-zone-text').style.display='inline-block'; this.parentElement.style.display='none';">
+              <!-- Flex container with folder emoji + logo image -->
+              <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <span style="font-size: 4rem;">📁</span>
+                <div class="drop-icon-img">
+                  <img src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/logo_pic/jpg%20to%20pdf.png?raw=true" alt="JPG to PDF Logo" onerror="this.onerror=null; this.parentElement.parentElement.querySelector('.drop-zone-text').style.display='inline-block'; this.parentElement.style.display='none';">
+                </div>
               </div>
               <div class="drop-zone-text">Drag & Drop JPG Image Here</div>
               <div class="drop-zone-sub">Click to select (Max 5MB)</div>
