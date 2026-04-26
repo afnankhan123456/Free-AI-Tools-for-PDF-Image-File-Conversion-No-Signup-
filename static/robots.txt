@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ai-tools-website-twj7.onrender.com/sitemap.xml
+Sitemap: https://free-ai-tools-for-pdf-image-file.onrender.com/sitemap.xml
