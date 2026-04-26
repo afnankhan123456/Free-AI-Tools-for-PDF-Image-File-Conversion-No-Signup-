@@ -360,7 +360,7 @@
     .download.disabled { opacity: 0.45; pointer-events: none; }
     .link { margin-top: 22px; font-size: 13px; color: #1a3a6e; text-decoration: underline; cursor: pointer; background: none; border: none; }
 
-    /* ==================== SEO INFO CARD (UNCHANGED) ==================== */
+    /* ==================== SEO INFO CARD (UNCHANGED + INTERNAL LINKS ADDED) ==================== */
     .white-info-card {
       background: white;
       border-radius: 40px;
@@ -392,9 +392,35 @@
     .faq-list-white { margin: 24px 0; }
     .faq-item-white { background: #f0f4f8; border-radius: 20px; padding: 14px 22px; margin-bottom: 10px; }
     body.dark-mode .faq-item-white { background: #1e213a; }
-    .internal-links-white { text-align: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e0e6ed; }
-    .links-row-white { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
-    .links-row-white a { color: white; text-decoration: none; background: linear-gradient(95deg,#5cb0ff,#3a8cff); padding: 8px 20px; border-radius: 50px; }
+    
+    /* ===== INTERNAL LINKS SECTION (RESTORED) ===== */
+    .internal-links-white {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #e0e6ed;
+    }
+    .links-row-white {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin: 16px 0 10px;
+    }
+    .links-row-white a {
+      color: white;
+      text-decoration: none;
+      background: linear-gradient(95deg,#5cb0ff,#3a8cff);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .links-row-white a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(58,140,255,0.3);
+    }
+    
     .how-it-works-white { display: flex; gap: 20px; justify-content: space-between; flex-wrap: wrap; margin: 30px 0; }
     .step-card-white { background: #f0f4f8; border-radius: 28px; flex: 1; padding: 20px; text-align: center; }
     body.dark-mode .step-card-white { background: #1e213a; }
@@ -478,6 +504,7 @@
       .inner-card { flex-direction: column; }
       .left { flex: auto; }
       .right { flex: auto; }
+      .links-row-white a { padding: 6px 14px; font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -565,7 +592,7 @@
       </div>
     </section>
 
-    <!-- ==================== #=====SEO RICH CONTENT (UNCHANGED)===== ==================== -->
+    <!-- ==================== #=====SEO RICH CONTENT (UNCHANGED + INTERNAL LINKS ADDED)===== ==================== -->
     <article class="white-info-card">
       <h2>📄 Professional PDF Compressor - Reduce File Size Instantly</h2>
       <p class="section-sub" style="text-align:center; margin-bottom:20px;">Compress PDF files while maintaining quality with our custom compression slider. Perfect for email attachments, document sharing, and storage optimization.</p>
@@ -618,6 +645,19 @@
         <div class="faq-item-white"><div class="faq-question-white">🔹 Which quality setting should I choose?</div><div class="faq-answer-white">85% is recommended for best balance. Use 100% for maximum quality, 30-50% for smallest file size.</div></div>
         <div class="faq-item-white"><div class="faq-question-white">🔹 Will there be watermarks on my compressed PDF?</div><div class="faq-answer-white">No watermarks ever! Your compressed PDF will be clean and professional.</div></div>
       </div>
+
+      <!-- ==================== #===== INTERNAL LINKS (RESTORED) ==================== -->
+      <footer class="internal-links-white">
+        <p>🔥 More Free PDF Tools:</p>
+        <div class="links-row-white">
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-word">PDF to Word Converter</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/merge-pdf">Merge PDF Files</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/split-pdf">Split PDF Pages</a>
+          <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-to-jpg">PDF to JPG Converter</a>
+        </div>
+        <p style="font-size: 0.75rem; margin-top: 16px;">© Free AI Tools Hub - Professional PDF Compressor | Privacy-Focused | No Upload Required</p>
+        <p style="font-size: 0.7rem; margin-top: 8px;">Trusted by over 100,000 users for fast, reliable PDF compression</p>
+      </footer>
     </article>
 
     <!-- ==================== #=====AI TOOL HUB INFO SECTION (UNCHANGED)===== ==================== -->
