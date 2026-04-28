@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- #=====SEO META TAGS (Base64 Encoder/Decoder)===== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/base64-encoder-decoder">
+  <meta name="description" content="Free Base64 Encoder & Decoder – Convert text to Base64 and Base64 to text instantly. Drag & drop any file. 100% private, no upload.">
+  <meta name="keywords" content="Base64 Encoder, Base64 Decoder, convert to Base64, Base64 to text, online Base64 tool, free Base64 converter, file to Base64">
+  <meta name="author" content="Free AI Tools Hub">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="theme-color" content="#3a8cff">
+  
+  <!-- #=====OPEN GRAPH===== -->
+  <meta property="og:title" content="Base64 Encoder/Decoder | Free Tool | Convert Text & Files">
+  <meta property="og:description" content="Encode text or files to Base64, decode Base64 back to text. Drag & drop, copy to clipboard. 100% client-side, no upload.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/base64-encoder-decoder">
+  <meta property="og:image" content="https://placehold.co/1200x630/3a8cff/white?text=Base64+Tool">
+  <meta property="og:image:alt" content="Base64 Encoder Decoder">
+  
+  <!-- #=====TWITTER CARD===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Base64 Encoder/Decoder – Free & Private">
+  <meta name="twitter:description" content="Convert text or files to Base64 and back. Instant, local, no signup.">
+  
+  <!-- #=====STRUCTURED DATA (Schema)===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Base64 Encoder/Decoder",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "description": "Convert text to Base64 and Base64 to text. Supports drag & drop, file uploads, UTF-8, and clipboard copy. 100% local processing.",
+    "featureList": "Base64 Encode, Base64 Decode, Drag & Drop, File to Base64, UTF-8 Support, Copy to Clipboard"
+  }
+  </script>
+  
+  <title>Base64 Encoder/Decoder | Free Text & File Converter | No Upload</title>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 30%, #a8d8ff, #6bb5ff, #3a8cff);
+      font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+      padding: 0 20px 32px;
+      transition: background 0.3s ease;
+    }
+    body.dark-mode { background: linear-gradient(135deg, #0a0e1a 0%, #0f1422 50%, #1a1a2e 100%); }
+    .wrapper { max-width: 1400px; margin: 0 auto; }
+    .error-msg { color: #ff6b6b; font-size: 0.75rem; margin-top: 8px; text-align: center; }
+
+    /* #=====HEADER - TRANSPARENT===== */
+    .ai-hub-header {
+      background: transparent;
+      margin: 20px 0 12px;
+      padding: 12px 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo-area { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+    .logo-img { width: 52px; height: 52px; border-radius: 28px; background: transparent; object-fit: contain; }
+    .logo-text h2 { font-size: 1.45rem; font-weight: 800; background: linear-gradient(135deg,#1a3a6e,#3a8cff); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .logo-text p { font-size: 0.7rem; color: #4a6a8e; }
+    
+    .header-breadcrumb {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 6px 16px;
+    }
+    .header-breadcrumb ol {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      font-size: 0.8rem;
+    }
+    .header-breadcrumb li:not(:last-child)::after { content: "›"; margin-left: 5px; color: #1a3a6e; }
+    .header-breadcrumb a { text-decoration: none; color: #1a3a6e; }
+    .header-breadcrumb span { color: #3a8cff; font-weight: 500; }
+    body.dark-mode .header-breadcrumb { background: rgba(18,20,36,0.7); }
+    body.dark-mode .header-breadcrumb a, body.dark-mode .header-breadcrumb li::after { color: #bbd4ff; }
+    body.dark-mode .header-breadcrumb span { color: #8ab8ff; }
+    @media (max-width: 780px) { .ai-hub-header { flex-direction: column; align-items: flex-start; } }
+    
+    .nav-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .nav-link, .dark-toggle {
+      background: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 8px 18px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1f2f47;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-link::after, .dark-toggle::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(115deg, rgba(255,255,255,0) 10%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 90%);
+      transform: skewX(-20deg);
+      transition: left 0.5s;
+      pointer-events: none;
+    }
+    .nav-link:hover::after, .dark-toggle:hover::after { left: 125%; }
+    .nav-link:hover, .dark-toggle:hover { transform: scale(1.02); background: rgba(255,255,255,0.45); }
+    body.dark-mode .nav-link, body.dark-mode .dark-toggle { background: rgba(255,255,255,0.12); color: #eef5ff; }
+    @media (max-width: 780px) { .nav-link, .dark-toggle { padding: 6px 14px; font-size: 0.8rem; gap: 4px; } }
+
+    /* #=====MAIN CARD===== */
+    .main-card {
+      background: rgba(200,225,255,0.25);
+      backdrop-filter: blur(16px);
+      border-radius: 48px;
+      border: 1px solid rgba(255,255,255,0.5);
+      margin-bottom: 30px;
+    }
+    body.dark-mode .main-card { background: rgba(18,20,34,0.8); }
+    .inner-card {
+      display: flex;
+      flex-direction: row;
+      gap: 28px;
+      padding: 36px 40px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 700px) { .inner-card { flex-direction: column; } }
+    
+    .left { flex: 1.5; min-width: 280px; }
+    .center { flex: 1.2; background: rgba(180,215,255,0.2); backdrop-filter: blur(8px); border-radius: 32px; padding: 20px; }
+    .right { flex: 0.8; min-width: 220px; background: rgba(180,215,255,0.3); border-radius: 32px; padding: 28px 20px; text-align: center; }
+    body.dark-mode .center, body.dark-mode .right { background: rgba(22,25,42,0.7); }
+
+    .title-row { margin-bottom: 8px; }
+    .title-left h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0 0 5px 0;
+      background: linear-gradient(135deg,#1a3a6e,#3a8cff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .title-left .desc { font-size: 0.9rem; color: #1a3a6e; margin: 0; }
+
+    /* Mode switcher */
+    .mode-switcher {
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 60px;
+      padding: 6px;
+    }
+    .mode-btn {
+      flex: 1;
+      background: rgba(255,255,255,0.3);
+      border: none;
+      border-radius: 60px;
+      padding: 8px 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #1a3a6e;
+    }
+    body.dark-mode .mode-btn { background: rgba(58,140,255,0.2); color: #c0d4ff; }
+    .mode-btn.active { background: linear-gradient(95deg,#5cb0ff,#3a8cff); color: white; }
+
+    /* Drop zone now includes a small text input area */
+    .drop-zone {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 28px;
+      padding: 12px 16px;
+      border: 2px dashed rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .drop-zone.drag-over { background: rgba(255,255,255,0.4); border-color: #3a8cff; transform: scale(1.01); }
+    .drop-zone-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .drop-zone-icon-img { width: 70px; margin: 0 auto; }
+    .drop-zone-icon-img img { width: 100%; height: auto; }
+    .drop-zone-text { font-size: 0.85rem; font-weight: 600; color: #1a3a6e; }
+    .drop-zone-sub { font-size: 0.65rem; color: #4a6a8e; }
+    body.dark-mode .drop-zone-text { color: #c0d4ff; }
+    body.dark-mode .drop-zone-sub { color: #8a9dc0; }
+
+    /* Small text input area inside drop-zone (compact) */
+    .paste-area {
+      width: 100%;
+      margin-top: 8px;
+    }
+    .paste-area textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 20px;
+      padding: 8px 12px;
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #1a3a6e;
+      resize: vertical;
+      min-height: 70px;
+      max-height: 100px;
+    }
+    body.dark-mode .paste-area textarea { background: rgba(58,140,255,0.15); color: white; }
+
+    /* Button row (Convert | Download) */
+    .button-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .action-btn {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 60px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .convert-btn {
+      background: linear-gradient(95deg,#5cb0ff,#3a8cff);
+      color: white;
+    }
+    .download-btn {
+      background: rgba(255,255,255,0.3);
+      color: #1a3a6e;
+      border: 1px solid rgba(58,140,255,0.4);
+    }
+    body.dark-mode .download-btn { background: #1e213a; color: #c0d4ff; border-color: rgba(58,140,255,0.3); }
+    .convert-btn.disabled, .download-btn.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+    .convert-btn:hover:not(.disabled) { transform: scale(0.97); background: linear-gradient(95deg,#4aa0ff,#2a7cff); }
+    .download-btn:hover:not(.disabled) { background: #3a8cff; color: white; }
+
+    .io-label {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 6px;
+    }
+    .copy-btn {
+      background: rgba(255,255,255,0.3);
+      border: none;
+      border-radius: 30px;
+      padding: 2px 10px;
+      font-size: 0.65rem;
+      cursor: pointer;
+      color: #1a3a6e;
+    }
+    body.dark-mode .copy-btn { color: #c0d4ff; }
+    .copy-btn:hover { background: #3a8cff; color: white; }
+
+    .output-textarea {
+      width: 100%;
+      height: 180px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,0.4);
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #1a3a6e;
+      resize: vertical;
+    }
+    body.dark-mode .output-textarea { background: rgba(58,140,255,0.15); color: white; }
+
+    .check { width: 60px; height: 60px; background: linear-gradient(145deg,#4caf50,#2e7d32); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: white; }
+    .link {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #1a3a6e;
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-weight: 600;
+    }
+    body.dark-mode .link { color: #8a9dc0; }
+    
+    .continue-links {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      text-align: center;
+    }
+    .continue-links a { display: inline-block; margin: 0 8px; font-size: 0.75rem; color: #1a3a6e; text-decoration: underline; }
+    body.dark-mode .continue-links a { color: #bbd4ff; }
+    .info-note {
+      font-size: 0.7rem;
+      margin-top: 12px;
+      text-align: center;
+      color: #4a6a8e;
+    }
+    body.dark-mode .info-note { color: #8a9dc0; }
+
+    /* White info card (full structure) */
+    .white-info-card { background: white; border-radius: 40px; padding: 32px 36px; margin-top: 28px; }
+    body.dark-mode .white-info-card { background: #15182b; }
+    .white-info-card h2 { font-size: 1.8rem; text-align: center; margin-bottom: 16px; color: #1a3a6e; }
+    body.dark-mode .white-info-card h2 { color: #c0d4ff; }
+    .features-grid-white {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin: 28px 0;
+    }
+    .feature-item-white { background: #f0f4f8; padding: 18px; border-radius: 24px; text-align: center; }
+    body.dark-mode .feature-item-white { background: #1e213a; }
+    .extra-description-block {
+      background: linear-gradient(105deg, rgba(92,176,255,0.1), rgba(58,140,255,0.05));
+      border-left: 6px solid #3a8cff;
+      padding: 20px 28px;
+      border-radius: 32px;
+      margin: 28px 0;
+    }
+    .faq-list-white { margin: 24px 0; }
+    .faq-item-white { background: #f0f4f8; border-radius: 20px; padding: 14px 22px; margin-bottom: 10px; }
+    body.dark-mode .faq-item-white { background: #1e213a; }
+    .faq-item-white > div:first-child { font-weight: 600; margin-bottom: 6px; }
+    .how-it-works-white { display: flex; gap: 20px; justify-content: space-between; flex-wrap: wrap; margin: 30px 0; }
+    .step-card-white { background: #f0f4f8; border-radius: 28px; flex: 1; padding: 20px; text-align: center; }
+    .step-num-white { width: 44px; height: 44px; background: #3a8cff; border-radius: 40px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.4rem; }
+    
+    .ai-toolhub-section { background: white; border-radius: 40px; padding: 30px; margin-top: 40px; margin-bottom: 30px; }
+    body.dark-mode .ai-toolhub-section { background: #15182b; }
+    .ai-toolhub-section .menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
+    .ai-toolhub-section .menu a { background: none; text-align: center; cursor: pointer; font-weight: 500; font-size: 1rem; color: #1a3a6e; text-decoration: none; }
+    .ai-toolhub-section .card { background: #f8fafc; padding: 24px; border-radius: 32px; margin-bottom: 30px; display: block; }
+    .footer { display: flex; justify-content: center; gap: 30px; padding-top: 20px; margin-top: 20px; border-top: 1px solid #e2e8f0; }
+    .info-footer { margin-top: 25px; padding-top: 15px; border-top: 1px solid #e2e8f0; text-align: center; }
+    .cookie-disclaimer { font-size: 0.85rem; color: #4a6a8e; margin-bottom: 12px; }
+    .hub-footer-text { font-size: 0.8rem; color: #4a6a8e; }
+    @media (max-width: 780px) {
+      .white-info-card { padding: 24px 20px; }
+      .inner-card { flex-direction: column; }
+      .ai-toolhub-section .menu { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <!-- #=====HEADER SECTION===== -->
+  <header class="ai-hub-header">
+    <div class="logo-area" id="homeLogoLink">
+      <img class="logo-img" src="https://github.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/blob/main/static/logo1.webp?raw=true" alt="Free AI Tools Hub Logo" loading="lazy">
+      <div class="logo-text"><h2>Free AI Tools Hub</h2><p>Base64 Encoder/Decoder</p></div>
+    </div>
+    <nav class="header-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="https://free-ai-tools-for-pdf-image-file.onrender.com/">Home</a></li>
+        <li><a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools">Utility Tools</a></li>
+        <li><span>Base64 Encoder/Decoder</span></li>
+      </ol>
+    </nav>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/" class="nav-link">🏠 Home</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-tools" class="nav-link">🖼️ Image Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/pdf-tools" class="nav-link">📄 PDF Tools</a>
+      <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools" class="nav-link">⚙️ Utility Suite</a>
+      <button class="dark-toggle" id="darkModeToggle" aria-label="Dark Mode Toggle">🌙 Dark Mode</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="main-card">
+      <div class="inner-card">
+        <div class="left">
+          <div class="title-row">
+            <div class="title-left">
+              <h1>Base64 Encoder & Decoder — Convert Instantly</h1>
+              <p class="desc">Encode text to Base64, decode Base64 to text, or convert any file. No upload, 100% private.</p>
+            </div>
+          </div>
+          
+          <div class="mode-switcher">
+            <button class="mode-btn active" data-mode="encode">🔐 Encode to Base64</button>
+            <button class="mode-btn" data-mode="decode">🔓 Decode from Base64</button>
+          </div>
+          
+          <!-- Drag & Drop Zone with integrated paste area -->
+          <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-content">
+              <div class="drop-zone-icon-img">
+                <img src="https://raw.githubusercontent.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/main/logo_pic/Encoder-Decoder.png" alt="Base64 Tool" loading="lazy">
+              </div>
+              <div class="drop-zone-text">📁 Drag & Drop Any File</div>
+              <div class="drop-zone-sub">Click or drop (JPG, PNG, PDF, TXT, etc.)</div>
+              <div class="paste-area">
+                <textarea id="pasteText" placeholder="Or paste text here (max ~100 words) to encode/decode..."></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Button Row: Convert | Download -->
+          <div class="button-row">
+            <button class="action-btn convert-btn" id="convertBtn">✨ Convert ✨</button>
+            <button class="action-btn download-btn disabled" id="downloadBtn">💾 Download Result (.txt)</button>
+          </div>
+          <div id="fileErrorMsg" class="error-msg"></div>
+          <div class="info-note">💡 Paste text then click Convert. Drop a file → Convert to see Base64, then Download to save as .txt.</div>
+        </div>
+
+        <div class="center">
+          <div class="io-label">
+            <button class="copy-btn" id="copyOutputBtn">📋 Copy Output</button>
+          </div>
+          <textarea id="outputText" class="output-textarea" placeholder="Result will appear here..." readonly></textarea>
+          <div id="outputStatus" style="font-size:0.7rem; text-align:center; margin-top:6px;"></div>
+        </div>
+
+        <div class="right">
+          <div class="check" id="checkIcon">🚀</div>
+          <h3 id="completeTitle">Awaiting Input</h3>
+          <p id="completeMsg">Paste text or drop a file</p>
+          <button class="link" id="resetLink">Clear all →</button>
+          <div class="continue-links">
+            <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/jpg-to-pdf">JPG to PDF</a> |
+            <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/compress-image">Image Compressor</a> |
+            <a href="https://free-ai-tools-for-pdf-image-file.onrender.com/image-resizer">Image Resizer</a>
+          </div>
+          <div style="margin-top: 20px; font-size:0.7rem; opacity:0.7;">
+            ⚡ Supports UTF-8 • 📁 Any file → Base64<br>
+            🔒 100% local, no server
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- #=====WHITE INFO CARD (Full structure with two extra blocks and FAQ)===== -->
+    <article class="white-info-card">
+      <h2>Professional Base64 Encoder/Decoder — Text & Files</h2>
+      <p style="text-align:center; margin-bottom:20px;">Convert text to Base64 and Base64 back to text instantly. Supports UTF-8, drag & drop any file, and clipboard copy. 100% local processing.</p>
+      
+      <div class="features-grid-white">
+        <div class="feature-item-white"><div>🔐</div><h4>Encode to Base64</h4><p>Convert text or files to Base64</p></div>
+        <div class="feature-item-white"><div>🔓</div><h4>Decode from Base64</h4><p>Restore original text</p></div>
+        <div class="feature-item-white"><div>📁</div><h4>Any File Support</h4><p>Images, PDFs, documents → Base64</p></div>
+        <div class="feature-item-white"><div>📋</div><h4>Copy to Clipboard</h4><p>One-click copy input/output</p></div>
+        <div class="feature-item-white"><div>🌐</div><h4>UTF-8 Support</h4><p>All languages & symbols</p></div>
+        <div class="feature-item-white"><div>🔒</div><h4>100% Private</h4><p>No server upload, all local</p></div>
+      </div>
+
+      <!-- First extra-description-block -->
+      <div class="extra-description-block">
+        <h3 style="font-size:1.6rem; margin-bottom:12px;">✨ Why Our Base64 Tool Stands Out</h3>
+        <p>Unlike server‑based tools, our encoder/decoder works entirely inside your browser using native JavaScript APIs. Your data never leaves your device – zero privacy risks. Supports UTF‑8, drag & drop any file, and instant clipboard copy.</p>
+        <ul class="tips-bullet">
+          <li>✅ <strong>Zero data transfer</strong> – 100% local processing</li>
+          <li>✅ <strong>Any file to Base64</strong> – drop images, PDFs, text files, etc.</li>
+          <li>✅ <strong>UTF-8 safe</strong> – handles emojis, accents, all languages</li>
+          <li>✅ <strong>Instant copy</strong> – copy encoded/decoded result with one click</li>
+        </ul>
+      </div>
+
+      <h2>📖 How to Use Base64 Encoder/Decoder</h2>
+      <div class="how-it-works-white">
+        <div class="step-card-white"><div class="step-num-white">1</div><h4>Choose Mode</h4><p>Select Encode or Decode</p></div>
+        <div class="step-card-white"><div class="step-num-white">2</div><h4>Enter Data</h4><p>Paste text OR drop any file</p></div>
+        <div class="step-card-white"><div class="step-num-white">3</div><h4>Convert & Copy</h4><p>Click Convert, copy result, or Download as file</p></div>
+      </div>
+
+      <h2>❓ Frequently Asked Questions</h2>
+      <div class="faq-list-white">
+        <div class="faq-item-white"><div>🔹 What is Base64?</div><div>Base64 is an encoding scheme that converts binary data to ASCII text format, commonly used for embedding images in HTML/CSS or transmitting data over text‑based protocols.</div></div>
+        <div class="faq-item-white"><div>🔹 Can I encode a file to Base64?</div><div>Yes! Drag & drop any file (image, PDF, document) onto the drop zone – it will be converted to a Base64 string instantly.</div></div>
+        <div class="faq-item-white"><div>🔹 Does it support UTF-8 characters?</div><div>Absolutely. Our tool uses the modern TextEncoder/TextDecoder APIs, so emojis, special symbols, and all languages work perfectly.</div></div>
+        <div class="faq-item-white"><div>🔹 Is it completely free?</div><div>Yes, 100% free with unlimited conversions. No signup, no watermarks, no hidden fees.</div></div>
+        <div class="faq-item-white"><div>🔹 Does it upload my data to a server?</div><div>No! All encoding and decoding happens locally in your browser. Your files and text never leave your device.</div></div>
+        <div class="faq-item-white"><div>🔹 Can I decode a Base64 string back to original text?</div><div>Yes, simply switch to Decode mode, paste the Base64 string, and click convert – the original text will be restored.</div></div>
+        <div class="faq-item-white"><div>🔹 What is the recommended file size?</div><div>Files up to 5MB are recommended for smooth client-side performance. Larger files may work but could take longer.</div></div>
+      </div>
+
+      <!-- Second extra-description-block -->
+      <div class="extra-description-block" style="background: rgba(92,176,255,0.08);">
+        <h3 style="font-size:1.5rem;">💡 Expert Tips for Best Results</h3>
+        <p>Use Encode mode for preparing data for JSON, APIs, or email attachments. Use Decode mode to read Base64-encoded content from data URIs or saved strings. For large files, use the Download button to save the Base64 output as a text file.</p>
+        <ul class="tips-bullet">
+          <li>🎯 <strong>Text encoding</strong> – perfect for API keys, binary data in JSON</li>
+          <li>📁 <strong>File conversion</strong> – embed images directly in HTML/CSS using data:image/...;base64,</li>
+          <li>🖥️ <strong>Offline first</strong> – works without internet after page load</li>
+          <li>⚡ <strong>Save as file</strong> – Download button saves result as .txt</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- #=====AI TOOL HUB SECTION (All cards visible for SEO)===== -->
+    <div class="ai-toolhub-section">
+      <div class="menu">
+        <a href="#" onclick="showCard('about'); return false;">About Us</a>
+        <a href="#" onclick="showCard('contact'); return false;">Contact Us</a>
+        <a href="#" onclick="showCard('privacy'); return false;">Privacy Policy</a>
+        <a href="#" onclick="showCard('terms'); return false;">Terms of Service</a>
+        <a href="#" onclick="showCard('disclaimer'); return false;">Disclaimer</a>
+        <a href="#" onclick="showCard('cookie'); return false;">Cookie Policy</a>
+        <a href="#" onclick="showCard('dmca'); return false;">DMCA Policy</a>
+        <a href="#" onclick="showCard('sitemap'); return false;">Sitemap</a>
+        <a href="#" onclick="showCard('support'); return false;">Support</a>
+        <a href="#" onclick="showCard('report'); return false;">Report an Issue</a>
+        <a href="#" onclick="showCard('newsletter'); return false;">Newsletter</a>
+      </div>
+
+      <div id="about" class="card"><h2>🔹 About Us</h2><p>We provide free AI-powered tools for PDF and image processing. Fast, private, no signup.</p></div>
+      <div id="contact" class="card"><h2>🔹 Contact Us</h2><p>Email: <strong>afnank6789@gmail.com</strong></p></div>
+      <div id="privacy" class="card"><h2>🔹 Privacy Policy</h2><p>No file uploads; all processing is local. We do not collect personal data.</p></div>
+      <div id="terms" class="card"><h2>🔹 Terms of Service</h2><p>Use tools for lawful purposes only. We reserve rights to modify services.</p></div>
+      <div id="disclaimer" class="card"><h2>🔹 Disclaimer</h2><p>Tools provided "as is". We are not liable for misuse or outcome.</p></div>
+      <div id="cookie" class="card"><h2>🔹 Cookie Policy</h2><p>We do not use tracking cookies. Only essential local storage for theme.</p></div>
+      <div id="dmca" class="card"><h2>🔹 DMCA Policy</h2><p>Respect copyright. For takedown requests, email afnank6789@gmail.com</p></div>
+      <div id="sitemap" class="card"><h2>🔹 Sitemap</h2><p>All tools accessible via navigation menu.</p></div>
+      <div id="support" class="card"><h2>🔹 Support</h2><p>Reach us at afnank6789@gmail.com for assistance.</p></div>
+      <div id="report" class="card"><h2>🔹 Report an Issue</h2><p>Found a bug? Email afnank6789@gmail.com with details.</p></div>
+      <div id="newsletter" class="card"><h2>🔹 Newsletter</h2><p>Stay tuned for updates. No newsletter at the moment.</p></div>
+
+      <div class="footer">
+        <svg viewBox="0 0 24 24" width="28" height="28"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2zm6.2-.9a1.2 1.2 0 1 1-1.2 1.2 1.2 1.2 0 0 1 1.2-1.2zM12 9.2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2z"/></svg>
+        <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zm7 0h3.6v1.7h.05a4 4 0 0 1 3.6-2c3.8 0 4.5 2.5 4.5 5.7V21h-4v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4z"/></svg></a>
+        <a href="https://x.com/afnank6789" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M22 5.9a8.2 8.2 0 0 1-2.3.6 4.1 4.1 0 0 0 1.8-2.3 8.3 8.3 0 0 1-2.6 1 4.1 4.1 0 0 0-7 3.7A11.6 11.6 0 0 1 3 4.8a4.1 4.1 0 0 0 1.3 5.5 4 4 0 0 1-1.9-.5v.1a4.1 4.1 0 0 0 3.3 4 4 4 0 0 1-1.8.1 4.1 4.1 0 0 0 3.8 2.8A8.3 8.3 0 0 1 2 19.5 11.7 11.7 0 0 0 8.3 21c7.5 0 11.6-6.2 11.6-11.6v-.5A8.2 8.2 0 0 0 22 5.9z"/></svg></a>
+      </div>
+
+      <footer class="info-footer">
+        <div class="cookie-disclaimer">🍪 हम cookies का उपयोग नहीं करते हैं, जिससे हमारा UI और वेबसाइट तेज़ है।</div>
+        <div class="hub-footer-text">© Free AI Tools Hub - Professional Base64 Encoder/Decoder | Privacy-Focused | No Upload Required<br>Trusted by over 56,500 users per month</div>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script>
+  (function() {
+    let currentMode = 'encode';
+    let selectedFile = null;
+    let lastResult = '';
+    
+    const modeBtns = document.querySelectorAll('.mode-btn');
+    const pasteText = document.getElementById('pasteText');
+    const outputText = document.getElementById('outputText');
+    const outputStatus = document.getElementById('outputStatus');
+    const convertBtn = document.getElementById('convertBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const resetLink = document.getElementById('resetLink');
+    const copyOutputBtn = document.getElementById('copyOutputBtn');
+    const fileErrorMsg = document.getElementById('fileErrorMsg');
+    const checkIcon = document.getElementById('checkIcon');
+    const completeTitle = document.getElementById('completeTitle');
+    const completeMsg = document.getElementById('completeMsg');
+    const dropZone = document.getElementById('dropZone');
+    const hiddenFileInput = document.createElement('input');
+    hiddenFileInput.type = 'file';
+    hiddenFileInput.style.display = 'none';
+    document.body.appendChild(hiddenFileInput);
+    
+    // Mode switching
+    modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modeBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentMode = btn.dataset.mode;
+        // Clear everything on mode change
+        pasteText.value = '';
+        outputText.value = '';
+        selectedFile = null;
+        lastResult = '';
+        downloadBtn.classList.add('disabled');
+        updateUIAfterClear();
+        if (currentMode === 'encode') {
+          pasteText.placeholder = 'Enter text to encode to Base64... or drop a file';
+        } else {
+          pasteText.placeholder = 'Paste Base64 string to decode...';
+        }
+      });
+    });
+    
+    function updateUIAfterClear() {
+      checkIcon.innerHTML = '🚀';
+      completeTitle.innerText = 'Awaiting Input';
+      completeMsg.innerText = 'Paste text or drop a file';
+      outputStatus.innerText = '';
+      fileErrorMsg.textContent = '';
+    }
+    
+    function showMessage(msg, isErr = false) {
+      fileErrorMsg.textContent = msg;
+      fileErrorMsg.style.color = isErr ? '#ff6b6b' : '#4caf50';
+      if (!isErr) setTimeout(() => {
+        if (fileErrorMsg.textContent === msg) fileErrorMsg.textContent = '';
+      }, 3000);
+    }
+    
+    // File handling
+    function handleFile(file) {
+      if (currentMode !== 'encode') {
+        showMessage('⚠️ File upload only works in Encode mode. Switch to "Encode to Base64" first.', true);
+        return;
+      }
+      selectedFile = file;
+      pasteText.value = `📁 ${file.name} (${(file.size/1024).toFixed(1)} KB) - Drop zone ready. Click Convert to encode.`;
+      showMessage(`✓ File "${file.name}" loaded, ready to encode`, false);
+      downloadBtn.classList.remove('disabled');
+      // Clear previous output
+      outputText.value = '';
+      lastResult = '';
+      outputStatus.innerText = '';
+    }
+    
+    dropZone.addEventListener('click', () => {
+      if (currentMode === 'encode') {
+        hiddenFileInput.click();
+      } else {
+        showMessage('File upload only works in Encode mode. Switch to Encode mode first.', true);
+      }
+    });
+    
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('drag-over');
+    });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+    
+    hiddenFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        handleFile(e.target.files[0]);
+      }
+      hiddenFileInput.value = '';
+    });
+    
+    // Base64 functions
+    function encodeToBase64(str) {
+      const utf8Bytes = new TextEncoder().encode(str);
+      let binary = '';
+      for (let i = 0; i < utf8Bytes.length; i++) {
+        binary += String.fromCharCode(utf8Bytes[i]);
+      }
+      return btoa(binary);
+    }
+    
+    function decodeFromBase64(str) {
+      try {
+        const binary = atob(str);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        return new TextDecoder().decode(bytes);
+      } catch (e) {
+        throw new Error('Invalid Base64 string');
+      }
+    }
+    
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          let base64 = reader.result;
+          if (base64.includes(',')) {
+            base64 = base64.split(',')[1];
+          }
+          resolve(base64);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+    
+    // Convert action
+    async function startConversion() {
+      let inputValue = pasteText.value.trim();
+      if (!inputValue && !selectedFile) {
+        showMessage('Please paste text OR drop a file.', true);
+        return;
+      }
+      
+      try {
+        let result = '';
+        if (currentMode === 'encode') {
+          if (selectedFile) {
+            result = await fileToBase64(selectedFile);
+            showMessage(`✓ File encoded to Base64`, false);
+          } else if (inputValue) {
+            // Check if input looks like file indicator (we ignore that)
+            if (inputValue.startsWith('📁')) {
+              showMessage('Please drop a file or paste actual text.', true);
+              return;
+            }
+            result = encodeToBase64(inputValue);
+            showMessage('✓ Text encoded to Base64', false);
+          } else {
+            throw new Error('No input provided');
+          }
+        } else {
+          // Decode mode
+          if (selectedFile) {
+            showMessage('File upload only works in Encode mode. Switch to Encode mode first.', true);
+            return;
+          }
+          if (!inputValue) throw new Error('Please paste Base64 string to decode');
+          result = decodeFromBase64(inputValue);
+          showMessage('✓ Base64 decoded successfully', false);
+        }
+        
+        outputText.value = result;
+        lastResult = result;
+        outputStatus.innerText = `Result length: ${result.length} characters`;
+        checkIcon.innerHTML = '✔️🔄';
+        completeTitle.innerText = 'Conversion Complete!';
+        completeMsg.innerText = 'Result ready to copy or download';
+        // Enable download button if there is result
+        if (result) downloadBtn.classList.remove('disabled');
+        else downloadBtn.classList.add('disabled');
+      } catch (err) {
+        showMessage('Error: ' + err.message, true);
+        outputText.value = '';
+        lastResult = '';
+        outputStatus.innerText = '';
+        checkIcon.innerHTML = '❌';
+        completeTitle.innerText = 'Conversion Failed';
+        completeMsg.innerText = 'Check your input';
+        downloadBtn.classList.add('disabled');
+      }
+    }
+    
+    // Download result as .txt file
+    function downloadResult() {
+      if (!lastResult) {
+        showMessage('No result to download. First click Convert.', true);
+        return;
+      }
+      const blob = new Blob([lastResult], {type: 'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'base64_output.txt';
+      a.click();
+      URL.revokeObjectURL(url);
+      showMessage('✓ File downloaded', false);
+    }
+    
+    // Copy output
+    copyOutputBtn.addEventListener('click', () => {
+      if (outputText.value) {
+        outputText.select();
+        document.execCommand('copy');
+        showMessage('✓ Output copied to clipboard', false);
+      } else {
+        showMessage('No output to copy', true);
+      }
+    });
+    
+    // Reset everything
+    resetLink.addEventListener('click', () => {
+      pasteText.value = '';
+      outputText.value = '';
+      selectedFile = null;
+      lastResult = '';
+      downloadBtn.classList.add('disabled');
+      updateUIAfterClear();
+      showMessage('Cleared', false);
+    });
+    
+    convertBtn.addEventListener('click', startConversion);
+    downloadBtn.addEventListener('click', downloadResult);
+    
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+    
+    document.getElementById('homeLogoLink').addEventListener('click', () => window.location.href = 'https://free-ai-tools-for-pdf-image-file.onrender.com/');
+    
+    window.showCard = function(id) {
+      const card = document.getElementById(id);
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    
+    updateUIAfterClear();
+  })();
+</script>
+</body>
+</html>
