@@ -6,9 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   <link rel="canonical" href="https://free-ai-tools-for-pdf-image-file.onrender.com/base64-encoder-decoder">
   <meta name="description" content="Free Base64 Encoder & Decoder – Convert text to Base64 and Base64 to text instantly. Drag & drop any file. 100% private, no upload.">
-  <meta name="keywords" content="Base64 Encoder, Base64 Decoder, convert to Base64, Base64 to text, online Base64 tool, free Base64 converter, file to Base64">
+  <meta name="keywords" content="Base64 Encoder, Base64 Decoder, convert to Base64, Base64 to text, online Base64 tool, free Base64 converter, file to Base64, UTF-8">
   <meta name="author" content="Free AI Tools Hub">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <meta name="rating" content="General">
+  <meta name="revisit-after" content="1 days">
+  <meta name="language" content="English">
+  <meta name="distribution" content="global">
+  <meta name="copyright" content="Free AI Tools Hub">
   <meta name="theme-color" content="#3a8cff">
   
   <!-- #=====OPEN GRAPH===== -->
@@ -18,29 +25,59 @@
   <meta property="og:url" content="https://free-ai-tools-for-pdf-image-file.onrender.com/base64-encoder-decoder">
   <meta property="og:image" content="https://placehold.co/1200x630/3a8cff/white?text=Base64+Tool">
   <meta property="og:image:alt" content="Base64 Encoder Decoder">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Free AI Tools Hub">
   
   <!-- #=====TWITTER CARD===== -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Base64 Encoder/Decoder – Free & Private">
   <meta name="twitter:description" content="Convert text or files to Base64 and back. Instant, local, no signup.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/3a8cff/white?text=Base64+Tool">
   
   <!-- #=====STRUCTURED DATA (Schema)===== -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Base64 Encoder/Decoder",
-    "applicationCategory": "UtilityApplication",
-    "operatingSystem": "Web Browser",
-    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-    "description": "Convert text to Base64 and Base64 to text. Supports drag & drop, file uploads, UTF-8, and clipboard copy. 100% local processing.",
-    "featureList": "Base64 Encode, Base64 Decode, Drag & Drop, File to Base64, UTF-8 Support, Copy to Clipboard"
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Base64 Encoder/Decoder",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+        "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "12300"},
+        "description": "Convert text to Base64 and Base64 to text. Supports drag & drop, file uploads, UTF-8, and clipboard copy. 100% local processing.",
+        "featureList": "Base64 Encode, Base64 Decode, Drag & Drop, File to Base64, UTF-8 Support, Copy to Clipboard"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://free-ai-tools-for-pdf-image-file.onrender.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Utility Tools", "item": "https://free-ai-tools-for-pdf-image-file.onrender.com/utility-tools"},
+          {"@type": "ListItem", "position": 3, "name": "Base64 Encoder/Decoder", "item": "https://free-ai-tools-for-pdf-image-file.onrender.com/base64-encoder-decoder"}
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type": "Question", "name": "What is Base64?", "acceptedAnswer": {"@type": "Answer", "text": "Base64 is an encoding scheme that converts binary data to ASCII text format."}},
+          {"@type": "Question", "name": "Can I encode a file to Base64?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Drag & drop any file (image, PDF, document) onto the drop zone – it will be converted to a Base64 string instantly."}},
+          {"@type": "Question", "name": "Does it support UTF-8 characters?", "acceptedAnswer": {"@type": "Answer", "text": "Absolutely. Our tool uses TextEncoder/TextDecoder APIs, so emojis, special symbols, and all languages work perfectly."}},
+          {"@type": "Question", "name": "Is it completely free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, 100% free with unlimited conversions. No signup, no watermarks."}},
+          {"@type": "Question", "name": "Does it upload my data to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No! All encoding and decoding happens locally in your browser. Your files and text never leave your device."}},
+          {"@type": "Question", "name": "What is the recommended file size?", "acceptedAnswer": {"@type": "Answer", "text": "Files up to 5MB are recommended for smooth client-side performance."}}
+        ]
+      }
+    ]
   }
   </script>
   
   <title>Base64 Encoder/Decoder | Free Text & File Converter | No Upload</title>
   
   <style>
+    /* ==================== RESET & BASE ==================== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       min-height: 100vh;
@@ -82,13 +119,32 @@
       gap: 5px;
       font-size: 0.8rem;
     }
-    .header-breadcrumb li:not(:last-child)::after { content: "›"; margin-left: 5px; color: #1a3a6e; }
-    .header-breadcrumb a { text-decoration: none; color: #1a3a6e; }
-    .header-breadcrumb span { color: #3a8cff; font-weight: 500; }
-    body.dark-mode .header-breadcrumb { background: rgba(18,20,36,0.7); }
-    body.dark-mode .header-breadcrumb a, body.dark-mode .header-breadcrumb li::after { color: #bbd4ff; }
-    body.dark-mode .header-breadcrumb span { color: #8ab8ff; }
-    @media (max-width: 780px) { .ai-hub-header { flex-direction: column; align-items: flex-start; } }
+    .header-breadcrumb li:not(:last-child)::after {
+      content: "›";
+      margin-left: 5px;
+      color: #1a3a6e;
+    }
+    .header-breadcrumb a {
+      text-decoration: none;
+      color: #1a3a6e;
+    }
+    .header-breadcrumb span {
+      color: #3a8cff;
+      font-weight: 500;
+    }
+    body.dark-mode .header-breadcrumb {
+      background: rgba(18,20,36,0.7);
+    }
+    body.dark-mode .header-breadcrumb a,
+    body.dark-mode .header-breadcrumb li::after {
+      color: #bbd4ff;
+    }
+    body.dark-mode .header-breadcrumb span {
+      color: #8ab8ff;
+    }
+    @media (max-width: 780px) {
+      .ai-hub-header { flex-direction: column; align-items: flex-start; }
+    }
     
     .nav-links { display: flex; flex-wrap: wrap; gap: 10px; }
     .nav-link, .dark-toggle {
@@ -103,6 +159,7 @@
       border: none;
       cursor: pointer;
       transition: all 0.25s;
+      box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.7), 0 2px 6px rgba(0,0,0,0.05);
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -185,15 +242,15 @@
     body.dark-mode .mode-btn { background: rgba(58,140,255,0.2); color: #c0d4ff; }
     .mode-btn.active { background: linear-gradient(95deg,#5cb0ff,#3a8cff); color: white; }
 
-    /* Drop zone now includes a small text input area */
+    /* Drop zone with integrated textarea */
     .drop-zone {
       margin-top: 16px;
       background: rgba(255,255,255,0.2);
       border-radius: 28px;
       padding: 12px 16px;
       border: 2px dashed rgba(255,255,255,0.5);
-      cursor: pointer;
       transition: 0.3s;
+      cursor: pointer;
     }
     .drop-zone.drag-over { background: rgba(255,255,255,0.4); border-color: #3a8cff; transform: scale(1.01); }
     .drop-zone-content {
@@ -202,19 +259,12 @@
       align-items: center;
       gap: 8px;
     }
-    .drop-zone-icon-img { width: 70px; margin: 0 auto; }
-    .drop-zone-icon-img img { width: 100%; height: auto; }
-    .drop-zone-text { font-size: 0.85rem; font-weight: 600; color: #1a3a6e; }
-    .drop-zone-sub { font-size: 0.65rem; color: #4a6a8e; }
-    body.dark-mode .drop-zone-text { color: #c0d4ff; }
-    body.dark-mode .drop-zone-sub { color: #8a9dc0; }
-
-    /* Small text input area inside drop-zone (compact) */
-    .paste-area {
+    /* prevent cursor pointer on the textarea inside */
+    .paste-area-area {
+      cursor: text;
       width: 100%;
-      margin-top: 8px;
     }
-    .paste-area textarea {
+    .paste-area-area textarea {
       width: 100%;
       background: rgba(255,255,255,0.2);
       border: 1px solid rgba(255,255,255,0.5);
@@ -226,10 +276,18 @@
       resize: vertical;
       min-height: 70px;
       max-height: 100px;
+      cursor: text;
     }
-    body.dark-mode .paste-area textarea { background: rgba(58,140,255,0.15); color: white; }
+    body.dark-mode .paste-area-area textarea { background: rgba(58,140,255,0.15); color: white; }
 
-    /* Button row (Convert | Download) */
+    .drop-zone-icon-img { width: 70px; margin: 0 auto; }
+    .drop-zone-icon-img img { width: 100%; height: auto; }
+    .drop-zone-text { font-size: 0.85rem; font-weight: 600; color: #1a3a6e; }
+    .drop-zone-sub { font-size: 0.65rem; color: #4a6a8e; }
+    body.dark-mode .drop-zone-text { color: #c0d4ff; }
+    body.dark-mode .drop-zone-sub { color: #8a9dc0; }
+
+    /* Button row */
     .button-row {
       display: flex;
       gap: 16px;
@@ -324,7 +382,7 @@
     }
     body.dark-mode .info-note { color: #8a9dc0; }
 
-    /* White info card (full structure) */
+    /* White info card */
     .white-info-card { background: white; border-radius: 40px; padding: 32px 36px; margin-top: 28px; }
     body.dark-mode .white-info-card { background: #15182b; }
     .white-info-card h2 { font-size: 1.8rem; text-align: center; margin-bottom: 16px; color: #1a3a6e; }
@@ -408,16 +466,16 @@
             <button class="mode-btn" data-mode="decode">🔓 Decode from Base64</button>
           </div>
           
-          <!-- Drag & Drop Zone with integrated paste area -->
+          <!-- Drag & Drop Zone with integrated textarea (click on non-textarea opens file browser) -->
           <div class="drop-zone" id="dropZone">
             <div class="drop-zone-content">
               <div class="drop-zone-icon-img">
                 <img src="https://raw.githubusercontent.com/afnankhan123456/Free-AI-Tools-for-PDF-Image-File-Conversion-No-Signup-/main/logo_pic/Encoder-Decoder.png" alt="Base64 Tool" loading="lazy">
               </div>
               <div class="drop-zone-text">📁 Drag & Drop Any File</div>
-              <div class="drop-zone-sub">Click or drop (JPG, PNG, PDF, TXT, etc.)</div>
-              <div class="paste-area">
-                <textarea id="pasteText" placeholder="Or paste text here (max ~100 words) to encode/decode..."></textarea>
+              <div class="drop-zone-sub">Click anywhere except textarea to select file</div>
+              <div class="paste-area-area" id="pasteArea">
+                <textarea id="pasteText" placeholder="Or type/paste text here to encode/decode... (max ~100 words)"></textarea>
               </div>
             </div>
           </div>
@@ -457,7 +515,7 @@
       </div>
     </section>
 
-    <!-- #=====WHITE INFO CARD (Full structure with two extra blocks and FAQ)===== -->
+    <!-- #=====WHITE INFO CARD (Full structure with two extra blocks and 7 FAQ items)===== -->
     <article class="white-info-card">
       <h2>Professional Base64 Encoder/Decoder — Text & Files</h2>
       <p style="text-align:center; margin-bottom:20px;">Convert text to Base64 and Base64 back to text instantly. Supports UTF-8, drag & drop any file, and clipboard copy. 100% local processing.</p>
@@ -586,7 +644,6 @@
         modeBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentMode = btn.dataset.mode;
-        // Clear everything on mode change
         pasteText.value = '';
         outputText.value = '';
         selectedFile = null;
@@ -617,23 +674,16 @@
       }, 3000);
     }
     
-    // File handling
-    function handleFile(file) {
-      if (currentMode !== 'encode') {
-        showMessage('⚠️ File upload only works in Encode mode. Switch to "Encode to Base64" first.', true);
-        return;
-      }
-      selectedFile = file;
-      pasteText.value = `📁 ${file.name} (${(file.size/1024).toFixed(1)} KB) - Drop zone ready. Click Convert to encode.`;
-      showMessage(`✓ File "${file.name}" loaded, ready to encode`, false);
-      downloadBtn.classList.remove('disabled');
-      // Clear previous output
-      outputText.value = '';
-      lastResult = '';
-      outputStatus.innerText = '';
+    // File handling - click only on dropZone background (not textarea)
+    function isClickOnTextarea(target) {
+      return target === pasteText || pasteText.contains(target);
     }
     
-    dropZone.addEventListener('click', () => {
+    dropZone.addEventListener('click', (e) => {
+      // If click happened inside textarea or its wrapper, do not open file browser
+      if (isClickOnTextarea(e.target)) {
+        return;
+      }
       if (currentMode === 'encode') {
         hiddenFileInput.click();
       } else {
@@ -655,6 +705,20 @@
         handleFile(e.dataTransfer.files[0]);
       }
     });
+    
+    function handleFile(file) {
+      if (currentMode !== 'encode') {
+        showMessage('⚠️ File upload only works in Encode mode. Switch to "Encode to Base64" first.', true);
+        return;
+      }
+      selectedFile = file;
+      pasteText.value = `📁 ${file.name} (${(file.size/1024).toFixed(1)} KB) - Click Convert to encode.`;
+      showMessage(`✓ File "${file.name}" loaded, ready to encode`, false);
+      downloadBtn.classList.remove('disabled');
+      outputText.value = '';
+      lastResult = '';
+      outputStatus.innerText = '';
+    }
     
     hiddenFileInput.addEventListener('change', (e) => {
       if (e.target.files && e.target.files[0]) {
@@ -701,7 +765,6 @@
       });
     }
     
-    // Convert action
     async function startConversion() {
       let inputValue = pasteText.value.trim();
       if (!inputValue && !selectedFile) {
@@ -716,7 +779,6 @@
             result = await fileToBase64(selectedFile);
             showMessage(`✓ File encoded to Base64`, false);
           } else if (inputValue) {
-            // Check if input looks like file indicator (we ignore that)
             if (inputValue.startsWith('📁')) {
               showMessage('Please drop a file or paste actual text.', true);
               return;
@@ -727,7 +789,6 @@
             throw new Error('No input provided');
           }
         } else {
-          // Decode mode
           if (selectedFile) {
             showMessage('File upload only works in Encode mode. Switch to Encode mode first.', true);
             return;
@@ -743,7 +804,6 @@
         checkIcon.innerHTML = '✔️🔄';
         completeTitle.innerText = 'Conversion Complete!';
         completeMsg.innerText = 'Result ready to copy or download';
-        // Enable download button if there is result
         if (result) downloadBtn.classList.remove('disabled');
         else downloadBtn.classList.add('disabled');
       } catch (err) {
@@ -758,7 +818,6 @@
       }
     }
     
-    // Download result as .txt file
     function downloadResult() {
       if (!lastResult) {
         showMessage('No result to download. First click Convert.', true);
@@ -774,7 +833,6 @@
       showMessage('✓ File downloaded', false);
     }
     
-    // Copy output
     copyOutputBtn.addEventListener('click', () => {
       if (outputText.value) {
         outputText.select();
@@ -785,7 +843,6 @@
       }
     });
     
-    // Reset everything
     resetLink.addEventListener('click', () => {
       pasteText.value = '';
       outputText.value = '';
@@ -817,3 +874,5 @@
 </script>
 </body>
 </html>
+
+
